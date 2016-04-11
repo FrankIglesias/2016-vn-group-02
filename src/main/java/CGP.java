@@ -25,5 +25,5 @@ public class CGP extends POI {
 	Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
 	return elServicioBuscado;	
 	
-	}
 }
+	}
