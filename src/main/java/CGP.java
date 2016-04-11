@@ -12,7 +12,8 @@ public class CGP extends POI {
 
 	public boolean estaDisponible(Date horario, Servicio servicio) {
 		Servicio servicioBuscado = this.buscarServicio(servicio);
-		return (servicio.estasDisponibleEn(horario));
+		return (servicioBuscado.estasDisponibleEn(horario));
+			
 	}
 
 	public boolean estaDisponible(Date horario) {
@@ -20,4 +21,9 @@ public class CGP extends POI {
 		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
 	}
 	
+	private Servicio buscarServicio(Servicio servicio){
+	Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
+	return elServicioBuscado;	
+	
+	}
 }
