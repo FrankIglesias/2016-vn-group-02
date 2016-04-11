@@ -12,49 +12,6 @@ calendar.get(Calendar.MONTH);       // gets month number, NOTE this is zero base
 
 public class Banco extends POI {
 
-/*	public enum Dia {
-		// public abstract String getNombre();
-		LUNES {
-
-			@Override
-			public String getNombre() {
-				return"Lunes";
-			}
-		},
-		MARTES {
-
-			@Override
-			public String getNombre() {
-				return"Martes";
-			}
-
-		},
-		MIERCOLES {
-
-			@Override
-			public String getNombre() {
-				return"Miercoles";
-			}
-
-		},
-		JUEVES{
-
-		@Override
-		public String getNombre() {
-			return "Jueves";
-			}
-		},
-		VIERNES
-
-		{
-
-		@Override
-		public String getNombre() {
-			return "Viernes";
-		}
-
-	};*/
-
 	public Banco(Direccion dir, String nombre) {
 		super(dir, nombre);
 
