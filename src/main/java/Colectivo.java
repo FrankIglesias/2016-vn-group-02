@@ -11,8 +11,7 @@ public class Colectivo extends POI {
 	public boolean estaDisponible(Date horario, Servicio servicio) {
 		return true;
 	}
-
-	@Override
+	
 	public boolean estaDisponible(Date horario) {
 		// TODO Auto-generated method stub
 		return false;
