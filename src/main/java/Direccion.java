@@ -14,4 +14,10 @@ public class Direccion {
 		this.longitud = longitud;
 	}
 	
+	public double getLatitud(){
+		return this.latitud;
+	}
+		public double getLongitud(){
+		return this.longitud;
+	}	
 }
