@@ -18,7 +18,7 @@ public class Banco extends POI {
 	
 	public Banco(Direccion dir, String nombre) {
 		super(dir, nombre);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public boolean estaDisponible(Date horario){
@@ -33,9 +33,6 @@ public class Banco extends POI {
 		SimpleDateFormat formateador = new SimpleDateFormat("dd.MM.yyyy");
 		String fechadeReferencia=formateador.format(diaReferencia);*/
 		
-		
-		
-		
+
 	}
 		
-}

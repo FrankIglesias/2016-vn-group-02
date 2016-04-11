@@ -7,7 +7,7 @@ public class Direccion {
 	private int unidad;
 	private int latitud;
 	private int longitud;
-	private int comuna;
+	
 	
 	public Direccion (int latitud,int longitud) {
 		this.latitud = latitud;
