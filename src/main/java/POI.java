@@ -64,8 +64,13 @@ public abstract class POI {
 			return palabrasClave.stream().anyMatch(palabra -> palabra.equals(unaPalabra));
 	}
 		
-	}
+	
 
+public void setPalabrasClaves (String unaPalabra)
+{
+	this.palabrasClave.add(unaPalabra);
+}
 
+}
 
 
