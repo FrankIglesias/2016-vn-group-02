@@ -2,9 +2,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class POI {
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			
+			Direccion direc1 = new Direccion(40.7486, -73.9864);
+			Direccion direc2 = new Direccion(38.1424, -72.1245);
+			
+			double dist;
+			
+			dist = distanciaEntre (direc1, direc2);
+			
+			System.out.println(dist);
+			
+		}
+
 protected Direccion direccion;
 protected String nombre; 
 protected ArrayList<String> palabrasClave = new ArrayList<String>();
+
+	
 
 	public POI(Direccion dir,String nombre){
 		this.direccion = dir;
@@ -17,7 +34,7 @@ protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	}
 	
 	
-	public double distanciaEntre (Direccion direccion1 , Direccion direccion2){
+	public static double distanciaEntre (Direccion direccion1 , Direccion direccion2){
 		
 		double lat1 = direccion1.getLatitud();
 		double lat2 = direccion2.getLatitud();
@@ -38,7 +55,7 @@ protected ArrayList<String> palabrasClave = new ArrayList<String>();
 		
 	}
 	
-	public double distancia(double num, double num2){
+	public static double distancia(double num, double num2){
 		return num - num2;
 	}
 	

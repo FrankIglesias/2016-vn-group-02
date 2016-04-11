@@ -5,11 +5,11 @@ public class Direccion {
 	private int altura;
 	private int piso;
 	private int unidad;
-	private int latitud;
-	private int longitud;
+	private double latitud;
+	private double longitud;
 	
 	
-	public Direccion (int latitud,int longitud) {
+	public Direccion (double latitud,double longitud) {
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
