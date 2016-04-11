@@ -2,11 +2,12 @@ import java.util.Date;
 
 public class Local extends POI {
 	
-	private String horario;
-	private Rubro rubro;
-	
-	public Local(Direccion dir, String nombre) {
+		private Rubro rubro;
+		private String nombre; 
+		
+	public Local(String nombreDelRubro ,Direccion dir, String nombre, Dia diaInicial, Dia diaFinal, int horaInicial, int horaFinal) {
 		super(dir, nombre);
+		rubro = new Rubro(nombreDelRubro,diaInicial, diaFinal, horaInicial, horaFinal);
 	}
 	
 	public boolean estaDisponible(Date horario, Servicio servicio) {
@@ -15,4 +16,5 @@ public class Local extends POI {
 	public boolean estaDisponible(Date horario) {
 		return rubro.estaDisponible(horario);
 	}
+
 }
