@@ -10,7 +10,7 @@ public class Direccion {
 	
 	
 	public Direccion (double latitud,double longitud) {
-		//cambio tipo a double
+		//cambio tipo int a double
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
