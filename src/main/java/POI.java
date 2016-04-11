@@ -4,32 +4,38 @@ import java.util.List;
 public abstract class POI {
 protected Direccion direccion;
 protected String nombre; 
-protected List palabrasClave = new ArrayList<String>();
+protected ArrayList<String> palabrasClave = new ArrayList<String>();
 
 	public POI(Direccion dir,String nombre){
-		this.Direccion = dir;
+		this.direccion = dir;
 		this.nombre = nombre;
 		}
 
 	
-	public float distanciaHacia(POI unPoi){
-		distanciaEntre (direccion , unPoi.direccion);
+	public void distanciaHacia(POI unPoi){
+		//distanciaEntre (direccion , unPoi.direccion);
 	}
-	/*
 	
-	public float distanciaEntre (Direcion direccion1 , Direccion direccion2){
-		double longitud = distancia (direccion1.getLongitud(), direccion2.getLongitud());
-		double latitud = distancia (direccion1.getLatitud(), direccion2.getLatitud());
-		longitud = toRadian(longitud);
-		latitud = toRadian(latitud);
-		double a = Math.pow(Math.sin(latitud/2), 2) + 
-				    Math.cos(direccion1.getLatitud()) * Math.cos(direccion2.getLatitud())* Math.pow(Math.sin(longitud/2), 2);
-		longitud = Math.pow(longitud, 2);
-		latitud = Math.pow(latitud, 2);
-		double c = 2 . Math.tan(sqrt(a), sqrt(1-a));
-		double d = ;
-				c = 2 · atan2(√a, √(1−a))
-				d = R · c
+	
+	public double distanciaEntre (Direccion direccion1 , Direccion direccion2){
+		
+		double lat1 = direccion1.getLatitud();
+		double lat2 = direccion2.getLatitud();
+		double diferenciaLong = Math.toRadians(distancia(direccion1.getLongitud(), direccion2.getLongitud()));
+		double diferenciaLat = Math.toRadians(distancia(lat1, lat2));
+		
+		double radio = 6371000;
+		
+		double a = Math.sin(diferenciaLat/2) * Math.sin(diferenciaLat/2) +
+				 Math.cos(lat1) * Math.cos(lat2) * Math.sin(diferenciaLong/2) * 
+				 Math.sin(diferenciaLong/2);
+		
+		double b = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		
+		double distancia = radio * b;
+		
+		return distancia;
+		
 	}
 	
 	public double distancia(double num, double num2){
@@ -39,6 +45,6 @@ protected List palabrasClave = new ArrayList<String>();
 	static double toRadian(double valor){
 		return (Math.PI / 180) * valor;
 	}
- */
+ 
 
 }
