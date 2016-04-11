@@ -41,7 +41,9 @@ public class EncuentraSegunPalabraClaveTest {
 		Sistema.setList(puntosDeInteres);
 		Sistema.buscarSegunPalabraClave("banelco");
 		
-		Assert.assertTrue(Sistema.buscarSegunPalabraClave("banelco").contains(banco));  
+		Assert.assertTrue(Sistema.buscarSegunPalabraClave("banelco").contains(banco)); 
+		Assert.assertEquals("Cantidad de elementos en el array",1,Sistema.buscarSegunPalabraClave("banelco").size());
+		
 		
 	}
 	
