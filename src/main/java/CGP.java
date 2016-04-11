@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+	import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +17,6 @@ public class CGP extends POI {
 	}
 
 	public boolean estaDisponible(Date horario) {
-
 		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
 	}
 
