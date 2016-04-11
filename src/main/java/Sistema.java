@@ -20,7 +20,7 @@ public static void setList(List<POI> unaLista)
 }
 	
 public Sistema()
-{
+{ 
 	super();
 }
 	

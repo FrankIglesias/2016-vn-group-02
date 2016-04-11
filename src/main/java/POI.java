@@ -62,7 +62,7 @@ public abstract class POI {
 	
 	public boolean tenesUnaPalabra(String unaPalabra) {
 			return palabrasClave.stream().anyMatch(palabra -> palabra.equals(unaPalabra));
-	}
+	} 
 		
 	
 
