@@ -12,7 +12,7 @@ public abstract class POI {
 		
 			double dist;
 			
-			dist = distanciaEntre1 (direc1, direc2);
+			dist = distanciaEntre (direc1, direc2);
 			
 			//prueba distancia
 			System.out.println(dist);
@@ -50,7 +50,7 @@ public abstract class POI {
 	}
 	
 	
-	public static double distanciaEntre1(Direccion direccion1, Direccion direccion2) {
+	public static double distanciaEntre(Direccion direccion1, Direccion direccion2) {
 	    double earthRadius = 6371000; //meters
 	    double lat1 = direccion1.getLatitud();
 		double lat2 = direccion2.getLatitud();
