@@ -10,6 +10,11 @@ public class Local extends POI {
 		rubro = new Rubro(nombreDelRubro,diaInicial, diaFinal, horaInicial, horaFinal);
 	}
 	
+	public Local(String nombre, Direccion dir ,Rubro rubro) { // en caso que el rubro exista
+		super(dir, nombre);
+		this.rubro = rubro;
+	}
+	
 	public boolean estaDisponible(Date horario, Servicio servicio) {
 		return 	this.estaDisponible(horario);
 	}
