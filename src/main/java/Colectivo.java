@@ -9,16 +9,14 @@ public class Colectivo extends POI {
 	
 	}
 
-	@Override
+
 	public boolean estaDisponible(Date horario, Servicio servicio) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-	@Override
+
 	public boolean estaDisponible(Date horario) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
