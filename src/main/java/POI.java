@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public abstract class POI {
 	protected Direccion direccion;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
-
+	public abstract boolean estaDisponible(Date horario, Servicio servicio);
+	public abstract boolean estaDisponible(Date horario);
 	public POI(Direccion dir, String nombre) {
 		this.direccion = dir;
 		this.nombre = nombre;

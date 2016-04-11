@@ -32,7 +32,11 @@ public class Banco extends POI {
 		
 		SimpleDateFormat formateador = new SimpleDateFormat("dd.MM.yyyy");
 		String fechadeReferencia=formateador.format(diaReferencia);*/
-		
 
+	public boolean estaDisponible(Date horario, Servicio servicio) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+		
+}
 		
