@@ -15,7 +15,7 @@ public class EncuentraSegunPalabraClaveTest {
 	public Sistema sistPrueba;
 	
 	@Before 
-	public void init(){ 
+	public void init(){  
 		sistPrueba = new Sistema();
 		
 		direccionBanco = new Direccion(150, 160);

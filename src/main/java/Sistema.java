@@ -7,6 +7,12 @@ public class Sistema {
 	
 static List<POI> puntosDeInteres = new ArrayList<POI>();
 
+public static void main(String[] args) {
+
+	
+}
+
+
 public static List<POI> buscarSegunPalabraClave(String unaPalabra)
 {
 	List<POI> puntosSegunPalabra = new ArrayList<POI>();
