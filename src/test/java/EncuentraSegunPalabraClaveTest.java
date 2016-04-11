@@ -20,17 +20,17 @@ public class EncuentraSegunPalabraClaveTest {
 		
 		direccionBanco = new Direccion(150, 160);
 		banco = new Banco(direccionBanco, "Banco");
-		banco.setPalabrasClaves("dinero");
-		banco.setPalabrasClaves("cuenta");
-		banco.setPalabrasClaves("banco");
-		banco.setPalabrasClaves("banelco");
+		banco.addPalabraClave("dinero");
+		banco.addPalabraClave("cuenta");
+		banco.addPalabraClave("banco");
+		banco.addPalabraClave("banelco");
 		
 		direccionColectivo = new Direccion(130, 140);
 		colectivo = new Colectivo(direccionColectivo, "Colectivo");
-		colectivo.setPalabrasClaves("colectivo");
-		colectivo.setPalabrasClaves("transporte");
-		colectivo.setPalabrasClaves("publico");
-		colectivo.setPalabrasClaves("rueditas");
+		colectivo.addPalabraClave("colectivo");
+		colectivo.addPalabraClave("transporte");
+		colectivo.addPalabraClave("publico");
+		colectivo.addPalabraClave("rueditas");
 		
 		puntosDeInteres.add(colectivo);
 		puntosDeInteres.add(banco);

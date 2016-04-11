@@ -6,6 +6,7 @@ public abstract class POI {
 	protected Direccion direccion;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
+	protected Horario horario;
 
 	public POI(Direccion dir, String nombre) {
 		this.direccion = dir;

@@ -4,18 +4,12 @@ import java.util.GregorianCalendar;
 
 public class Rubro {
 	
-	private Dia inicioDeSemana;
-	private Dia finDeSemana;
-	private int horaInicial;
-	private int horaFinal;
+	private Horario horario;
 	private String nombre;
 	
-	public Rubro(String name,Dia diaInicial, Dia diaFinal, int horaI, int horaF){
+	public Rubro(String name,Horario horario){
 		super();
-		inicioDeSemana = diaInicial;
-		finDeSemana = diaFinal;
-		horaFinal = horaF;
-		horaInicial = horaI;	
+		this.horario = horario;	
 		nombre = name;
 	}
 	
@@ -26,6 +20,7 @@ public class Rubro {
 		Integer hora = calendar.get(Calendar.HOUR_OF_DAY); 
 		Integer dia = calendar.get(Calendar.DAY_OF_WEEK);
 	// ojo que repite codigo en banco
+	// no esta actualizado al manejo del atributo horario.
 		
 		return false;
 	

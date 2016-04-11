@@ -6,9 +6,7 @@ public class Colectivo extends POI {
 	
 	public Colectivo(Direccion dir, String nombre) {
 		super(dir, nombre);
-	
-	}
-
+		}
 
 	public boolean estaDisponible(Date horario, Servicio servicio) {
 		return true;
