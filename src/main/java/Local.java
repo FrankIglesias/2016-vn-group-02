@@ -4,18 +4,15 @@ public class Local extends POI {
 	
 	private String horario;
 	private Rubro rubro;
+	
 	public Local(Direccion dir, String nombre) {
 		super(dir, nombre);
-		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
 	public boolean estaDisponible(Date horario, Servicio servicio) {
-		// TODO Auto-generated method stub
-		return false;
+		return 	this.estaDisponible(horario);
 	}
-	@Override
 	public boolean estaDisponible(Date horario) {
-		// TODO Auto-generated method stub
-		return false;
+		return rubro.estaDisponible(horario);
 	}
 }
