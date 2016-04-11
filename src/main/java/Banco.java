@@ -16,6 +16,11 @@ calendar.get(Calendar.MONTH);       // gets month number, NOTE this is zero base
 public class Banco extends POI {
 
 	
+	public Banco(Direccion dir, String nombre) {
+		super(dir, nombre);
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean estaDisponible(Date horario){
 		//Date date = new Date();   // given date
 		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
