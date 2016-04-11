@@ -5,7 +5,7 @@ import java.util.Date;
 public abstract class POI {
 
 		public static void main(String[] args) {
-			// TODO Auto-generated method stub
+
 			
 			Direccion direc1 = new Direccion(40.7486, -73.9864);
 			Direccion direc2 = new Direccion(38.1424, -72.1245);

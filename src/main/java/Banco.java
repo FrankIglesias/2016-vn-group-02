@@ -2,7 +2,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import org.junit.Assert;
 
 /*Date date = new Date();   // given date
 Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
@@ -33,10 +32,8 @@ public class Banco extends POI {
 		SimpleDateFormat formateador = new SimpleDateFormat("dd.MM.yyyy");
 		String fechadeReferencia=formateador.format(diaReferencia);*/
 
-	@Override
 	public boolean estaDisponible(Date horario, Servicio servicio) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 		
 
