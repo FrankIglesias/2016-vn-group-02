@@ -8,11 +8,12 @@ public abstract class POI {
 			
 			Direccion direc1 = new Direccion(40.7486, -73.9864);
 			Direccion direc2 = new Direccion(38.1424, -72.1245);
-			
+		
 			double dist;
 			
 			dist = distanciaEntre (direc1, direc2);
 			
+			//prueba distancia
 			System.out.println(dist);
 			
 		}
