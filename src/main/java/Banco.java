@@ -14,7 +14,6 @@ public class Banco extends POI {
 	public boolean estaDisponible(GregorianCalendar horario) {
 		return horarioBancario.estaEntreLosHorarios(horario);
 	}
-
 	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
 		return estaDisponible(horario);
 	}
