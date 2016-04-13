@@ -5,7 +5,7 @@ public class Local extends POI {
 		private Rubro rubro;
 		private String nombre; 
 		
-	public Local(String nombreDelRubro ,Direccion dir, String nombre, Dia diaInicial, Dia diaFinal, int horaInicial, int horaFinal) {
+	public Local(String nombreDelRubro ,Direccion dir, String nombre, int diaInicial, int diaFinal, int horaInicial, int horaFinal) {
 		super(dir, nombre);
 		rubro = new Rubro(nombreDelRubro,diaInicial, diaFinal, horaInicial, horaFinal);
 	}
