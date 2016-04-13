@@ -2,26 +2,26 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CalculoDeCercaniaTest {
-	 
-	public Colectivo colectivo;
-	public Banco banco;
-	public Direccion direccion1;
-	public Direccion direccion2;
+public class CalculoDeCercaniaTest extends PoiMainTest {
+	 /*
+	  * direccion1 = new Direccion(-34.596044,-58.419946,2);
+		direccion2 = new Direccion(-34.602945,-58.420948,2);
+		
+		*/
+
 	
 	@Before 
 	public void init(){  
 	
-		direccion1 = new Direccion(9961/180,151/90);
-		direccion2 = new Direccion(9961/180,377/225);
-		colectivo = new Colectivo(direccion1,"134",46);
-		banco = new Banco(direccion2,"Banelco");
+		super.init();
 		
+	
 	}
 	@Test
-	public void calcularDistanciaEntreDosPIO() {
-		
-		Assert.assertEquals(colectivo.distanciaCon(banco),equals(150));
+	public void calcularDistanciaEntreDosPOI() {
+		/*http://www.movable-type.co.uk/scripts/latlong.html
+		 * testeado de aca*/
+		Assert.assertEquals(colectivo.distanciaCon(banco),700,100);
 	}
 	
 	

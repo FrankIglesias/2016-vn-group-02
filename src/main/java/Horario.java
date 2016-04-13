@@ -19,8 +19,9 @@ public class Horario {
 	public boolean estaEntreLosHorarios(GregorianCalendar horarioPreguntado){
 		int diaPreguntado = horarioPreguntado.get(Calendar.DAY_OF_WEEK);
 		int horaPreguntada = horarioPreguntado.get(Calendar.HOUR_OF_DAY);
-		if(inicioDeSemana <= diaPreguntado && diaPreguntado <= finDeSemana)
-			return (horaInicial <= horaPreguntada && horaPreguntada <= horaFinal);
+		if((inicioDeSemana <= diaPreguntado && diaPreguntado <= finDeSemana))
+		return ((horaInicial <= horaPreguntada) && (horaPreguntada <= horaFinal));
 		return false;
-		}
+		
+}
 }

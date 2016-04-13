@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,14 @@ public Sistema()
 { 
 	super();
 }
+public static void main (String [ ] args) {
+	GregorianCalendar fechaActual = new  GregorianCalendar(2014, 04, 13, 14, 25);
+	System.out.println(fechaActual.get(Calendar.HOUR_OF_DAY));
+	System.out.println(fechaActual.get(Calendar.DAY_OF_WEEK));
+  
+  }
 	
+
+
 
 }
