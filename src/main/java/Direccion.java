@@ -8,6 +8,10 @@ public class Direccion {
 	private int comuna;
 	private double latitud;
 	private double longitud;
+	private int codigoPostal;
+	private String localidad;
+	private String provincia;
+	private String Pais;
 	
 	
 	public Direccion (double latitud,double longitud, int comuna) {
