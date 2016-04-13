@@ -13,7 +13,9 @@ public class Colectivo extends POI {
 	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
 		return true;
 	}
-
+	public boolean estasCerca(Direccion unaDireccion) {
+		return this.direccion.distanciaCon(unaDireccion)< 200;
+	}
 
 	public boolean estaDisponible(GregorianCalendar horario) {
 		return true;
