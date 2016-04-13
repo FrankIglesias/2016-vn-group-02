@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.util.GregorianCalendar;
 
 public class Colectivo extends POI {
