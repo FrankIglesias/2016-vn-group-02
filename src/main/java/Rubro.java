@@ -6,19 +6,21 @@ public class Rubro {
 	
 	private Horario horarioDelRubro;
 	private String nombre;
+	private int radioDeCercania;
 	
-	public Rubro(String name,Horario horario){
+	public Rubro(String name,Horario horario,int radioDeCercania){
 		super();
 		this.horarioDelRubro = horario;	
-		nombre = name;
+		this.nombre = name;
+		this.radioDeCercania = radioDeCercania;
 	}
 	
 	public boolean estaDisponible(GregorianCalendar horario) {
 		return horarioDelRubro.estaEntreLosHorarios(horario);
 	}
 	
-	public boolean estasCerca(Direccion unaDireccion){
-		return true;
+	public boolean estasCerca(Direccion unaDireccion, Local miLocal){
+		return miLocal.getDireccion().distanciaCon(unaDireccion) < radioDeCercania;
 	}
 
 }
