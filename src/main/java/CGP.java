@@ -9,6 +9,8 @@ public class CGP extends POI {
 	public CGP(Direccion dir, String nombre, List<Servicio> listaDeServicios) {
 		super(dir, nombre);
 		servicios = listaDeServicios;
+		for (Servicio unServicio : servicios)
+			addPalabraClave(unServicio.getNombre());
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
@@ -22,12 +24,14 @@ public class CGP extends POI {
 	}
 
 	private Servicio buscarServicio(Servicio servicio) {
-		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
+		Servicio elServicioBuscado = servicios.stream()
+				.filter(unServicio -> equals(servicio)).findFirst().get();
 		return elServicioBuscado;
 
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario) {
-		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
+		return servicios.stream().anyMatch(
+				servicio -> servicio.estasDisponibleEn(horario));
 	}
 }

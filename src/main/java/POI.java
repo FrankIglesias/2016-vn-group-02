@@ -15,12 +15,14 @@ public abstract class POI {
 	public POI(Direccion dir, String nombre) {
 		this.direccion = dir;
 		this.nombre = nombre;
+		this.addPalabraClave(nombre);
 	}
 
 	
 	public double distanciaCon(POI unPoi) {
 		return this.direccion.distanciaCon(unPoi.direccion);
 	}
+	
 	
 	public boolean estasCerca(Direccion unaDireccion) {
 		return this.direccion.distanciaCon(unaDireccion)< 500;

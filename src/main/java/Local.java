@@ -11,6 +11,7 @@ public class Local extends POI {
 		super(dir, nombre);
 		horario = new Horario(diaInicial, diaFinal, horaInicial, horaFinal);
 		rubro = new Rubro(nombreDelRubro, horario, radioDeCercania);
+		addPalabraClave(nombreDelRubro);
 	}
 
 	public Direccion getDireccion(){

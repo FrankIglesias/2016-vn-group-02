@@ -14,4 +14,8 @@ public class Servicio {
 			return horarioDelServicio.estaEntreLosHorarios(horario);
 			
 		}
+		public String getNombre()
+		{
+			return nombreDelServicio;
+		}
 }

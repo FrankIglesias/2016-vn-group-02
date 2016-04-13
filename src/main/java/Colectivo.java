@@ -2,11 +2,13 @@ import java.util.GregorianCalendar;
 
 public class Colectivo extends POI {
 
-	private int linea;
+	private Integer linea;
+ 
 	
 	public Colectivo(Direccion dir, String nombre, int numero) {
 		super(dir, nombre);
 		linea = numero;
+		this.addPalabraClave(linea.toString());
 		}
 
 
