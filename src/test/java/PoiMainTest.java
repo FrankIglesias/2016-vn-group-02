@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,9 +13,12 @@ public class PoiMainTest {
 	protected Direccion direccion2;
 	protected CGP centroDeCGP;
 	protected List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
-	protected Horario horarioDelServicio1;
+	protected Horario horarioPrueba;
 	protected Servicio ventaDeVOS;
-
+	protected GregorianCalendar fechaActual ;
+	protected Local unLocal;
+	protected Rubro unRubro;
+	
 	@Before 
 	public void init(){  
 	
@@ -22,9 +26,12 @@ public class PoiMainTest {
 		direccion2 = new Direccion(-34.602945,-58.420948,2);
 		colectivo = new Colectivo(direccion1,"134",46);
 		banco = new Banco(direccion2,"Banelco");
-		horarioDelServicio1 = new Horario(1, 6, 12, 15);
-		ventaDeVOS = new Servicio("Tarjeta vos", horarioDelServicio1);
+		horarioPrueba = new Horario(1, 6, 12, 15);
+		ventaDeVOS = new Servicio("Tarjeta vos", horarioPrueba);
 		serviciosDelCGP.add(ventaDeVOS);
+		centroDeCGP = new CGP(direccion1, "CGP1", serviciosDelCGP);
+		unRubro = new Rubro("Ventas chetas", horarioPrueba, 3000);
+		unLocal = new Local("lo de mari", direccion2, unRubro);
 		
 		
 		
