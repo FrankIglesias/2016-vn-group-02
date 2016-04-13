@@ -1,4 +1,6 @@
+import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 public abstract class POI {
@@ -24,8 +26,11 @@ public abstract class POI {
 		return this.direccion.distanciaCon(unaDireccion)< 500;
 	}
 
-	public boolean tenesUnaPalabra(String unaPalabra) {
-		return palabrasClave.stream().anyMatch(palabra -> palabra.equals(unaPalabra));
+	public boolean tenesUnaPalabraDe(String unaFrase) {
+		String[] split = unaFrase.split(" ");
+		return palabrasClave.stream().anyMatch(palabra -> Arrays.asList(split).contains(palabra));
+		
+		
 	}
 
 	public void addPalabraClave(String unaPalabra) {

@@ -18,15 +18,15 @@ public class EncuentraSegunPalabraClaveTest {
 	public void init(){  
 		sistPrueba = new Sistema();
 		
-		direccionBanco = new Direccion(150, 160);
+		direccionBanco = new Direccion(150, 160,12);
 		banco = new Banco(direccionBanco, "Banco");
 		banco.addPalabraClave("dinero");
 		banco.addPalabraClave("cuenta");
 		banco.addPalabraClave("banco");
 		banco.addPalabraClave("banelco");
 		
-		direccionColectivo = new Direccion(130, 140);
-		colectivo = new Colectivo(direccionColectivo, "Colectivo");
+		direccionColectivo = new Direccion(130, 140,13);
+		colectivo = new Colectivo(direccionColectivo, "Colectivo",193);
 		colectivo.addPalabraClave("colectivo");
 		colectivo.addPalabraClave("transporte");
 		colectivo.addPalabraClave("publico");
@@ -38,10 +38,11 @@ public class EncuentraSegunPalabraClaveTest {
 	}
 	@Test
 	public void encontrarPOISegunPalabra() {
+		String fraseABuscar = "quiero un banco malo";
 		Sistema.setList(puntosDeInteres);
-		Sistema.buscarSegunPalabraClave("banelco");
+		Sistema.buscarSegunPalabraClave(fraseABuscar);
 		
-		Assert.assertTrue(Sistema.buscarSegunPalabraClave("banelco").contains(banco)); 
+		Assert.assertTrue(Sistema.buscarSegunPalabraClave(fraseABuscar).contains(banco)); 
 		Assert.assertEquals("Cantidad de elementos en el array",1,Sistema.buscarSegunPalabraClave("banelco").size());
 		
 		
