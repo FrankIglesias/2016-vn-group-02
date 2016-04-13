@@ -5,13 +5,15 @@ public class Direccion {
 	private int altura;
 	private int piso;
 	private int unidad;
+	private int comuna;
 	private double latitud;
 	private double longitud;
 	
 	
-	public Direccion (double latitud,double longitud) {
+	public Direccion (double latitud,double longitud, int comuna) {
 		this.latitud = latitud;
 		this.longitud = longitud;
+		this.comuna = comuna;
 	}
 	
 	public double distanciaCon(Direccion dir){
@@ -36,5 +38,9 @@ public class Direccion {
 	}
 		public double getLongitud(){
 		return this.longitud;
+	}
+		
+	public int getComuna(){
+		return this.comuna;
 	}
 }
