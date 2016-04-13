@@ -1,5 +1,6 @@
-	import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CGP extends POI {
@@ -10,10 +11,14 @@ public class CGP extends POI {
 		super(dir, nombre);
 	}
 
-	public boolean estaDisponible(Date horario, Servicio servicio) {
+	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
 		Servicio servicioBuscado = this.buscarServicio(servicio);
 		return (servicioBuscado.estasDisponibleEn(horario));
 
+	}
+
+	public boolean estasCerca(Direccion unaDireccion) {
+		return unaDireccion.getComuna() == (this.comuna);
 	}
 
 	public boolean estaDisponible(Date horario) {

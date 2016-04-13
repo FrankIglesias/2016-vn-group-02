@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public abstract class POI {
 
@@ -13,12 +13,16 @@ public abstract class POI {
 		this.nombre = nombre;
 	}
 
-	public abstract boolean estaDisponible(Date horario, Servicio servicio);
+	public abstract boolean estaDisponible(GregorianCalendar horario, Servicio servicio);
 
-	public abstract boolean estaDisponible(Date horario);
+	public abstract boolean estaDisponible(GregorianCalendar horario);
 
 	public double distanciaCon(POI unPoi) {
 		return this.direccion.distanciaCon(unPoi.direccion);
+	}
+	
+	public boolean estasCerca(Direccion unaDireccion) {
+		return this.direccion.distanciaCon(unaDireccion)< 500;
 	}
 
 	public boolean tenesUnaPalabra(String unaPalabra) {
@@ -32,4 +36,5 @@ public abstract class POI {
 	public static void main(String[] args) {
 
 	}
+	
 }

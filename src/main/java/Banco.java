@@ -20,21 +20,21 @@ public class Banco extends POI {
 	}
 
 	public boolean estaDisponible(Date horario) {
-		// Date date = new Date(); // given date
-		Calendar calendar = GregorianCalendar.getInstance(); // creates a new
-		calendar.setTime(horario); // assigns calendar to given date
-		Integer hora = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h
-		Integer dia = calendar.get(Calendar.DAY_OF_WEEK);
-		return ((10<hora && hora<15) && (1 < dia && dia <5));
+		//Date date = new Date(); // given date
+		//Calendar calendar = GregorianCalendar.getInstance(); // creates a new
+		//calendar.setTime(horario); // assigns calendar to given date
+		//Date hora = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h
+		//Integer dia = calendar.get(Calendar.DAY_OF_WEEK);
+		//return ((10<hora && hora<15) && (1 < dia && dia <5));
 	}
 	
 	
-	/*
-	 * Date diaReferencia = new Date();
-	 * 
-	 * SimpleDateFormat formateador = new SimpleDateFormat("dd.MM.yyyy"); String
-	 * fechadeReferencia=formateador.format(diaReferencia);
-	 */
+	
+	  Date diaReferencia = new Date();
+	  
+	  SimpleDateFormat formateador = new SimpleDateFormat("ISO-LOCAL-TIME"); 
+	  String fechadeReferencia=formateador.format(diaReferencia);
+	 
 
 	public boolean estaDisponible(Date horario, Servicio servicio) {
 		return true;
