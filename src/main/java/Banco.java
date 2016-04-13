@@ -11,6 +11,8 @@ calendar.get(Calendar.HOUR);        // gets hour in 12h format
 calendar.get(Calendar.MONTH);       // gets month number, NOTE this is zero based!*/
 
 public class Banco extends POI {
+	
+	Horario hora = new Horario("1","5","10","15");
 
 	public Banco(Direccion dir, String nombre) {
 		super(dir, nombre);
