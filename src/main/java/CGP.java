@@ -6,8 +6,9 @@ public class CGP extends POI {
 	private int comuna;
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
-	public CGP(Direccion dir, String nombre) {
+	public CGP(Direccion dir, String nombre, List<Servicio> listaDeServicios) {
 		super(dir, nombre);
+		servicios = listaDeServicios;
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {

@@ -10,16 +10,16 @@ Requerimientos funcionales: Buscar puntos de interés, según criterios de búsq
 0B => POI =>Si se encuentra a menos de X metros de otro POI ( Falta generar un radio de distancia,HECHO distancia hacia otro POI)
             Si es válido: no puede haber POIs sin geolocalizar ni a los que les falte nombre. (HECHO con el constructor)
             
-1  => Cálculo de cercanía => Un POI esta cerca de otro si esta a menos de 5 cuadras (FALTA)
-                             Un parada de  colectivo a menos de una cuadra.
-                             Los CGP, si su coordenada está dentro de la zona delimitada por la  comuna.
-                             Locales comerciales, cada rubro define el radio de cercanía. Ejemplo: para las librerías                                         escolares se considera cerca si está en un radio de 5 cuadras, para un kiosco de diarios en                                       cambio son 2 cuadras, y así sucesivamente.
+1  => Cálculo de cercanía => Un POI esta cerca de otro si esta a menos de 5 cuadras (HECHO)
+                             Un parada de  colectivo a menos de una cuadra.(HECHO)
+                             Los CGP, si su coordenada está dentro de la zona delimitada por la  comuna.(HECHO)
+                             Locales comerciales, cada rubro define el radio de cercanía. Ejemplo: para las librerías                                         escolares se considera cerca si está en un radio de 5 cuadras, para un kiosco de diarios en                                       cambio son 2 cuadras, y así sucesivamente.(HECHO)
 
    Cálculo de disponibilidad => Colectivos está disponible a toda hora (HECHO)
                                 CGP: si se ingresa un valor x (el nombre de un servicio), la fecha debe estar en el rango de atención. Ej: si es sábado no se atiende Rentas, no está disponible. Si es lunes a las 20hs tampoco se encuentra disponible este servicio. En cambio si es lunes a las 10:30hs sí se encuentra disponible.
-si no se ingresa un valor x, considerar que exista al menos un servicio en el CGP que esté atendiendo en ese momento.
-                                Bancos, el mismo comportamiento que para los CGP pero considerando el horario de atención bancario (Lunes a Viernes de 10hs a 15hs)
-                                locales comerciales,  considerar el horario de atención del local. Ejemplo: para Carrousel el horario de atención es de Lunes a Sábado de 10hs a 13hs y de 17hs a 20:30hs. Si son las 15 horas de un martes no debe estar disponible.
+si no se ingresa un valor x, considerar que exista al menos un servicio en el CGP que esté atendiendo en ese momento.(HECHO)
+                                Bancos, el mismo comportamiento que para los CGP pero considerando el horario de atención bancario (Lunes a Viernes de 10hs a 15hs)(HECHO)
+                                locales comerciales,  considerar el horario de atención del local. Ejemplo: para Carrousel el horario de atención es de Lunes a Sábado de 10hs a 13hs y de 17hs a 20:30hs. Si son las 15 horas de un martes no debe estar disponible.(HECHO)
 
   Búsqueda de puntos => Si se ingresa una palabra clave, se debería encontrar todos los puntos que estén etiquetados mediante                          esa palabra clave.  (creo que HECHO)
   
