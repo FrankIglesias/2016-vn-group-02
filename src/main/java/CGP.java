@@ -17,8 +17,7 @@ public class CGP extends POI {
 		try {
 			Servicio servicioBuscado = buscarServicio(servicio);
 			return (servicioBuscado.estasDisponibleEn(horario));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Error! No existe el servicio buscado");
 			return false;
 		}
@@ -29,14 +28,12 @@ public class CGP extends POI {
 	}
 
 	private Servicio buscarServicio(Servicio servicio) {
-		Servicio elServicioBuscado = servicios.stream()
-				.filter(unServicio -> equals(servicio)).findFirst().get();
+		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
 		return elServicioBuscado;
 
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario) {
-		return servicios.stream().anyMatch(
-				servicio -> servicio.estasDisponibleEn(horario));
+		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
 	}
 }
