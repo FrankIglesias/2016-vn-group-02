@@ -30,7 +30,6 @@ public class CGP extends POI {
 	private Servicio buscarServicio(Servicio servicio) {
 		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
 		return elServicioBuscado;
-
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario) {
