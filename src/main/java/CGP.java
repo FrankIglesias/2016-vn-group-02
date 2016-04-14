@@ -14,9 +14,14 @@ public class CGP extends POI {
 	}
 
 	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
-		Servicio servicioBuscado = buscarServicio(servicio);
-		return (servicioBuscado.estasDisponibleEn(horario));
-
+		try {
+			Servicio servicioBuscado = buscarServicio(servicio);
+			return (servicioBuscado.estasDisponibleEn(horario));
+		}
+		catch (Exception e) {
+			System.out.println("Error! No existe el servicio buscado");
+			return false;
+		}
 	}
 
 	public boolean estasCerca(Direccion unaDireccion) {
