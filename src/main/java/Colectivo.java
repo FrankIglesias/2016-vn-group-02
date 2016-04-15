@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.GregorianCalendar;
 
 public class Colectivo extends POI {
 
