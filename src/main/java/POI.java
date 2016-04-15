@@ -1,6 +1,7 @@
 
 
 import java.awt.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -10,9 +11,9 @@ public abstract class POI {
 	protected Direccion direccion;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
-	protected Horario horario;
-	public abstract boolean estaDisponible(GregorianCalendar horario, Servicio servicio);
-	public abstract boolean estaDisponible(GregorianCalendar horario);
+	protected ArrayList<Horario> horario = new ArrayList<Horario>();
+	public abstract boolean estaDisponible(LocalDateTime horario, Servicio servicio);
+	public abstract boolean estaDisponible(LocalDateTime horario);
 
 	public POI(Direccion dir, String nombre) {
 		this.direccion = dir;

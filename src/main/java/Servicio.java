@@ -1,21 +1,23 @@
 
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Servicio {
 	
-		private Horario horarioDelServicio;
+		private ArrayList<Horario> horario;
 		private String nombreDelServicio;
-		public Servicio(String nombre, Horario horario){
+		public Servicio(String nombre, ArrayList<Horario> horario){
 			nombreDelServicio = nombre;
-			horarioDelServicio = horario;
+			horario = horario;
 		}
 	
-		public boolean estasDisponibleEn(GregorianCalendar horario) {
-			return horarioDelServicio.estaEntreLosHorarios(horario);
-			
-		}
+//		public boolean estasDisponibleEn(LocalDateTime horarioConsultado) {
+//			return horario.estaDisponibleEnHorario(horarioConsultado);
+//			
+//		}
 		public String getNombre()
 		{
 			return nombreDelServicio;

@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -13,15 +14,15 @@ public class CGP extends POI {
 			addPalabraClave(unServicio.getNombre());
 	}
 
-	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
-		try {
-			Servicio servicioBuscado = buscarServicio(servicio);
-			return (servicioBuscado.estasDisponibleEn(horario));
-		} catch (Exception e) {
-			System.out.println("Error! No existe el servicio buscado");
-			return false;
-		}
-	}
+//	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
+//		try {
+//			Servicio servicioBuscado = buscarServicio(servicio);
+//			return (servicioBuscado.estasDisponibleEn(horario));
+//		} catch (Exception e) {
+//			System.out.println("Error! No existe el servicio buscado");
+//			return false;
+//		}
+//	}
 
 	public boolean estasCerca(Direccion unaDireccion) {
 		return unaDireccion.getComuna() == (this.comuna);
@@ -32,7 +33,19 @@ public class CGP extends POI {
 		return elServicioBuscado;
 	}
 
-	public boolean estaDisponible(GregorianCalendar horario) {
-		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
+	@Override
+	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+	@Override
+	public boolean estaDisponible(LocalDateTime horario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+//	public boolean estaDisponible(LocalDateTime horario) {
+//		return servicios.stream().anyMatch(servicio -> servicio.estasDisponibleEn(horario));
+//	}
 }

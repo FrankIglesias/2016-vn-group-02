@@ -1,17 +1,25 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Banco extends POI {
-	private Horario horarioBancario;
+	private ArrayList<Horario> horario;
 
-	public Banco(Direccion dir, String nombre) {
+	public Banco(Direccion dir, String nombre, ArrayList<Horario> horario) {
 		super(dir, nombre);
-		horarioBancario = new Horario(1, 5, 10, 15);
+		horario = horario;
 	}
 
-	public boolean estaDisponible(GregorianCalendar horario) {
-		return horarioBancario.estaEntreLosHorarios(horario);
-	}
-	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
+//	public boolean estaDisponible(LocalDateTime horarioConsultado) {
+//		return horario.estaDisponibleEnHorario(horarioConsultado);
+//	}
+	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
 		return estaDisponible(horario);
 	}
+
+@Override
+public boolean estaDisponible(LocalDateTime horario) {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

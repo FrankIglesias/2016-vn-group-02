@@ -1,29 +1,56 @@
 
-
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
 public class Horario {
 
-	private int inicioDeSemana;
-	private int finDeSemana;
-	private int horaInicial;
-	private int horaFinal;
-	
-	public Horario (int inicioSem,int finSem,int horai, int horaf){
+	private DayOfWeek day;
+	private LocalTime horaInicial;
+	private LocalTime horaFinal;
+
+	public Horario(DayOfWeek day, LocalTime horaInicial, LocalTime horaFinal) {
 		super();
-		this.horaFinal = horaf;
-		this.horaInicial = horai;
-		this.inicioDeSemana = inicioSem;
-		this.finDeSemana = finSem;
+		this.day = day;
+		this.horaInicial = horaInicial;
+		this.horaFinal = horaFinal;
 	}
-	public boolean estaEntreLosHorarios(GregorianCalendar horarioPreguntado){
-		int diaPreguntado = horarioPreguntado.get(Calendar.DAY_OF_WEEK);
-		int horaPreguntada = horarioPreguntado.get(Calendar.HOUR_OF_DAY);
-		if((inicioDeSemana <= diaPreguntado && diaPreguntado <= finDeSemana))
-		return ((horaInicial <= horaPreguntada) && (horaPreguntada <= horaFinal));
-		return false;
-		
-}
+
+	public DayOfWeek getDay() {
+		return day;
+	}
+
+	public void setDay(DayOfWeek day) {
+		this.day = day;
+	}
+
+	public LocalTime getHoraInicial() {
+		return horaInicial;
+	}
+
+	public void setHoraInicial(LocalTime horaInicial) {
+		this.horaInicial = horaInicial;
+	}
+
+	public LocalTime getHoraFinal() {
+		return horaFinal;
+	}
+
+	public void setHoraFinal(LocalTime horaFinal) {
+		this.horaFinal = horaFinal;
+	}
+
+	public boolean estaDisponibleEnHorario(LocalDateTime horario) {
+		boolean retorno = false;
+
+		if (horario.getDayOfWeek() == this.day && horario.toLocalTime().isAfter(horaInicial)
+				&& horario.toLocalTime().isBefore(horaFinal)) {
+			retorno = true;
+		}
+
+		return retorno;
+	}
 }

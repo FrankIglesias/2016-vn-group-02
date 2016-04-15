@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
 public class Colectivo extends POI {
@@ -21,6 +22,20 @@ public class Colectivo extends POI {
 
 	public boolean estaDisponible(GregorianCalendar horario) {
 		return true;
+	}
+
+
+	@Override
+	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean estaDisponible(LocalDateTime horario) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
