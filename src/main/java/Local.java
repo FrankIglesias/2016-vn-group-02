@@ -9,9 +9,9 @@ public class Local extends POI {
 	private Rubro rubro;
 	private String nombre;
 
-	public Local(String nombreDelRubro, Direccion dir, String nombre, ArrayList<Horario> horario, int radioDeCercania) {
+	public Local(String nombreDelRubro, Direccion dir, String nombre, int radioDeCercania) {
 		super(dir, nombre);
-		rubro = new Rubro(nombreDelRubro, horario, radioDeCercania);
+		rubro = new Rubro(nombreDelRubro, radioDeCercania);
 		addPalabraClave(nombreDelRubro);
 	}
 
@@ -23,27 +23,7 @@ public class Local extends POI {
 		this.rubro = rubro;
 	}
 
-//	public boolean estaDisponible(GregorianCalendar horario, Servicio servicio) {
-//		return this.estaDisponible(horario);
-//	}
-
-//	public boolean estaDisponible(LocalDateTime horario) {
-//		return rubro.estaDisponible(horario);
-//	}
-
 	public boolean estasCerca(Direccion unaDireccion) {
 		return rubro.estasCerca(unaDireccion, this);
-	}
-
-	@Override
-	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean estaDisponible(LocalDateTime horario) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

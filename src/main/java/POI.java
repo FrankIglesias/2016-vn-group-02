@@ -12,8 +12,6 @@ public abstract class POI {
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	protected ArrayList<Horario> horario = new ArrayList<Horario>();
-	public abstract boolean estaDisponible(LocalDateTime horario, Servicio servicio);
-	public abstract boolean estaDisponible(LocalDateTime horario);
 
 	public POI(Direccion dir, String nombre) {
 		this.direccion = dir;
@@ -40,6 +38,17 @@ public abstract class POI {
 
 	public void addPalabraClave(String unaPalabra) {
 		this.palabrasClave.add(unaPalabra);
+	}
+	
+	public boolean estaDisponible(LocalDateTime horario){
+		boolean retorno = false;
+		
+		for(int i = 0; i < this.horario.size(); i++) {
+			if(this.horario.get(i).incluyeHorario(horario))
+				retorno = true;
+		}
+		
+		return retorno;
 	}
 
 	

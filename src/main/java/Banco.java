@@ -16,10 +16,4 @@ public class Banco extends POI {
 	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
 		return estaDisponible(horario);
 	}
-
-@Override
-public boolean estaDisponible(LocalDateTime horario) {
-	// TODO Auto-generated method stub
-	return false;
-}
 }

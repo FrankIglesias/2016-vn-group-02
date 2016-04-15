@@ -9,46 +9,34 @@ import java.util.GregorianCalendar;
 public class Horario {
 
 	private DayOfWeek day;
-	private LocalTime horaInicial;
-	private LocalTime horaFinal;
-
-	public Horario(DayOfWeek day, LocalTime horaInicial, LocalTime horaFinal) {
-		super();
-		this.day = day;
-		this.horaInicial = horaInicial;
-		this.horaFinal = horaFinal;
-	}
+	private ArrayList<IntervaloHorario> intervaloHorario;
 
 	public DayOfWeek getDay() {
 		return day;
 	}
-
 	public void setDay(DayOfWeek day) {
 		this.day = day;
 	}
-
-	public LocalTime getHoraInicial() {
-		return horaInicial;
+	public ArrayList<IntervaloHorario> getIntervaloHorario() {
+		return intervaloHorario;
 	}
-
-	public void setHoraInicial(LocalTime horaInicial) {
-		this.horaInicial = horaInicial;
+	public void setIntervaloHorario(ArrayList<IntervaloHorario> intervaloHorario) {
+		this.intervaloHorario = intervaloHorario;
 	}
-
-	public LocalTime getHoraFinal() {
-		return horaFinal;
+	public Horario(DayOfWeek day, ArrayList<IntervaloHorario> intervaloHorario) {
+		super();
+		this.day = day;
+		this.intervaloHorario = intervaloHorario;
 	}
-
-	public void setHoraFinal(LocalTime horaFinal) {
-		this.horaFinal = horaFinal;
-	}
-
-	public boolean estaDisponibleEnHorario(LocalDateTime horario) {
+	
+	public boolean incluyeHorario(LocalDateTime horario) {
 		boolean retorno = false;
 
-		if (horario.getDayOfWeek() == this.day && horario.toLocalTime().isAfter(horaInicial)
-				&& horario.toLocalTime().isBefore(horaFinal)) {
-			retorno = true;
+		if (horario.getDayOfWeek() == this.day) {
+			for(int i = 0; i < intervaloHorario.size(); i++){
+				if(intervaloHorario.get(i).incluyeHora(horario.toLocalTime()))
+					retorno = true;
+			}
 		}
 
 		return retorno;
