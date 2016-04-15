@@ -9,9 +9,9 @@ public class Servicio {
 		private ArrayList<Horario> horario;
 		private String nombreDelServicio;
 		
-		public Servicio(String nombre, ArrayList<Horario> horario){
+		public Servicio(String nombre, ArrayList<Horario> listaDeHorarios){
 			nombreDelServicio = nombre;
-			horario = horario;
+			horario = listaDeHorarios;
 		}
 
 		public ArrayList<Horario> getHorario() {
@@ -34,8 +34,8 @@ public class Servicio {
 			return nombreDelServicio;
 		}
 		
-		public boolean estaDisponible() {
-			// TODO Auto-generated method stub
-			return false;
+		public boolean estaDisponible(LocalDateTime unHorario) {
+			return horario.stream().anyMatch(hora -> hora.incluyeHorario(unHorario));
+			
 		}
 }

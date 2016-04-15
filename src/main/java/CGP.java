@@ -17,8 +17,8 @@ public class CGP extends POI {
 		return unaDireccion.getComuna() == (comuna);
 	}
 
-	private Servicio buscarServicio(Servicio servicio) {
-		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> equals(servicio)).findFirst().get();
+	private Servicio buscarServicio(String nombreDelServicio) {
+		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> unServicio.getNombre().equals(nombreDelServicio)).findFirst().get();
 		return elServicioBuscado;
 		
 	}
@@ -32,18 +32,17 @@ public class CGP extends POI {
 		String busqueda = keyboard.nextLine();
 
 		if (busqueda.equals("")) {
-			retorno = servicios.stream().anyMatch(Servicio::estaDisponible);
+			retorno = servicios.stream().anyMatch(unServicio -> estaDisponible(horario));
 
 		} else {
 			try {
-				if (servicios.stream()
-						.anyMatch(unServicio -> unServicio.equals(busqueda) && unServicio.estaDisponible())) {
+				if (this.buscarServicio(busqueda).estaDisponible(horario)) {
 					retorno = true;
 				}
 			} catch (NullPointerException exepcion) {
-				System.out.println("No existe el servicio " + busqueda);
+				//System.out.println("No existe el servicio " + busqueda);
+				return false;
 			}
-				//prueba
 		}
 		return retorno;
 	}
