@@ -46,7 +46,6 @@ public class CGP extends POI {
 			}
 
 		}
-			// nuevos cabiios
 		return retorno;
 	}
 }
