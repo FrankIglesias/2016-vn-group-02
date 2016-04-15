@@ -11,12 +11,11 @@ public class CGP extends POI {
 	public CGP(Direccion dir, String nombre, List<Servicio> listaDeServicios) {
 		super(dir, nombre);
 		servicios = listaDeServicios;
-		for (Servicio unServicio : servicios)
-			addPalabraClave(unServicio.getNombre());
+		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
 
 	public boolean estasCerca(Direccion unaDireccion) {
-		return unaDireccion.getComuna() == (this.comuna);
+		return unaDireccion.getComuna() == (comuna);
 	}
 
 	private Servicio buscarServicio(Servicio servicio) {
@@ -33,24 +32,18 @@ public class CGP extends POI {
 		String busqueda = keyboard.nextLine();
 
 		if (busqueda.equals("")) {
-			for (int i = 0; i < this.servicios.size(); i++) {
-				if (servicios.get(i).estaDisponible())
-					retorno = true;
-			}
+			retorno = servicios.stream().anyMatch(Servicio::estaDisponible);
+
 		} else {
-			boolean encontrado = false;
-			
-			for (int i = 0; i < this.servicios.size(); i++) {
-				if (servicios.get(i).getNombre().equals(busqueda) && servicios.get(i).estaDisponible()){
+			try {
+				if (servicios.stream()
+						.anyMatch(unServicio -> unServicio.equals(busqueda) && unServicio.estaDisponible())) {
 					retorno = true;
-					encontrado = true;
 				}
+			} catch (NullPointerException exepcion) {
+				System.out.println("No existe el servicio " + busqueda);
 			}
-			
-			if(!encontrado)
-			{
-				System.out.println("No existe el servicio "+busqueda);
-			}
+
 		}
 
 		return retorno;

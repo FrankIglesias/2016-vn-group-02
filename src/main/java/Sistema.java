@@ -11,8 +11,20 @@ import java.util.stream.Collectors;
 public class Sistema {
 	
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
+public static void main (String [ ] args) {
+	GregorianCalendar fechaActual = new  GregorianCalendar(2014, 04, 13, 14, 25);
+	System.out.println(fechaActual.get(Calendar.HOUR_OF_DAY));
+	System.out.println(fechaActual.get(Calendar.DAY_OF_WEEK));
+	List<String> nombres = new ArrayList<String>();
+	nombres.add("juancito");
+	nombres.add("tingui");
+	nombres.stream().forEach(nombre -> System.out.println(nombre));
 
-//public static void main(String[] args) {}
+  
+  }
+
+
+
 
 
 public static List<POI> buscarSegunPalabraClave(String unaFrase)
@@ -35,12 +47,6 @@ public Sistema()
 { 
 	super();
 }
-public static void main (String [ ] args) {
-	GregorianCalendar fechaActual = new  GregorianCalendar(2014, 04, 13, 14, 25);
-	System.out.println(fechaActual.get(Calendar.HOUR_OF_DAY));
-	System.out.println(fechaActual.get(Calendar.DAY_OF_WEEK));
-  
-  }
 	
 
 
