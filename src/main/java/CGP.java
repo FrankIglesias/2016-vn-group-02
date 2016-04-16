@@ -18,9 +18,10 @@ public class CGP extends POI {
 	}
 
 	private Servicio buscarServicio(String nombreDelServicio) {
-		Servicio elServicioBuscado = servicios.stream().filter(unServicio -> unServicio.getNombre().equals(nombreDelServicio)).findFirst().get();
+		Servicio elServicioBuscado = servicios.stream()
+				.filter(unServicio -> unServicio.getNombre().equals(nombreDelServicio)).findFirst().get();
 		return elServicioBuscado;
-		
+
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class CGP extends POI {
 					retorno = true;
 				}
 			} catch (NullPointerException exepcion) {
-				//System.out.println("No existe el servicio " + busqueda);
+				// System.out.println("No existe el servicio " + busqueda);
 				return false;
 			}
 		}

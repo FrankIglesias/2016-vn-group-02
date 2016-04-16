@@ -2,29 +2,30 @@
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Horario {
 
 	private DayOfWeek day;
-	private ArrayList<IntervaloHorario> intervaloHorario;
+	private List<IntervaloHorario> intervaloHorario;
 
 	public DayOfWeek getDay() {
 		return day;
 	}
 
 	public void setDay(DayOfWeek unDia) {
-	day = unDia;
+		day = unDia;
 	}
 
-	public ArrayList<IntervaloHorario> getIntervaloHorario() {
+	public List<IntervaloHorario> getIntervaloHorario() {
 		return intervaloHorario;
 	}
 
-	public void setIntervaloHorario(ArrayList<IntervaloHorario> intervaloHorario) {
+	public void setIntervaloHorario(List<IntervaloHorario> intervaloHorario) {
 		this.intervaloHorario = intervaloHorario;
 	}
 
-	public Horario(DayOfWeek day, ArrayList<IntervaloHorario> intervaloHorario) {
+	public Horario(DayOfWeek day, List<IntervaloHorario> intervaloHorario) {
 		super();
 		this.day = day;
 		this.intervaloHorario = intervaloHorario;

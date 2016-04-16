@@ -1,8 +1,4 @@
 
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class Local extends POI {
 
 	private Rubro rubro;
@@ -14,10 +10,13 @@ public class Local extends POI {
 		addPalabraClave(nombreDelRubro);
 	}
 
-	public Direccion getDireccion(){
+	public Direccion getDireccion() {
 		return direccion;
 	}
-	public Local(String nombre, Direccion dir, Rubro rubro) { // en caso que el													// rubro exista
+
+	public Local(String nombre, Direccion dir, Rubro rubro) { // en caso que el
+																// // rubro
+																// exista
 		super(dir, nombre);
 		this.rubro = rubro;
 	}

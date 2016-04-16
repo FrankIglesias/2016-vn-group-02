@@ -4,34 +4,31 @@ public class IntervaloHorario {
 
 	LocalTime horaInicio;
 	LocalTime horaFin;
-	
-	
+
+	public IntervaloHorario(LocalTime horaInicial, LocalTime horaFinal) {
+		super();
+		horaInicio = horaInicial;
+		horaFin = horaFinal;
+	}
+
+	public boolean incluyeHora(LocalTime hora) {
+		return (hora.isAfter(horaInicio) && hora.isBefore(horaFin));
+	}
+
 	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
+
+	public void setHoraInicio(LocalTime horaInicial) {
+		horaInicio = horaInicial;
 	}
+
 	public LocalTime getHoraFin() {
 		return horaFin;
 	}
-	public void setHoraFin(LocalTime horaFin) {
-		this.horaFin = horaFin;
+
+	public void setHoraFin(LocalTime horaFinal) {
+		horaFin = horaFinal;
 	}
-	public IntervaloHorario(LocalTime horaInicio, LocalTime horaFin) {
-		super();
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
-	}
-	
-	public boolean incluyeHora(LocalTime hora) {
-		boolean retorno = false;
-		
-		if(hora.isAfter(this.horaInicio) && hora.isBefore(horaFin)) {
-			retorno = true;
-		}
-		
-		return retorno;
-	}
-	
+
 }
