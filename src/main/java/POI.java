@@ -5,23 +5,23 @@ import java.util.Arrays;
 
 public abstract class POI {
 
-	protected Direccion direccion;
+	protected Geolocalizacion point;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	protected ArrayList<Horario> horario = new ArrayList<Horario>();
 
-	public POI(Direccion dir, String nombre) {
-		this.direccion = dir;
-		this.nombre = nombre;
+	public POI(Geolocalizacion p, String nom) {
+		point = p;
+		nombre = nom;
 		this.addPalabraClave(nombre);
 	}
 
 	public double distanciaCon(POI unPoi) {
-		return this.direccion.distanciaCon(unPoi.direccion);
+		return this.point.distanciaCon(unPoi.point);
 	}
 
-	public boolean estasCerca(Direccion unaDireccion) {
-		return this.direccion.distanciaCon(unaDireccion) < 500;
+	public boolean estasCerca(Geolocalizacion point) {
+		return this.point.distanciaCon(point) < 500;
 	}
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {

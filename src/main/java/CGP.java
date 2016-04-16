@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CGP extends POI {
-	private int comuna;
+	// private int comuna;
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
-	public CGP(Direccion dir, String nombre, List<Servicio> listaDeServicios) {
-		super(dir, nombre);
+	public CGP(Geolocalizacion point, String nombre, List<Servicio> listaDeServicios) {
+		super(point, nombre);
 		servicios = listaDeServicios;
 		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
 
-	public boolean estasCerca(Direccion unaDireccion) {
-		return unaDireccion.getComuna() == (comuna);
-	}
+	// public boolean estasCerca(Geolocalizacion point) {
+	// return point.getComuna() == (comuna);
+	// }
 
 	private Servicio buscarServicio(String nombreDelServicio) {
 		Servicio elServicioBuscado = servicios.stream()

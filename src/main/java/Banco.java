@@ -16,8 +16,8 @@ public class Banco extends POI {
 
 	// Horario lunes = new Horario(DayOfWeek.MONDAY,new
 	// IntervaloHorario(LocalTime.of(10, 00),LocalTime.of(15, 00)));
-	public Banco(Direccion dir, String nombre) {
-		super(dir, nombre);
+	public Banco(Geolocalizacion point, String nombre) {
+		super(point, nombre);
 		intervaloFijo.add(intervalo);
 		horario.add(lunes);
 		horario.add(martes);
