@@ -10,10 +10,13 @@ public abstract class POI {
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	protected ArrayList<Horario> horario = new ArrayList<Horario>();
 
-	public POI(Geolocalizacion p, String nom) {
-		point = p;
-		nombre = nom;
+	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, ArrayList<Horario> horario) {
+		super();
+		this.point = point;
+		this.nombre = nombre;
+		this.palabrasClave = palabrasClave;
 		this.addPalabraClave(nombre);
+		this.horario = horario;
 	}
 
 	public double distanciaCon(POI unPoi) {

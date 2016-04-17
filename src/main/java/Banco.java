@@ -5,18 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Banco extends POI {
-	private List<Horario> horario = new ArrayList<Horario>();
-	
+	static ArrayList<Horario> horarioBancario = initializeHorarioBanco();
 
-	// Horario lunes = new Horario(DayOfWeek.MONDAY,new
-	// IntervaloHorario(LocalTime.of(10, 00),LocalTime.of(15, 00)));
-	public Banco(Geolocalizacion point, String nombre) {
-		super(point, nombre);
-		this.horario = initializeBanco();
-
+	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave/*, ArrayList<Horario> horario*/) {
+		super(point, nombre, palabrasClave, horarioBancario);
 	}
 
-	private List<Horario> initializeBanco() {
+	private static ArrayList<Horario> initializeHorarioBanco() {
+		ArrayList<Horario> horario = new ArrayList<Horario>();
 		List<IntervaloHorario> intervaloFijo = new ArrayList<IntervaloHorario>();
 		IntervaloHorario intervalo = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
 		Horario lunes = new Horario(DayOfWeek.MONDAY, intervaloFijo);

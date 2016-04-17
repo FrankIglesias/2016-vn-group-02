@@ -1,12 +1,14 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Colectivo extends POI {
 
 	private String linea;
 
-	public Colectivo(Geolocalizacion point, String nombre, String numero) {
-		super(point, nombre);
-		linea = numero;
+	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, 
+			String linea) {
+		super(point, nombre, palabrasClave, new ArrayList<Horario>());
+		this.linea = linea;
 		this.addPalabraClave(linea.toString());
 	}
 
