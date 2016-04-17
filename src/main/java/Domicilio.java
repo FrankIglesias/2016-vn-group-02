@@ -3,13 +3,13 @@ public class Domicilio {
 
 	private String callePrincipal;
 	private String entreCalles;
-	private int altura;
+	private String altura;
 	private String piso;
 	private String unidad;
-	private int codigoPostal;
+	private String codigoPostal;
 	
-	public Domicilio(String callePrincipal, String entreCalles, int altura, String piso, String unidad,
-			int codigoPostal) {
+	public Domicilio(String callePrincipal, String entreCalles, String altura, String piso, String unidad,
+			String codigoPostal) {
 		super();
 		this.callePrincipal = callePrincipal;
 		this.entreCalles = entreCalles;
@@ -18,6 +18,8 @@ public class Domicilio {
 		this.unidad = unidad;
 		this.codigoPostal = codigoPostal;
 	}
+	
+	
 
 	
 }

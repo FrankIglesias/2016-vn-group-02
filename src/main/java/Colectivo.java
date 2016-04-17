@@ -2,9 +2,9 @@ import java.time.LocalDateTime;
 
 public class Colectivo extends POI {
 
-	private Integer linea;
+	private String linea;
 
-	public Colectivo(Geolocalizacion point, String nombre, int numero) {
+	public Colectivo(Geolocalizacion point, String nombre, String numero) {
 		super(point, nombre);
 		linea = numero;
 		this.addPalabraClave(linea.toString());

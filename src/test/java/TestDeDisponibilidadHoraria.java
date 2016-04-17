@@ -2,6 +2,9 @@
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.GregorianCalendar;
 
 import org.junit.Before;
@@ -13,7 +16,9 @@ public class TestDeDisponibilidadHoraria extends PoiMainTest {
 	@Before
 	public void init(){
 		super.init();
-		 fechaActual = new  GregorianCalendar(2014, 04, 13, 14, 25);
+		fecha = LocalDate.of(2016,04,15);
+		hora = LocalTime.of(10,40);
+		fechaActual = LocalDateTime.of(fecha, hora) ;
 	}
 	@Test
 	public void testDisponibilidadHorariaDeBanco() {
@@ -27,7 +32,7 @@ public class TestDeDisponibilidadHoraria extends PoiMainTest {
 	public void testDisponibilidadHorariaServicioCGP() {
 		
 		
-			assertTrue(ventaDeVOS.estasDisponibleEn(fechaActual));
+			assertTrue(ventaDeVOS.estaDisponible(fechaActual));
 			
 	}
 	@Test

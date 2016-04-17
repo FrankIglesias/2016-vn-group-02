@@ -23,7 +23,7 @@ public class CalculoDeCercaniaTest extends PoiMainTest {
 	public void calcularDistanciaEntreDosPOI() {
 		/*http://www.movable-type.co.uk/scripts/latlong.html
 		 * testeado de aca*/
-		Assert.assertEquals(colectivo.distanciaCon(banco),700,100);
+		Assert.assertEquals(banco.distanciaCon(centroDeCGP),440,10);
 	}
 	
 	
