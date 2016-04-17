@@ -9,9 +9,13 @@ import org.junit.Test;
 
 public class EncuentraSegunPalabraClaveTest {
 	 
-	public Direccion direccionBanco;
+	public Domicilio domicilioBanco;
+	public Localidad localidadBanco;
+	public Geolocalizacion geolocalizacionBanco;
 	public Banco banco;
-	public Direccion direccionColectivo;
+	public Domicilio direccionColectivo;
+	public Localidad localidadColectivo;
+	public Geolocalizacion geolocalizacionColectivo;
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Sistema sistPrueba;
@@ -20,8 +24,8 @@ public class EncuentraSegunPalabraClaveTest {
 	public void init(){  
 		sistPrueba = new Sistema();
 		
-		direccionBanco = new Direccion(150, 160,12);
-		banco = new Banco(direccionBanco, "Banco");
+		domicilioBanco = new Domicilio("Bolivia","El Gaucho","Estrella Federal",6058,0,"PB",1419);
+		banco = new Banco(domicilioBanco, "Banco");
 		banco.addPalabraClave("dinero");
 		banco.addPalabraClave("cuenta");
 		banco.addPalabraClave("banco");

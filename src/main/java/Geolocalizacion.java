@@ -6,9 +6,12 @@ public class Geolocalizacion {
 	private Domicilio domicilio;
 	private Localidad localidad;
 
-	public Geolocalizacion(double lat, double lng) {
-		latitud = lat;
-		longitud = lng;
+	public Geolocalizacion(double latitud, double longitud, Domicilio domicilio, Localidad localidad) {
+		super();
+		this.latitud = latitud;
+		this.longitud = longitud;
+		this.domicilio = domicilio;
+		this.localidad = localidad;
 	}
 
 	public void setDomicilio(Domicilio domic) {
