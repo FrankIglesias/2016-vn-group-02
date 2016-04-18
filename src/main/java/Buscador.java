@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
-
-
-public class Buscador {
+ 
+  
+public class Buscador { 
 	
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
 
