@@ -20,11 +20,11 @@ public class EncuentraSegunPalabraClaveTest {
 	public ArrayList<String> palabrasClaveColectivo = new ArrayList<String>();
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
-	public Sistema sistPrueba;
+	public Buscador sistPrueba;
 	
 	@Before 
 	public void init(){  
-		sistPrueba = new Sistema();
+		sistPrueba = new Buscador();
 		
 		domicilioBanco = new Domicilio("Bolivia","El Gaucho y Estrella Federal","6058","PB","","1419");
 		localidadBanco = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
@@ -52,11 +52,11 @@ public class EncuentraSegunPalabraClaveTest {
 	@Test
 	public void encontrarPOISegunPalabra() {
 		String fraseABuscar = "quiero un banco malo";
-		Sistema.setList(puntosDeInteres);
-		Sistema.buscarSegunPalabraClave(fraseABuscar);
+		Buscador.setList(puntosDeInteres);
+		Buscador.buscarSegunPalabraClave(fraseABuscar);
 		
-		Assert.assertTrue(Sistema.buscarSegunPalabraClave(fraseABuscar).contains(banco)); 
-		Assert.assertEquals("Cantidad de elementos en el array",1,Sistema.buscarSegunPalabraClave("banelco").size());
+		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(banco)); 
+		Assert.assertEquals("Cantidad de elementos en el array",1,Buscador.buscarSegunPalabraClave("banelco").size());
 		
 		
 	}
