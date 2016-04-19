@@ -33,9 +33,12 @@ public class PoiMainTest {
 	protected CGP centroDeCGP;
 	protected Local unLocal;
 	protected Rubro unRubro;
-	protected LocalDateTime fechaActual;
-	protected LocalDate fecha;
-	protected LocalTime hora;
+	protected LocalDateTime fechaAbierto;
+	protected LocalDateTime fechaCerrado;
+	protected LocalDate fecha1;
+	protected LocalTime hora1;
+	protected LocalDate fecha2;
+	protected LocalTime hora2;
 	
 	@Before 
 	public void init(){  
