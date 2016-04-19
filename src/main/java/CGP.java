@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CGP extends POI {
-	// private int comuna;
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 	
 	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios) {
@@ -13,11 +12,9 @@ public class CGP extends POI {
 		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
 
-
-
-	// public boolean estasCerca(Geolocalizacion point) {
-	// return point.getComuna() == (comuna);
-	// }
+	public boolean estasCerca(Geolocalizacion otroPoint) {
+	return point.distanciaCon(otroPoint) < 500;
+	 }
 
 	private Servicio buscarServicio(String nombreDelServicio) {
 		Servicio elServicioBuscado = servicios.stream()
