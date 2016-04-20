@@ -35,10 +35,8 @@ public class Horario {
 		boolean retorno = false;
 
 		if (horario.getDayOfWeek() == this.day) {
-			for (int i = 0; i < intervaloHorario.size(); i++) {
-				if (intervaloHorario.get(i).incluyeHora(horario.toLocalTime()))
-					retorno = true;
-			}
+			retorno = intervaloHorario.stream().anyMatch
+					(unHorario -> unHorario.incluyeHora(horario.toLocalTime()));
 		}
 
 		return retorno;

@@ -39,6 +39,7 @@ public class PoiMainTest {
 	protected LocalTime hora1;
 	protected LocalDate fecha2;
 	protected LocalTime hora2;
+	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
 	@Before 
 	public void init(){  
@@ -46,12 +47,12 @@ public class PoiMainTest {
 		domicilioBanco 			= new Domicilio("Bolivia","El Gaucho y Estrella Federal","6058","PB","","1419");
 		localidadBanco 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		geolocalizacionBanco 	= new Geolocalizacion(-34.5735632, -58.5105945, domicilioBanco, localidadBanco);
-		banco = new Banco(geolocalizacionBanco, "Banco Rio", new ArrayList<String>());
+		banco = new Banco(geolocalizacionBanco, "Banco Rio", new ArrayList<String>(), feriados);
 		
 		domicilioColectivo 			= new Domicilio("Manuel Alvarez Prado","Bolivia y Av. de Los Constituyentes","2402-2600","","","1419");
 		localidadColectivo 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		geolocalizacionColectivo 	= new Geolocalizacion(-34.5730928, -58.511029, domicilioColectivo, localidadColectivo);
-		colectivo = new Colectivo(geolocalizacionColectivo, "Colectivo", new ArrayList<String>(),"127");
+		colectivo = new Colectivo(geolocalizacionColectivo, "Colectivo", new ArrayList<String>(),"127", feriados);
 		
 		domicilioCGP 			= new Domicilio("Av. de los Constituyentes","Jose Pascual Tamborini e Ibera","5836","PB","","1419");
 		localidadCGP 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
@@ -70,10 +71,10 @@ public class PoiMainTest {
 		horario.add(viernes);
 		ventaDeVOS = new Servicio("Tarjeta vos", horario);
 		serviciosDelCGP.add(ventaDeVOS);
-		centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP);
+		centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);
 
 		unRubro = new Rubro("Ventas chetas", 3000);
-		unLocal = new Local(geolocalizacionBanco, "lo de mari", horario, unRubro);
+		unLocal = new Local(geolocalizacionBanco, "lo de mari", horario, unRubro, feriados);
 		
 		
 		

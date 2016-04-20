@@ -1,13 +1,14 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Colectivo extends POI {
 
 	private String linea;
 
 	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, 
-			String linea) {
-		super(point, nombre, palabrasClave, new ArrayList<Horario>());
+			String linea, List<Feriado> feriados) {
+		super(point, nombre, palabrasClave, new ArrayList<Horario>(), feriados);
 		this.linea = linea;
 		this.addPalabraClave(linea.toString());
 	}
@@ -18,7 +19,21 @@ public class Colectivo extends POI {
 
 	@Override
 	public boolean estaDisponible(LocalDateTime horario) {
-		return true;
+		boolean retorno = false;
+		
+		if (estoyEnFeriado(horario.toLocalDate())) {
+			Feriado fecha = this.feriados.stream().filter
+			(Feriado -> Feriado.getFecha() == horario.toLocalDate()).findFirst().get();
+			
+			if(fecha.incluyeHorario(horario)) {
+				retorno = true;
+			}
+		}
+		else
+			retorno = true;
+		
+		
+		return retorno;
 	}
 
 }

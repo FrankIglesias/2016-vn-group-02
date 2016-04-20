@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class CGP extends POI {
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 	
-	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios) {
-		super(point, nombre, new ArrayList<String>(), new ArrayList<Horario>());
+	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {
+		super(point, nombre, new ArrayList<String>(), new ArrayList<Horario>(), feriados);
 		this.servicios = servicios;
 		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
@@ -30,8 +30,16 @@ public class CGP extends POI {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Buscar Servicio:");
 		String busqueda = keyboard.nextLine();
-
-		if (busqueda.equals("")) {
+		
+		/*if (estoyEnFeriado(horario.toLocalDate())) {
+			Feriado fecha = this.feriados.stream().filter
+			(Feriado -> Feriado.getFecha() == horario.toLocalDate()).findFirst().get();
+			
+			if(fecha.incluyeHorario(horario)) {
+				retorno = true;
+			}
+		}
+		else */if (busqueda.equals("")) {
 			retorno = servicios.stream().anyMatch(unServicio -> estaDisponible(horario));
 
 		} else {

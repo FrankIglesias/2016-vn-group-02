@@ -7,8 +7,8 @@ import java.util.List;
 public class Banco extends POI {
 	static ArrayList<Horario> horarioBancario = initializeHorarioBanco();
 
-	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave/*, ArrayList<Horario> horario*/) {
-		super(point, nombre, palabrasClave, horarioBancario);
+	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave/*, ArrayList<Horario> horario*/, List<Feriado> feriados) {
+		super(point, nombre, palabrasClave, horarioBancario, feriados);
 	}
 
 	private static ArrayList<Horario> initializeHorarioBanco() {
@@ -32,10 +32,21 @@ public class Banco extends POI {
 	}
 
 	public boolean estaDisponible(LocalDateTime horarioConsultado) {
-		return horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioConsultado));
-	}
-
-	public boolean estaDisponible(LocalDateTime horario, Servicio servicio) {
-		return estaDisponible(horario);
+		boolean retorno = false;
+		
+		if (estoyEnFeriado(horarioConsultado.toLocalDate())) {
+			Feriado fecha = this.feriados.stream().filter
+			(Feriado -> Feriado.getFecha() == horarioConsultado.toLocalDate()).findFirst().get();
+			
+			if(fecha.incluyeHorario(horarioConsultado)) {
+				retorno = true;
+			}
+		}
+		else if (horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioConsultado)))
+		{
+			retorno = true;
+		}
+		
+		return retorno;
 	}
 }

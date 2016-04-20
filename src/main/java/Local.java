@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Local extends POI {
 
 	private Rubro rubro;
 
 	public Local(Geolocalizacion point, String nombre, ArrayList<Horario> horario,
-			Rubro rubro) {
-		super(point, nombre, new ArrayList<String>(), horario);
+			Rubro rubro, List<Feriado> feriados) {
+		super(point, nombre, new ArrayList<String>(), horario, feriados);
 		this.rubro = rubro;
 	}
 
