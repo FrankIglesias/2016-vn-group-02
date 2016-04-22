@@ -42,6 +42,11 @@ public abstract class POI {
 		this.palabrasClave.add(unaPalabra);
 	}
 	
+	public void addFeriado(Feriado unFeriado)
+	{
+		this.feriados.add(unFeriado);
+	}
+	
 	
 	public boolean compararmeConFeriados(LocalDate fecha)
 	{

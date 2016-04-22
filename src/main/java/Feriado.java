@@ -10,6 +10,13 @@ public class Feriado {
 	protected IntervaloHorario intervaloFeriado;
 
 
+public Feriado(Month unMes, int unDia, IntervaloHorario unIntervalo)
+{
+	this.mes = unMes;
+	this.dia = unDia;
+	this.intervaloFeriado = unIntervalo;
+}
+	
 public boolean comparateConDiaYMes(LocalDate unaFecha)
 {
 	
