@@ -1,5 +1,4 @@
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,22 +30,4 @@ public class Banco extends POI {
 		return horario;
 	}
 
-	public boolean estaDisponible(LocalDateTime horarioConsultado) {
-		boolean retorno = false;
-		
-		if (estoyEnFeriado(horarioConsultado.toLocalDate())) {
-			Feriado fecha = this.feriados.stream().filter
-			(Feriado -> Feriado.getFecha() == horarioConsultado.toLocalDate()).findFirst().get();
-			
-			if(fecha.incluyeHorario(horarioConsultado)) {
-				retorno = true;
-			}
-		}
-		else if (horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioConsultado)))
-		{
-			retorno = true;
-		}
-		
-		return retorno;
-	}
 }

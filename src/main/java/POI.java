@@ -12,6 +12,7 @@ public abstract class POI {
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	protected ArrayList<Horario> horario = new ArrayList<Horario>();
 	protected List<Feriado> feriados;
+	
 
 	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, ArrayList<Horario> horario, List<Feriado> feriados) {
 		super();
@@ -32,36 +33,43 @@ public abstract class POI {
 	}
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {
-		String[] split = unaFrase.split(" ");
-		return palabrasClave.stream().anyMatch(palabra -> Arrays.asList(split).contains(palabra));
+		String[] listaDePalabrasDeFrase = unaFrase.split(" ");
+		return palabrasClave.stream().anyMatch(palabra -> Arrays.asList(listaDePalabrasDeFrase).contains(palabra));
 
 	}
 
 	public void addPalabraClave(String unaPalabra) {
 		this.palabrasClave.add(unaPalabra);
 	}
+	
+	
+	public boolean compararmeConFeriados(LocalDate fecha)
+	{
+		return (feriados.stream().anyMatch(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
+	}
+
+	
 
 	public boolean estoyEnFeriado(LocalDate fecha) {
 		boolean retorno = false;
 
 		if (this.feriados.size() > 0) { 
-			if(this.feriados.stream().anyMatch(Feriado -> Feriado.getFecha().getDayOfYear() == fecha.getDayOfYear()))
+			if(this.compararmeConFeriados(fecha))
 				retorno = true;
 		}
 
 		return retorno;
 	}
-
+ 
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 		boolean retorno = false;
 
 		if (estoyEnFeriado(horarioPreguntado.toLocalDate())) {
-			Feriado fecha = this.feriados.stream().filter
-			(Feriado -> Feriado.getFecha() == horarioPreguntado.toLocalDate()).findFirst().get();
+			Feriado fecha = (Feriado) this.feriados.stream().filter(Feriado -> Feriado.comparateConDiaYMes(horarioPreguntado.toLocalDate()));
 			
-			if(fecha.incluyeHorario(horarioPreguntado)) {
+			if(fecha.incluisHorario(horarioPreguntado.toLocalTime())) {
 				retorno = true;
-			}
+			} 
 		}
 		else if(horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioPreguntado))) {
 			retorno = true;

@@ -22,10 +22,9 @@ public class Colectivo extends POI {
 		boolean retorno = false;
 		
 		if (estoyEnFeriado(horario.toLocalDate())) {
-			Feriado fecha = this.feriados.stream().filter
-			(Feriado -> Feriado.getFecha() == horario.toLocalDate()).findFirst().get();
+			Feriado feriado = (Feriado) this.feriados.stream().filter(Feriado -> Feriado.comparateConDiaYMes(horario.toLocalDate()));
 			
-			if(fecha.incluyeHorario(horario)) {
+			if(feriado.incluisHorario(horario.toLocalTime())) {
 				retorno = true;
 			}
 		}
