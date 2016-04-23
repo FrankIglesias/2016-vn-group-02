@@ -40,6 +40,15 @@ public class PoiMainTest {
 	protected LocalDate fecha2;
 	protected LocalTime hora2;
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
+	protected Colectivo unColectivo;
+	protected Feriado feriado1;
+	protected Feriado feriado2;
+	protected IntervaloHorario intervalo1;
+	protected IntervaloHorario intervalo2;
+	protected LocalTime hora3;
+	protected LocalTime hora4;
+	protected LocalDate diaActual;
+	protected LocalDateTime horarioActual;
 	
 	@Before 
 	public void init(){  

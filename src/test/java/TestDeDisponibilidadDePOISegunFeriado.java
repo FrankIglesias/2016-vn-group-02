@@ -6,22 +6,9 @@ import org.junit.Test;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 
 public class TestDeDisponibilidadDePOISegunFeriado extends PoiMainTest {
 
-	public Colectivo unColectivo;
-	public List<Feriado> feriados = new ArrayList<Feriado>();
-	public Feriado feriado1;
-	public Feriado feriado2;
-	public IntervaloHorario intervalo1;
-	public IntervaloHorario intervalo2;
-	public LocalTime hora1;
-	public LocalTime hora2;
-	public LocalTime hora3;
-	public LocalTime hora4;
-	public LocalDate diaActual;
-	public LocalDateTime horarioActual;
 
 	@Before
 	public void init() {
