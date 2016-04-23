@@ -37,7 +37,7 @@ public class CGP extends POI {
 			
 			if(fecha.incluyeHorario(horario)) {
 				retorno = true;
-			}//
+			}
 		}
 		else */if (busqueda.equals("")) {
 			retorno = servicios.stream().anyMatch(unServicio -> estaDisponible(horario));
