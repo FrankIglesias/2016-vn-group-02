@@ -10,11 +10,11 @@ public abstract class POI {
 	protected Geolocalizacion point;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
-	protected ArrayList<Horario> horario = new ArrayList<Horario>();
+	protected Horario horario = new Horario();
 	protected List<Feriado> feriados;
 	
 
-	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, ArrayList<Horario> horario, List<Feriado> feriados) {
+	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, Horario horario, List<Feriado> feriados) {
 		super();
 		this.point = point;
 		this.nombre = nombre;
@@ -70,7 +70,7 @@ public abstract class POI {
 		if (estoyEnFeriado(horarioPreguntado.toLocalDate())) 
 			return (feriados.stream().anyMatch(feriado -> feriado.comparateConDiaYMes(horarioPreguntado.toLocalDate())&& feriado.incluisHorario(horarioPreguntado.toLocalTime())));
 				
-		return (horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioPreguntado)));
+		return (horario.incluyeHorario(horarioPreguntado));
 
 
 	}

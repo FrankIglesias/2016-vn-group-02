@@ -5,12 +5,12 @@ import java.time.Month;
 
 public class Feriado {
 	
-	protected Month mes;
+	protected int mes;
 	protected int dia;
 	protected IntervaloHorario intervaloFeriado;
 
 
-public Feriado(Month unMes, int unDia, IntervaloHorario unIntervalo)
+public Feriado(int unMes, int unDia, IntervaloHorario unIntervalo)
 {
 	this.mes = unMes;
 	this.dia = unDia;
@@ -20,7 +20,7 @@ public Feriado(Month unMes, int unDia, IntervaloHorario unIntervalo)
 public boolean comparateConDiaYMes(LocalDate unaFecha)
 {
 	
-	return (dia == unaFecha.getDayOfYear() && mes == unaFecha.getMonth());
+	return (dia == unaFecha.getDayOfYear() && mes == unaFecha.getMonthValue());
 }
 
 public boolean incluisHorario(LocalTime horario)

@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class Servicio {
 	
-		private ArrayList<Horario> horario;
+		private Horario horario;
 		private String nombreDelServicio;
 		
-		public Servicio(String nombre, ArrayList<Horario> listaDeHorarios){
+		public Servicio(String nombre, Horario agenda){
 			nombreDelServicio = nombre;
-			horario = listaDeHorarios;
+			horario = agenda;
 		}
 
-		public ArrayList<Horario> getHorario() {
+		public Horario getHorario() {
 			return horario;
 		}
 
-		public void setHorario(ArrayList<Horario> horario) {
+		public void setHorario(Horario horario) {
 			this.horario = horario;
 		}
 
@@ -35,7 +35,7 @@ public class Servicio {
 		}
 		
 		public boolean estaDisponible(LocalDateTime unHorario) {
-			return horario.stream().anyMatch(hora -> hora.incluyeHorario(unHorario));
+			return horario.incluyeHorario(unHorario);
 			
 		}
 }

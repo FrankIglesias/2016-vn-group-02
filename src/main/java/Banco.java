@@ -21,11 +21,11 @@ public class Banco extends POI {
 		List<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
 		intervaloBancario.add(intervaloUnico);
 		
-		horarioBancario.aÃ±adirIntervalo(DayOfWeek.MONDAY, intervaloBancario);
-		horarioBancario.aÃ±adirIntervalo(DayOfWeek.TUESDAY, intervaloBancario);
-		horarioBancario.aÃ±adirIntervalo(DayOfWeek.WEDNESDAY, intervaloBancario);
-		horarioBancario.aÃ±adirIntervalo(DayOfWeek.THURSDAY, intervaloBancario);
-		horarioBancario.aÃ±adirIntervalo(DayOfWeek.FRIDAY, intervaloBancario);
+		horarioBancario.añadirIntervalo(DayOfWeek.MONDAY, intervaloBancario);
+		horarioBancario.añadirIntervalo(DayOfWeek.TUESDAY, intervaloBancario);
+		horarioBancario.añadirIntervalo(DayOfWeek.WEDNESDAY, intervaloBancario);
+		horarioBancario.añadirIntervalo(DayOfWeek.THURSDAY, intervaloBancario);
+		horarioBancario.añadirIntervalo(DayOfWeek.FRIDAY, intervaloBancario);
 	}
 
 }

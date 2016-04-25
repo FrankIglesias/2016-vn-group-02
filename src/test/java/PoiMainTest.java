@@ -24,11 +24,11 @@ public class PoiMainTest {
 	protected Domicilio domicilioCGP;
 	protected Localidad localidadCGP;
 	protected Geolocalizacion geolocalizacionCGP;
-	private List<IntervaloHorario> intervaloFijo = new ArrayList<IntervaloHorario>();
+	private List<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
 	protected IntervaloHorario intervalo;
 	protected List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
 	protected Horario horarioPrueba;
-	protected ArrayList<Horario> horario = new ArrayList<Horario>();
+	protected Horario horario = new Horario();
 	protected Servicio ventaDeVOS;
 	protected CGP centroDeCGP;
 	protected Local unLocal;
@@ -58,17 +58,13 @@ public class PoiMainTest {
 		localidadCGP 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		geolocalizacionCGP 		= new Geolocalizacion(-34.5730009, -58.5047724, domicilioColectivo, localidadColectivo);
 		intervalo = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
-		Horario lunes = new Horario(DayOfWeek.MONDAY, intervaloFijo);
-		Horario martes = new Horario(DayOfWeek.TUESDAY, intervaloFijo);
-		Horario miercoles = new Horario(DayOfWeek.WEDNESDAY, intervaloFijo);
-		Horario jueves = new Horario(DayOfWeek.THURSDAY, intervaloFijo);
-		Horario viernes = new Horario(DayOfWeek.FRIDAY, intervaloFijo);
-		intervaloFijo.add(intervalo);
-		horario.add(lunes);
-		horario.add(martes);
-		horario.add(miercoles);
-		horario.add(jueves);
-		horario.add(viernes);
+		horario.añadirIntervalo(DayOfWeek.MONDAY, listaDeIntervalos);
+		horario.añadirIntervalo(DayOfWeek.TUESDAY, listaDeIntervalos);
+		horario.añadirIntervalo(DayOfWeek.WEDNESDAY, listaDeIntervalos);
+		horario.añadirIntervalo(DayOfWeek.THURSDAY, listaDeIntervalos);
+		horario.añadirIntervalo(DayOfWeek.FRIDAY, listaDeIntervalos);
+		listaDeIntervalos.add(intervalo);
+		
 		ventaDeVOS = new Servicio("Tarjeta vos", horario);
 		serviciosDelCGP.add(ventaDeVOS);
 		centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);

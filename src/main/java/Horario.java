@@ -16,13 +16,13 @@ public class Horario {
 		super();
 		unHorario = horario;
 	}
-	public void aÃ±adirIntervalo(DayOfWeek dia, List<IntervaloHorario> unIntervalo){
+	public void añadirIntervalo(DayOfWeek dia, List<IntervaloHorario> unIntervalo){
 	unHorario.put(dia, unIntervalo);
 	
 	}
 	
 	public boolean incluyeHorario(LocalDateTime horario) {
 		List<IntervaloHorario> intervaloHorario = unHorario.get(horario.getDayOfWeek());
-		return intervaloHorario.stream().anyMatch(unHorario -> unHorario.incluyeHora(horario.toLocalTime()));
+		return intervaloHorario.stream().anyMatch(unIntervalo -> unIntervalo.incluyeHora(horario.toLocalTime()));
 	}
 }

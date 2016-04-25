@@ -29,11 +29,11 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	hora1 = LocalTime.of(10,00);
 	hora2 =  LocalTime.of(15,00);
 	intervalo1 = new IntervaloHorario(hora1, hora2);	
-	feriado1 = new Feriado(Month.JULY, 9, intervalo1);
-	hora3 = LocalTime.of(12, 0);
+	feriado1 = new Feriado(07, 9, intervalo1);
+	hora3 = LocalTime.of(11, 0);
 	hora4 = LocalTime.of(19,30);
 	intervalo2 = new IntervaloHorario(hora3, hora4);
-	feriado2 = new Feriado(Month.APRIL,22,intervalo2);
+	feriado2 = new Feriado(04,25, intervalo2);
 	unColectivo = new Colectivo(null, "linea2", null, "152", feriados);
 	unColectivo.addFeriado(feriado1);
 	unColectivo.addFeriado(feriado2);
@@ -43,7 +43,7 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	@Test
 	public void ColectivoEstaEnFuncionamientoLosFeriados()
 	{
-		Assert.assertTrue(unColectivo.compararmeConFeriados(diaActual));
-		Assert.assertTrue(unColectivo.estaDisponible(horarioActual));
+		Assert.assertTrue(unColectivo.compararmeConFeriados(LocalDate.now()));
+		Assert.assertTrue(unColectivo.estaDisponible(LocalDateTime.now()));
 	}
 }
