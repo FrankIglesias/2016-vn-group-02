@@ -14,14 +14,7 @@ public class Geolocalizacion {
 		this.localidad = localidad;
 	}
 
-	public void setDomicilio(Domicilio domic) {
-		domicilio = domic;
 
-	}
-
-	public void setLocalidad(Localidad loc) {
-		localidad = loc;
-	}
 
 	public double distanciaCon(Geolocalizacion point) {
 		double earthRadius = 6371000; // radio expresado en metros

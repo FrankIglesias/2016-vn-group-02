@@ -1,9 +1,11 @@
 import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import java.time.LocalTime;
+
+import static org.junit.Assert.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,7 +17,9 @@ public class TestDeDisponibilidadDePOISegunFeriado extends PoiMainTest {
 		hora1 = LocalTime.of(10, 00);
 		hora2 = LocalTime.of(15, 00);
 		intervalo1 = new IntervaloHorario(hora1, hora2);
+		
 		feriado1 = new Feriado(7, 9, intervalo1);
+		
 		hora3 = LocalTime.of(12, 0);
 		hora4 = LocalTime.of(22, 00);
 		intervalo2 = new IntervaloHorario(hora3, hora4);
@@ -29,7 +33,15 @@ public class TestDeDisponibilidadDePOISegunFeriado extends PoiMainTest {
 
 	@Test
 	public void ColectivoEstaEnFuncionamientoLosFeriados() {
+		
 		Assert.assertTrue(unColectivo.compararmeConFeriados(diaActual));
+	}
+	
+	
+	@Test
+	public void colectivoEstaDisponibleEnLaHoraActual() throws Exception {
+		
 		Assert.assertTrue(unColectivo.estaDisponible(horarioActual));
 	}
+	
 }

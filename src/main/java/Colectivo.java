@@ -18,6 +18,6 @@ public class Colectivo extends POI {
 	}
 
 	public boolean estaDisponible(LocalDateTime horario) {
-	return true;
+		return true;
 	}
 }

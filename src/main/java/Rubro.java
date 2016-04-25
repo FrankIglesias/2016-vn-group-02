@@ -1,7 +1,3 @@
-
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-
 public class Rubro {
 
 	private String nombre;

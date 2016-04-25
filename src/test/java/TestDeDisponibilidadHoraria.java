@@ -1,11 +1,8 @@
-
-
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -50,7 +50,7 @@ public class EncuentraSegunPalabraClaveTest {
 		
 	}
 	@Test
-	public void encontrarPOISegunPalabra() {
+	public void encontrarPOISegunPalabraBancoDevuelveUnBanco() {
 		String fraseABuscar = "quiero un banco malo";
 		Buscador.setList(puntosDeInteres);
 		Buscador.buscarSegunPalabraClave(fraseABuscar);
