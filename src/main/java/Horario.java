@@ -1,44 +1,26 @@
-
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Horario {
-
-	private DayOfWeek day;
-	private List<IntervaloHorario> intervaloHorario;
-
-	public DayOfWeek getDay() {
-		return day;
+	private Map <DayOfWeek, List<IntervaloHorario>> unHorario = new HashMap<DayOfWeek,List<IntervaloHorario>>();
+	
+	public Horario(){
+	super();
 	}
-
-	public void setDay(DayOfWeek unDia) {
-		day = unDia;
-	}
-
-	public List<IntervaloHorario> getIntervaloHorario() {
-		return intervaloHorario;
-	}
-
-	public void setIntervaloHorario(List<IntervaloHorario> intervaloHorario) {
-		this.intervaloHorario = intervaloHorario;
-	}
-
-	public Horario(DayOfWeek day, List<IntervaloHorario> intervaloHorario) {
+	public Horario(Map <DayOfWeek, List<IntervaloHorario>> horario) {
 		super();
-		this.day = day;
-		this.intervaloHorario = intervaloHorario;
+		unHorario = horario;
 	}
-
+	public void añadirIntervalo(DayOfWeek dia, List<IntervaloHorario> unIntervalo){
+	unHorario.put(dia, unIntervalo);
+	
+	}
+	
 	public boolean incluyeHorario(LocalDateTime horario) {
-		boolean retorno = false;
-
-		if (horario.getDayOfWeek() == this.day) {
-			retorno = intervaloHorario.stream().anyMatch
-					(unHorario -> unHorario.incluyeHora(horario.toLocalTime()));
-		}
-
-		return retorno;
+		List<IntervaloHorario> intervaloHorario = unHorario.get(horario.getDayOfWeek());
+		return intervaloHorario.stream().anyMatch(unHorario -> unHorario.incluyeHora(horario.toLocalTime()));
 	}
 }
