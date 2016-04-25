@@ -15,7 +15,7 @@ public class Banco extends POI {
 	}
 
 	private static void initializeHorarioBanco() {
-		 
+		 //
 		
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
 		List<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();

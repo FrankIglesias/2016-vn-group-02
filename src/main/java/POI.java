@@ -58,29 +58,21 @@ public abstract class POI {
 	public boolean estoyEnFeriado(LocalDate fecha) {
 		boolean retorno = false;
 
-		if (this.feriados.size() > 0) { 
-			if(this.compararmeConFeriados(fecha))
-				retorno = true;
+		if (!(feriados.isEmpty())) { 
+			retorno = compararmeConFeriados(fecha);
 		}
 
 		return retorno;
 	}
  
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
-		boolean retorno = false;
 
-		if (estoyEnFeriado(horarioPreguntado.toLocalDate())) {
-			Feriado fecha = (Feriado) this.feriados.stream().filter(Feriado -> Feriado.comparateConDiaYMes(horarioPreguntado.toLocalDate()));
-			
-			if(fecha.incluisHorario(horarioPreguntado.toLocalTime())) {
-				retorno = true;
-			} 
-		}
-		else if(horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioPreguntado))) {
-			retorno = true;
-		}
+		if (estoyEnFeriado(horarioPreguntado.toLocalDate())) 
+			return (feriados.stream().anyMatch(feriado -> feriado.comparateConDiaYMes(horarioPreguntado.toLocalDate())&& feriado.incluisHorario(horarioPreguntado.toLocalTime())));
+				
+		return (horario.stream().anyMatch(unHorario -> unHorario.incluyeHorario(horarioPreguntado)));
 
-		return retorno;
+
 	}
 
 }
