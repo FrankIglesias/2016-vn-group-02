@@ -10,7 +10,7 @@ public class Banco extends POI {
 	private static Horario horarioBancario = new Horario();
 
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
-		super(point, nombre, palabrasClave, horarioBancario, feriados);
+		super(point, nombre, palabrasClave, null, feriados);
 		initializeHorarioBanco();
 	}
 
