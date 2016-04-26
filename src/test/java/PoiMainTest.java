@@ -44,8 +44,11 @@ public class PoiMainTest {
 	protected LocalTime hora1;
 	protected LocalDate fecha2;
 	protected LocalTime hora2;
-
-	
+	protected Domicilio domicilioPepe;
+	protected Localidad localidadPepe;
+	protected Geolocalizacion geolocalizacionPersonaCercanaColectivo;
+	protected Geolocalizacion geolocalizacionPersonaCercanaCGP; 
+	protected Geolocalizacion geolocalizacionPersonaCercanaLocal; 
 	@Before 
 	public void init(){  
 	
@@ -58,6 +61,13 @@ public class PoiMainTest {
 		localidadColectivo 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		geolocalizacionColectivo 	= new Geolocalizacion(-34.5730928, -58.511029, domicilioColectivo, localidadColectivo);
 		colectivo = new Colectivo(geolocalizacionColectivo, "Colectivo", new ArrayList<String>(),"127", feriados);
+		
+		domicilioPepe = new Domicilio ("La Rioja", "San Juan y Humberto Primo", "1000", "", "", "1111");
+		localidadPepe = new Localidad ("Capital Federal", "Buenos Aires", "Argentina");		
+		
+		geolocalizacionPersonaCercanaColectivo = new Geolocalizacion(-34.5730926,-58.512000, domicilioPepe, localidadPepe);
+		geolocalizacionPersonaCercanaCGP = new Geolocalizacion(-34.5730926, -58.5010000, domicilioPepe, localidadPepe);
+		geolocalizacionPersonaCercanaLocal = new Geolocalizacion (-34.5730926, -58.5002200, domicilioPepe, localidadPepe);		
 		
 		domicilioCGP 			= new Domicilio("Av. de los Constituyentes","Jose Pascual Tamborini e Ibera","5836","PB","","1419");
 		localidadCGP 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
