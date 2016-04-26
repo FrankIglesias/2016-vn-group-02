@@ -15,7 +15,7 @@ public class HorarioYDia {
 		super();
 		agenda = horario;
 	}
-	public void añadirIntervalo(DayOfWeek dia, List<IntervaloHorario> unIntervalo){
+	public void agregarIntervalo(DayOfWeek dia, List<IntervaloHorario> unIntervalo){
 	agenda.put(dia, unIntervalo);
 	
 	}

@@ -63,11 +63,11 @@ public class PoiMainTest {
 		localidadCGP 			= new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		geolocalizacionCGP 		= new Geolocalizacion(-34.5730009, -58.5047724, domicilioColectivo, localidadColectivo);
 		intervalo = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
-		horario.añadirIntervalo(DayOfWeek.MONDAY, listaDeIntervalos);
-		horario.añadirIntervalo(DayOfWeek.TUESDAY, listaDeIntervalos);
-		horario.añadirIntervalo(DayOfWeek.WEDNESDAY, listaDeIntervalos);
-		horario.añadirIntervalo(DayOfWeek.THURSDAY, listaDeIntervalos);
-		horario.añadirIntervalo(DayOfWeek.FRIDAY, listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.MONDAY, listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.TUESDAY, listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.WEDNESDAY, listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.THURSDAY, listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.FRIDAY, listaDeIntervalos);
 		listaDeIntervalos.add(intervalo);
 		
 		ventaDeVOS = new Servicio("Tarjeta vos", horario);

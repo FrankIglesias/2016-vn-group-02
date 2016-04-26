@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 
-public class TestDeDisponibilidadDePOISegunFeriado {
+public class TestDeDisponibilidadDePOISegunFeriado extends PoiMainTest{
 
 	public Colectivo unColectivo;
 	public List<Feriado> feriados = new ArrayList<Feriado>();
@@ -34,7 +34,7 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	hora4 = LocalTime.of(19,30);
 	intervalo2 = new IntervaloHorario(hora3, hora4);
 	feriado2 = new Feriado(04,26, intervalo2);
-	unColectivo = new Colectivo(null, "linea2", null, "152", feriados);
+	unColectivo = new Colectivo(geolocalizacionColectivo, "linea2", new ArrayList<String>(), "152", feriados);
 	unColectivo.addFeriado(feriado1);
 	unColectivo.addFeriado(feriado2);
 	
@@ -43,7 +43,7 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	@Test
 	public void ColectivoEstaEnFuncionamientoLosFeriados()
 	{
-		Assert.assertTrue(unColectivo.estasEnFeriado(LocalDateTime.now()));
+		Assert.assertTrue(unColectivo.estaDisponible(LocalDateTime.now()));
 		
 	}
 }

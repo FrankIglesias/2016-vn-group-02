@@ -12,10 +12,9 @@ public abstract class POI {
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
 	protected HorarioYDia horario = new HorarioYDia();
 	protected List<Feriado> feriados;
-	
-	
 
-	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario, List<Feriado> feriados) {
+	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
+			List<Feriado> feriados) {
 		super();
 		this.point = point;
 		this.nombre = nombre;
@@ -42,40 +41,38 @@ public abstract class POI {
 	public void addPalabraClave(String unaPalabra) {
 		this.palabrasClave.add(unaPalabra);
 	}
-	
-	public void addFeriado(Feriado unFeriado)
-	{
+
+	public void addFeriado(Feriado unFeriado) {
 		this.feriados.add(unFeriado);
 	}
-	
-	
-	public boolean compararmeConFeriadosDiaYMes(LocalDate fecha)
-	{
+
+	public boolean compararmeConFeriadosDiaYMes(LocalDate fecha) {
 		return (feriados.stream().anyMatch(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
 	}
-	public boolean compararmeConFeriadosHorario(LocalDateTime horario)
-	{
+
+	public boolean compararmeConFeriadosHorario(LocalDateTime horario) {
 		return (feriados.stream().anyMatch(unFeriado -> unFeriado.incluisHorario(horario.toLocalTime())));
 	}
-	
-	public boolean estasEnFeriado(LocalDateTime fecha)
-	{
+
+	public boolean estasEnFeriado(LocalDateTime fecha) {
 		return (compararmeConFeriadosDiaYMes(fecha.toLocalDate()) && compararmeConFeriadosHorario(fecha));
 	}
-	
 
-	public boolean tenesFeriados(LocalDate fecha) {
-	 return (!feriados.isEmpty());
+	public boolean tenesFeriados() {
+		return (!feriados.isEmpty());
 	}
- 
+
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (tenesFeriados(horarioPreguntado.toLocalDate())) 
+		if (tenesFeriados())
 			return estasEnFeriado(horarioPreguntado);
-		else		
-		return (horario.incluyeHorario(horarioPreguntado));
-
-
+		else {
+			try {
+				return (horario.incluyeHorario(horarioPreguntado));
+			} catch (NullPointerException e) {
+				return false;
+			}
+		}
 	}
 
 }

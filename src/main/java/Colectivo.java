@@ -17,22 +17,10 @@ public class Colectivo extends POI {
 		return this.point.distanciaCon(point) < 100;
 	}
 
-	@Override
+	
 	public boolean estaDisponible(LocalDateTime horario) {
-		boolean retorno = false;
-		
-		if (tenesFeriados(horario.toLocalDate())) {
-			Feriado feriado = (Feriado) this.feriados.stream().filter(Feriado -> Feriado.comparateConDiaYMes(horario.toLocalDate()));
-			
-			if(feriado.incluisHorario(horario.toLocalTime())) {
-				retorno = true;
-			}
-		}
-		else
-			retorno = true;
-		
-		
-		return retorno;
+
+		return true;
 	}
 
 }
