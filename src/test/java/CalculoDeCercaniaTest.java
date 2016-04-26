@@ -24,20 +24,34 @@ public class CalculoDeCercaniaTest extends PoiMainTest {
 		 */
 		Assert.assertEquals(banco.distanciaConUnPOI(centroDeCGP), 440, 100);
 	}
-	
+
 	@Test
 	public void calculoCercaniaConColectivo() {
 		Assert.assertTrue(colectivo.estasCercaDeUnPunto(geolocalizacionPersonaCercanaColectivo));
 	}
-	
+
 	@Test
 	public void calculoCercaniaConCGP() {
 		Assert.assertTrue(centroDeCGP.estasCercaDeUnPunto(geolocalizacionPersonaCercanaCGP));
 	}
-	
+
 	@Test
 	public void calculoCercaniaConLocal() {
 		Assert.assertTrue(unLocal.estasCercaDeUnPunto(geolocalizacionPersonaCercanaLocal));
 	}
 
+	@Test
+	public void calculoLejaniaConColectivo() {
+		Assert.assertFalse(colectivo.estasCercaDeUnPunto(geolocalizacionPersonaLejosDeTodo));
+	}
+
+	@Test
+	public void calculoLejaniaConCGP() {
+		Assert.assertFalse(centroDeCGP.estasCercaDeUnPunto(geolocalizacionPersonaLejosDeTodo));
+	}
+
+	@Test
+	public void calculoLejaniaConLocal() {
+		Assert.assertFalse(unLocal.estasCercaDeUnPunto(geolocalizacionPersonaLejosDeTodo));
+	}
 }
