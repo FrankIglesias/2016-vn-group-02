@@ -12,8 +12,8 @@ public class CGP extends POI {
 		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
 
-	public boolean estasCerca(Geolocalizacion otroPoint) {
-	return point.distanciaCon(otroPoint) < 500;
+	public boolean estasCercaDeUnPunto(Geolocalizacion otroPoint) {
+	return distanciaMenor(point.distanciaCon(otroPoint), 500);
 	 }
 
 	private Servicio buscarServicio(String nombreDelServicio) {

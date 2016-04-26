@@ -13,8 +13,8 @@ public class Colectivo extends POI {
 		this.addPalabraClave(linea.toString());
 	}
 
-	public boolean estasCerca(Geolocalizacion point) {
-		return this.point.distanciaCon(point) < 100;
+	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
+		return distanciaMenor(this.point.distanciaCon(point), 100);
 	}
 
 	

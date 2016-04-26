@@ -24,12 +24,16 @@ public abstract class POI {
 		this.feriados = feriados;
 	}
 
-	public double distanciaCon(POI unPoi) {
+	public double distanciaConUnPOI(POI unPoi) {
 		return this.point.distanciaCon(unPoi.point);
 	}
 
-	public boolean estasCerca(Geolocalizacion point) {
-		return this.point.distanciaCon(point) < 500;
+	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
+		return distanciaMenor(this.point.distanciaCon(point), 500);
+	}
+	
+	public boolean distanciaMenor(double distancia, double rango){
+		return distancia < rango;
 	}
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {

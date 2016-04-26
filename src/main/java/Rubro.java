@@ -13,7 +13,7 @@ public class Rubro {
 		this.radioDeCercania = radioDeCercania;
 	}
 
-	public boolean estasCerca(Geolocalizacion point, Local miLocal) {
+	public boolean estasCercaDeUnPunto(Geolocalizacion point, Local miLocal) {
 		return miLocal.getDireccion().distanciaCon(point) < radioDeCercania;
 	}
 
