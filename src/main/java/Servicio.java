@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class Servicio {
 	
-		private Horario horario;
+		private HorarioYDia horario;
 		private String nombreDelServicio;
 		
-		public Servicio(String nombre, Horario agenda){
+		public Servicio(String nombre, HorarioYDia agenda){
 			nombreDelServicio = nombre;
 			horario = agenda;
 		}
 
-		public Horario getHorario() {
+		public HorarioYDia getHorario() {
 			return horario;
 		}
 
-		public void setHorario(Horario horario) {
+		public void setHorario(HorarioYDia horario) {
 			this.horario = horario;
 		}
 

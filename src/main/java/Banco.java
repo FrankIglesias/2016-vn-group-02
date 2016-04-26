@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Banco extends POI {
 	
-	private static Horario horarioBancario = new Horario();
+	private static HorarioYDia horarioBancario = new HorarioYDia();
 
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, null, feriados);

@@ -10,11 +10,12 @@ public abstract class POI {
 	protected Geolocalizacion point;
 	protected String nombre;
 	protected ArrayList<String> palabrasClave = new ArrayList<String>();
-	protected Horario horario = new Horario();
+	protected HorarioYDia horario = new HorarioYDia();
 	protected List<Feriado> feriados;
 	
+	
 
-	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, Horario horario, List<Feriado> feriados) {
+	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario, List<Feriado> feriados) {
 		super();
 		this.point = point;
 		this.nombre = nombre;
@@ -48,28 +49,30 @@ public abstract class POI {
 	}
 	
 	
-	public boolean compararmeConFeriados(LocalDate fecha)
+	public boolean compararmeConFeriadosDiaYMes(LocalDate fecha)
 	{
 		return (feriados.stream().anyMatch(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
 	}
-
+	public boolean compararmeConFeriadosHorario(LocalDateTime horario)
+	{
+		return (feriados.stream().anyMatch(unFeriado -> unFeriado.incluisHorario(horario.toLocalTime())));
+	}
+	
+	public boolean estasEnFeriado(LocalDateTime fecha)
+	{
+		return (compararmeConFeriadosDiaYMes(fecha.toLocalDate()) && compararmeConFeriadosHorario(fecha));
+	}
 	
 
-	public boolean estoyEnFeriado(LocalDate fecha) {
-		boolean retorno = false;
-
-		if (!(feriados.isEmpty())) { 
-			retorno = compararmeConFeriados(fecha);
-		}
-
-		return retorno;
+	public boolean tenesFeriados(LocalDate fecha) {
+	 return (!feriados.isEmpty());
 	}
  
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (estoyEnFeriado(horarioPreguntado.toLocalDate())) 
-			return (feriados.stream().anyMatch(feriado -> feriado.comparateConDiaYMes(horarioPreguntado.toLocalDate())&& feriado.incluisHorario(horarioPreguntado.toLocalTime())));
-				
+		if (tenesFeriados(horarioPreguntado.toLocalDate())) 
+			return estasEnFeriado(horarioPreguntado);
+		else		
 		return (horario.incluyeHorario(horarioPreguntado));
 
 

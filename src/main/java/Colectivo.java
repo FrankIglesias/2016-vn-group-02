@@ -8,7 +8,7 @@ public class Colectivo extends POI {
 
 	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, 
 			String linea, List<Feriado> feriados) {
-		super(point, nombre, palabrasClave, new Horario(), feriados);
+		super(point, nombre, palabrasClave, new HorarioYDia(), feriados);
 		this.linea = linea;
 		this.addPalabraClave(linea.toString());
 	}
@@ -21,7 +21,7 @@ public class Colectivo extends POI {
 	public boolean estaDisponible(LocalDateTime horario) {
 		boolean retorno = false;
 		
-		if (estoyEnFeriado(horario.toLocalDate())) {
+		if (tenesFeriados(horario.toLocalDate())) {
 			Feriado feriado = (Feriado) this.feriados.stream().filter(Feriado -> Feriado.comparateConDiaYMes(horario.toLocalDate()));
 			
 			if(feriado.incluisHorario(horario.toLocalTime())) {

@@ -17,18 +17,23 @@ public class PoiMainTest {
 	protected Localidad localidadBanco;
 	protected Geolocalizacion geolocalizacionBanco;
 	protected Banco banco;
+	protected List<Feriado> feriados = new ArrayList<Feriado>();
+	
 	protected Domicilio domicilioColectivo;
 	protected Localidad localidadColectivo;
 	protected Geolocalizacion geolocalizacionColectivo;
 	protected Colectivo colectivo;
+	
 	protected Domicilio domicilioCGP;
 	protected Localidad localidadCGP;
 	protected Geolocalizacion geolocalizacionCGP;
+	
 	private List<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
 	protected IntervaloHorario intervalo;
 	protected List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
-	protected Horario horarioPrueba;
-	protected Horario horario = new Horario();
+	protected HorarioYDia horarioPrueba;
+	protected HorarioYDia horario = new HorarioYDia();
+	
 	protected Servicio ventaDeVOS;
 	protected CGP centroDeCGP;
 	protected Local unLocal;
@@ -39,7 +44,7 @@ public class PoiMainTest {
 	protected LocalTime hora1;
 	protected LocalDate fecha2;
 	protected LocalTime hora2;
-	protected List<Feriado> feriados = new ArrayList<Feriado>();
+
 	
 	@Before 
 	public void init(){  
