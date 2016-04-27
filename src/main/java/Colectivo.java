@@ -10,7 +10,7 @@ public class Colectivo extends POI {
 			String linea, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, new HorarioYDia(), feriados);
 		this.linea = linea;
-		this.addPalabraClave(linea.toString());
+		this.addPalabraClave(linea);
 	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion point) {

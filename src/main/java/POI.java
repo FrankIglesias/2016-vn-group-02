@@ -1,4 +1,3 @@
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +12,8 @@ public abstract class POI {
 	protected HorarioYDia horario = new HorarioYDia();
 	protected List<Feriado> feriados;
 
-	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
+	public POI(Geolocalizacion point, String nombre,
+			ArrayList<String> palabrasClave, HorarioYDia horario,
 			List<Feriado> feriados) {
 		super();
 		this.point = point;
@@ -31,14 +31,16 @@ public abstract class POI {
 	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
 		return distanciaMenor(this.point.distanciaCon(point), 500);
 	}
-	
-	public boolean distanciaMenor(double distancia, double rango){
+
+	public boolean distanciaMenor(double distancia, double rango) {
 		return distancia < rango;
 	}
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {
 		String[] listaDePalabrasDeFrase = unaFrase.split(" ");
-		return palabrasClave.stream().anyMatch(palabra -> Arrays.asList(listaDePalabrasDeFrase).contains(palabra));
+		return palabrasClave.stream().anyMatch(
+				palabra -> Arrays.asList(listaDePalabrasDeFrase).contains(
+						palabra));
 
 	}
 
@@ -51,11 +53,13 @@ public abstract class POI {
 	}
 
 	public boolean compararmeConFeriadosDiaYMes(LocalDate fecha) {
-		return (feriados.stream().anyMatch(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
+		return (feriados.stream().anyMatch(unFeriado -> unFeriado
+				.comparateConDiaYMes(fecha)));
 	}
 
 	public boolean compararmeConFeriadosHorario(LocalDateTime horario) {
-		return (feriados.stream().anyMatch(unFeriado -> unFeriado.incluisHorario(horario.toLocalTime())));
+		return (feriados.stream().anyMatch(unFeriado -> unFeriado
+				.incluisHorario(horario.toLocalTime())));
 	}
 
 	public boolean estasEnFeriado(LocalDateTime fecha) {
@@ -68,16 +72,13 @@ public abstract class POI {
 
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (tenesFeriados() && estasEnFeriado(horarioPreguntado) ){
-			return false;
-		}
-		else {
-			try {
-				return (horario.incluyeHorario(horarioPreguntado));
-			} catch (NullPointerException e) {
-				return false;
-			}
-		}
+		if (tenesFeriados())
+
+			return estasEnFeriado(horarioPreguntado);
+		else
+
+			return (horario.incluyeHorario(horarioPreguntado));
+
 	}
 
 }

@@ -57,9 +57,8 @@ public class EncuentraSegunPalabraClaveTest {
 		
 		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(banco)); 
 		Assert.assertEquals("Cantidad de elementos en el array",1,Buscador.buscarSegunPalabraClave("banelco").size());
-		
-		
 	}
+	
 	
 	
 }

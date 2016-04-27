@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -35,36 +34,33 @@ public class TestDeDisponibilidadHoraria extends PoiMainTest {
 		assertFalse(banco.estaDisponible(fechaCerrado));
 	}
 
-	@Test
-	public void testServicioCGPDisponible() {
-
-		assertTrue(ventaDeVOS.estaDisponible(fechaAbierto));
-	}
-
-	@Test
-	public void testServicioCGPNoDisponible() {
-
-		assertFalse(ventaDeVOS.estaDisponible(fechaCerrado));
-	}
-
-	@Test
-	public void testCGPAbierto() {
-
-		assertTrue(centroDeCGP.estaDisponible(fechaAbierto));
-
-	}
-
-	@Test
-	public void testCGPCerrado() {
-
-		assertFalse(centroDeCGP.estaDisponible(fechaCerrado));
-
-	}
+	/*
+	 * @Test public void testServicioCGPDisponible() {
+	 * 
+	 * assertTrue(ventaDeVOS.estaDisponible(fechaAbierto)); }
+	 * 
+	 * @Test public void testServicioCGPNoDisponible() {
+	 * 
+	 * assertFalse(ventaDeVOS.estaDisponible(fechaCerrado)); }
+	 * 
+	 * @Test public void testCGPAbierto() {
+	 * 
+	 * assertTrue(centroDeCGP.estaDisponible(fechaAbierto));
+	 * 
+	 * }
+	 * 
+	 * @Test public void testCGPCerrado() {
+	 * 
+	 * assertFalse(centroDeCGP.estaDisponible(fechaCerrado));
+	 * 
+	 * }
+	 */
 
 	@Test
 	public void testColectivoDisponibleSiempre() {
 
-		assertTrue(colectivo.estaDisponible(fechaAbierto) && colectivo.estaDisponible(fechaCerrado));
+		assertTrue(colectivo.estaDisponible(fechaAbierto)
+				&& colectivo.estaDisponible(fechaCerrado));
 		// El colectivo no deja de estar disponible en ningun horario
 	}
 
