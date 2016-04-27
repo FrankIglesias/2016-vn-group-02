@@ -19,8 +19,7 @@ public Feriado(int unMes, int unDia, IntervaloHorario unIntervalo)
 	
 public boolean comparateConDiaYMes(LocalDate unaFecha)
 {
-	
-	return (dia == unaFecha.getDayOfYear() && mes == unaFecha.getMonthValue());
+	return (dia == unaFecha.getDayOfMonth() && mes == unaFecha.getMonthValue());
 }
 
 public boolean incluisHorario(LocalTime horario)

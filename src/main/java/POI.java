@@ -68,8 +68,9 @@ public abstract class POI {
 
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (tenesFeriados())
-			return estasEnFeriado(horarioPreguntado);
+		if (tenesFeriados() && estasEnFeriado(horarioPreguntado) ){
+			return false;
+		}
 		else {
 			try {
 				return (horario.incluyeHorario(horarioPreguntado));

@@ -4,11 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CalculoDeCercaniaTest extends PoiMainTest {
-	/*
-	 * direccion1 = new Direccion(-34.596044,-58.419946,2); direccion2 = new
-	 * Direccion(-34.602945,-58.420948,2);
-	 * 
-	 */
 
 	@Before
 	public void init() {
@@ -17,11 +12,14 @@ public class CalculoDeCercaniaTest extends PoiMainTest {
 
 	}
 
+	/*
+	 * Todo testeado de aca 
+	 * http://www.movable-type.co.uk/scripts/latlong.html
+	 */
+
 	@Test
 	public void calcularDistanciaEntreDosPOI() {
-		/*
-		 * http://www.movable-type.co.uk/scripts/latlong.html testeado de aca
-		 */
+
 		Assert.assertEquals(banco.distanciaConUnPOI(centroDeCGP), 440, 100);
 	}
 

@@ -50,6 +50,8 @@ public class PoiMainTest {
 	protected Geolocalizacion geolocalizacionPersonaCercanaLocal;
 	protected Geolocalizacion geolocalizacionPersonaLejosDeTodo;
 	
+	protected Local miLocal;
+	
 	@Before
 	public void init() {
 
