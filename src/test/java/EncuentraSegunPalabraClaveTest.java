@@ -13,6 +13,7 @@ public class EncuentraSegunPalabraClaveTest extends GlobalTestVariables{
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
+	String fraseABuscar;
 	
 	
 	@Before 
@@ -21,20 +22,27 @@ public class EncuentraSegunPalabraClaveTest extends GlobalTestVariables{
 		banco = crearUnBanco();
 		colectivo = crearUnColectivo();
 		
+		fraseABuscar = "quiero un banco malo";
 		puntosDeInteres.add(colectivo);
 		puntosDeInteres.add(banco);
+		
+		Buscador.setPuntosDeIntereses(puntosDeInteres);
+		Buscador.buscarSegunPalabraClave(fraseABuscar);
 		
 	}
 	@Test
 	public void encontrarPOISegunPalabra() {
-		String fraseABuscar = "quiero un banco malo";
-		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		Buscador.buscarSegunPalabraClave(fraseABuscar);
+		
 		
 		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(banco)); 
 		Assert.assertEquals("Cantidad de elementos en el array",1,Buscador.buscarSegunPalabraClave("banelco").size());
 	}
 	
+	@Test
+	public void noEncuentraPOISegunPalabraClave()
+	{
+		Assert.assertFalse(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(colectivo));
+	}
 	
 	
 }

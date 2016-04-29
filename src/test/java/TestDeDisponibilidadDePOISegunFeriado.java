@@ -13,11 +13,14 @@ public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
 
 	public Colectivo unColectivo;
 	public Local miLocal;
+	public CGP unCGP;
 
 	@Before
 	public void init() {
 		unColectivo = crearUnColectivo();
 		miLocal = crearUnLocal();
+	
+		
 
 	}
 
@@ -32,5 +35,10 @@ public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
 		Assert.assertFalse(miLocal.estaDisponible(LocalDateTime.now()));
 	}
 	
-	
+	@Test
+	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario()
+	{
+		
+		Assert.assertTrue(miLocal.estaDisponible(LocalDateTime.of(2016, 4, 29, 11, 00)));
+	}
 }

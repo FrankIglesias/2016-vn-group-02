@@ -52,19 +52,19 @@ public abstract class POI {
 		this.feriados.add(unFeriado);
 	}
 
-	public boolean compararmeConFeriadosDiaYMes(LocalDate fecha) {
+	public boolean sosFeriado(LocalDate fecha) {
 		return (feriados.stream().anyMatch(unFeriado -> unFeriado
 				.comparateConDiaYMes(fecha)));
 	}
 
-	public boolean compararmeConFeriadosHorario(LocalDateTime horario) {
-		return (feriados.stream().anyMatch(unFeriado -> unFeriado
-				.incluisHorario(horario.toLocalTime())));
+	public boolean compararmeConHorarioDeUnFeriado(Feriado unFeriado, LocalDateTime horario) {
+		return (unFeriado.incluisHorario(horario.toLocalTime()));
+	}
+	public Feriado getUnFeriado(LocalDate fecha)
+	{
+		return (Feriado) (feriados.stream().filter(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
 	}
 
-	public boolean estasEnFeriado(LocalDateTime fecha) {
-		return (compararmeConFeriadosDiaYMes(fecha.toLocalDate()) && compararmeConFeriadosHorario(fecha));
-	}
 
 	public boolean tenesFeriados() {
 		return (!feriados.isEmpty());
@@ -72,9 +72,8 @@ public abstract class POI {
 
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (tenesFeriados())
-
-			return estasEnFeriado(horarioPreguntado);
+		if (tenesFeriados() && sosFeriado(horarioPreguntado.toLocalDate()))
+			return compararmeConHorarioDeUnFeriado(getUnFeriado(horarioPreguntado.toLocalDate()), horarioPreguntado);
 		else
 
 			return (horario.incluyeHorario(horarioPreguntado));

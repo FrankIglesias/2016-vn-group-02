@@ -18,12 +18,12 @@ public class GlobalTestVariables {
 	public static List<Feriado> crearEInicializarListaDeFeriados() {
 		List<Feriado> feriados = new ArrayList<Feriado>();
 
-		// 9 de julio
+
 		LocalTime hora1 = LocalTime.of(00, 00);
 		LocalTime hora2 = LocalTime.of(03, 00);
 		IntervaloHorario intervalo1 = new IntervaloHorario(hora1, hora2);
 		Feriado feriado1 = new Feriado(07, 9, intervalo1);
-		// 25 de mayo
+		
 		LocalTime hora3 = LocalTime.of(11, 0);
 		LocalTime hora4 = LocalTime.of(19, 30);
 		IntervaloHorario intervalo2 = new IntervaloHorario(hora3, hora4);
