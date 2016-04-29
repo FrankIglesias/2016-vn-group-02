@@ -14,7 +14,7 @@ public static List<POI> buscarSegunPalabraClave(String unaFrase)
 	return puntosSegunPalabra;
 }
 
-public static void setList(List<POI> unaLista)
+public static void setPuntosDeIntereses(List<POI> unaLista)
 {
 	Buscador.puntosDeIntereses = unaLista;
 }
