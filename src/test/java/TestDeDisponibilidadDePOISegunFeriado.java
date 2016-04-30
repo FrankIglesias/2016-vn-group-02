@@ -1,15 +1,10 @@
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
+public class TestDeDisponibilidadDePOISegunFeriado {
 
 	public Colectivo unColectivo;
 	public Local miLocal;
@@ -17,10 +12,8 @@ public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
 
 	@Before
 	public void init() {
-		unColectivo = crearUnColectivo();
-		miLocal = crearUnLocal();
-	
-		
+		unColectivo = GlobalTestVariables.crearUnColectivo();
+		miLocal = GlobalTestVariables.crearUnLocal();
 
 	}
 
@@ -29,16 +22,15 @@ public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
 		Assert.assertTrue(unColectivo.estaDisponible(LocalDateTime.now()));
 
 	}
-	
+
 	@Test
 	public void LocalEstaCerradoPorqueEsFeriado() {
 		Assert.assertFalse(miLocal.estaDisponible(LocalDateTime.now()));
 	}
-	
+
 	@Test
-	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario()
-	{
-		
+	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario() {
+
 		Assert.assertTrue(miLocal.estaDisponible(LocalDateTime.of(2016, 07, 9, 01, 00)));
 	}
 }

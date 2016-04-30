@@ -6,13 +6,10 @@ import java.util.List;
 public class CGP extends POI {
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
-	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios,
-			List<Feriado> feriados) {
-		super(point, nombre, new ArrayList<String>(), new HorarioYDia(),
-				feriados);
+	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {
+		super(point, nombre, new ArrayList<String>(), new HorarioYDia(), feriados);
 		this.servicios = servicios;
-		servicios.stream().forEach(
-				servicio -> addPalabraClave(servicio.getNombre()));
+		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
 	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion otroPoint) {
@@ -20,23 +17,20 @@ public class CGP extends POI {
 	}
 
 	public Servicio buscarServicio(String nombreDelServicio) {
-		Servicio elServicioBuscado = servicios
-				.stream()
-				.filter(unServicio -> unServicio.getNombre().equals(
-						nombreDelServicio)).findFirst().get();
+		Servicio elServicioBuscado = servicios.stream()
+				.filter(unServicio -> unServicio.getNombre().equals(nombreDelServicio)).findFirst().get();
 		return elServicioBuscado;
 
 	}
 
 	public boolean estaDisponible(LocalDateTime horario) {
-		return servicios.stream().anyMatch(
-				unServicio -> estaDisponible(horario));
+		
+		return servicios.stream().anyMatch(unServicio -> unServicio.estaDisponible(horario));
 		/*
 		 * boolean retorno = false;
 		 * 
-		 * Scanner keyboard = new Scanner(System.in);
-		 * System.out.println("Buscar Servicio:"); String busqueda =
-		 * keyboard.nextLine();
+		 * Scanner keyboard = new Scanner(System.in); System.out.println(
+		 * "Buscar Servicio:"); String busqueda = keyboard.nextLine();
 		 * 
 		 * /*if (estoyEnFeriado(horario.toLocalDate())) { Feriado fecha =
 		 * this.feriados.stream().filter (Feriado -> Feriado.getFecha() ==
@@ -50,9 +44,9 @@ public class CGP extends POI {
 		 * } else { try { return
 		 * this.buscarServicio(busqueda).estaDisponible(horario);
 		 * 
-		 * } } catch (NullPointerException exepcion) { //
-		 * System.out.println("No existe el servicio " + busqueda); return
-		 * false; } } return retorno;
+		 * } } catch (NullPointerException exepcion) { // System.out.println(
+		 * "No existe el servicio " + busqueda); return false; } } return
+		 * retorno;
 		 */
 	}
 }

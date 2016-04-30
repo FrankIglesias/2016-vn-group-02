@@ -3,18 +3,39 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CalculoDeCercaniaTest extends PoiMainTest {
+public class CalculoDeCercaniaTest {
+	private Banco banco;
+	private Colectivo colectivo;
+	private CGP centroDeCGP;
+	private Local unLocal;
+
+	private Geolocalizacion geolocalizacionPersonaCercanaColectivo;
+	private Geolocalizacion geolocalizacionPersonaCercanaCGP;
+	private Geolocalizacion geolocalizacionPersonaCercanaLocal;
+	private Geolocalizacion geolocalizacionPersonaLejosDeTodo;
+	private Domicilio domicilioPepe;
+	private Localidad localidadPepe;
 
 	@Before
 	public void init() {
 
-		super.init();
+		banco = GlobalTestVariables.crearUnBanco();
+		colectivo = GlobalTestVariables.crearUnColectivo();
+		centroDeCGP = GlobalTestVariables.crearUnCGP();
+		unLocal = GlobalTestVariables.crearUnLocal();
+		geolocalizacionPersonaCercanaColectivo = new Geolocalizacion(-34.5730926, -58.512000, domicilioPepe,
+				localidadPepe);
+		geolocalizacionPersonaCercanaCGP = new Geolocalizacion(-34.5730926, -58.5010000, domicilioPepe, localidadPepe);
+		geolocalizacionPersonaCercanaLocal = new Geolocalizacion(-34.5730926, -58.5002200, domicilioPepe,
+				localidadPepe);
+		geolocalizacionPersonaLejosDeTodo = new Geolocalizacion(-34.5739926, -58.5992200, domicilioPepe, localidadPepe);
 
+		domicilioPepe = new Domicilio("La Rioja", "San Juan y Humberto Primo", "1000", "", "", "1111");
+		localidadPepe = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 	}
 
 	/*
-	 * Todo testeado de aca 
-	 * http://www.movable-type.co.uk/scripts/latlong.html
+	 * Todo testeado de aca http://www.movable-type.co.uk/scripts/latlong.html
 	 */
 
 	@Test

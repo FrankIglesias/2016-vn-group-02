@@ -35,7 +35,7 @@ public class GlobalTestVariables {
 
 	}
 
-	private HorarioYDia crearHorarioTipoBancario() {
+	public static HorarioYDia crearHorarioTipoBancario() {
 		HorarioYDia horario = new HorarioYDia();
 		IntervaloHorario intervalo = new IntervaloHorario(LocalTime.of(10, 00),
 				LocalTime.of(15, 00));
@@ -86,7 +86,7 @@ public class GlobalTestVariables {
 		return colectivo;
 	}
 
-	public CGP crearUnCGP() {
+	public static CGP crearUnCGP() {
 		Domicilio domicilioCGP = new Domicilio("Av. de los Constituyentes",
 				"Jose Pascual Tamborini e Ibera", "5836", "PB", "", "1419");
 		Localidad localidadCGP = new Localidad("Capital Federal",
@@ -102,7 +102,7 @@ public class GlobalTestVariables {
 		return centroDeCGP;
 	}
 
-	public Local crearUnLocal() {
+	public static Local crearUnLocal() {
 
 		Rubro unRubro = new Rubro("Ventas chetas", 3000);
 		Domicilio domicilioLocal = new Domicilio("Bolivia",
