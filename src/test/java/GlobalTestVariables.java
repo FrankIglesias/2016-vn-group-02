@@ -86,21 +86,6 @@ public class GlobalTestVariables {
 		return colectivo;
 	}
 
-	/*
-	 * domicilioPepe = new Domicilio("La Rioja", "San Juan y Humberto Primo",
-	 * "1000", "", "", "1111"); localidadPepe = new Localidad("Capital Federal",
-	 * "Buenos Aires", "Argentina");
-	 * 
-	 * geolocalizacionPersonaCercanaColectivo = new Geolocalizacion(-34.5730926,
-	 * -58.512000, domicilioPepe, localidadPepe);
-	 * geolocalizacionPersonaCercanaCGP = new Geolocalizacion(-34.5730926,
-	 * -58.5010000, domicilioPepe, localidadPepe);
-	 * geolocalizacionPersonaCercanaLocal = new Geolocalizacion(-34.5730926,
-	 * -58.5002200, domicilioPepe,localidadPepe);
-	 * geolocalizacionPersonaLejosDeTodo = new Geolocalizacion
-	 * (-34.5739926,-58.5992200,domicilioPepe, localidadPepe);
-	 */
-
 	public CGP crearUnCGP() {
 		Domicilio domicilioCGP = new Domicilio("Av. de los Constituyentes",
 				"Jose Pascual Tamborini e Ibera", "5836", "PB", "", "1419");
