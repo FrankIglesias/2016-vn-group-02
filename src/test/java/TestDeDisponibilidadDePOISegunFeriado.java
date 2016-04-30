@@ -39,6 +39,6 @@ public class TestDeDisponibilidadDePOISegunFeriado extends GlobalTestVariables {
 	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario()
 	{
 		
-		Assert.assertTrue(miLocal.estaDisponible(LocalDateTime.of(2016, 4, 29, 11, 00)));
+		Assert.assertTrue(miLocal.estaDisponible(LocalDateTime.of(2016, 07, 9, 01, 00)));
 	}
 }

@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class POI {
 
@@ -62,7 +63,7 @@ public abstract class POI {
 	}
 	public Feriado getUnFeriado(LocalDate fecha)
 	{
-		return (Feriado) (feriados.stream().filter(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
+		return (feriados.stream().filter(unFeriado -> unFeriado.comparateConDiaYMes(fecha))).collect(Collectors.toList()).get(0);
 	}
 
 
