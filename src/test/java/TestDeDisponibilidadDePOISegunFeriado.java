@@ -7,14 +7,15 @@ import org.junit.Test;
 public class TestDeDisponibilidadDePOISegunFeriado {
 
 	public Colectivo unColectivo;
-	public Local miLocal;
+	public Local miLocalCerrado;
+	public Local miLocalAbierto;
 	public CGP unCGP;
 
 	@Before
 	public void init() {
 		unColectivo = GlobalTestVariables.crearUnColectivo();
-		miLocal = GlobalTestVariables.crearUnLocal();
-
+		miLocalCerrado = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoNoAbierto());;
+		miLocalAbierto = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto());
 	}
 
 	@Test
@@ -25,12 +26,12 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 
 	@Test
 	public void LocalEstaCerradoPorqueEsFeriado() {
-		Assert.assertFalse(miLocal.estaDisponible(LocalDateTime.now()));
+		Assert.assertFalse(miLocalCerrado.estaDisponible(LocalDateTime.now()));
 	}
 
 	@Test
 	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario() {
 
-		Assert.assertTrue(miLocal.estaDisponible(LocalDateTime.of(2016, 07, 9, 01, 00)));
+		Assert.assertTrue(miLocalAbierto.estaDisponible(LocalDateTime.of(2016, 07, 9, 01, 00)));
 	}
 }

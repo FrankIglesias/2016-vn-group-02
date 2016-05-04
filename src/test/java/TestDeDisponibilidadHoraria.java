@@ -29,12 +29,11 @@ public class TestDeDisponibilidadHoraria {
 		fecha2 = LocalDate.of(2016, 04, 15);
 		hora2 = LocalTime.of(03, 00);
 		fechaCerrado = LocalDateTime.of(fecha2, hora2);
-		centroDeCGP = GlobalTestVariables.crearUnCGP();
-		banco = GlobalTestVariables.crearUnBanco();
+		centroDeCGP = GlobalTestVariables.crearUnCGP(GlobalTestVariables.crearFeriadoVacio());
+		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		colectivo = GlobalTestVariables.crearUnColectivo();
-		unLocal = GlobalTestVariables.crearUnLocal();
-		ventaDeVOS = new Servicio("Tarjeta vos", GlobalTestVariables.crearHorarioTipoBancario());
-		// uso horario bancario pero puedo usar cualquier otro horario ....
+		unLocal = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoVacio());
+		ventaDeVOS = new Servicio("Tarjeta vos", GlobalTestVariables.crearUnHorarioDeLunesAViernes(LocalTime.of(8, 00), LocalTime.of(21, 00)));
 		
 
 	}

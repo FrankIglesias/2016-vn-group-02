@@ -15,7 +15,7 @@ public class EncuentraSegunPalabraClaveTest {
 	@Before
 	public void init() {
 		buscador = new Buscador();
-		banco = GlobalTestVariables.crearUnBanco();
+		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
 		fraseABuscar = "quiero un banco malo";

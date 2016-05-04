@@ -19,10 +19,10 @@ public class CalculoDeCercaniaTest {
 	@Before
 	public void init() {
 
-		banco = GlobalTestVariables.crearUnBanco();
+		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		colectivo = GlobalTestVariables.crearUnColectivo();
-		centroDeCGP = GlobalTestVariables.crearUnCGP();
-		unLocal = GlobalTestVariables.crearUnLocal();
+		centroDeCGP = GlobalTestVariables.crearUnCGP(GlobalTestVariables.crearFeriadoVacio());
+		unLocal = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoVacio());
 		geolocalizacionPersonaCercanaColectivo = new Geolocalizacion(-34.5730926, -58.512000, domicilioPepe,
 				localidadPepe);
 		geolocalizacionPersonaCercanaCGP = new Geolocalizacion(-34.5730926, -58.5010000, domicilioPepe, localidadPepe);
