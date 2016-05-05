@@ -37,13 +37,18 @@ public class GlobalTestVariables {
 	}
 
 	public static List<Feriado> crearFeriadoNoAbierto() {
+		if (LocalTime.now().getHour() == 0 || LocalTime.now().getHour() == 1){
+			return crearFeriado(3, 4,
+					LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
+		}
+		else
 		return crearFeriado(LocalTime.now().getHour() - 2, LocalTime.now().getHour() - 1,
 				LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
 
 	}
 
 	public static List<Feriado> crearFeriadoAbierto() {
-		return crearFeriado(LocalTime.now().getHour() - 1, LocalTime.now().getHour() + 1, LocalDate.now().getMonthValue(),
+		return crearFeriado(LocalTime.now().getHour(), LocalTime.now().getHour() + 1, LocalDate.now().getMonthValue(),
 				LocalDate.now().getDayOfMonth());
 	}
 
@@ -98,7 +103,7 @@ public class GlobalTestVariables {
 				"PB", "", "1419");
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
-		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)));
+		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
 		List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
 		serviciosDelCGP.add(ventaDeVOS);
 		CGP centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);

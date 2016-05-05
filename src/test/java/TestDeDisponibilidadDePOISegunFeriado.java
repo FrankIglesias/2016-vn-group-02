@@ -9,13 +9,20 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	public Colectivo unColectivo;
 	public Local miLocalCerrado;
 	public Local miLocalAbierto;
-	public CGP unCGP;
+	public CGP unCGPCerrado;
+	public CGP unCGPAbierto;
+	public Banco unBancoCerrado;
+	public Banco unBancoAbierto;
 
 	@Before
 	public void init() {
 		unColectivo = GlobalTestVariables.crearUnColectivo();
-		miLocalCerrado = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoNoAbierto());;
+		miLocalCerrado = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoNoAbierto());
 		miLocalAbierto = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto());
+		unCGPCerrado = GlobalTestVariables.crearUnCGP(GlobalTestVariables.crearFeriadoNoAbierto());
+		unCGPAbierto = GlobalTestVariables.crearUnCGP(GlobalTestVariables.crearFeriadoAbierto());
+		unBancoCerrado = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoNoAbierto());
+		unBancoAbierto = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 	}
 
 	@Test
@@ -25,13 +32,35 @@ public class TestDeDisponibilidadDePOISegunFeriado {
 	}
 
 	@Test
-	public void LocalEstaCerradoPorqueEsFeriado() {
+	public void LocalCerradoEnFeriado() {
 		Assert.assertFalse(miLocalCerrado.estaDisponible(LocalDateTime.now()));
 	}
 
 	@Test
-	public void LocalEstaAbiertoPorqueEsFeriadoPeroAbreEnEseHorario() {
+	public void LocalAbiertoEnFeriado() {
 
-		Assert.assertTrue(miLocalAbierto.estaDisponible(LocalDateTime.of(2016, 07, 9, 01, 00)));
+		Assert.assertTrue(miLocalAbierto.estaDisponible(LocalDateTime.now()));
 	}
+	
+	@Test
+	public void CGPCerradoEnFeriado()	{
+		Assert.assertFalse(unCGPCerrado.estaDisponible(LocalDateTime.now()));
+	}
+	
+	@Test
+	public void CGPAbiertoEnFeriado()	{
+		Assert.assertTrue(unCGPAbierto.estaDisponible(LocalDateTime.now()));
+	}
+	
+	@Test
+	public void BancoCerradoEnFeriado()	{
+		Assert.assertFalse(unBancoCerrado.estaDisponible(LocalDateTime.now()));
+	}
+	
+	@Test
+	public void BancoAbiertoEnFeriado()	{
+		Assert.assertTrue(unBancoAbierto.estaDisponible(LocalDateTime.now()));
+	}
+	
+	
 }

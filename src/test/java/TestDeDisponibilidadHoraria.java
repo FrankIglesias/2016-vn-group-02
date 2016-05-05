@@ -33,7 +33,7 @@ public class TestDeDisponibilidadHoraria {
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		colectivo = GlobalTestVariables.crearUnColectivo();
 		unLocal = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoVacio());
-		ventaDeVOS = new Servicio("Tarjeta vos", GlobalTestVariables.crearUnHorarioDeLunesAViernes(LocalTime.of(8, 00), LocalTime.of(21, 00)));
+		ventaDeVOS = new Servicio("Tarjeta vos", GlobalTestVariables.crearUnHorarioDeLunesAViernes(LocalTime.of(8, 00), LocalTime.of(21, 00)),GlobalTestVariables.crearFeriadoVacio());
 		
 
 	}
