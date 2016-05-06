@@ -13,6 +13,7 @@ public static List<POI> buscarSegunPalabraClave(String unaFrase)
 	puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
 	return puntosSegunPalabra;
 }
+//probando
 
 public static void setPuntosDeIntereses(List<POI> unaLista)
 {
