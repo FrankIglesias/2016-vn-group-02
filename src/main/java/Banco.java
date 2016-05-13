@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Banco extends POI {
-	
+
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
@@ -12,7 +12,7 @@ public class Banco extends POI {
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
 		List<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
 		intervaloBancario.add(intervaloUnico);
-		
+
 		horarioBancario.agregarIntervalo(DayOfWeek.MONDAY, intervaloBancario);
 		horarioBancario.agregarIntervalo(DayOfWeek.TUESDAY, intervaloBancario);
 		horarioBancario.agregarIntervalo(DayOfWeek.WEDNESDAY, intervaloBancario);

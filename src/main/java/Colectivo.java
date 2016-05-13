@@ -8,7 +8,7 @@ public class Colectivo extends POI {
 
 	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, 
 			String linea, List<Feriado> feriados) {
-		super(point, nombre, palabrasClave, new HorarioYDia(), feriados);
+		super(point, nombre, palabrasClave, new HorarioYDia(),feriados);
 		this.linea = linea;
 		this.addPalabraClave(linea);
 	}

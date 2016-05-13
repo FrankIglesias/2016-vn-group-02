@@ -26,27 +26,5 @@ public class CGP extends POI {
 	public boolean estaDisponible(LocalDateTime horario) {
 		
 		return servicios.stream().anyMatch(unServicio -> unServicio.estaDisponible(horario));
-		/*
-		 * boolean retorno = false;
-		 * 
-		 * Scanner keyboard = new Scanner(System.in); System.out.println(
-		 * "Buscar Servicio:"); String busqueda = keyboard.nextLine();
-		 * 
-		 * /*if (estoyEnFeriado(horario.toLocalDate())) { Feriado fecha =
-		 * this.feriados.stream().filter (Feriado -> Feriado.getFecha() ==
-		 * horario.toLocalDate()).findFirst().get();
-		 * 
-		 * if(fecha.incluyeHorario(horario)) { retorno = true; } } else if
-		 * (busqueda.equals("")) {
-		 */
-
-		/*
-		 * } else { try { return
-		 * this.buscarServicio(busqueda).estaDisponible(horario);
-		 * 
-		 * } } catch (NullPointerException exepcion) { // System.out.println(
-		 * "No existe el servicio " + busqueda); return false; } } return
-		 * retorno;
-		 */
 	}
 }
