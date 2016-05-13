@@ -3,11 +3,11 @@ import java.time.LocalDate;
 public class Busqueda {
 
 	LocalDate fecha;
-	String terminal;
+	Terminal terminal;
 	String frase;
 	double tiempo;
 
-	public Busqueda(String terminal, String frase, double tiempo) {
+	public Busqueda(Terminal terminal, String frase, double tiempo) {
 		this.terminal = terminal;
 		this.fecha = LocalDate.now();
 		this.frase = frase;

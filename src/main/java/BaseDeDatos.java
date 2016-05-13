@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Notificador {
+public class BaseDeDatos {
 	static List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Administrador admin;
 
-	public void addBusqueda(String terminal, String frase, double tiempo) {
+	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
 		busquedas.add(busqueda);
 		admin.notificar(busqueda);

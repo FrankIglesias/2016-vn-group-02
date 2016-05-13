@@ -11,6 +11,7 @@ public class EncuentraSegunPalabraClaveTest {
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
 	String fraseABuscar;
+	public Terminal terminal = new Terminal();
 
 	@Before
 	public void init() {
@@ -23,20 +24,20 @@ public class EncuentraSegunPalabraClaveTest {
 		puntosDeInteres.add(banco);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		Buscador.buscarSegunPalabraClave(fraseABuscar);
+		Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 
 	}
 
 	@Test
 	public void encontrarPOISegunPalabra() {
 
-		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(banco));
-		Assert.assertEquals("Cantidad de elementos en el array", 1, Buscador.buscarSegunPalabraClave("banelco").size());
+		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(banco));
+		Assert.assertEquals("Cantidad de elementos en el array", 1, Buscador.buscarSegunPalabraClave("banelco", terminal).size());
 	}
 
 	@Test
 	public void noEncuentraPOISegunPalabraClave() {
-		Assert.assertFalse(Buscador.buscarSegunPalabraClave(fraseABuscar).contains(colectivo));
+		Assert.assertFalse(Buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
 	}
 
 }
