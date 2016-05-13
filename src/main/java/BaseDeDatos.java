@@ -9,6 +9,11 @@ public class BaseDeDatos {
 	static List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Administrador admin;
+	
+	BaseDeDatos(){
+		super();
+		admin = new Administrador();
+	}
 
 	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
