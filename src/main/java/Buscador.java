@@ -16,6 +16,7 @@ public static List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerm
 	puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
 	fin = System.currentTimeMillis();
 	baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio));
+	unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 	return puntosSegunPalabra;
 }
 

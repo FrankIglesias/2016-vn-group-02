@@ -9,7 +9,7 @@ public class BaseDeDatos {
 	static List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Administrador admin;
-	
+
 	BaseDeDatos(){
 		super();
 		admin = new Administrador();
@@ -33,6 +33,6 @@ public class BaseDeDatos {
 	public Map<LocalDate, Integer> getReportePorFecha(){
 		return reportePorFecha;
 	}
-	
+
 	
 }
