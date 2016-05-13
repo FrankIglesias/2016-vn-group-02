@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Buscador { 
 	
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
-static Sistema sistema = new Sistema();
+static Notificador notificador = new Notificador();
 
 public static List<POI> buscarSegunPalabraClave(String unaFrase)
 {
@@ -15,7 +15,7 @@ public static List<POI> buscarSegunPalabraClave(String unaFrase)
 	List<POI> puntosSegunPalabra = new ArrayList<POI>();
 	puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
 	fin = System.currentTimeMillis();
-	sistema.addBusqueda("unTerminal", unaFrase, (fin - inicio));
+	notificador.addBusqueda("unTerminal", unaFrase, (fin - inicio));
 	return puntosSegunPalabra;
 }
 
