@@ -7,6 +7,7 @@ public class Buscador {
 	
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
 static BaseDeDatos baseDeDatos = new BaseDeDatos();
+static List<BancoImpostor> bancosImpostores = new ArrayList<BancoImpostor>();
 
 public static List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
 {
@@ -20,9 +21,20 @@ public static List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerm
 	return puntosSegunPalabra;
 }
 
+public static List<BancoImpostor> buscarBancoSegunNombreYServicio(String nombreBanco, String unServicio)
+{
+	List<BancoImpostor> bancosFiltrados = new ArrayList<BancoImpostor>();
+	bancosFiltrados = bancosImpostores.stream().filter(unBanco -> unBanco.getNombre() == nombreBanco && unBanco.realizasUnServicio(unServicio)).collect(Collectors.toList());
+	return bancosFiltrados;
+}
 public static void setPuntosDeIntereses(List<POI> unaLista)
 {
 	Buscador.puntosDeIntereses = unaLista;
+}
+
+public static void setBancosImpostores(List<BancoImpostor> unosBancos)
+{
+	bancosImpostores = unosBancos;
 }
 	
 public Buscador()

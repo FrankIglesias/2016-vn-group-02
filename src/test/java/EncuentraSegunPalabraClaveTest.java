@@ -11,7 +11,7 @@ public class EncuentraSegunPalabraClaveTest {
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
 	String fraseABuscar;
-	public Terminal terminal = new Terminal();
+	//public Terminal terminal = new Terminal();
 
 	@Before
 	public void init() {
@@ -24,7 +24,7 @@ public class EncuentraSegunPalabraClaveTest {
 		puntosDeInteres.add(banco);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+	//	Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 
 	}
 
