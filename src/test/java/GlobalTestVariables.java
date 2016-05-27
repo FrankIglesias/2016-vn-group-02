@@ -120,6 +120,7 @@ public class GlobalTestVariables {
 		Local unLocal = new Local(geolocalizacionLocal, "lo de mari", crearUnHorarioDeLunesAViernes(LocalTime.of(8, 00), LocalTime.of(17, 00)), unRubro,
 				feriados);
 		return unLocal;
+		
 
 	}
 

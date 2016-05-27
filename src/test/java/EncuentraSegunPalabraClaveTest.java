@@ -4,13 +4,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EncuentraSegunPalabraClaveTest {
+public class EncuentraSegunPalabraClaveTest  {
 
 	public Banco banco;
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
 	String fraseABuscar;
+	Terminal terminal = new Terminal("Terminal 1");
 	//public Terminal terminal = new Terminal();
 
 	@Before
