@@ -20,7 +20,6 @@ public class BaseDeDatos {
 	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
 		busquedas.add(busqueda);
-		admin.notificar(busqueda);
 	}
 
 	public int cantidadDeBusquedasPorFecha(LocalDate fecha) {
