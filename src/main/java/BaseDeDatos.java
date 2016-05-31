@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BaseDeDatos {
+	static List<POI> puntosDeIntereses = new ArrayList<POI>();
 	static List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
@@ -36,5 +37,17 @@ public class BaseDeDatos {
 		}
 
 	}
+	public void agregarNuevosPoi(POI nuevoPOI){
+		puntosDeIntereses.add(nuevoPOI);
+	}
+	public void sacarPoi(POI POIaSacar){
+		puntosDeIntereses.remove(POIaSacar);
+		
+	}
+	public int cantidadDePOI(){
+		return puntosDeIntereses.size();
+	}
+		
+
 
 }

@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
   
 public class Buscador { 
 	
-static List<POI> puntosDeIntereses = new ArrayList<POI>();
+
+	static List<POI> puntosDeIntereses = new ArrayList<POI>();
 static BaseDeDatos baseDeDatos = new BaseDeDatos();
 static List<BancoImpostor> bancosImpostores = new ArrayList<BancoImpostor>();
 
@@ -35,15 +36,7 @@ public static void setBancosImpostores(List<BancoImpostor> unosBancos)
 {
 	bancosImpostores = unosBancos;
 }
-public void agregarNuevosPoi(POI nuevoPOI){
-	puntosDeIntereses.add(nuevoPOI);
-}
-public void sacarPoi(POI POIaSacar){
-	puntosDeIntereses.remove(POIaSacar);
-	
-}
 
-	
 
 
 
