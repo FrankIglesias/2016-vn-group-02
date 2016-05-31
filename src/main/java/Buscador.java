@@ -31,16 +31,18 @@ public static void setPuntosDeIntereses(List<POI> unaLista)
 {
 	Buscador.puntosDeIntereses = unaLista;
 }
-
 public static void setBancosImpostores(List<BancoImpostor> unosBancos)
 {
 	bancosImpostores = unosBancos;
 }
-	
-public Buscador()
-{ 
-	super();
+public void agregarNuevosPoi(POI nuevoPOI){
+	puntosDeIntereses.add(nuevoPOI);
 }
+public void sacarPoi(POI POIaSacar){
+	puntosDeIntereses.remove(POIaSacar);
+	
+}
+
 	
 
 
