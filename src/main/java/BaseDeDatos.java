@@ -10,12 +10,6 @@ public class BaseDeDatos {
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
 	static List<Terminal> terminales = new ArrayList<Terminal>();
-	Administrador admin;
-
-	BaseDeDatos() {
-		super();
-		admin = new Administrador();
-	}
 
 	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
