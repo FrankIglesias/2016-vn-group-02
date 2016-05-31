@@ -50,15 +50,7 @@ public class RequestService {
 	}
 
 	public String obtenerBancos() {
-		String retorno;
-		RequestService requester = new RequestService();
-		ClientResponse response = requester.getBookByFilter("sucursal", "Avellaneda");
-		if (response.getStatus() == 200) {
-			throw new RuntimeException();
-		} else {
-			
-			retorno = response.getEntity(String.class);
+		ClientResponse response = this.getBookByFilter("sucursal", "Avellaneda");
+			return response.getEntity(String.class);
 		}
-		return retorno;
-	}
 }
