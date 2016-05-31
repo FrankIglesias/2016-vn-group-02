@@ -1,5 +1,7 @@
+import java.io.FileReader;
+import java.io.Reader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.google.gson.Gson;
 
@@ -11,9 +13,14 @@ public class ApiDeBancoMock {
 
 	public static Banco parse() {
 		Gson gson = new Gson();
-		BancoTrucho banco = gson.fromJson(stream, BancoTrucho.class);
-		Banco bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
+		Banco bancoSistema = null; 
+try(Reader reader = new FileReader("/home/frank/2016-vn-group-02/src/main/java/prueba.json")){
+		BancoTrucho banco = gson.fromJson(reader, BancoTrucho.class);
+		bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
 				new ArrayList<String>(), null);
+}catch(IOException e){
+	System.out.println("violacion de segmento");
+}
 		return bancoSistema;
 	}
 }
