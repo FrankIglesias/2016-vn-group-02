@@ -4,9 +4,10 @@ import com.sun.jersey.api.client.WebResource;
 
 import javax.ws.rs.core.MediaType;
 
-/* Para el ejemplo se usara el siguiente recurso
-*  https://www.googleapis.com/books/v1/volumes/?q=isbn:9706434526&fields=totalItems,items(id,volumeInfo(title,publishedDate))
-* */
+/* API DE BANCOS
+ * http://private-96b476-ddsutn.apiary-mock.com/banks?banco=banco&servicio=servicio
+ * 
+ * */
 
 public class RequestService {
     private Client client;
