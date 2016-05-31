@@ -9,22 +9,18 @@ import static org.junit.Assert.*;
  */
 public class RequestServiceTest {
 
-    RequestService requester;
+	RequestService requester;
 
-    @Before
-    public void setUp() throws Exception {
-        this.requester = new RequestService();
-    }
+	@Before
+	public void setUp() throws Exception {
+		this.requester = new RequestService();
+	}
 
-    @Test
-    public void obtenerConUnFiltro() throws Exception {
-        //Se solicita todos los datos de un libro por su isbn.
-        ClientResponse response = this.requester.getBookByFilter("isbn","9706434526");
-        assertEquals(response.getStatus(), 200);
-        String json = response.getEntity(String.class);
-        //assertTrue(json.contains("items"));
-        //assertTrue(json.contains("Tio Tom"));
-    }
+	@Test
+	public void testDeObtenerBancosDesdeLaAPI() throws Exception {
+		String json = requester.obtenerBancos();
+		assertTrue(json.contains("sucursal"));
 
-  
+	}
+
 }
