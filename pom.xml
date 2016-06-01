@@ -5,7 +5,7 @@
 	<artifactId>TPIntegrador</artifactId>
 	<version>1-SNAPSHOT</version>
 	<properties>
-		<jackson.version>2.7.4</jackson.version>
+		<jackson.version>2.4.4</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +42,21 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 

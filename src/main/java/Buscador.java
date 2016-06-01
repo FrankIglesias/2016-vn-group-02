@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Buscador { 
 	
 
-	static List<POI> puntosDeIntereses = new ArrayList<POI>();
+static List<POI> puntosDeIntereses = new ArrayList<POI>();
 static BaseDeDatos baseDeDatos = new BaseDeDatos();
 
 

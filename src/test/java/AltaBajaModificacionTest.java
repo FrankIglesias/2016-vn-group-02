@@ -3,19 +3,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AltaBajaModificacionTest {
-	private static BaseDeDatos unaBase = new BaseDeDatos();
-
+	
 	@Test
 	public void testDeAltaDeDatos() {
-		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
-		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
-
-		Assert.assertEquals(unaBase.cantidadDePOI(), 2);
+		BaseDeDatos unaBase1 = new BaseDeDatos();
+		Assert.assertEquals(unaBase1.cantidadDePOI(), 0);
 
 	}
 
 	@Test
 	public void testDeAgregarPOI() {
+		BaseDeDatos unaBase = new BaseDeDatos();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
@@ -25,6 +23,7 @@ public class AltaBajaModificacionTest {
 
 	@Test
 	public void testDeQuitarPOI() {
+		BaseDeDatos unaBase = new BaseDeDatos();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.sacarPoi(GlobalTestVariables.crearUnColectivo());
