@@ -26,10 +26,15 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 		Reader read = obtenerReader();
 		BancoTrucho banco = gson.fromJson(read, BancoTrucho.class);
 		bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
-				new ArrayList<String>(), null);
+				banco.servicios, null);
 		return bancoSistema;
 	}
-
+public Banco obtenerBancosFlashero()
+{
+	JsonFactory jsonFactory = new JsonFactory();
+	Banco unBanco = jsonFactory.fromJson(jsonBanco, Banco.class);
+	return unBanco;
+}
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {

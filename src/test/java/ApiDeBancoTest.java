@@ -2,7 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 public class ApiDeBancoTest {
 
-	ApiDeBanco requester = new ApiDeBancoReal();
+	ApiDeBancoReal requester = new ApiDeBancoReal();
 	ApiDeBancoMock secondRequester = new ApiDeBancoMock();
 
 	@Test
@@ -31,6 +31,12 @@ public class ApiDeBancoTest {
 		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
 		Assert.assertEquals(unBanco.nombre, "Banco de la Plaza");
 
+	}
+	@Test
+	public void testDeObtenerUnBancoObjetoDeMockDeArchivoContieneUnServicio() throws Exception {
+		secondRequester.setRuta();
+		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
+		Assert.assertTrue(unBanco.palabrasClave.contains("cobro cheques"));
 	}
 
 }

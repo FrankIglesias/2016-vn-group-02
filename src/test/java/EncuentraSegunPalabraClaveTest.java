@@ -6,7 +6,9 @@ import org.junit.Test;
 
 public class EncuentraSegunPalabraClaveTest  {
 
+	
 	public Banco banco;
+	public Banco banco2;
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
@@ -17,11 +19,14 @@ public class EncuentraSegunPalabraClaveTest  {
 	public void init() {
 		buscador = new Buscador();
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		ApiDeBancoMock.setRuta();
+		banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
-		fraseABuscar = "quiero un banco malo";
+		fraseABuscar = "quiero un banco que tenga depositos";
 		puntosDeInteres.add(colectivo);
 		puntosDeInteres.add(banco);
+		puntosDeInteres.add(banco2);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
 		buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
@@ -30,8 +35,8 @@ public class EncuentraSegunPalabraClaveTest  {
 
 	@Test
 	public void encontrarPOISegunPalabra() {
-		Assert.assertTrue(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(banco));
-		Assert.assertEquals("Cantidad de elementos en el array", 1, buscador.buscarSegunPalabraClave("banelco", terminal).size());
+		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 2);
+		Assert.assertEquals("Cantidad de elementos en el array", 2, buscador.buscarSegunPalabraClave("depositos", terminal).size());
 	}
 
 	@Test

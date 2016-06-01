@@ -82,6 +82,7 @@ public class GlobalTestVariables {
 		banco.addPalabraClave("cuenta");
 		banco.addPalabraClave("banco");
 		banco.addPalabraClave("banelco");
+		banco.addPalabraClave("depositos");
 		return banco;
 	}
 
