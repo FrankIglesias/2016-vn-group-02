@@ -48,6 +48,9 @@ public class GlobalTestVariables {
 	}
 
 	public static List<Feriado> crearFeriadoAbierto() {
+		if (LocalTime.now().getHour() == 23){
+			return crearFeriado(23, 00, LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
+		}
 		return crearFeriado(LocalTime.now().getHour(), LocalTime.now().getHour() + 1, LocalDate.now().getMonthValue(),
 				LocalDate.now().getDayOfMonth());
 	}
