@@ -41,13 +41,16 @@ public class BaseDeDatos {
 		puntosDeIntereses.add(nuevoPOI);
 	}
 	public void sacarPoi(POI POIaSacar){
-		puntosDeIntereses.remove(POIaSacar);
+	puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> sonIguales(unPoi,POIaSacar)).collect(Collectors.toList()).get(1));
+		
 		
 	}
 	public int cantidadDePOI(){
 		return puntosDeIntereses.size();
 	}
-		
-
+	private boolean sonIguales(POI point1, POI point2){
+		return point1.point.getLatitud()==point2.point.getLatitud() &&point1.point.getLongitud()==point2.point.getLongitud();
+		// dos point son iguales si estan exactamente en el mismo  punto.
+	}
 
 }
