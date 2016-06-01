@@ -27,6 +27,7 @@ public class ApiDeBancoTest {
 	}
 	@Test
 	public void testDeObtenerUnBancoObjetoDeMockDeArchivo() throws Exception {
+		secondRequester.setRuta();
 		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
 		Assert.assertEquals(unBanco.nombre, "Banco de la Plaza");
 

@@ -12,7 +12,6 @@ public class EncuentraSegunPalabraClaveTest  {
 	public Buscador buscador;
 	String fraseABuscar;
 	Terminal terminal = new Terminal("Terminal 1");
-	//public Terminal terminal = new Terminal();
 
 	@Before
 	public void init() {
@@ -25,7 +24,7 @@ public class EncuentraSegunPalabraClaveTest  {
 		puntosDeInteres.add(banco);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-	//	Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+		Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 
 	}
 

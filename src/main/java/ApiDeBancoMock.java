@@ -2,16 +2,23 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
 
 public class ApiDeBancoMock implements ApiDeBanco {
-	private static String ruta = "C:/Users/Juani/git";
+	private static String rutaDeArchivo;
 	private String jsonBanco = "{" + "\"banco\": \"Banco de la Plaza\"," + "\"x\": -35.9338322," + "\"y\": 72.348353,"
 			+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","
 			+ "\"extra_property\": \"Does not fail because mapper is configured to not fail with unknown properties\""
 			+ "}";
+
+	public static void setRuta() {
+		// "/home/frank/"
+		System.out.println("Ingrese la ruta donde se encuentra la carpeta \"2016-vn-group-02\" ej: /home/frank/");
+		Scanner reader = new Scanner(System.in);
+		rutaDeArchivo = reader.next();
+	}
 
 	public static Banco obtenerBancoDesdeArchivo() {
 		Gson gson = new Gson();
@@ -26,7 +33,7 @@ public class ApiDeBancoMock implements ApiDeBanco {
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
-			read = new FileReader(ruta + "/2016-vn-group-02/src/main/java/prueba.json");
+			read = new FileReader(rutaDeArchivo + "2016-vn-group-02/src/main/java/prueba.json");
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
