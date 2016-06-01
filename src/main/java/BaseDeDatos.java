@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BaseDeDatos {
-	static  List<POI> puntosDeIntereses = new ArrayList<POI>();
-	static List<Busqueda> busquedas = new ArrayList<Busqueda>();
+	List<POI> puntosDeIntereses = new ArrayList<POI>();
+	List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
-	static List<Terminal> terminales = new ArrayList<Terminal>();
+	List<Terminal> terminales = new ArrayList<Terminal>();
 
 	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
