@@ -10,7 +10,7 @@ static List<POI> puntosDeIntereses = new ArrayList<POI>();
 static BaseDeDatos baseDeDatos = new BaseDeDatos();
 
 
-public static List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
+public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
 {
 	double inicio, fin;
 	inicio = System.currentTimeMillis();
