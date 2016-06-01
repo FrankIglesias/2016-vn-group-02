@@ -24,19 +24,19 @@ public class EncuentraSegunPalabraClaveTest  {
 		puntosDeInteres.add(banco);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		Buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+		buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 
 	}
 
 	@Test
 	public void encontrarPOISegunPalabra() {
-		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(banco));
-		Assert.assertEquals("Cantidad de elementos en el array", 1, Buscador.buscarSegunPalabraClave("banelco", terminal).size());
+		Assert.assertTrue(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(banco));
+		Assert.assertEquals("Cantidad de elementos en el array", 1, buscador.buscarSegunPalabraClave("banelco", terminal).size());
 	}
 
 	@Test
 	public void noEncuentraPOISegunPalabraClave() {
-		Assert.assertFalse(Buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
+		Assert.assertFalse(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
 	}
 
 }
