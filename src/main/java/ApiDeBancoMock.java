@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
 
-public class ApiDeBancoMock implements ApiDeBanco {
+public class ApiDeBancoMock implements ApiDeBancoInterface {
 	private static String rutaDeArchivo;
 	private String jsonBanco = "{" + "\"banco\": \"Banco de la Plaza\"," + "\"x\": -35.9338322," + "\"y\": 72.348353,"
 			+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","

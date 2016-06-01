@@ -8,18 +8,23 @@ public class Buscador {
 
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
 static BaseDeDatos baseDeDatos = new BaseDeDatos();
+static double tiempoMax = 0.0001;
 
 
-public static List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
+public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
 {
 	double inicio, fin;
 	inicio = System.currentTimeMillis();
 	List<POI> puntosSegunPalabra = new ArrayList<POI>();
 	puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
 	fin = System.currentTimeMillis();
-	baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio));
+	baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax);
 	unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 	return puntosSegunPalabra;
+}
+
+public void setTiempoMaximoDeBusqueda (double tiempoMax){
+	Buscador.tiempoMax = tiempoMax;
 }
 
 

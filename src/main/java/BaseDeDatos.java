@@ -12,8 +12,8 @@ public class BaseDeDatos {
 	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
 	List<Terminal> terminales = new ArrayList<Terminal>();
 
-	public void addBusqueda(Terminal terminal, String frase, double tiempo) {
-		Busqueda busqueda = new Busqueda(terminal, frase, tiempo);
+	public void addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
+		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax);
 		busquedas.add(busqueda);
 	}
 

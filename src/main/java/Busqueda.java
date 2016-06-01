@@ -6,9 +6,9 @@ public class Busqueda {
 	Terminal terminal;
 	String frase;
 	double tiempo;
-	double tiempoMax = 5;
+	double tiempoMax;
 
-	public Busqueda(Terminal terminal, String frase, double tiempo) {
+	public Busqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
 		this.terminal = terminal;
 		this.fecha = LocalDate.now();
 		this.frase = frase;
