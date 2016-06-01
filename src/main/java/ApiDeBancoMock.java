@@ -15,7 +15,7 @@ public class ApiDeBancoMock implements ApiDeBanco {
 
 	public static void setRuta() {
 		// "/home/frank/"
-		System.out.println("Ingrese la ruta donde se encuentra la carpeta \"2016-vn-group-02\" ej: /home/frank/");
+		System.out.println("Ingrese la ruta donde se encuentra la carpeta prueba.json");
 		Scanner reader = new Scanner(System.in);
 		rutaDeArchivo = reader.next();
 	}
@@ -33,7 +33,7 @@ public class ApiDeBancoMock implements ApiDeBanco {
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
-			read = new FileReader(rutaDeArchivo + "2016-vn-group-02/src/main/java/prueba.json");
+			read = new FileReader(rutaDeArchivo+"prueba.json");
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
