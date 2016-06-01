@@ -30,7 +30,6 @@ public class EncuentraSegunPalabraClaveTest  {
 
 	@Test
 	public void encontrarPOISegunPalabra() {
-
 		Assert.assertTrue(Buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(banco));
 		Assert.assertEquals("Cantidad de elementos en el array", 1, Buscador.buscarSegunPalabraClave("banelco", terminal).size());
 	}

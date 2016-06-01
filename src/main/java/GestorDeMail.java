@@ -21,9 +21,12 @@ public class GestorDeMail implements GestorMailInterface {
 
 	public boolean enviarMail(Message.RecipientType tipoDeCopia, String usuarioTo, String asunto,
 			String cuerpoDelMail) {
-
+		
+	
 		MimeMessage message = new MimeMessage(session);
 		try {
+			
+			System.out.println("HOLI");
 			message.setFrom(new InternetAddress(usuarioFrom));
 			message.addRecipient(tipoDeCopia, new InternetAddress(usuarioTo));
 			message.setSubject(asunto);

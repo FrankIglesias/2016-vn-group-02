@@ -8,16 +8,16 @@ import javax.mail.Session;
 public class Terminal {
 
 	private String nombre;
-	private static List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
-	private GestorDeMail gestorDeMail;
-	private String mailAdmin;
+	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
+	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
+	private String mailAdmin = "mailprueba@gmail.com";
 
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void setGestorDeMail(Session session, String usuarioFrom, String contrasenia) {
-		this.gestorDeMail = new GestorDeMail(session, usuarioFrom, contrasenia);
+	public void setGestorDeMail(GestorMailInterface gestorDeMail) {
+		this.gestorDeMail = gestorDeMail;
 	}
 
 	public int cantidadDeResultadosPorBusqueda(List<POI> puntosSegunPalabra) {
@@ -46,9 +46,7 @@ public class Terminal {
 
 	public boolean avisaAlAdminTiempoExcedido(double tiempo, String frase, LocalDate fecha, String terminal) {
 
-		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido",
-				"La busqueda con la frase " + frase + " realizada en la fecha " + fecha + ",y en la terminal "
-						+ terminal + "se ha excedido " + tiempo + "milisegundos");
+		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido", "");
 	}
 
 	public String getNombre() {
