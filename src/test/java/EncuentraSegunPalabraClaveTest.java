@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import MainClasses.CGP;
 import MainClasses.Colectivo;
 import MainClasses.POI;
 
+
 public class EncuentraSegunPalabraClaveTest  {
 
 	
@@ -18,7 +20,7 @@ public class EncuentraSegunPalabraClaveTest  {
 	public CGP cgp;
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
-	 static private Buscador buscador;
+	public Buscador buscador;
 	String fraseABuscar;
 	String fraseABuscar2;
 	Terminal terminal = new Terminal("Terminal 1");
@@ -28,26 +30,26 @@ public class EncuentraSegunPalabraClaveTest  {
 		buscador = new Buscador();
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		cgp = GlobalTestVariables.crearUnCGP(null);
-		//ApiDeBancoMock.setRuta();
-		//banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
+		ApiDeBancoMock.setRuta();
+		banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
 		fraseABuscar = "quiero un banco que tenga depositos";
 		fraseABuscar2 = "Tarjeta vos";
 		puntosDeInteres.add(colectivo);
 		puntosDeInteres.add(banco);
+		puntosDeInteres.add(banco2);
 		puntosDeInteres.add(cgp);
-		//puntosDeInteres.add(banco2);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+		buscador.buscarSegunPalabraClave(fraseABuscar2, terminal);
 
 	}
 
 	@Test
 	public void encontrarPOISegunPalabra() {
 		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 2);
-		Assert.assertEquals("Cantidad de elementos en el array", 1, buscador.buscarSegunPalabraClave("depositos", terminal).size());
+		Assert.assertEquals("Cantidad de elementos en el array", 2, buscador.buscarSegunPalabraClave("depositos", terminal).size());
 	}
 
 	@Test
@@ -57,9 +59,9 @@ public class EncuentraSegunPalabraClaveTest  {
 	
 	@Test
 	public void encuentraACGP()
-	{	
+	{
 		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(),1);
-		
 	}
+	
 
 }

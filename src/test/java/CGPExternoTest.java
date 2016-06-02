@@ -23,24 +23,21 @@ public class CGPExternoTest {
 
 	@Before
 	public void init() {
-		// cgp = GlobalTestVariables.crearUnCGP(null);
-		// fraseABuscar = "Tarjeta Vos";
+		cgp = GlobalTestVariables.crearUnCGP(null);
+		fraseABuscar = "Tarjeta Vos";
 		List<POI> listaDePOIs = null;
 
 		// banco =
-		// GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
-		// listaDePOIs.add(cgp);
-		// listaDePOIs.add(banco);
-		// buscador = new Buscador();
-		// Buscador.setPuntosDeIntereses(listaDePOIs);
-		// buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+		GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		listaDePOIs.add(cgp);
+		listaDePOIs.add(banco);
+		buscador = new Buscador();
+		Buscador.setPuntosDeIntereses(listaDePOIs);
+		buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 	}
 
 	@Test
 	public void encontrarPOISegunPalabraClaveParaCGPExterno() {
-		if (listaDePOIs.isEmpty()) {
-			System.out.println("esta vacio");
-		}
 		Assert.assertEquals(RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("Jose Campanella").size(),
 				0);
 

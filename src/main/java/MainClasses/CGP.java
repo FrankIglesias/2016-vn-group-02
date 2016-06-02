@@ -14,7 +14,7 @@ public class CGP extends POI {
 	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {
 		super(point, nombre, new ArrayList<String>(), new HorarioYDia(), feriados);
 		this.servicios = servicios;
-		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
+		servicios.stream().forEach(servicio -> addPalabrasClaves(servicio.getNombre()));
 		
 	}
 

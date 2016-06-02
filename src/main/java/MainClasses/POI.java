@@ -47,10 +47,18 @@ public abstract class POI {
 				palabra -> estaEnListaDePalabras(palabra,listaDePalabrasDeFrase));
 	}
 	private boolean estaEnListaDePalabras(String palabra, List<String> lista){
-		return lista.stream().anyMatch(unaPalabra -> palabra.contains(unaPalabra));
+		return lista.stream().anyMatch(unaPalabra -> unaPalabra.contains(palabra));
 	}
 	public void addPalabraClave(String unaPalabra) {
 		this.getPalabrasClave().add(unaPalabra);
+	}
+	public void addPalabrasClaves(String unaFrase)
+	{
+		String[] fraseDividida = unaFrase.split(" ");
+		for(String palabra : fraseDividida)
+		{
+			this.getPalabrasClave().add(palabra);
+		}
 	}
 
 	public void addFeriado(Feriado unFeriado) {
