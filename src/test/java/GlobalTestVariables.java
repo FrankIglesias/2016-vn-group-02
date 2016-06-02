@@ -5,6 +5,19 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import DesignDreamTeamLocation.Domicilio;
+import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamLocation.Localidad;
+import DesignDreamTeamTime.Feriado;
+import DesignDreamTeamTime.HorarioYDia;
+import DesignDreamTeamTime.IntervaloHorario;
+import MainClasses.Banco;
+import MainClasses.CGP;
+import MainClasses.Colectivo;
+import MainClasses.Local;
+import MainClasses.Rubro;
+import MainClasses.Servicio;
+
 public class GlobalTestVariables {
 	/*
 	 * FERIADOS: 9 DE JULIO, 25 DE MAYO COLECTIVO: GEOLOCALIZACION:

@@ -4,6 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import BancoExterno.ApiDeBancoMock;
+import MainClasses.Banco;
+import MainClasses.Colectivo;
+import MainClasses.POI;
+
 public class EncuentraSegunPalabraClaveTest  {
 
 	

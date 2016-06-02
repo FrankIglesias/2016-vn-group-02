@@ -2,6 +2,10 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import BancoExterno.ApiDeBancoMock;
+import BancoExterno.ApiDeBancoReal;
+import MainClasses.Banco;
 public class ApiDeBancoTest {
 
 	ApiDeBancoReal requester = new ApiDeBancoReal();
@@ -31,14 +35,14 @@ public class ApiDeBancoTest {
 	public void testDeObtenerUnBancoObjetoDeMockDeArchivo() throws Exception {
 		secondRequester.setRuta();
 		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
-		Assert.assertEquals(unBanco.nombre, "Banco de la Plaza");
+		Assert.assertEquals(unBanco.getNombre(), "Banco de la Plaza");
 
 	}
 	@Test
 	public void testDeObtenerUnBancoObjetoDeMockDeArchivoContieneUnServicio() throws Exception {
 		secondRequester.setRuta();
 		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
-		Assert.assertTrue(unBanco.palabrasClave.contains("cobro cheques"));
+		Assert.assertTrue(unBanco.getPalabrasClave().contains("cobro cheques"));
 	}
 
 }

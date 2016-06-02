@@ -3,6 +3,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import DesignDreamTeamLocation.Domicilio;
+import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamLocation.Localidad;
+import MainClasses.Banco;
+import MainClasses.CGP;
+import MainClasses.Colectivo;
+import MainClasses.Local;
+
 public class CalculoDeCercaniaTest {
 	private Banco banco;
 	private Colectivo colectivo;

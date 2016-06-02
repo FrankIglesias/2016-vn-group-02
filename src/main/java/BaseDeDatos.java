@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import MainClasses.Banco;
+import MainClasses.POI;
+
 public class BaseDeDatos {
 	List<POI> puntosDeIntereses = new ArrayList<POI>();
 	List<Busqueda> busquedas = new ArrayList<Busqueda>();
@@ -49,7 +52,7 @@ public class BaseDeDatos {
 		return puntosDeIntereses.size();
 	}
 	private boolean sonIguales(POI point1, POI point2){
-		return point1.point.getLatitud()==point2.point.getLatitud() &&point1.point.getLongitud()==point2.point.getLongitud();
+		return point1.getPoint().getLatitud()==point2.getPoint().getLatitud() &&point1.getPoint().getLongitud()==point2.getPoint().getLongitud();
 		// dos point son iguales si estan exactamente en el mismo  punto.
 	}
 	public void agregarVariosPoi(List<POI> listaDePoi) {

@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
-import javax.mail.Session;
+
+import MainClasses.POI;
 
 public class Terminal {
 
@@ -12,6 +13,7 @@ public class Terminal {
 	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
 	private String mailAdmin = "mailprueba@gmail.com";
 
+	
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}

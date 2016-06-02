@@ -79,5 +79,4 @@ public class CentroDTO {
 				|| getTelefono().contains(criterio)
 				|| servicios.stream().anyMatch(servicio -> servicio.matchea(criterio));
 	}
-
 }

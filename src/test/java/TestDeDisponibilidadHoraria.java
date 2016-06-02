@@ -8,6 +8,12 @@ import java.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 
+import MainClasses.Banco;
+import MainClasses.CGP;
+import MainClasses.Colectivo;
+import MainClasses.Local;
+import MainClasses.Servicio;
+
 public class TestDeDisponibilidadHoraria {
 	private LocalDateTime fechaAbierto;
 	private LocalDateTime fechaCerrado;

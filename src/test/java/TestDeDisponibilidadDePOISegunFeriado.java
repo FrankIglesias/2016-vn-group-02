@@ -4,6 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import MainClasses.Banco;
+import MainClasses.CGP;
+import MainClasses.Colectivo;
+import MainClasses.Local;
+
 public class TestDeDisponibilidadDePOISegunFeriado {
 
 	public Colectivo unColectivo;
