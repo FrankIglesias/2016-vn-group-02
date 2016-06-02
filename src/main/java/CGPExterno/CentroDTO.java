@@ -80,3 +80,4 @@ public class CentroDTO {
 				|| servicios.stream().anyMatch(servicio -> servicio.matchea(criterio));
 	}
 }
+
