@@ -22,6 +22,10 @@ public class HorarioYDia {
 		agenda.put(dia, unIntervalo);
 
 	}
+	public void setAgenda(Map<DayOfWeek, List<IntervaloHorario>> unaAgenda)
+	{
+		this.agenda = unaAgenda;
+	}
 
 	public boolean incluyeHorario(LocalDateTime horario) {
 		

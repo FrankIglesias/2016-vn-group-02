@@ -95,14 +95,14 @@ public class RepositorioCGPExterno {
 				.build());
 
 		cgps.add(new CGPBuilder(3).setZonas("Balvanera - San Cristobal").setDirector("Jose Campanella")
-				.setDomicilio("Junín 521").setTelefono("4375-0644")
+				.setDomicilio("Junin 521").setTelefono("4375-0644")
 				.agregarServicio(new ServicioGestionBuilder("Mesa de informes")
 						.agregarHorarioDisponible(new RangoServicioDTO(1, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(2, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(3, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(4, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(5, 9, 0, 18, 0)).build())
-				.agregarServicio(new ServicioGestionBuilder("Dirección de Gestion Urbanistica")
+				.agregarServicio(new ServicioGestionBuilder("Direccion de Gestion Urbanistica")
 						.agregarHorarioDisponible(new RangoServicioDTO(1, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(2, 9, 0, 18, 0))
 						.agregarHorarioDisponible(new RangoServicioDTO(3, 9, 0, 18, 0))

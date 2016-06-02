@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
 import MainClasses.Banco;
+import MainClasses.CGP;
 import MainClasses.Colectivo;
 import MainClasses.POI;
 
@@ -14,21 +15,25 @@ public class EncuentraSegunPalabraClaveTest  {
 	
 	public Banco banco;
 	public Banco banco2;
+	public CGP cgp;
 	public Colectivo colectivo;
 	public List<POI> puntosDeInteres = new ArrayList<POI>();
 	public Buscador buscador;
 	String fraseABuscar;
+	String fraseABuscar2;
 	Terminal terminal = new Terminal("Terminal 1");
 
 	@Before
 	public void init() {
 		buscador = new Buscador();
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		cgp = GlobalTestVariables.crearUnCGP(null);
 		ApiDeBancoMock.setRuta();
 		banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
 		fraseABuscar = "quiero un banco que tenga depositos";
+		fraseABuscar2 = "Tarjeta Vos";
 		puntosDeInteres.add(colectivo);
 		puntosDeInteres.add(banco);
 		puntosDeInteres.add(banco2);
@@ -47,6 +52,12 @@ public class EncuentraSegunPalabraClaveTest  {
 	@Test
 	public void noEncuentraPOISegunPalabraClave() {
 		Assert.assertFalse(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
+	}
+	
+	@Test
+	public void encuentraACGP()
+	{
+		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(),1);
 	}
 
 }

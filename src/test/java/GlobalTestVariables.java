@@ -116,7 +116,7 @@ public class GlobalTestVariables {
 	}
 
 	public static CGP crearUnCGP(List<Feriado> feriados) {
-		Domicilio domicilioCGP = new Domicilio("Av. de los Constituyentes", "Jose Pascual Tamborini e Ibera", "5836",
+		Domicilio domicilioCGP = new Domicilio("Junin", "Jose Pascual Tamborini e Ibera", "5836",
 				"PB", "", "1419");
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
