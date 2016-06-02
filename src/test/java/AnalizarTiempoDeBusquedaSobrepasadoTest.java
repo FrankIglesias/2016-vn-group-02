@@ -10,16 +10,18 @@ public class AnalizarTiempoDeBusquedaSobrepasadoTest {
 	Buscador buscador2 = new Buscador();
 	List<MainClasses.POI> lista2 = new ArrayList<MainClasses.POI>();
 	Terminal terminal = new Terminal("TerminalPepito");
+	List<MainClasses.POI> lista3 = new ArrayList<MainClasses.POI>();
+	
 	
 	@Before
 	public void init() {
 		
-		for(int i=0; i<500000; i++){
+		for(int i=0; i<5000; i++){
 			lista2.add(GlobalTestVariables.crearUnBanco(null));
 		}
-		buscador2.setTiempoMaximoDeBusqueda(0.001);
+		buscador2.setTiempoMaximoDeBusqueda(0.01);
 		Buscador.setPuntosDeIntereses(lista2);
-
+		lista3 = buscador2.buscarSegunPalabraClave("banelco", terminal);
 	}
 	
 	@Test

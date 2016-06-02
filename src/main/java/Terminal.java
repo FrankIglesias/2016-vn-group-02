@@ -47,7 +47,6 @@ public class Terminal {
 	}
 
 	public boolean avisaAlAdminTiempoExcedido(double tiempo, String frase, LocalDate fecha, String terminal) {
-
 		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido", "");
 	}
 

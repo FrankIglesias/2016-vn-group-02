@@ -13,6 +13,7 @@ public class Busqueda {
 		this.fecha = LocalDate.now();
 		this.frase = frase;
 		this.tiempo = tiempo;
+		this.tiempoMax = tiempoMax;
 		this.analizaElTiempoDeBusqueda();
 	}
 
@@ -21,7 +22,7 @@ public class Busqueda {
 	}
 
 	public void analizaElTiempoDeBusqueda() {
-		if (tiempo >= tiempoMax) {                    
+		if (tiempo >= tiempoMax) {    
 			terminal.avisaAlAdminTiempoExcedido((tiempoMax - tiempo), frase, fecha, terminal.getNombre());
 		}
 
