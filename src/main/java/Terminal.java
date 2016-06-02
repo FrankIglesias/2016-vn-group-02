@@ -54,4 +54,8 @@ public class Terminal {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public GestorMailInterface getGestor(){
+		return gestorDeMail;
+	}
 }

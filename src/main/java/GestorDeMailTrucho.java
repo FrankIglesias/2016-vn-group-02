@@ -8,6 +8,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class GestorDeMailTrucho implements GestorMailInterface {
+	
+	int contadorDeMails = 0;
 
 	public boolean enviarMail(Message.RecipientType tipoDeCopia, String usuarioTo, String asunto,
 			String cuerpoDelMail) {
@@ -31,9 +33,15 @@ public class GestorDeMailTrucho implements GestorMailInterface {
 			Transport t = session.getTransport("smtp");
 			t.close();
 			
+			contadorDeMails = contadorDeMails++;
+			
 		} catch (MessagingException me){
 			return false;
 		}
 		return true;
+	}
+	
+	public int getContadorDeMails(){
+		return contadorDeMails;
 	}
 }
