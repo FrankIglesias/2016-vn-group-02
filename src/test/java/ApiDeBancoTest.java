@@ -1,3 +1,5 @@
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 public class ApiDeBancoTest {
@@ -14,15 +16,15 @@ public class ApiDeBancoTest {
 
 	@Test
 	public void testObtenerBancoDesdeReal() throws Exception {
-		Banco unBanco = requester.obtenerBancos();
-		Assert.assertEquals(unBanco.nombre, "Banco de la Plaza");
+		List<Banco> listaDeBancos  = requester.obtenerBancos();
+		Assert.assertTrue(listaDeBancos.size()==2);
 
 	}
 
 	@Test
-	public void testDeObtenerUnBancoObjetoDeMockDeString() throws Exception {
-		Banco unBanco = secondRequester.obtenerBancos();
-		Assert.assertEquals(unBanco.nombre, "Banco de la Plaza");
+	public void testDeObtenerBancosDesdeString() throws Exception {
+		List<Banco> listaDeBancos = secondRequester.obtenerBancos();
+		Assert.assertTrue(listaDeBancos.size()==2);
 
 	}
 	@Test

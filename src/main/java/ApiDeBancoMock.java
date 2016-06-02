@@ -2,16 +2,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 import com.google.gson.Gson;
-import com.sun.jersey.api.client.ClientResponse;
+import com.google.gson.reflect.TypeToken;
 
 public class ApiDeBancoMock implements ApiDeBancoInterface {
 	private static String rutaDeArchivo;
-	private String jsonBanco = "{" + "\"banco\": \"Banco de la Plaza\"," + "\"x\": -35.9338322," + "\"y\": 72.348353,"
-			+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","
-			+ "\"extra_property\": \"Does not fail because mapper is configured to not fail with unknown properties\""
-			+ "}";
+	private String jsonBanco = "[{" + "\"banco\":\"Banco de la Plaza\"," + "\"x\":-35.9338322," + "\"y\":72.348353,"
+			+ "\"sucursal\":\"Avellaneda\"," + "\"gerente\":\"Javier Loeschbor\"," + "\"servicios\": ["
+			+ "\"depositos\",\"extracciones\",\"transferencias\",\"seguros\"" + "]}" + "," + "{"
+			+ "\"banco\":\"Banco de la Plaza\"," + "\"x\":-35.9338322," + "\"y\":72.348353,"
+			+ "\"sucursal\":\"Caballito\"," + "\"gerente\":\"Fabian Fantaguzzi\"," + "\"servicios\": ["
+			+ "\"depositos\", \"extracciones\", \"transferencias\", \"seguros\"" + "]}" + "]";
+
 
 	public static void setRuta() {
 		// "/home/frank/"
@@ -29,12 +34,9 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 				banco.servicios, null);
 		return bancoSistema;
 	}
-public Banco obtenerBancosFlashero()
-{
-	JsonFactory jsonFactory = new JsonFactory();
-	Banco unBanco = jsonFactory.fromJson(jsonBanco, Banco.class);
-	return unBanco;
-}
+
+	
+	
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
@@ -46,32 +48,18 @@ public Banco obtenerBancosFlashero()
 		return read;
 	}
 
-	public ClientResponse getBookAndSendHeader(String filter, String value, String header, String headerValue) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public List<Banco> obtenerBancos() {
+
+		Gson gson = new Gson();
+		java.lang.reflect.Type tipolistaDeBancosTruchos = new TypeToken<List<BancoTrucho>>() {
+		}.getType();
+		List<BancoTrucho> bancostruchos = gson.fromJson(jsonBanco, tipolistaDeBancosTruchos);
+		List<Banco> bancosPosta = new ArrayList<Banco>();
+		bancostruchos.forEach(banco -> bancosPosta.add(new Banco(new Geolocalizacion(banco.x, banco.y, null, null),
+				banco.banco, new ArrayList<String>(), null)));
+		return bancosPosta;
 	}
 
-	public ClientResponse getBookByFilter(String filter, String value, String fields) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public ClientResponse getBookByFilter(String filter, String value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Banco obtenerBancos() {
-		JsonFactory jsonFactory = new JsonFactory();
-		BancoTrucho banco = jsonFactory.fromJson(jsonBanco, BancoTrucho.class);
-		Banco bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
-				new ArrayList<String>(), null);
-		return bancoSistema;
-	}
-
-	@Override
-	public String obtenerStream() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

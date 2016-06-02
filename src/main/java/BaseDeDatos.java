@@ -52,5 +52,15 @@ public class BaseDeDatos {
 		return point1.point.getLatitud()==point2.point.getLatitud() &&point1.point.getLongitud()==point2.point.getLongitud();
 		// dos point son iguales si estan exactamente en el mismo  punto.
 	}
+	public void agregarVariosPoi(List<POI> listaDePoi) {
+		listaDePoi.forEach(unPoi ->puntosDeIntereses.add(unPoi));
+		
+	}
 
+	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDePoi) {
+		listaDePoi.forEach(unPoi ->puntosDeIntereses.add(unPoi));
+		
+	}
+	
+	
 }

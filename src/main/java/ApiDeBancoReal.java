@@ -2,9 +2,12 @@
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -46,17 +49,17 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		return response;
 	}
 
-	public Banco obtenerBancos() {
-		
-		String json = "{" + "\"banco\": \"Banco de la Plaza\"," + "\"x\": -35.9338322," + "\"y\": 72.348353,"
-				+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","
-				+ "\"extra_property\": \"Does not fail because mapper is configured to not fail with unknown properties\""
-				+ "}";
-		JsonFactory jsonFactory = new JsonFactory();
-		BancoTrucho banco = jsonFactory.fromJson(json, BancoTrucho.class);
-		Banco bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
-				new ArrayList<String>(), null);
-		return bancoSistema;
+	public List<Banco> obtenerBancos() {
+		Gson gson = new Gson();
+		String json = obtenerStream();
+		java.lang.reflect.Type tipolistaDeBancosTruchos = new TypeToken<List<BancoTrucho>>() {
+		}.getType();
+		List<BancoTrucho> bancostruchos = gson.fromJson(json, tipolistaDeBancosTruchos);
+		List<Banco> bancosPosta = new ArrayList<Banco>();
+		bancostruchos.forEach(banco -> bancosPosta.add(new Banco(new Geolocalizacion(banco.x, banco.y, null, null),
+				banco.banco, new ArrayList<String>(), null)));
+		return bancosPosta;
+
 	}
 	public String obtenerStream(){
 		ClientResponse response = this.getBookByFilter("sucursal", "Avellaneda");

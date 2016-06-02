@@ -30,5 +30,17 @@ public class AltaBajaModificacionTest {
 		Assert.assertEquals(unaBase.cantidadDePOI(), 1);
 
 	}
+	@Test
+	public void testAgregarBancosDelPoi() {
+		BaseDeDatos unaBase = new BaseDeDatos();
+		ApiDeBancoMock requesterFalso = new ApiDeBancoMock();
+		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
+		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
+		unaBase.agregarVariosPoiDeListaDeBancos(requesterFalso.obtenerBancos());
+		// de los bancos siempre devuelve 2 - 
+		Assert.assertEquals(unaBase.cantidadDePOI(), 4);
+
+	}
+
 
 }

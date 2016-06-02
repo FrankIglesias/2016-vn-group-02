@@ -1,9 +1,5 @@
-import com.sun.jersey.api.client.ClientResponse;
+import java.util.List;
 
 public interface ApiDeBancoInterface {
-public Banco obtenerBancos();
-public ClientResponse getBookAndSendHeader(String filter, String value, String header, String headerValue);
-public ClientResponse getBookByFilter(String filter, String value, String fields);
-public ClientResponse getBookByFilter(String filter, String value);
-public String obtenerStream();
+public List<Banco> obtenerBancos();
 }
