@@ -47,7 +47,7 @@ public abstract class POI {
 				palabra -> estaEnListaDePalabras(palabra,listaDePalabrasDeFrase));
 	}
 	private boolean estaEnListaDePalabras(String palabra, List<String> lista){
-		return lista.stream().anyMatch(unaPalabra -> unaPalabra.contains(palabra));
+		return lista.stream().anyMatch(unaPalabra -> palabra.contains(unaPalabra));
 	}
 	public void addPalabraClave(String unaPalabra) {
 		this.getPalabrasClave().add(unaPalabra);

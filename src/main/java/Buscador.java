@@ -17,8 +17,7 @@ public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
 {
 	double inicio, fin;
 	inicio = System.currentTimeMillis();
-	List<POI> puntosSegunPalabra = new ArrayList<POI>();
-	puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
+	List<POI> puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase)).collect(Collectors.toList());
 	fin = System.currentTimeMillis();
 	baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax);
 	unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);

@@ -20,24 +20,29 @@ public class CGPExternoTest {
 	String fraseABuscar;
 	Terminal terminal = new Terminal("Terminal 1");
 	List<POI> listaDePOIs;
+
 	@Before
-	public void init()
-	{
-	//cgp = GlobalTestVariables.crearUnCGP(null);
-	//fraseABuscar = "Tarjeta Vos";
-	List<POI> listaDePOIs = RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("Jose Campanella");
-	//banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
-	//listaDePOIs.add(cgp);
-	//listaDePOIs.add(banco);
-	//buscador = new Buscador();
-	//Buscador.setPuntosDeIntereses(listaDePOIs);
-	//buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
+	public void init() {
+		// cgp = GlobalTestVariables.crearUnCGP(null);
+		// fraseABuscar = "Tarjeta Vos";
+		List<POI> listaDePOIs = null;
+
+		// banco =
+		// GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		// listaDePOIs.add(cgp);
+		// listaDePOIs.add(banco);
+		// buscador = new Buscador();
+		// Buscador.setPuntosDeIntereses(listaDePOIs);
+		// buscador.buscarSegunPalabraClave(fraseABuscar, terminal);
 	}
-	
+
 	@Test
 	public void encontrarPOISegunPalabraClaveParaCGPExterno() {
-		Assert.assertEquals(listaDePOIs.size(), 0);	
-	
-	
-}
+		if (listaDePOIs.isEmpty()) {
+			System.out.println("esta vacio");
+		}
+		Assert.assertEquals(RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("Jose Campanella").size(),
+				0);
+
+	}
 }
