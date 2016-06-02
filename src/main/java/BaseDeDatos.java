@@ -9,15 +9,25 @@ import MainClasses.Banco;
 import MainClasses.POI;
 
 public class BaseDeDatos {
+	
+	private static BaseDeDatos instancia = null;
 	List<POI> puntosDeIntereses = new ArrayList<POI>();
 	List<Busqueda> busquedas = new ArrayList<Busqueda>();
 	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
 	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
 	List<Terminal> terminales = new ArrayList<Terminal>();
+	
+	 public static BaseDeDatos getInstance() {
+	      if(instancia == null) {
+	         instancia = new BaseDeDatos();
+	      }
+	      return instancia;
+	   }
 
-	public void addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
+	public Busqueda addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax);
 		busquedas.add(busqueda);
+		return busqueda;
 	}
 
 	public int cantidadDeBusquedasPorFecha(LocalDate fecha) {

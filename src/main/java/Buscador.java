@@ -9,7 +9,7 @@ public class Buscador {
 	
 
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
-static BaseDeDatos baseDeDatos = new BaseDeDatos();
+static BaseDeDatos baseDeDatos = BaseDeDatos.getInstance();
 static double tiempoMax = 0.0001;
 
 
