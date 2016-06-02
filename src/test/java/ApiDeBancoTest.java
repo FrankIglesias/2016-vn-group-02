@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
 import BancoExterno.ApiDeBancoReal;
+import BancoExterno.BancoTrucho;
+import BancoExterno.JsonFactory;
 import MainClasses.Banco;
 public class ApiDeBancoTest {
 
@@ -45,4 +47,15 @@ public class ApiDeBancoTest {
 		Assert.assertTrue(unBanco.getPalabrasClave().contains("cobro cheques"));
 	}
 
+	@Test
+	public void testParsearYObtenerUnBanco() {
+		 String jsonStudent = "{" + "\"banco\": \"Banco de la Plaza\"," + "\"x\": -35.9338322," + "\"y\": 72.348353,"
+				+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","
+				+ "\"extra_property\": \"Does not fail because mapper is configured to not fail with unknown properties\""
+				+ "}";
+		 BancoTrucho unBanco;
+		  JsonFactory jsonFactory = new JsonFactory();
+		 unBanco = jsonFactory.fromJson(jsonStudent, BancoTrucho.class);
+		Assert.assertEquals(unBanco.gerente, "Javier Loeschbor");
+	}
 }
