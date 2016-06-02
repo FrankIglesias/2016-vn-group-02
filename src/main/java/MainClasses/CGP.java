@@ -15,6 +15,7 @@ public class CGP extends POI {
 		super(point, nombre, new ArrayList<String>(), new HorarioYDia(), feriados);
 		this.servicios = servicios;
 		servicios.stream().forEach(servicio -> addPalabraClave(servicio.getNombre()));
+		
 	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion otroPoint) {

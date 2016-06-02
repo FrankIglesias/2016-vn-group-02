@@ -42,13 +42,13 @@ public abstract class POI {
 	}
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {
-		String[] listaDePalabrasDeFrase = unaFrase.split(" ");
+		List<String> listaDePalabrasDeFrase = Arrays.asList(unaFrase.split(" "));
 		return getPalabrasClave().stream().anyMatch(
-				palabra -> Arrays.asList(listaDePalabrasDeFrase).contains(
-						palabra));
-
+				palabra -> estaEnListaDePalabras(palabra,listaDePalabrasDeFrase));
 	}
-
+	private boolean estaEnListaDePalabras(String palabra, List<String> lista){
+		return lista.stream().anyMatch(unaPalabra -> unaPalabra.contains(palabra));
+	}
 	public void addPalabraClave(String unaPalabra) {
 		this.getPalabrasClave().add(unaPalabra);
 	}
