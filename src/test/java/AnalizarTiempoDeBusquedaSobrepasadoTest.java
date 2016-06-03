@@ -8,7 +8,7 @@ import org.junit.Test;
 public class AnalizarTiempoDeBusquedaSobrepasadoTest {
 
 	Buscador buscador2 = new Buscador();
-	List<MainClasses.POI> lista2 = new ArrayList<MainClasses.POI>();
+	List<TypePois.POI> lista2 = new ArrayList<TypePois.POI>();
 	Terminal terminal = new Terminal("TerminalPepito");
 	
 	

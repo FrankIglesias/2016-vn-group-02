@@ -22,7 +22,7 @@ public class Busqueda {
 	}
 
 	public void analizaElTiempoDeBusqueda() {
-		if (tiempo >= tiempoMax) {    
+		if (tiempo >= tiempoMax) {
 			terminal.avisaAlAdminTiempoExcedido((tiempoMax - tiempo), frase, fecha, terminal.getNombre());
 		}
 

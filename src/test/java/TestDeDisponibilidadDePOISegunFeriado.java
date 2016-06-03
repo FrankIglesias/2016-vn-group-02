@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import MainClasses.Banco;
-import MainClasses.CGP;
-import MainClasses.Colectivo;
-import MainClasses.Local;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Colectivo;
+import TypePois.Local;
 
 public class TestDeDisponibilidadDePOISegunFeriado {
 

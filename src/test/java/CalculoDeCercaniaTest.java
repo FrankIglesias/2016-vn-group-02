@@ -6,10 +6,10 @@ import org.junit.Test;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
-import MainClasses.Banco;
-import MainClasses.CGP;
-import MainClasses.Colectivo;
-import MainClasses.Local;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Colectivo;
+import TypePois.Local;
 
 public class CalculoDeCercaniaTest {
 	private Banco banco;

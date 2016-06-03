@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.mail.Message;
 
-import MainClasses.POI;
+import TypePois.POI;
 
 public class Terminal {
 
@@ -13,7 +13,6 @@ public class Terminal {
 	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
 	private String mailAdmin = "mailprueba@gmail.com";
 
-	
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}
@@ -53,8 +52,8 @@ public class Terminal {
 	public String getNombre() {
 		return nombre;
 	}
-	
-	public GestorMailInterface getGestor(){
+
+	public GestorMailInterface getGestor() {
 		return gestorDeMail;
 	}
 }

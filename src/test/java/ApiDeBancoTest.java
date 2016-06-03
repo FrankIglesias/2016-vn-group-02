@@ -7,7 +7,7 @@ import BancoExterno.ApiDeBancoMock;
 import BancoExterno.ApiDeBancoReal;
 import BancoExterno.BancoTrucho;
 import BancoExterno.JsonFactory;
-import MainClasses.Banco;
+import TypePois.Banco;
 public class ApiDeBancoTest {
 
 	ApiDeBancoReal requester = new ApiDeBancoReal();

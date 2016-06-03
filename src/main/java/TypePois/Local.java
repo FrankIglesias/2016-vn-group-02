@@ -1,4 +1,5 @@
-package MainClasses;
+package TypePois;
+
 import java.util.ArrayList;
 import java.util.List;
 

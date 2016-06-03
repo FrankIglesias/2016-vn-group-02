@@ -1,4 +1,5 @@
 package DesignDreamTeamTime;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -22,21 +23,21 @@ public class HorarioYDia {
 		agenda.put(dia, unIntervalo);
 
 	}
-	public void setAgenda(Map<DayOfWeek, List<IntervaloHorario>> unaAgenda)
-	{
+
+	public void setAgenda(Map<DayOfWeek, List<IntervaloHorario>> unaAgenda) {
 		this.agenda = unaAgenda;
 	}
 
 	public boolean incluyeHorario(LocalDateTime horario) {
-		
+
 		Set<DayOfWeek> diasDeLaAgenda = agenda.keySet();
 		List<IntervaloHorario> intervaloHorario = agenda.get(horario.getDayOfWeek());
-		
+
 		if (diasDeLaAgenda.stream().filter(unDia -> unDia == (horario.getDayOfWeek())) != null) {
 			return intervaloHorario.stream().anyMatch(unIntervalo -> unIntervalo.incluyeHora(horario.toLocalTime()));
 		} else {
 			return false;
 		}
 	}
-	
+
 }

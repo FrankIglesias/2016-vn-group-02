@@ -79,8 +79,8 @@ public class CentroDTO {
 				|| getTelefono().contains(criterio)
 				|| servicios.stream().anyMatch(servicio -> servicio.matchea(criterio));
 	}
-	public List<ServicioDTO> getServicios()
-	{
+
+	public List<ServicioDTO> getServicios() {
 		return servicios;
 	}
 

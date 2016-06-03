@@ -8,7 +8,7 @@ public class Domicilio {
 	private String piso;
 	private String unidad;
 	private String codigoPostal;
-	
+
 	public Domicilio(String callePrincipal, String entreCalles, String altura, String piso, String unidad,
 			String codigoPostal) {
 		super();
@@ -19,12 +19,9 @@ public class Domicilio {
 		this.unidad = unidad;
 		this.codigoPostal = codigoPostal;
 	}
-	
-	public String getCallePrincipal()
-	{
+
+	public String getCallePrincipal() {
 		return this.callePrincipal;
 	}
-	
 
-	
 }

@@ -11,12 +11,12 @@ import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
-import MainClasses.Banco;
-import MainClasses.CGP;
-import MainClasses.Colectivo;
-import MainClasses.Local;
-import MainClasses.Rubro;
-import MainClasses.Servicio;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Colectivo;
+import TypePois.Local;
+import TypePois.Rubro;
+import TypePois.Servicio;
 
 public class GlobalTestVariables {
 	/*

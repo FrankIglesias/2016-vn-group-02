@@ -1,4 +1,5 @@
 package BancoExterno;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
@@ -10,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import DesignDreamTeamLocation.Geolocalizacion;
-import MainClasses.Banco;
+import TypePois.Banco;
 
 public class ApiDeBancoMock implements ApiDeBancoInterface {
 	private static String rutaDeArchivo;
@@ -20,7 +21,6 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 			+ "\"banco\":\"Banco de la Plaza\"," + "\"x\":-35.9338322," + "\"y\":72.348353,"
 			+ "\"sucursal\":\"Caballito\"," + "\"gerente\":\"Fabian Fantaguzzi\"," + "\"servicios\": ["
 			+ "\"depositos\", \"extracciones\", \"transferencias\", \"seguros\"" + "]}" + "]";
-
 
 	public static void setRuta() {
 		// "/home/frank/"
@@ -34,24 +34,20 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 		Banco bancoSistema = null;
 		Reader read = obtenerReader();
 		BancoTrucho banco = gson.fromJson(read, BancoTrucho.class);
-		bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco,
-				banco.servicios, null);
+		bancoSistema = new Banco(new Geolocalizacion(banco.x, banco.y, null, null), banco.banco, banco.servicios, null);
 		return bancoSistema;
 	}
 
-	
-	
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
-			read = new FileReader(rutaDeArchivo+"prueba.json");
+			read = new FileReader(rutaDeArchivo + "prueba.json");
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
 		}
 		return read;
 	}
-
 
 	public List<Banco> obtenerBancos() {
 
@@ -64,6 +60,5 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 				banco.banco, new ArrayList<String>(), null)));
 		return bancosPosta;
 	}
-
 
 }

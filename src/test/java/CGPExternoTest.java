@@ -2,10 +2,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.POI;
+
 import java.util.ArrayList;
-import MainClasses.Banco;
-import MainClasses.CGP;
-import MainClasses.POI;
 
 
 public class CGPExternoTest {

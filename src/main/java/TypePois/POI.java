@@ -1,4 +1,5 @@
-package MainClasses;
+package TypePois;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public abstract class POI {
 	protected HorarioYDia horario = new HorarioYDia();
 	protected List<Feriado> feriados;
 
-	public POI(Geolocalizacion point, String nombre,
-			ArrayList<String> palabrasClave, HorarioYDia horario, List<Feriado> feriados) {
+	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
+			List<Feriado> feriados) {
 		super();
 		this.setPoint(point);
 		this.setNombre(nombre);
@@ -43,18 +44,16 @@ public abstract class POI {
 
 	public boolean tenesUnaPalabraDe(String unaFrase) {
 		List<String> listaDePalabrasDeFrase = Arrays.asList(unaFrase.split(" "));
-		return getPalabrasClave().stream().anyMatch(
-				palabra -> estaEnListaDePalabras(palabra,listaDePalabrasDeFrase));
+		return getPalabrasClave().stream().anyMatch(palabra -> estaEnListaDePalabras(palabra, listaDePalabrasDeFrase));
 	}
-	private boolean estaEnListaDePalabras(String palabra, List<String> lista){
+
+	private boolean estaEnListaDePalabras(String palabra, List<String> lista) {
 		return lista.stream().anyMatch(unaPalabra -> unaPalabra.contains(palabra));
 	}
-	
-	public void addPalabrasClaves(String unaFrase)
-	{
+
+	public void addPalabrasClaves(String unaFrase) {
 		String[] fraseDividida = unaFrase.split(" ");
-		for(String palabra : fraseDividida)
-		{
+		for (String palabra : fraseDividida) {
 			this.getPalabrasClave().add(palabra);
 		}
 	}
@@ -64,18 +63,17 @@ public abstract class POI {
 	}
 
 	public boolean sosFeriado(LocalDate fecha) {
-		return (feriados.stream().anyMatch(unFeriado -> unFeriado
-				.comparateConDiaYMes(fecha)));
+		return (feriados.stream().anyMatch(unFeriado -> unFeriado.comparateConDiaYMes(fecha)));
 	}
 
 	public boolean compararmeConHorarioDeUnFeriado(Feriado unFeriado, LocalDateTime horario) {
 		return (unFeriado.incluisHorario(horario.toLocalTime()));
 	}
-	public Feriado getUnFeriado(LocalDate fecha)
-	{
-		return (feriados.stream().filter(unFeriado -> unFeriado.comparateConDiaYMes(fecha))).collect(Collectors.toList()).get(0);
-	}
 
+	public Feriado getUnFeriado(LocalDate fecha) {
+		return (feriados.stream().filter(unFeriado -> unFeriado.comparateConDiaYMes(fecha)))
+				.collect(Collectors.toList()).get(0);
+	}
 
 	public boolean tenesFeriados() {
 		return (!feriados.isEmpty());
@@ -83,10 +81,9 @@ public abstract class POI {
 
 	public boolean estaDisponible(LocalDateTime horarioPreguntado) {
 
-		if (tenesFeriados() && sosFeriado(horarioPreguntado.toLocalDate())){
+		if (tenesFeriados() && sosFeriado(horarioPreguntado.toLocalDate())) {
 			return compararmeConHorarioDeUnFeriado(getUnFeriado(horarioPreguntado.toLocalDate()), horarioPreguntado);
-		}
-		else
+		} else
 			return (horario.incluyeHorario(horarioPreguntado));
 
 	}

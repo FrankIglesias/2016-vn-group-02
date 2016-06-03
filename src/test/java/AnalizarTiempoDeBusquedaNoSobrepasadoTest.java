@@ -14,7 +14,7 @@ public class AnalizarTiempoDeBusquedaNoSobrepasadoTest {
 
 	@Before
 	public void init() {
-		List<MainClasses.POI> lista = new ArrayList<MainClasses.POI>();
+		List<TypePois.POI> lista = new ArrayList<TypePois.POI>();
 		lista.add(GlobalTestVariables.crearUnBanco(null));
 		buscador1.setTiempoMaximoDeBusqueda(5);
 		Buscador.setPuntosDeIntereses(lista);

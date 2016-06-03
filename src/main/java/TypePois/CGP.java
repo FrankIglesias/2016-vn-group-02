@@ -1,4 +1,5 @@
-package MainClasses;
+package TypePois;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class CGP extends POI {
 		this.servicios = servicios;
 		servicios.stream().forEach(servicio -> addPalabrasClaves(servicio.getNombre()));
 		this.addPalabrasClaves(point.getDomicilio().getCallePrincipal());
-		
+
 	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion otroPoint) {
@@ -31,7 +32,7 @@ public class CGP extends POI {
 	}
 
 	public boolean estaDisponible(LocalDateTime horario) {
-		
+
 		return servicios.stream().anyMatch(unServicio -> unServicio.estaDisponible(horario));
 	}
 }

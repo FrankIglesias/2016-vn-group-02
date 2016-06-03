@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
-import MainClasses.Banco;
-import MainClasses.CGP;
-import MainClasses.Colectivo;
-import MainClasses.POI;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Colectivo;
+import TypePois.POI;
 
 
 public class EncuentraSegunPalabraClaveTest  {

@@ -1,4 +1,5 @@
 package BancoExterno;
+
 import java.util.ArrayList;
 
 public class BancoTrucho {
@@ -8,5 +9,5 @@ public class BancoTrucho {
 	public String sucursal;
 	public String gerente;
 	public ArrayList<String> servicios = new ArrayList<String>();
-	 
+
 }

@@ -1,7 +1,5 @@
 package BancoExterno;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import DesignDreamTeamLocation.Geolocalizacion;
-import MainClasses.Banco;
+import TypePois.Banco;
 
 /* API DE BANCOS
  * http://private-96b476-ddsutn.apiary-mock.com/banks?banco=banco&servicio=servicio
@@ -65,7 +63,8 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		return bancosPosta;
 
 	}
-	public String obtenerStream(){
+
+	public String obtenerStream() {
 		ClientResponse response = this.getBookByFilter("sucursal", "Avellaneda");
 		return response.getEntity(String.class);
 	}

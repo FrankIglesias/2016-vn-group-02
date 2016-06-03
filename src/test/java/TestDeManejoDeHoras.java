@@ -35,7 +35,7 @@ public class TestDeManejoDeHoras {
 	public void testIncluyeHoraEnLimiteDeIntervaloFacil() {
 		Assert.assertTrue(unIntervalofacil.incluyeHora(hora2));
 	}
-	
+
 	@Test
 	public void testIncluyeHoraenIntervaloNocturno() {
 		Assert.assertTrue(unIntervalonocturno.incluyeHora(hora3));
@@ -50,6 +50,5 @@ public class TestDeManejoDeHoras {
 	public void testIncluyeHoraEnLimiteDeIntervaloNocturno() {
 		Assert.assertTrue(unIntervalonocturno.incluyeHora(hora1));
 	}
-	
-	
+
 }

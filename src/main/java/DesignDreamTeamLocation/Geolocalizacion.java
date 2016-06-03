@@ -48,8 +48,8 @@ public class Geolocalizacion {
 	public double getLongitud() {
 		return this.longitud;
 	}
-	public Domicilio getDomicilio()
-	{
+
+	public Domicilio getDomicilio() {
 		return this.domicilio;
 	}
 

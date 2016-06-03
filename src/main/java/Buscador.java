@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import MainClasses.POI;
+import TypePois.POI;
   
   
 public class Buscador { 
@@ -25,7 +25,7 @@ public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal)
 }
 
 public void setTiempoMaximoDeBusqueda (double tiempoMax){
-	Buscador.tiempoMax = tiempoMax;
+		Buscador.tiempoMax = tiempoMax;
 }
 
 

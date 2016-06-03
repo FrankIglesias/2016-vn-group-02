@@ -1,7 +1,9 @@
 package BancoExterno;
+
 import java.util.List;
-import MainClasses.Banco;
+
+import TypePois.Banco;
 
 public interface ApiDeBancoInterface {
-public List<Banco> obtenerBancos();
+	public List<Banco> obtenerBancos();
 }
