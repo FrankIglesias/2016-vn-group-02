@@ -30,8 +30,26 @@ public static ArrayList<POI> obtenerCGPDesdeRepositorioExterno(String criterio)
 public static void agregarAListaDeCGP(ArrayList<POI> listaPOIS, CentroDTO unCentro)
 {
 	String[] domicilioDeCentro = unCentro.getDomicilio().split(" ");
-	String calleDeDomicilioCentro = domicilioDeCentro[0];
-	String alturaDeDomicilioCentro = domicilioDeCentro[1];
+	String calleDeDomicilioCentro = null;
+	String alturaDeDomicilioCentro;
+	/*int tamanio = domicilioDeCentro.length;
+	for(int i=0; i<tamanio; i++)
+	{
+		calleDeDomicilioCentro = calleDeDomicilioCentro + domicilioDeCentro[i];
+	}
+	alturaDeDomicilioCentro = domicilioDeCentro[tamanio];*/
+	
+	if(domicilioDeCentro.length == 3)
+	{
+		calleDeDomicilioCentro = domicilioDeCentro[0] + domicilioDeCentro[1];
+		alturaDeDomicilioCentro = domicilioDeCentro[2];
+	}
+	else
+	{
+	 calleDeDomicilioCentro = domicilioDeCentro[0];
+	 alturaDeDomicilioCentro = domicilioDeCentro[1];
+	}
+	
 	Domicilio domicilioCGP = new Domicilio(calleDeDomicilioCentro, null,alturaDeDomicilioCentro, null, null, null);
 	Geolocalizacion geolocalizacionCGP = new Geolocalizacion(unCentro.getLatitud(), unCentro.getLongitud(), domicilioCGP, null);
 	List<Servicio> serviciosCGP = obtenerServiciosDeCGPExterno(unCentro);

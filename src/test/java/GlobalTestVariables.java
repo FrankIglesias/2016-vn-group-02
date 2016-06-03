@@ -91,11 +91,11 @@ public class GlobalTestVariables {
 				localidadBanco);
 		Banco banco = new Banco(geolocalizacionBanco, "Banco Rio", new ArrayList<String>(),
 				feriados);
-		banco.addPalabraClave("dinero");
-		banco.addPalabraClave("cuenta");
-		banco.addPalabraClave("banco");
-		banco.addPalabraClave("banelco");
-		banco.addPalabraClave("depositos");
+		banco.addPalabrasClaves("dinero");
+		banco.addPalabrasClaves("cuenta");
+		banco.addPalabrasClaves("banco");
+		banco.addPalabrasClaves("banelco");
+		banco.addPalabrasClaves("depositos");
 		return banco;
 	}
 
@@ -108,10 +108,10 @@ public class GlobalTestVariables {
 				localidadColectivo);
 		Colectivo colectivo = new Colectivo(geolocalizacionColectivo, "Colectivo", new ArrayList<String>(), "127",
 				crearFeriadoVacio());
-		colectivo.addPalabraClave("colectivo");
-		colectivo.addPalabraClave("transporte");
-		colectivo.addPalabraClave("publico");
-		colectivo.addPalabraClave("rueditas");
+		colectivo.addPalabrasClaves("colectivo");
+		colectivo.addPalabrasClaves("transporte");
+		colectivo.addPalabrasClaves("publico");
+		colectivo.addPalabrasClaves("rueditas");
 		return colectivo;
 	}
 

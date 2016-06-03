@@ -1,16 +1,12 @@
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import DesignDreamTeamLocation.Geolocalizacion;
-
 import java.util.ArrayList;
-
 import MainClasses.Banco;
 import MainClasses.CGP;
 import MainClasses.POI;
+
 
 public class CGPExternoTest {
 
@@ -20,15 +16,15 @@ public class CGPExternoTest {
 	String fraseABuscar;
 	Terminal terminal = new Terminal("Terminal 1");
 	List<POI> listaDePOIs;
+	
 
 	@Before
 	public void init() {
 		cgp = GlobalTestVariables.crearUnCGP(null);
-		fraseABuscar = "Tarjeta Vos";
-		List<POI> listaDePOIs = null;
-
-		// banco =
-		GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
+		fraseABuscar = "Quiero un POI de Direccion de Gestion Urbanistica";
+		listaDePOIs = new ArrayList<POI>();
+		listaDePOIs = RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("4637-2355");
 		listaDePOIs.add(cgp);
 		listaDePOIs.add(banco);
 		buscador = new Buscador();
@@ -38,8 +34,9 @@ public class CGPExternoTest {
 
 	@Test
 	public void encontrarPOISegunPalabraClaveParaCGPExterno() {
-		Assert.assertEquals(RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("Jose Campanella").size(),
-				0);
-
+		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 1);
+		
 	}
+	
+	
 }

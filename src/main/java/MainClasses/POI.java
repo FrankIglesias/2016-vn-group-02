@@ -24,7 +24,7 @@ public abstract class POI {
 		this.setPoint(point);
 		this.setNombre(nombre);
 		this.setPalabrasClave(palabrasClave);
-		this.addPalabraClave(nombre);
+		this.addPalabrasClaves(nombre);
 		this.horario = horario;
 		this.feriados = feriados;
 	}
@@ -49,9 +49,7 @@ public abstract class POI {
 	private boolean estaEnListaDePalabras(String palabra, List<String> lista){
 		return lista.stream().anyMatch(unaPalabra -> unaPalabra.contains(palabra));
 	}
-	public void addPalabraClave(String unaPalabra) {
-		this.getPalabrasClave().add(unaPalabra);
-	}
+	
 	public void addPalabrasClaves(String unaFrase)
 	{
 		String[] fraseDividida = unaFrase.split(" ");
