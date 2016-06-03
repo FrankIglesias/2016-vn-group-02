@@ -20,6 +20,10 @@ public class Domicilio {
 		this.codigoPostal = codigoPostal;
 	}
 	
+	public String getCallePrincipal()
+	{
+		return this.callePrincipal;
+	}
 	
 
 	

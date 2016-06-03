@@ -126,6 +126,18 @@ public class GlobalTestVariables {
 		CGP centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);
 		return centroDeCGP;
 	}
+	public static CGP crearOtroCGP(List<Feriado> feriados)
+	{
+		Domicilio domicilioCGP = new Domicilio("Av. Rivadavia 7202", "Jose Pascual Tamborini e Ibera", "5836",
+				"PB", "", "1419");
+		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
+		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
+		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
+		List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
+		serviciosDelCGP.add(ventaDeVOS);
+		CGP centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);
+		return centroDeCGP;
+	}
 
 	public static Local crearUnLocal(List<Feriado> feriados) {
 
