@@ -28,29 +28,16 @@ public class RepositorioCGPExternoAdapter {
 	}
 
 	public static void agregarAListaDeCGP(ArrayList<POI> listaPOIS, CentroDTO unCentro) {
-		String[] domicilioDeCentro = unCentro.getDomicilio().split(" ");
-		String calleDeDomicilioCentro;
+		String calleDeDomicilioCentro=null;
 		String alturaDeDomicilioCentro;
-
-		calleDeDomicilioCentro = domicilioDeCentro[0];
-		alturaDeDomicilioCentro = domicilioDeCentro[1];
-
-		/*
-		 * int tamanio = domicilioDeCentro.length; for(int i=0; i<tamanio; i++)
-		 * { calleDeDomicilioCentro = calleDeDomicilioCentro +
-		 * domicilioDeCentro[i]; } alturaDeDomicilioCentro =
-		 * domicilioDeCentro[tamanio];
-		 */
-		// if(domicilioDeCentro.length == 3)
-		// {
-		// calleDeDomicilioCentro = domicilioDeCentro[0] + domicilioDeCentro[1];
-		// alturaDeDomicilioCentro = domicilioDeCentro[2];
-
-		// }
-		/*
-		 * else { calleDeDomicilioCentro = domicilioDeCentro[0];
-		 * alturaDeDomicilioCentro = domicilioDeCentro[1]; }
-		 */
+		String[] domicilioDeCentro = unCentro.getDomicilio().split(" ");
+		int alturaDomicilio = domicilioDeCentro.length -1;
+		
+		for(int i=0; i<alturaDomicilio; i++)
+		{
+			calleDeDomicilioCentro += " " + domicilioDeCentro[i];
+		}
+		alturaDeDomicilioCentro = domicilioDeCentro[alturaDomicilio];
 
 		Domicilio domicilioCGP = new Domicilio(calleDeDomicilioCentro, null, alturaDeDomicilioCentro, null, null, null);
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(unCentro.getLatitud(), unCentro.getLongitud(),
