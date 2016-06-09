@@ -8,14 +8,16 @@ public class AltaBajaModificacionTest {
 	
 	@Test
 	public void testDeAltaDeDatos() {
-		BaseDeDatos unaBase1 = new BaseDeDatos();
-		Assert.assertEquals(unaBase1.cantidadDePOI(), 0);
+		BaseDeDatos unaBase = BaseDeDatos.getInstance();
+		unaBase.inicializarBaseDeDatos();
+		Assert.assertEquals(unaBase.cantidadDePOI(), 0);
 
 	}
 
 	@Test
 	public void testDeAgregarPOI() {
-		BaseDeDatos unaBase = new BaseDeDatos();
+		BaseDeDatos unaBase = BaseDeDatos.getInstance();
+		unaBase.inicializarBaseDeDatos();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
@@ -25,7 +27,8 @@ public class AltaBajaModificacionTest {
 
 	@Test
 	public void testDeQuitarPOI() {
-		BaseDeDatos unaBase = new BaseDeDatos();
+		BaseDeDatos unaBase = BaseDeDatos.getInstance();
+		unaBase.inicializarBaseDeDatos();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.sacarPoi(GlobalTestVariables.crearUnColectivo());
@@ -34,7 +37,8 @@ public class AltaBajaModificacionTest {
 	}
 	@Test
 	public void testAgregarBancosDelPoi() {
-		BaseDeDatos unaBase = new BaseDeDatos();
+		BaseDeDatos unaBase = BaseDeDatos.getInstance();
+		unaBase.inicializarBaseDeDatos();
 		ApiDeBancoMock requesterFalso = new ApiDeBancoMock();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
