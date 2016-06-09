@@ -3,8 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import TypePois.POI;
-  
-  
+
 public class Buscador { 
 	
 
@@ -34,8 +33,9 @@ public static void setPuntosDeIntereses(List<POI> unaLista)
 	Buscador.puntosDeIntereses = unaLista;
 }
 
-
-
+public BaseDeDatos getBaseDeDatos(){
+	return baseDeDatos;
+}
 
 
 }

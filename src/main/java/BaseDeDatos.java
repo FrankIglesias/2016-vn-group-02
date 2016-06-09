@@ -11,22 +11,35 @@ import TypePois.POI;
 public class BaseDeDatos {
 
 	private static BaseDeDatos instancia = null;
-	List<POI> puntosDeIntereses = new ArrayList<POI>();
-	List<Busqueda> busquedas = new ArrayList<Busqueda>();
-	Map<LocalDate, Integer> reportePorFecha = new HashMap<LocalDate, Integer>();
-	Map<String, Integer> reporteBusquedasTotales = new HashMap<String, Integer>();
-	List<Terminal> terminales = new ArrayList<Terminal>();
+	List<POI> puntosDeIntereses;
+	List<Busqueda> busquedas;
+	Map<LocalDate, Integer> reportePorFecha;
+	Map<String, Integer> reporteBusquedasTotales;
+	List<Terminal> terminales;
 
 	public static BaseDeDatos getInstance() {
 		if (instancia == null) {
 			instancia = new BaseDeDatos();
+			instancia.inicializarBaseDeDatos();
 		}
 		return instancia;
+	}
+
+	public void inicializarBaseDeDatos() {
+		puntosDeIntereses = new ArrayList<POI>();
+		busquedas = new ArrayList<Busqueda>();
+		reportePorFecha = new HashMap<LocalDate, Integer>();
+		reporteBusquedasTotales = new HashMap<String, Integer>();
+		terminales = new ArrayList<Terminal>();
 	}
 
 	public Busqueda addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax);
 		busquedas.add(busqueda);
+		addBusquedasPorFechaAlReporte(busqueda.getFecha());
+		if (!terminales.contains(terminal)) {
+			terminales.add(terminal);
+		}
 		return busqueda;
 	}
 
@@ -49,6 +62,11 @@ public class BaseDeDatos {
 			reporteBusquedasTotales.put(unaTerminal.getNombre(), unaTerminal.resultadosTotales());
 		}
 
+	}
+
+	public Map<String, Integer> getReporteBusquedasTotales() {
+		addReportesPorTerminal();
+		return reporteBusquedasTotales;
 	}
 
 	public void agregarNuevosPoi(POI nuevoPOI) {

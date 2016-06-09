@@ -27,4 +27,8 @@ public class Busqueda {
 		}
 
 	}
+	
+	public LocalDate getFecha(){
+		return fecha;
+	}
 }
