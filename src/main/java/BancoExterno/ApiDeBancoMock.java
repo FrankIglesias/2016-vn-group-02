@@ -23,10 +23,7 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 			+ "\"depositos\", \"extracciones\", \"transferencias\", \"seguros\"" + "]}" + "]";
 
 	public static void setRuta() {
-		// "/home/frank/"
-		System.out.println("Ingrese la ruta donde se encuentra la carpeta prueba.json");
-		Scanner reader = new Scanner(System.in);
-		rutaDeArchivo = reader.next();
+		rutaDeArchivo = System.getenv("JSON");
 	}
 
 	public static Banco obtenerBancoDesdeArchivo() {
