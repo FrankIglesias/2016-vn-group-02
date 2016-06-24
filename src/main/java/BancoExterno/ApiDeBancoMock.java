@@ -41,7 +41,7 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
-			read = new FileReader(rutaDeArchivo + "prueba.json");
+			read = new FileReader(rutaDeArchivo+ "\\" + "prueba.json");
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
