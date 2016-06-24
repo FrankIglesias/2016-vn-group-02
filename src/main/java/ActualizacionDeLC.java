@@ -14,6 +14,8 @@ public class ActualizacionDeLC {
 	public static void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
 
 		try {
+			
+			
 			File archivo = new File(ruta);
 			FileReader fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);

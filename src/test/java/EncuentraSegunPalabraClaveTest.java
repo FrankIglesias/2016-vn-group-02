@@ -12,6 +12,7 @@ import TypePois.Colectivo;
 import TypePois.POI;
 
 
+
 public class EncuentraSegunPalabraClaveTest  {
 
 	

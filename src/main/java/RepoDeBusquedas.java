@@ -23,6 +23,7 @@ public class RepoDeBusquedas {
 		}
 		return instancia;
 	}
+	
 
 	public void inicializarBaseDeDatos() {
 		busquedas = new ArrayList<Busqueda>();
