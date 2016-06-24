@@ -9,12 +9,12 @@ public class BaseDeDatosTest {
 	
 	Buscador buscador;
 	Terminal terminal;
-	BaseDeDatos baseDeDatos;
+	RepoDeBusquedas baseDeDatos;
 	
 	@Before
 	public void init() {
 		buscador = new Buscador();
-		baseDeDatos = BaseDeDatos.getInstance();
+		baseDeDatos = RepoDeBusquedas.getInstance();
 		baseDeDatos.inicializarBaseDeDatos();
 		terminal = new Terminal("mari");
 		buscador.buscarSegunPalabraClave("prueba", terminal);

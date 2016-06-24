@@ -8,7 +8,7 @@ public class Buscador {
 	
 
 static List<POI> puntosDeIntereses = new ArrayList<POI>();
-static BaseDeDatos baseDeDatos = BaseDeDatos.getInstance();
+static RepoDeBusquedas baseDeDatos = RepoDeBusquedas.getInstance();
 static double tiempoMax = 0.0001;
 
 
@@ -33,7 +33,7 @@ public static void setPuntosDeIntereses(List<POI> unaLista)
 	Buscador.puntosDeIntereses = unaLista;
 }
 
-public BaseDeDatos getBaseDeDatos(){
+public RepoDeBusquedas getBaseDeDatos(){
 	return baseDeDatos;
 }
 
