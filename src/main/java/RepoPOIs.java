@@ -9,7 +9,6 @@ public class RepoPOIs {
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia = new RepoPOIs();
 
-	
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
 			instancia = new RepoPOIs();
@@ -20,7 +19,7 @@ public class RepoPOIs {
 
 	public void inicializarPuntosDeIntereses() {
 		puntosDeIntereses = new ArrayList<POI>();
-}
+	}
 
 	public void agregarNuevosPoi(POI nuevoPOI) {
 		puntosDeIntereses.add(nuevoPOI);

@@ -21,7 +21,7 @@ import TypePois.Banco;
 
 public class ApiDeBancoReal implements ApiDeBancoInterface {
 	private Client client;
-	private static final String API_GOOGLE = "http://private-96b476-ddsutn.apiary-mock.com/";
+	private static final String API_GOOGLE = "http://private-96b476-ddsutn.apiary-mock.com/banks";
 	private static final String RESOURCE = "banks";
 
 	// Inicializacion del cliente.
@@ -61,7 +61,6 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		bancostruchos.forEach(banco -> bancosPosta.add(new Banco(new Geolocalizacion(banco.x, banco.y, null, null),
 				banco.banco, new ArrayList<String>(), null)));
 		return bancosPosta;
-
 	}
 
 	public String obtenerStream() {

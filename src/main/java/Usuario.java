@@ -7,5 +7,11 @@ public class Usuario {
 	public Usuario(Geolocalizacion point){
 		this.point = point;
 	}
+
+	public int getComuna() {
+		return point.getDomicilio().getComuna();
+	}
+	
+	
 	
 }

@@ -28,13 +28,12 @@ public class RepositorioCGPExternoAdapter {
 	}
 
 	public static void agregarAListaDeCGP(ArrayList<POI> listaPOIS, CentroDTO unCentro) {
-		String calleDeDomicilioCentro=null;
+		String calleDeDomicilioCentro = null;
 		String alturaDeDomicilioCentro;
 		String[] domicilioDeCentro = unCentro.getDomicilio().split(" ");
-		int alturaDomicilio = domicilioDeCentro.length -1;
-		
-		for(int i=0; i<alturaDomicilio; i++)
-		{
+		int alturaDomicilio = domicilioDeCentro.length - 1;
+
+		for (int i = 0; i < alturaDomicilio; i++) {
 			calleDeDomicilioCentro += " " + domicilioDeCentro[i];
 		}
 		alturaDeDomicilioCentro = domicilioDeCentro[alturaDomicilio];
