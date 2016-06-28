@@ -5,7 +5,20 @@ import java.util.stream.Collectors;
 import TypePois.Local;
 
 public class RepoLocalesComerciales {
-	ArrayList<Local> listaLC = new ArrayList<Local>();
+	ArrayList<Local> listaLC;
+	static RepoLocalesComerciales instancia;
+	
+	public static RepoLocalesComerciales getInstance() {
+		if (instancia == null) {
+			instancia = new RepoLocalesComerciales();
+			instancia.inicializarLocalesComerciales();
+		}
+		return instancia;
+	}
+	
+	public void inicializarLocalesComerciales() {
+		listaLC = new ArrayList<Local>();
+	}
 	
 	public List<Local> tieneUnLocalConNombre(String nombre){
 		return listaLC.stream().filter(unLocal -> unLocal.getNombre().equals(nombre)).collect(Collectors.toList());
@@ -20,5 +33,13 @@ public class RepoLocalesComerciales {
 		localAModificar.setPalabrasClave(palabrasClave);
 		listaLC.add(localAModificar);
 		
+	}
+	
+	public boolean isEmpty(){
+		return listaLC.isEmpty();
+	}
+	
+	public int size(){
+		return listaLC.size();
 	}
 }

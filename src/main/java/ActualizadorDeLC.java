@@ -4,12 +4,22 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ActualizacionDeLC {
-	static String ruta = "C:\\Users\\Mi Pc\\Desktop\\UTN\\2016-vn-group-02\\src\\main\\java\\LocalesComerciales.txt";
+import org.junit.experimental.theories.Theories;
 
-	public static void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
+public class ActualizadorDeLC {
+	
+	static String ruta;
+	public void setRuta() {
+		
+		ruta =  System.getProperty("user.dir");
+		String nombreArchivo =  "LocalesComerciales.txt";
+		System.out.println(ruta + "\\"+ nombreArchivo);
+	}
+	
+	public void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
 
 		try {
+			setRuta();
 			File archivo = new File(ruta);
 			FileReader fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
