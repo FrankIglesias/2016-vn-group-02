@@ -10,14 +10,18 @@ public class BaseDeDatosTest {
 	Buscador buscador;
 	Terminal terminal;
 	RepoDeBusquedas baseDeDatos;
+	RepoTerminales repoTerminales;
 	
 	@Before
 	public void init() {
 		buscador = new Buscador();
 		baseDeDatos = RepoDeBusquedas.getInstance();
 		baseDeDatos.inicializarBaseDeDatos();
+		repoTerminales = RepoTerminales.getInstance();
+		repoTerminales.inicializarRepoTerminales();
 		terminal = new Terminal("mari");
 		buscador.buscarSegunPalabraClave("prueba", terminal);
+		
 	}
 	
 	@Test
@@ -37,7 +41,7 @@ public class BaseDeDatosTest {
 	
 	@Test
 	public void cantidadDeBusquedasTotalesTest() {
-		Assert.assertEquals(baseDeDatos.getReporteBusquedasTotales().size(), 1);
+		Assert.assertEquals(repoTerminales.getReporteBusquedasTotales().size(), 1);
 	}
 	
 	
