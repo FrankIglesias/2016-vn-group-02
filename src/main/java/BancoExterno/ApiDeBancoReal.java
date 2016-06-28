@@ -28,7 +28,7 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 	public ApiDeBancoReal() {
 		this.client = Client.create();
 	}
-
+	
 	public ClientResponse getBookByFilter(String filter, String value) {
 		WebResource recurso = this.client.resource(API_GOOGLE).path(RESOURCE);
 		WebResource recursoConParametros = recurso.queryParam("banks", filter + ": " + value);
