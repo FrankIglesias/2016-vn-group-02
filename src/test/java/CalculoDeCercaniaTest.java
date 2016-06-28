@@ -38,7 +38,7 @@ public class CalculoDeCercaniaTest {
 				localidadPepe);
 		geolocalizacionPersonaLejosDeTodo = new Geolocalizacion(-34.5739926, -58.5992200, domicilioPepe, localidadPepe);
 
-		domicilioPepe = new Domicilio("La Rioja", "San Juan y Humberto Primo", "1000", "", "", "1111");
+		domicilioPepe = new Domicilio("La Rioja", "San Juan y Humberto Primo", "1000", "", "", "1111", 3);
 		localidadPepe = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 	}
 

@@ -7,10 +7,6 @@ import java.util.Arrays;
 public class ActualizacionDeLC {
 	static String ruta = "C:\\Users\\Mi Pc\\Desktop\\UTN\\2016-vn-group-02\\src\\main\\java\\LocalesComerciales.txt";
 
-	public static void main(String[] args) {
-
-	}
-
 	public static void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
 
 		try {

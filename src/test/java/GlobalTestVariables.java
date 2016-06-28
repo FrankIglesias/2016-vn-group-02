@@ -2,9 +2,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import java.util.List;
-
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
@@ -85,7 +83,7 @@ public class GlobalTestVariables {
 	}
 
 	public static Banco crearUnBanco(List<Feriado> feriados) {
-		Domicilio domicilioBanco = new Domicilio("Bolivia", "El Gaucho y Estrella Federal", "6058", "PB", "", "1419");
+		Domicilio domicilioBanco = new Domicilio("Bolivia", "El Gaucho y Estrella Federal", "6058", "PB", "", "1419", 0);
 		Localidad localidadBanco = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionBanco = new Geolocalizacion(-34.5735632, -58.5105945, domicilioBanco,
 				localidadBanco);
@@ -102,7 +100,7 @@ public class GlobalTestVariables {
 	public static Colectivo crearUnColectivo() {
 
 		Domicilio domicilioColectivo = new Domicilio("Manuel Alvarez Prado", "Bolivia y Av. de Los Constituyentes",
-				"2402-2600", "", "", "1419");
+				"2402-2600", "", "", "1419", 0);
 		Localidad localidadColectivo = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionColectivo = new Geolocalizacion(-34.5730928, -58.511029, domicilioColectivo,
 				localidadColectivo);
@@ -117,7 +115,7 @@ public class GlobalTestVariables {
 
 	public static CGP crearUnCGP(List<Feriado> feriados) {
 		Domicilio domicilioCGP = new Domicilio("Junin", "Jose Pascual Tamborini e Ibera", "5836",
-				"PB", "", "1419");
+				"PB", "", "1419", 0);
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
 		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
@@ -129,7 +127,7 @@ public class GlobalTestVariables {
 	public static CGP crearOtroCGP(List<Feriado> feriados)
 	{
 		Domicilio domicilioCGP = new Domicilio("Av. Rivadavia 7202", "Jose Pascual Tamborini e Ibera", "5836",
-				"PB", "", "1419");
+				"PB", "", "1419", 0);
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
 		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
@@ -142,7 +140,7 @@ public class GlobalTestVariables {
 	public static Local crearUnLocal(List<Feriado> feriados) {
 
 		Rubro unRubro = new Rubro("Ventas chetas", 3000);
-		Domicilio domicilioLocal = new Domicilio("Bolivia", "El Gaucho y Estrella Federal", "6058", "PB", "", "1419");
+		Domicilio domicilioLocal = new Domicilio("Bolivia", "El Gaucho y Estrella Federal", "6058", "PB", "", "1419", 0);
 		Localidad localidadLocal = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionLocal = new Geolocalizacion(-34.5735632, -58.5105945, domicilioLocal,
 				localidadLocal);

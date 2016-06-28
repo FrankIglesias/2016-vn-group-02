@@ -38,7 +38,7 @@ public class RepositorioCGPExternoAdapter {
 		}
 		alturaDeDomicilioCentro = domicilioDeCentro[alturaDomicilio];
 
-		Domicilio domicilioCGP = new Domicilio(calleDeDomicilioCentro, null, alturaDeDomicilioCentro, null, null, null);
+		Domicilio domicilioCGP = new Domicilio(calleDeDomicilioCentro, null, alturaDeDomicilioCentro, null, null, null, alturaDomicilio);
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(unCentro.getLatitud(), unCentro.getLongitud(),
 				domicilioCGP, null);
 		List<Servicio> serviciosCGP = obtenerServiciosDeCGPExterno(unCentro);
