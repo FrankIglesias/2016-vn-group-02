@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.mail.Message;
 
+import GestorDeMail.GestorDeMailTrucho;
+import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
 public class Terminal {

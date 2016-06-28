@@ -1,3 +1,4 @@
+package GestorDeMail;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
