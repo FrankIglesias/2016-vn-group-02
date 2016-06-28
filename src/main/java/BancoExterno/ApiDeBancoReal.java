@@ -21,7 +21,7 @@ import TypePois.Banco;
 
 public class ApiDeBancoReal implements ApiDeBancoInterface {
 	private Client client;
-	private static final String API_GOOGLE = "http://private-96b476-ddsutn.apiary-mock.com/banks";
+	private static final String API_GOOGLE = "http://private-96b476-ddsutn.apiary-mock.com/";
 	private static final String RESOURCE = "banks";
 
 	// Inicializacion del cliente.
