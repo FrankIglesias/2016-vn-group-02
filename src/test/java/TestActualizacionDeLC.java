@@ -6,17 +6,18 @@ import org.junit.Test;
 
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import Repositorio.RepoLocalesComerciales;
+import Repositorio.RepoPOIs;
 
 public class TestActualizacionDeLC {
 	
 	ActualizadorDeLC actualizador;
-	RepoLocalesComerciales repo;
+	RepoPOIs repo;
 	
 	@Before
 	public void init(){
 		actualizador = new ActualizadorDeLC();
-		repo = RepoLocalesComerciales.getInstance();
-		repo.inicializarLocalesComerciales();
+		repo = RepoPOIs.getInstance();
+		repo.inicializarPuntosDeIntereses();
 	}
 	
 	@Test
@@ -26,22 +27,22 @@ public class TestActualizacionDeLC {
 	
 	@Test
 	public void RepoSinLocalesComercialesEntoncesNoAgregaTest(){
-		actualizador.actualizarListaDeLC(repo);
+		actualizador.actualizarListaDeLC();
 		Assert.assertEquals(repo.size(), 0);
 	}
 	
 	@Test
 	public void RepoActualizadoCorrectamenteTest(){
-		repo.add("Carrousel", new ArrayList<String>());
-		repo.add("LoDeMari", new ArrayList<String>());
-		actualizador.actualizarListaDeLC(repo);
+		repo.addLocal("Carrousel", new ArrayList<String>());
+		repo.addLocal("LoDeMari", new ArrayList<String>());
+		actualizador.actualizarListaDeLC();
 		Assert.assertEquals(repo.size(), 2);
 	}
 	
 	@Test
 	public void RepoActualizadoUnSoloLocalTest(){
-		repo.add("LoDeMari", new ArrayList<String>());
-		actualizador.actualizarListaDeLC(repo);
+		repo.addLocal("LoDeMari", new ArrayList<String>());
+		actualizador.actualizarListaDeLC();
 		Assert.assertEquals(repo.size(), 1);
 	}
 

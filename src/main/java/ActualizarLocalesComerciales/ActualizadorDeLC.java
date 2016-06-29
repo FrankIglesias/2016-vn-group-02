@@ -5,14 +5,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.TimerTask;
 
 import Repositorio.RepoLocalesComerciales;
+import Repositorio.RepoPOIs;
 
 public class ActualizadorDeLC {
 
 	static String ruta;
-	RepoLocalesComerciales repo = RepoLocalesComerciales.getInstance();
+	RepoPOIs repo = RepoPOIs.getInstance();
 
 	public void setRuta() {
 
@@ -20,7 +20,7 @@ public class ActualizadorDeLC {
 		ruta = System.getProperty("user.dir") + "\\" + nombreArchivo;
 	}
 
-	public void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
+	public void actualizarListaDeLC() {
 
 		try {
 			this.setRuta();
@@ -30,7 +30,7 @@ public class ActualizadorDeLC {
 			String linea;
 
 			while ((linea = br.readLine()) != null) {
-				parsearYAgregarLocal(linea, repositorio);
+				parsearYAgregarLocal(linea, repo);
 			}
 
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class ActualizadorDeLC {
 		}
 	}
 
-	private static void parsearYAgregarLocal(String linea, RepoLocalesComerciales repositorio) {
+	private static void parsearYAgregarLocal(String linea, RepoPOIs repositorio) {
 		String[] nombreYpalabras = linea.split(";");
 		if (!repositorio.tieneUnLocalConNombre(nombreYpalabras[0]).isEmpty()) {
 			String[] linea3 = nombreYpalabras[1].split(" ");
