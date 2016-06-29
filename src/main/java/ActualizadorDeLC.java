@@ -11,15 +11,14 @@ public class ActualizadorDeLC {
 	static String ruta;
 	public void setRuta() {
 		
-		ruta =  System.getProperty("user.dir");
 		String nombreArchivo =  "LocalesComerciales.txt";
-		System.out.println(ruta + "\\"+ nombreArchivo);
+		ruta =  System.getProperty("user.dir") + "\\" + nombreArchivo;
 	}
 	
 	public void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
 
 		try {
-			setRuta();
+			this.setRuta();
 			File archivo = new File(ruta);
 			FileReader fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
@@ -30,13 +29,13 @@ public class ActualizadorDeLC {
 			}
 
 		} catch (Exception e) {
-			System.out.println("ERROR");
+			e.printStackTrace();
 		}
 	}
 
 	private static void parsearYAgregarLocal(String linea, RepoLocalesComerciales repositorio) {
 		String[] nombreYpalabras = linea.split(";");
-		if (repositorio.tieneUnLocalConNombre(nombreYpalabras[0]) != null) {
+		if (!repositorio.tieneUnLocalConNombre(nombreYpalabras[0]).isEmpty()) {
 			String[] linea3 = nombreYpalabras[1].split(" ");
 			ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea3));
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);

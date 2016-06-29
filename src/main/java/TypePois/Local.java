@@ -23,4 +23,8 @@ public class Local extends POI {
 	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
 		return rubro.estasCercaDeUnPunto(point, this);
 	}
+	
+	public void setPalabrasClave(ArrayList<String> palabrasClave){
+		super.setPalabrasClave(palabrasClave);
+	}
 }
