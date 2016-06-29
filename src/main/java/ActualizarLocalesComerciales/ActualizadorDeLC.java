@@ -1,17 +1,18 @@
 package ActualizarLocalesComerciales;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import org.junit.experimental.theories.Theories;
+import java.util.TimerTask;
 
 import Repositorio.RepoLocalesComerciales;
 
-public class ActualizadorDeLC {
+public class ActualizadorDeLC extends TimerTask {
 
 	static String ruta;
+	RepoLocalesComerciales repo = RepoLocalesComerciales.getInstance();
 
 	public void setRuta() {
 
@@ -44,6 +45,12 @@ public class ActualizadorDeLC {
 			ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea3));
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);
 		}
+
+	}
+
+	public void run() {
+
+		this.actualizarListaDeLC(repo);
 
 	}
 }

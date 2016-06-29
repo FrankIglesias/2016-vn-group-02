@@ -21,7 +21,7 @@ public class AsignarAccionesUsuarios extends TimerTask {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
