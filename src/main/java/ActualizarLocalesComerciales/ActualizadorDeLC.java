@@ -1,3 +1,4 @@
+package ActualizarLocalesComerciales;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.experimental.theories.Theories;
+
+import Repositorio.RepoLocalesComerciales;
 
 public class ActualizadorDeLC {
 
