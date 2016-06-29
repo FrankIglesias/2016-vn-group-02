@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import TypePois.Banco;
+import TypePois.Local;
 import TypePois.POI;
 
 public class RepoPOIs {
@@ -50,6 +51,37 @@ public class RepoPOIs {
 	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDePoi) {
 		listaDePoi.forEach(unPoi -> puntosDeIntereses.add(unPoi));
 
+	}
+	
+	public List<POI> tieneUnLocalConNombre(String nombre) {
+
+		return puntosDeIntereses.stream().filter(unLocal -> unLocal.getNombre().equals(nombre)).collect(Collectors.toList());
+	}
+	
+	public void actualizarLocal(String nombre, ArrayList<String> palabrasClave) {
+
+		POI localAModificar = this.tieneUnLocalConNombre(nombre).get(0);
+		puntosDeIntereses.remove(localAModificar);
+
+		localAModificar.setPalabrasClave(palabrasClave);
+		puntosDeIntereses.add(localAModificar);
+
+	}
+
+	public boolean isEmpty() {
+		return puntosDeIntereses.isEmpty();
+	}
+
+	public int size() {
+		return puntosDeIntereses.size();
+	}
+	
+	public void addLocal(String nombre, ArrayList<String> palabrasClave){
+		Local localito = new Local(null, nombre, null, null, null);
+		
+		puntosDeIntereses.remove(localito);
+		localito.setPalabrasClave(palabrasClave);
+		puntosDeIntereses.add(localito);
 	}
 
 }
