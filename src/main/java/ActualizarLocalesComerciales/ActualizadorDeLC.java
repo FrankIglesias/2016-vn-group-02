@@ -1,17 +1,18 @@
 package ActualizarLocalesComerciales;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import org.junit.experimental.theories.Theories;
+import java.util.TimerTask;
 
 import Repositorio.RepoLocalesComerciales;
 
 public class ActualizadorDeLC {
 
 	static String ruta;
+	RepoLocalesComerciales repo = RepoLocalesComerciales.getInstance();
 
 	public void setRuta() {
 

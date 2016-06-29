@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import Repositorio.Usuario;
 
-public class CriterioPreSeleccionados implements Criterios {
+public class CriterioPreSeleccionados implements Criterio {
 	ArrayList<Usuario> usuariosSeleccionados;
 
 	public boolean esCumplidoPor(Usuario unUsuario) {

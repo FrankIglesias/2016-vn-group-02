@@ -8,7 +8,7 @@ import TypePois.POI;
 
 public class RepoPOIs {
 	List<POI> puntosDeIntereses;
-	static RepoPOIs instancia = new RepoPOIs();
+	static RepoPOIs instancia;
 
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
