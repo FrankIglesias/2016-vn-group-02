@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
+import Repositorio.RepoPOIs;
 
 
 public class AltaBajaModificacionTest {

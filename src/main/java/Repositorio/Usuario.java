@@ -1,3 +1,4 @@
+package Repositorio;
 import DesignDreamTeamLocation.Geolocalizacion;
 
 public class Usuario {

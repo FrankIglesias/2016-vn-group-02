@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ActualizarLocalesComerciales.ActualizadorDeLC;
+import Repositorio.RepoLocalesComerciales;
+
 public class TestActualizacionDeLC {
 	
 	ActualizadorDeLC actualizador;

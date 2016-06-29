@@ -1,3 +1,6 @@
+package AsignarAccionesUsuario;
+
+import Repositorio.Usuario;
 
 public class criterioTodosUsuarios implements Criterios {
 

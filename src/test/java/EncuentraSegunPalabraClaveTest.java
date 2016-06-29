@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
+import Repositorio.Buscador;
+import Repositorio.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;

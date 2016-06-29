@@ -4,6 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import Repositorio.Buscador;
+import Repositorio.RepoDeBusquedas;
+import Repositorio.RepoTerminales;
+import Repositorio.Terminal;
+
 
 public class BaseDeDatosTest {
 	

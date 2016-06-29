@@ -1,3 +1,4 @@
+package Repositorio;
 import CGPExterno.CentroDTO;
 import CGPExterno.RangoServicioDTO;
 import CGPExterno.RepositorioCGPExterno;

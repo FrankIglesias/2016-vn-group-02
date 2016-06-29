@@ -1,6 +1,10 @@
+package AsignarAccionesUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import Repositorio.RepoUsuarios;
+import Repositorio.Usuario;
 
 public class AccionesUsuarios {
 

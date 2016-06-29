@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import Repositorio.Buscador;
+import Repositorio.Terminal;
+
 
 
 public class AnalizarTiempoDeBusquedaNoSobrepasadoTest {

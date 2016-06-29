@@ -3,6 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import Repositorio.Buscador;
+import Repositorio.RepositorioCGPExternoAdapter;
+import Repositorio.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.POI;
