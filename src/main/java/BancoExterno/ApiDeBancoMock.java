@@ -23,9 +23,7 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 			+ "\"depositos\", \"extracciones\", \"transferencias\", \"seguros\"" + "]}" + "]";
 
 	public static void setRuta() {
-	
-		rutaDeArchivo =  System.getProperty("user.dir");
-		String nombreArchivo =  "prueba.json";
+		rutaDeArchivo =  System.getProperty("user.dir") + "\\" + "prueba.json" ;
 	}
 
 	public static Banco obtenerBancoDesdeArchivo() {
@@ -40,7 +38,7 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 	public static Reader obtenerReader() {
 		Reader read = null;
 		try {
-			read = new FileReader(rutaDeArchivo+ "\\" + "prueba.json");
+			read = new FileReader(rutaDeArchivo);
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
