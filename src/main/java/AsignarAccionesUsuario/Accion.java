@@ -1,5 +1,5 @@
 package AsignarAccionesUsuario;
 
-public interface Acciones {
+public interface Accion {
 
 }

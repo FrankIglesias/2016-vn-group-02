@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 import Repositorio.RepoLocalesComerciales;
 
-public class ActualizadorDeLC extends TimerTask {
+public class ActualizadorDeLC {
 
 	static String ruta;
 	RepoLocalesComerciales repo = RepoLocalesComerciales.getInstance();
@@ -45,12 +45,6 @@ public class ActualizadorDeLC extends TimerTask {
 			ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea3));
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);
 		}
-
-	}
-
-	public void run() {
-
-		this.actualizarListaDeLC(repo);
 
 	}
 }

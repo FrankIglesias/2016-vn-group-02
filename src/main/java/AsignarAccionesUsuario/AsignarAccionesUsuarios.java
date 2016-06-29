@@ -9,8 +9,8 @@ import Repositorio.Usuario;
 
 public class AsignarAccionesUsuarios extends TimerTask {
 
-	ArrayList<Acciones> listaDeAcciones = new ArrayList<Acciones>();
-	List<Criterios> listaDeCriterios = new ArrayList<Criterios>();
+	ArrayList<Accion> listaDeAcciones = new ArrayList<Accion>();
+	List<Criterio> listaDeCriterios = new ArrayList<Criterio>();
 
 	ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios RepoUsuario) {
 		return RepoUsuarios.getUsuarios().stream()
@@ -18,6 +18,8 @@ public class AsignarAccionesUsuarios extends TimerTask {
 						.allMatch(unCriterio -> unCriterio.esCumplidoPor(unUsuario)))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
+	
+	
 
 	@Override
 	public void run() {

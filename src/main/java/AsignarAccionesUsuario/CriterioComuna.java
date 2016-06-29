@@ -2,7 +2,7 @@ package AsignarAccionesUsuario;
 
 import Repositorio.Usuario;
 
-public class CriterioComuna implements Criterios {
+public class CriterioComuna implements Criterio {
 		int comuna;
 
 		public boolean esCumplidoPor(Usuario unUsuario) {
