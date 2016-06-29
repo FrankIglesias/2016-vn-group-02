@@ -27,10 +27,9 @@ public class RepoLocalesComerciales {
 
 	public void actualizarLocal(String nombre, ArrayList<String> palabrasClave) {
 
-		Local localAModificar = (this.tieneUnLocalConNombre(nombre)).get(0);
+		Local localAModificar = this.tieneUnLocalConNombre(nombre).get(0);
 		listaLC.remove(localAModificar);
 
-		localAModificar.setNombre(nombre);
 		localAModificar.setPalabrasClave(palabrasClave);
 		listaLC.add(localAModificar);
 

@@ -40,6 +40,6 @@ public class TestActualizacionDeLC {
 		repo.add("LoDeMari", new ArrayList<String>());
 		actualizador.actualizarListaDeLC(repo);
 		Assert.assertEquals(repo.size(), 1);
-		
 	}
+
 }

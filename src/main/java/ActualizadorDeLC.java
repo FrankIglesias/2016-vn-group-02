@@ -7,14 +7,15 @@ import java.util.Arrays;
 import org.junit.experimental.theories.Theories;
 
 public class ActualizadorDeLC {
-	
+
 	static String ruta;
+
 	public void setRuta() {
-		
-		String nombreArchivo =  "LocalesComerciales.txt";
-		ruta =  System.getProperty("user.dir") + "\\" + nombreArchivo;
+
+		String nombreArchivo = "LocalesComerciales.txt";
+		ruta = System.getProperty("user.dir") + "\\" + nombreArchivo;
 	}
-	
+
 	public void actualizarListaDeLC(RepoLocalesComerciales repositorio) {
 
 		try {
