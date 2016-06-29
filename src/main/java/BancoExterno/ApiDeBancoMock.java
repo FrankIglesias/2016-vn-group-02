@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.TimerTask;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.Banco;
 
-public class ApiDeBancoMock implements ApiDeBancoInterface {
+public class ApiDeBancoMock  implements ApiDeBancoInterface {
 	private static String rutaDeArchivo;
 	private String jsonBanco = "[{" + "\"banco\":\"Banco de la Plaza\"," + "\"x\":-35.9338322," + "\"y\":72.348353,"
 			+ "\"sucursal\":\"Avellaneda\"," + "\"gerente\":\"Javier Loeschbor\"," + "\"servicios\": ["
@@ -57,5 +57,6 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 				banco.banco, new ArrayList<String>(), null)));
 		return bancosPosta;
 	}
+
 
 }
