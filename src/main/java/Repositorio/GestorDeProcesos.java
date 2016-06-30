@@ -16,7 +16,6 @@ public class GestorDeProcesos {
 	public final static Semaphore sem = new Semaphore(0);
 	public void setProceso(TimerTask actua,Date fecha) {
 		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+ "....");
-		
 		timer.schedule(actua,fecha);
 		SemVamoASincronizarno();
 	}

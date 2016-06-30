@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TimerTask;
 
+import Repositorio.GestorDeProcesos;
 import Repositorio.RepoPOIs;
 
 public class ActualizadorDeLC extends TimerTask {
@@ -48,6 +49,7 @@ public class ActualizadorDeLC extends TimerTask {
 		System.out.println("Por realizarse...");
 		this.actualizarListaDeLC();
 		System.out.println("Realizado Correctamente");
+		GestorDeProcesos.sem.release();
 
 	}
 }

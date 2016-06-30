@@ -26,6 +26,7 @@ public class GestorDeProcesosTest {
 	@Test
 	public void actualizacionProgramadaYConcretadaTest() {
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), new Date());
+		gestor.setProceso(new ActualizadorDeLC(), new Date());
 		Assert.assertTrue(repo.size() > 0);
 	}
 
