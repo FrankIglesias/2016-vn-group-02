@@ -1,5 +1,4 @@
 package ActualizarLocalesComerciales;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,20 +10,15 @@ import Repositorio.RepoPOIs;
 
 public class ActualizadorDeLC extends TimerTask {
 
-	static String ruta;
 	RepoPOIs repo = RepoPOIs.getInstance();
 
-	public void setRuta() {
-
-		String nombreArchivo = "LocalesComerciales.txt";
-		ruta = System.getProperty("user.dir") + "\\" + nombreArchivo;
-	}
 
 	public void actualizarListaDeLC() {
 
 		try {
-			this.setRuta();
-			File archivo = new File(ruta);
+			File archivo = new File(System.getProperty("user.dir")
+					+ System.getProperty("file.separator")
+					+ "LocalesComerciales.txt");
 			FileReader fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
 			String linea;
@@ -34,7 +28,8 @@ public class ActualizadorDeLC extends TimerTask {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out
+					.println("NO SE PUDO ABRIR EL ARCHIVO DE LOCALES COMERCIALES\n");
 		}
 	}
 
@@ -42,7 +37,8 @@ public class ActualizadorDeLC extends TimerTask {
 		String[] nombreYpalabras = linea.split(";");
 		if (!repositorio.tieneUnLocalConNombre(nombreYpalabras[0]).isEmpty()) {
 			String[] linea3 = nombreYpalabras[1].split(" ");
-			ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea3));
+			ArrayList<String> palabrasClave = new ArrayList<String>(
+					Arrays.asList(linea3));
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);
 		}
 
@@ -52,5 +48,6 @@ public class ActualizadorDeLC extends TimerTask {
 		System.out.println("Por realizarse...");
 		this.actualizarListaDeLC();
 		System.out.println("Realizado Correctamente");
+
 	}
 }

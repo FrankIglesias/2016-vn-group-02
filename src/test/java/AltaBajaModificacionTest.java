@@ -44,7 +44,7 @@ public class AltaBajaModificacionTest {
 		ApiDeBancoMock requesterFalso = new ApiDeBancoMock();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
-		unaBase.agregarVariosPoiDeListaDeBancos(requesterFalso.obtenerBancos());
+		unaBase.agregarVariosPoiDeListaDeBancos(requesterFalso.obtenerBancoDesdeString());
 		// de los bancos siempre devuelve 2 - 
 		Assert.assertEquals(unaBase.cantidadDePOI(), 4);
 
