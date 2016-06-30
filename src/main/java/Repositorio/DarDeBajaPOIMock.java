@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
+
+import org.json.JSONObject;
+
 import java.util.Map.Entry;
 
 import com.google.gson.Gson;
@@ -15,16 +18,43 @@ import TypePois.POI;
 import TypePois.genericPOI;
  
 public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
-
-	String noProcesado = "[{\"geo\":[\"latitud\":-35.9338322,\"longitud\":72.348353,\"domicilio\":null,\"localidad\":null],\"fecha\":1986-04-08 12:30},"
+	
+	
+	
+	
+	JSONObject json = new JSONObject(crearMap());
+	String noProcesado = json.toString();
+	/*String noProcesado = "[{{[\"latitud\":-35.9338322,"
+							+ "\"longitud\":72.348353,"
+							+ "\"domicilio\":[null],"
+							+ "\"localidad\":null]}"
+							+ ":1986-04-08 12:30},"
 						+ "{\"geo\":[\"latitud\":-35.9566622,\"longitud\":72.566653,\"domicilio\":null,\"localidad\":null],\"fecha\":2017-04-08 12:30}]";
-	//^^^^ intento de json
+	//^^^^ intento de json*/
 	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
+	
+	public Map<Geolocalizacion, LocalDateTime> crearMap()
+	{
+		Map<Geolocalizacion,LocalDateTime> mapPOI = new HashMap<Geolocalizacion,LocalDateTime>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //formato para la fecha
+		Geolocalizacion geo1 	= new Geolocalizacion(-35.9338322,72.348353,null,null);
+		Geolocalizacion geo2 	= new Geolocalizacion(-35.9566622,72.566653,null,null);
+		LocalDateTime date1 	= LocalDateTime.parse("1986-04-08 12:30", formatter);
+		LocalDateTime date2 	= LocalDateTime.parse("2017-04-08 12:30", formatter);
+		
+		mapPOI.put(geo1, date1);
+		mapPOI.put(geo2, date2);
+
+		return mapPOI;
+	}
 
 	@Override
 	public void run() { //realiza el proceso. lo copié de otro proceso
 		System.out.println("Obteniendo datos...");
 		System.out.println("Procesando datos...");
+		
+		System.out.println(noProcesado);
+		
 		POIsAEliminar = procesarPedido(noProcesado);
 		System.out.println("Por realizarse...");
 		this.eliminarPOIs();
