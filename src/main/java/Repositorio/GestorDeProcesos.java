@@ -1,25 +1,30 @@
 package Repositorio;
 
-import java.text.ParseException;
-import java.time.LocalDateTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ActualizarLocalesComerciales.ActualizadorDeLC;
-import AsignarAccionesUsuario.AsignarAccionesUsuarios;
-import BancoExterno.ApiDeBancoMock;
-
 public class GestorDeProcesos {
-	
-	   static Timer timer= new Timer();
-	 
-public void iniciarScheduleDeProcesos(){
 
-	
-	// aca hay que setear fechas
-	 
-	      timer.schedule(new AsignarAccionesUsuarios(),/*una fecha*/);
-	      timer.schedule(new ActualizadorDeRepositorioDePoi(), /*otra fecha*/);
-	   }
+	ArrayList<Timer> agendaDeProcesos = new ArrayList<Timer>();
+
+	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	/*
+	 * ASI SE SETEA LA FECHA QUE QUIERAN
+	 * try { 
+	 * date = formatoFecha.parse("2014-02-04 06:33:00"); } 
+	 * catch (ParseException e) 
+	 * { e.printStackTrace();
+	 * } 
+	 */
+
+	public void setProceso(TimerTask proceso, Date fecha) {
+		Timer timer = new Timer();
+		timer.schedule(proceso, fecha);
+		agendaDeProcesos.add(timer);
+	}
 }

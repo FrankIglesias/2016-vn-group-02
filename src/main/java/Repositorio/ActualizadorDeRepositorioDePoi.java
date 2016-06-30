@@ -5,7 +5,7 @@ import java.util.TimerTask;
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import BancoExterno.ApiDeBancoMock;
 
-public class ActualizadorDeRepositorioDePoi extends TimerTask{
+public class ActualizadorDeRepositorioDePoi extends TimerTask {
 
 	RepoPOIs repositorioDePois = RepoPOIs.getInstance();
 	public void run() { 

@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TimerTask;
+
 import Repositorio.RepoPOIs;
 
-public class ActualizadorDeLC {
+public class ActualizadorDeLC extends TimerTask {
 
 	static String ruta;
 	RepoPOIs repo = RepoPOIs.getInstance();
@@ -44,5 +46,11 @@ public class ActualizadorDeLC {
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);
 		}
 
+	}
+
+	public void run() {
+		System.out.println("Por realizarse...");
+		this.actualizarListaDeLC();
+		System.out.println("Realizado Correctamente");
 	}
 }
