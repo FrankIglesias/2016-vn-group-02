@@ -3,10 +3,9 @@ package Repositorio;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
-
-import org.json.JSONObject;
 
 import java.util.Map.Entry;
 
@@ -19,34 +18,9 @@ import TypePois.genericPOI;
  
 public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 	
-	
-	
-	
-	JSONObject json = new JSONObject(crearMap());
-	String noProcesado = json.toString();
-	/*String noProcesado = "[{{[\"latitud\":-35.9338322,"
-							+ "\"longitud\":72.348353,"
-							+ "\"domicilio\":[null],"
-							+ "\"localidad\":null]}"
-							+ ":1986-04-08 12:30},"
-						+ "{\"geo\":[\"latitud\":-35.9566622,\"longitud\":72.566653,\"domicilio\":null,\"localidad\":null],\"fecha\":2017-04-08 12:30}]";
-	//^^^^ intento de json*/
+	String noProcesado = "[{\"latitud\":-35.9338322,\"longitud\":72.348353,\"fecha\":\"1986-04-08 12:30\"},"
+			+ " {\"latitud\":-35.9566622,\"longitud\":72.566653,\"fecha\":\"2017-04-08 12:30\"}]";
 	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
-	
-	public Map<Geolocalizacion, LocalDateTime> crearMap()
-	{
-		Map<Geolocalizacion,LocalDateTime> mapPOI = new HashMap<Geolocalizacion,LocalDateTime>();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //formato para la fecha
-		Geolocalizacion geo1 	= new Geolocalizacion(-35.9338322,72.348353,null,null);
-		Geolocalizacion geo2 	= new Geolocalizacion(-35.9566622,72.566653,null,null);
-		LocalDateTime date1 	= LocalDateTime.parse("1986-04-08 12:30", formatter);
-		LocalDateTime date2 	= LocalDateTime.parse("2017-04-08 12:30", formatter);
-		
-		mapPOI.put(geo1, date1);
-		mapPOI.put(geo2, date2);
-
-		return mapPOI;
-	}
 
 	@Override
 	public void run() { //realiza el proceso. lo copié de otro proceso
@@ -63,16 +37,18 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 
 	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) { //Procesa el string json para transformarlo en un Map
 		Gson gson = new Gson();
-		java.lang.reflect.Type tipo = new TypeToken<Map<Geolocalizacion,String>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
-		Map<Geolocalizacion,String> POIsPrev = gson.fromJson(noProcesado, tipo);
+		java.lang.reflect.Type tipo = new TypeToken<List<restPOIAEliminar>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
+		List<restPOIAEliminar> POIsPrev = gson.fromJson(noProcesado, tipo);
 		
 		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>(); //para transformar la fecha en LocalDateTime
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //formato para la fecha
 		
-		for (Entry<Geolocalizacion,String> POI : POIsPrev.entrySet()) { //llena el POIs con las fechas nuevas
-			LocalDateTime dateTime = LocalDateTime.parse(POI.getValue(), formatter);
-			POIs.put(POI.getKey(),dateTime);
+		for(restPOIAEliminar i : POIsPrev)
+		{
+			LocalDateTime dateTime = LocalDateTime.parse(i.fecha, formatter);
+			Geolocalizacion geo = new Geolocalizacion(i.latitud, i.longitud, null, null);
+			POIs.put(geo, dateTime);
 		}
 		
 		return POIs;

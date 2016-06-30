@@ -8,6 +8,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TimerTask;
@@ -49,19 +50,20 @@ public class DarDeBajaPOI extends TimerTask implements processDarDeBajaPOI {
 		
 	}
 
-	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) {
+	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) { //Procesa el string json para transformarlo en un Map
 		Gson gson = new Gson();
-		java.lang.reflect.Type tipo = new TypeToken<Map<Geolocalizacion,String>>() {
-		}.getType();
-		Map<Geolocalizacion,String> POIsPrev = gson.fromJson(noProcesado, tipo);
+		java.lang.reflect.Type tipo = new TypeToken<List<restPOIAEliminar>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
+		List<restPOIAEliminar> POIsPrev = gson.fromJson(noProcesado, tipo);
 		
-		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>();
+		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>(); //para transformar la fecha en LocalDateTime
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //formato para la fecha
 		
-		for (Entry<Geolocalizacion,String> POI : POIsPrev.entrySet()) {
-			LocalDateTime dateTime = LocalDateTime.parse(POI.getValue(), formatter);
-			POIs.put(POI.getKey(),dateTime);
+		for(restPOIAEliminar i : POIsPrev)
+		{
+			LocalDateTime dateTime = LocalDateTime.parse(i.fecha, formatter);
+			Geolocalizacion geo = new Geolocalizacion(i.latitud, i.longitud, null, null);
+			POIs.put(geo, dateTime);
 		}
 		
 		return POIs;
