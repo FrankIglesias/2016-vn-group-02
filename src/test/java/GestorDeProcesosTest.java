@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,15 +27,22 @@ public class GestorDeProcesosTest {
 		repo.inicializarPuntosDeIntereses();
 
 		try {
-			date = formatoFecha.parse("2016-06-30 01:59:00");
+			date = formatoFecha.parse("2016-06-30 13:43:00");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	@Test
 	public void actualizacionProgramadaYConcretadaTest() {
+		int numero = repo.size();
 		gestor.setProceso(actualizador, date);
+		System.out.println(numero);
+		System.out.println(repo.size());
+		Assert.assertTrue(repo.size()>numero);
+		
+		
 	}
 
 }

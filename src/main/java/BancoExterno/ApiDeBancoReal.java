@@ -51,7 +51,7 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		return response;
 	}
 
-	public List<Banco> obtenerBancos() {
+	public List<Banco> obtenerBancoDesdeString() {
 		Gson gson = new Gson();
 		String json = obtenerStream();
 		java.lang.reflect.Type tipolistaDeBancosTruchos = new TypeToken<List<BancoTrucho>>() {

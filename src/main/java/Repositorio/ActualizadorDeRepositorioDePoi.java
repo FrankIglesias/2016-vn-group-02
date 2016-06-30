@@ -12,7 +12,7 @@ public class ActualizadorDeRepositorioDePoi extends TimerTask {
 	ActualizadorDeLC actualizadorDeLocalesComerciales = new ActualizadorDeLC();
 	actualizadorDeLocalesComerciales.actualizarListaDeLC();
 	ApiDeBancoMock actualizadorDeBancos = new ApiDeBancoMock();
-	repositorioDePois.agregarVariosPoiDeListaDeBancos(actualizadorDeBancos.obtenerBancos());
+	repositorioDePois.agregarVariosPoiDeListaDeBancos(actualizadorDeBancos.obtenerBancoDesdeString());
 
 	}
 

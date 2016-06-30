@@ -24,7 +24,8 @@ public class GestorDeProcesos {
 
 	public void setProceso(TimerTask proceso, Date fecha) {
 		Timer timer = new Timer();
+		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+ "....\n");
 		timer.schedule(proceso, fecha);
-		agendaDeProcesos.add(timer);
+		//agendaDeProcesos.add(timer);
 	}
 }

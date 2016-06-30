@@ -5,5 +5,5 @@ import java.util.List;
 import TypePois.Banco;
 
 public interface ApiDeBancoInterface {
-	public List<Banco> obtenerBancos();
+	public List<Banco> obtenerBancoDesdeString();
 }

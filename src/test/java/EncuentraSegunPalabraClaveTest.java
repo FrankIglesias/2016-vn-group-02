@@ -33,7 +33,6 @@ public class EncuentraSegunPalabraClaveTest  {
 		buscador = new Buscador();
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		cgp = GlobalTestVariables.crearUnCGP(null);
-		ApiDeBancoMock.setRuta();
 		banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
