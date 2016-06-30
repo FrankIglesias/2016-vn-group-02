@@ -68,7 +68,7 @@ public class DarDeBajaPOI extends TimerTask implements processDarDeBajaPOI {
 	}
 	
 	public POI getPOI(Geolocalizacion geo) {
-		POI p = new genericPOI(geo);
+		POI p = new genericPOI(geo,"");
 		return p;
 	}
 
