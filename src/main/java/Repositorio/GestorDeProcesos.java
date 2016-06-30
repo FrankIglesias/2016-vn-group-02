@@ -18,12 +18,12 @@ public class GestorDeProcesos {
 		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+ "....");
 		
 		timer.schedule(actua,fecha);
-		vamoAsincronizarno();
+		SemVamoASincronizarno();
 	}
 
 
 
-private void vamoAsincronizarno(){
+private void SemVamoASincronizarno(){
 	
 	try {
 		sem.acquire();
