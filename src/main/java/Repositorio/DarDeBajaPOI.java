@@ -23,7 +23,7 @@ public class DarDeBajaPOI extends TimerTask implements processDarDeBajaPOI {
 	
 	String url;
 	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
-
+ 
 	@Override
 	public void run() {
 		String noProcesado = null;

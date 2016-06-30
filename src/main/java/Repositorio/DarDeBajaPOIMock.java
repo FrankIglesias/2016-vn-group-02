@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.POI;
 import TypePois.genericPOI;
-
+ 
 public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 
 	String noProcesado = "[{[\"latitud\":-35.9338322,\"longitud\":72.348353,\"domicilio\":null,\"localidad\":null],1986-04-08 12:30},"
