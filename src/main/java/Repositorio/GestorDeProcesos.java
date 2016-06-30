@@ -15,14 +15,14 @@ public class GestorDeProcesos {
 	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public final static Semaphore sem = new Semaphore(0);
 	public void setProceso(TimerTask actua,Date fecha) {
-		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+ "....");
+		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+fecha.getSeconds()+ "....");
 		timer.schedule(actua,fecha);
-		SemVamoASincronizarno();
+		SemVamoASincronizarno_wait();
 	}
 
 
 
-private void SemVamoASincronizarno(){
+private void SemVamoASincronizarno_wait(){
 	
 	try {
 		sem.acquire();

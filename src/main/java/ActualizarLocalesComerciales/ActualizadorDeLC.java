@@ -49,7 +49,10 @@ public class ActualizadorDeLC extends TimerTask {
 		System.out.println("Por realizarse...");
 		this.actualizarListaDeLC();
 		System.out.println("Realizado Correctamente");
-		GestorDeProcesos.sem.release();
-
+		SemVamoASincronizarno_signal();
 	}
+private void SemVamoASincronizarno_signal(){
+	GestorDeProcesos.sem.release();
+}
+
 }
