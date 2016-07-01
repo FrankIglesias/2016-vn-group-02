@@ -1,7 +1,6 @@
 package AsignarAccionesUsuario;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
@@ -14,6 +13,7 @@ public class AsignarAccionesUsuarios extends TimerTask {
 	RepoUsuarios repoUsuario;
 	Accion accion;
 	Criterio criterio;
+	ArrayList<Usuario> usuariosAsignados = new ArrayList<Usuario>();
 
 	public AsignarAccionesUsuarios(RepoUsuarios repoUsuario, Criterio criterio, Accion accion) {
 		super();
@@ -23,8 +23,8 @@ public class AsignarAccionesUsuarios extends TimerTask {
 	}
 
 	public ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) {
-		return RepoUsuarios.getUsuarios().stream().filter(unUsuario -> cumpleCriterio(unUsuario))
-				.collect(Collectors.toCollection(ArrayList::new));
+		return repoUsuario.seleccionaUsuarios(this);
+		
 	}
 
 	public boolean cumpleCriterio(Usuario unUsuario) {
@@ -32,8 +32,12 @@ public class AsignarAccionesUsuarios extends TimerTask {
 	}
 
 	public void asignarAcciones() {
-		ArrayList<Usuario> usuarios = seleccionarUsuarios(repoUsuario);
-		usuarios.forEach(usuario -> usuario.addAccion(accion));
+		usuariosAsignados = seleccionarUsuarios(repoUsuario);
+		usuariosAsignados.forEach(usuario -> usuario.addAccion(accion));
+	}
+	
+	public void ejecutarAccion(Accion unaAccion){
+		usuariosAsignados.stream().forEach(unUsuario -> unUsuario.ejecutaUnaAccion(unaAccion));
 	}
 
 	@Override

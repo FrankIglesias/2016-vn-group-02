@@ -1,14 +1,15 @@
 package Repositorio;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
-import AsignarAccionesUsuario.Criterio;
+import AsignarAccionesUsuario.Accion;
+import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 
 public class RepoUsuarios {
 
 	static public ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-	static RepoUsuarios instancia;
+	static RepoUsuarios instancia = null;
 	
 	public static RepoUsuarios getInstance() {
 		if (instancia == null) {
@@ -30,10 +31,21 @@ public class RepoUsuarios {
 		listaUsuarios.add(usuario);
 	}
 
-	public ArrayList<Usuario> filtrarPor(List<Criterio> listaDeCriterios) {
-		ArrayList<Usuario> filtro = new ArrayList<Usuario>();
-		listaUsuarios.forEach(usuario-> usuario.ingresarALista(listaDeCriterios,filtro));
-		return null;
+	public boolean todosTienenLaAccion(Accion unaAccion){
+		return listaUsuarios.stream().allMatch(unUsuario -> unUsuario.getListaDeAcciones().get(0).equals(unaAccion));
 	}
+	
+	public int size(){
+		return listaUsuarios.size();
+	}
+	
+	public ArrayList<Usuario> seleccionaUsuarios(AsignarAccionesUsuarios proceso){
+		return listaUsuarios.stream().filter(unUsuario -> proceso.cumpleCriterio(unUsuario))
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+	//public void filtrarPor(Criterio criterio) {
+		//ArrayList<Usuario> filtro = new ArrayList<Usuario>();
+		//listaUsuarios.forEach(usuario-> filtro.add(criterio.esCumplidoPor(usuario)));
+	//}
 
 }

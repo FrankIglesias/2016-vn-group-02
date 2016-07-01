@@ -34,15 +34,11 @@ public class TestAsignarAccionesUsuario {
 
 	AccionDesactivar accionDesactivar;
 	AccionNotificarAdmin accionNotificarAdmin;
-	ArrayList<Accion> acciones = new ArrayList<Accion>();
 
 	CriterioComuna criterioComuna;
 	CriterioComuna criterioComuna2;
 	CriterioPreSeleccionados criterioPreSeleccionados;
 	CriterioTodosUsuarios criterioTodosUsuarios;
-	ArrayList<Criterio> criterios = new ArrayList<Criterio>();
-
-	AsignarAccionesUsuarios proceso;
 
 	@Before
 	public void init() {
@@ -66,11 +62,38 @@ public class TestAsignarAccionesUsuario {
 	}
 
 	@Test
-	public void asignarAccionNotificarAdminAPreseleccionadosTest() {
+	public void asignarAccionAPreseleccionadosTest() {
 		AsignarAccionesUsuarios proceso = new AsignarAccionesUsuarios(repoUsuarios, criterioPreSeleccionados,
 				accionNotificarAdmin);
 		proceso.asignarAcciones();
 		Assert.assertTrue(usuario3.getListaDeAcciones().get(0).equals(accionNotificarAdmin));
+	}
+
+	@Test
+	public void asignarAccionATodosLosUsuarioTest() {
+		AsignarAccionesUsuarios proceso = new AsignarAccionesUsuarios(repoUsuarios, criterioTodosUsuarios,
+				accionNotificarAdmin);
+		proceso.asignarAcciones();
+		
+		Assert.assertTrue(repoUsuarios.todosTienenLaAccion(accionNotificarAdmin));
+
+	}
+	
+	@Test
+	public void desactivarAccionAUsuarioPreseleccionadoTest() {
+		usuario3.inicializarListaDeAcciones();
+		
+		AsignarAccionesUsuarios proceso = new AsignarAccionesUsuarios(repoUsuarios, criterioPreSeleccionados,
+				accionNotificarAdmin);
+		proceso.asignarAcciones();
+		
+		AsignarAccionesUsuarios proceso2 = new AsignarAccionesUsuarios(repoUsuarios, criterioPreSeleccionados,
+			accionDesactivar);
+		proceso2.asignarAcciones();
+		proceso2.ejecutarAccion(accionDesactivar);
+		
+		Assert.assertTrue(usuario3.getListaDeAcciones().isEmpty());
+
 	}
 
 }

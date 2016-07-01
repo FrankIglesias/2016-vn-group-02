@@ -12,7 +12,7 @@ public class CriterioPreSeleccionados implements Criterio {
 	}
 
 	public boolean esCumplidoPor(Usuario unUsuario) {
-		return usuariosSeleccionados.stream().anyMatch(seleccionado -> seleccionado == unUsuario);
+		return usuariosSeleccionados.stream().anyMatch(seleccionado -> seleccionado.equals(unUsuario));
 	}
 
 }

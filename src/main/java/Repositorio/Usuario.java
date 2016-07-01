@@ -11,6 +11,9 @@ public class Usuario {
 	Geolocalizacion point;
 	ArrayList<Accion> listaDeAcciones = new ArrayList<Accion>();	
 	
+	public void inicializarListaDeAcciones(){
+		listaDeAcciones = new ArrayList<Accion>();
+	}
 	public Usuario(Geolocalizacion point){
 		this.point = point;
 	}
@@ -24,9 +27,9 @@ public class Usuario {
 	}
 
 	public void quitar(Accion accion) {
-		if(listaDeAcciones.contains(accion)){
+		//if(listaDeAcciones.contains(accion)){
 			listaDeAcciones.remove(accion);
-		}
+		//}
 	}
 	
 	public ArrayList<Accion> getListaDeAcciones() {
@@ -37,4 +40,14 @@ public class Usuario {
 		if(listaDeCriterios.stream().allMatch(criterio->criterio.esCumplidoPor(this)))
 			filtro.add(this);
 	}
+	
+	public boolean tieneAccion(Accion accion){
+		return listaDeAcciones.stream().anyMatch(unaAccion -> unaAccion.equals(accion) );
+	}
+	
+	public void ejecutaUnaAccion(Accion unaAccion){
+		unaAccion.ejecutarAccion(this);
+	}
+	
+	
 }

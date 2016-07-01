@@ -11,7 +11,8 @@ public class AccionDesactivar implements Accion {
 	}
 
 	public void ejecutarAccion(Usuario usuario) {
-		usuario.quitar(accion);
+			usuario.quitar(accion);
+			usuario.quitar(this);
 	}
 
 }
