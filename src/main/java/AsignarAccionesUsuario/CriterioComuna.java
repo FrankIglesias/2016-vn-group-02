@@ -3,14 +3,18 @@ package AsignarAccionesUsuario;
 import Repositorio.Usuario;
 
 public class CriterioComuna implements Criterio {
-		int comuna;
+	int comuna;
 
-		public boolean esCumplidoPor(Usuario unUsuario) {
-			if (unUsuario.getComuna() == comuna){
-				return true;
-			}
-			return false;
+	public CriterioComuna(int comuna) {
+		super();
+		this.comuna = comuna;
+	}
+
+	public boolean esCumplidoPor(Usuario unUsuario) {
+		if (unUsuario.getComuna() == comuna) {
+			return true;
 		}
-		
-		
+		return false;
+	}
+
 }
