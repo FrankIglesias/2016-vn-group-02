@@ -21,6 +21,7 @@ public class GestorDeProcesosTest {
 	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	int numero = 0;
 	Date date;
+	Date date1;
 
 	@Before
 	public void init() {
@@ -40,6 +41,7 @@ public class GestorDeProcesosTest {
 			e.printStackTrace();
 		}
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
+		gestor.correrProcesos();
 		Assert.assertTrue(repo.size() > 0);
 	}
 
@@ -50,16 +52,9 @@ public class GestorDeProcesosTest {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
-		numero = repo.size(); // aca se acarrea el del primer procesos
-		try {
-			date = formatoFecha.parse("2016-06-30 01:59:00");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		gestor.setProceso(new ActualizadorDeLC(), date);
-
+		gestor.correrProcesos();
 		Assert.assertTrue(repo.size() > numero);
 	}
 
@@ -67,18 +62,14 @@ public class GestorDeProcesosTest {
 	public void testVariosProcesosenMismosHorarios() throws Exception {
 		try {
 			date = formatoFecha.parse("2016-06-30 23:06:00");
+			date1 = formatoFecha.parse("2016-06-30 23:45:00");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
-		numero = repo.size(); // aca se acarrea el del primer procesos
-		try {
-			date = formatoFecha.parse("2016-06-30 23:06:00");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		gestor.setProceso(new ActualizadorDeLC(), date);
+		gestor.setProceso(new ActualizadorDeLC(), date1);
+		gestor.correrProcesos();
 		Assert.assertTrue(repo.size() > numero);
 	}
 }
