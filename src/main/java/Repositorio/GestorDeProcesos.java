@@ -1,6 +1,7 @@
 package Repositorio;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -34,6 +35,17 @@ public class GestorDeProcesos {
 
 	public void correrProcesos() {
 		listaDeProcesos.forEach(unProceso -> correrProceso(unProceso));
+	}
+	
+	public Date setFecha(String fecha){
+		Date date = null;
+		try {
+			date = formatoFecha.parse("2016-06-30 01:59:00");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return date;
 	}
 
 	private void correrProceso(Proceso unProceso) {

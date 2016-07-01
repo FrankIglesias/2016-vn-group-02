@@ -35,11 +35,9 @@ public class GestorDeProcesosTest {
 
 	@Test
 	public void actualizacionProgramadaYConcretadaTest() {
-		try {
-			date = formatoFecha.parse("2016-06-30 01:59:00");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		 
+		date = gestor.setFecha("2016-06-30 01:59:00");
+		
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.correrProcesos();
 		Assert.assertTrue(repo.size() > 0);
@@ -47,11 +45,9 @@ public class GestorDeProcesosTest {
 
 	@Test
 	public void testVariosProcesosenDistintosHorarios() throws Exception {
-		try {
-			date = formatoFecha.parse("2016-06-30 01:59:00");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		date = gestor.setFecha("2016-06-30 01:59:00");
+		
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.setProceso(new ActualizadorDeLC(), date);
 		gestor.correrProcesos();
@@ -59,13 +55,10 @@ public class GestorDeProcesosTest {
 	}
 
 	@Test
-	public void testVariosProcesosenMismosHorarios() throws Exception {
-		try {
-			date = formatoFecha.parse("2016-06-30 23:06:00");
-			date1 = formatoFecha.parse("2016-06-30 23:45:00");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public void testVariosProcesosenMismosHorarios() {
+		
+		date = gestor.setFecha("2016-06-30 23:06:00");
+		date1 = gestor.setFecha("2016-06-30 23:45:00");
 
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.setProceso(new ActualizadorDeLC(), date1);
