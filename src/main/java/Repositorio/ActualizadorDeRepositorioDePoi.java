@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import BancoExterno.ApiDeBancoMock;
 import DesignDreamTeamErrors.ErrorHandler;
+import DesignDreamTeamProcesses.GestorDeProcesos;
 
 public class ActualizadorDeRepositorioDePoi extends TimerTask {
 

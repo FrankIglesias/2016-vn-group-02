@@ -27,7 +27,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import DesignDreamTeamErrors.ErrorHandler;
 import DesignDreamTeamLocation.Geolocalizacion;
-import Repositorio.GestorDeProcesos;
+import DesignDreamTeamProcesses.GestorDeProcesos;
 import Repositorio.RepoPOIs;
 import TypePois.POI;
 import TypePois.genericPOI;

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.TimerTask;
 
 import DesignDreamTeamErrors.ErrorHandler;
-import Repositorio.GestorDeProcesos;
+import DesignDreamTeamProcesses.GestorDeProcesos;
 import Repositorio.RepoPOIs;
 
 public class ActualizadorDeLC extends TimerTask {

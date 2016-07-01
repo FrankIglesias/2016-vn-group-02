@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ActualizarLocalesComerciales.ActualizadorDeLC;
+import DesignDreamTeamProcesses.GestorDeProcesos;
 import Repositorio.ActualizadorDeRepositorioDePoi;
-import Repositorio.GestorDeProcesos;
 import Repositorio.RepoPOIs;
 
 public class GestorDeProcesosTest {
