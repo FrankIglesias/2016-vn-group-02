@@ -10,20 +10,21 @@ import java.util.TimerTask;
 
 import DesignDreamTeamErrors.ErrorHandler;
 import DesignDreamTeamProcesses.GestorDeProcesos;
+import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorio.RepoPOIs;
 
-public class ActualizadorDeLC extends TimerTask {
+public class ActualizadorDeLC extends DesignDreamTeamProcess {
 
 	private RepoPOIs repo = RepoPOIs.getInstance();
 	private String archivoALevantar;
 	private ErrorHandler AccionDeError;
 
-	public void setArchivoALevantar(String unArchivo) {
-		this.archivoALevantar = unArchivo;
+	public ActualizadorDeLC(ErrorHandler accion, Date date) {
+		super(accion, date);
 	}
 
-	public String getArchivoALevantar() {
-		return this.archivoALevantar;
+	public void setArchivoALevantar(String unArchivo) {
+		this.archivoALevantar = unArchivo;
 	}
 
 	public void actualizarListaDeLC() {
@@ -41,7 +42,12 @@ public class ActualizadorDeLC extends TimerTask {
 
 		} catch (Exception e) {
 			System.out.println("NO SE PUDO ABRIR EL ARCHIVO DE LOCALES COMERCIALES\n");
+			throw new RuntimeException();
 		}
+	}
+
+	public void setAccionDeError(ErrorHandler accionDeError) {
+		AccionDeError = accionDeError;
 	}
 
 	public ArrayList<String> getPalabrasClavesDeLinea(String unPOI) {
@@ -65,9 +71,7 @@ public class ActualizadorDeLC extends TimerTask {
 			System.out.println("NO SE PUDO ABRIR EL ARCHIVO DE LOCALES COMERCIALES\n");
 
 		}
-
 		return palabrasClaves;
-
 	}
 
 	public String obtenerNombreDePOIDeLinea(String unaLinea) {

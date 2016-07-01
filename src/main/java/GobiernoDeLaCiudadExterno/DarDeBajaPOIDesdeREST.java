@@ -37,10 +37,10 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 	String url;
 	Map<Geolocalizacion, LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion, LocalDateTime>();
 	private Client client;
-	private static String API_GOOGLE = "";
-	private static String RESOURCE = "";
+	private static String API_GOOGLE;
+	private static String RESOURCE;
 
-	public static void setRestParameters(String api, String res) {
+	public static void setRutaRest(String api, String res) {
 		API_GOOGLE = api;
 		RESOURCE = res;
 	}
@@ -63,25 +63,20 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 		} catch (RuntimeException | IOException e) {
 			AccionDeError.ejecutarAccion(new Date(), this);
 		}
-		
+
 		SemVamoASincronizarno_signal();
 	}
 
 	private void SemVamoASincronizarno_signal() {
 		GestorDeProcesos.sem.release();
 	}
+
 	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) {
 		Gson gson = new Gson();
 		java.lang.reflect.Type tipo = new TypeToken<List<POIAEliminarADapter>>() {
 		}.getType(); // Copiado de ApiDeBancoMock. La fecha es un string
 		List<POIAEliminarADapter> POIsPrev = gson.fromJson(noProcesado, tipo);
-
-		Map<Geolocalizacion, LocalDateTime> POIs = new HashMap<Geolocalizacion, LocalDateTime>(); // para
-																									// transformar
-																									// la
-																									// fecha
-																									// en
-																									// LocalDateTime
+		Map<Geolocalizacion, LocalDateTime> POIs = new HashMap<Geolocalizacion, LocalDateTime>();
 
 		for (POIAEliminarADapter i : POIsPrev) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -89,8 +84,7 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 			try {
 				d = sdf.parse(i.deletedAt);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
 
 			LocalDateTime dateTime = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());

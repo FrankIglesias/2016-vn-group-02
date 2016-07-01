@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +23,7 @@ public class BajaDePOIsTest {
 		geo2 = new Geolocalizacion(16.399024963378906, 48.21460723876953, null, null);
 		poi1 = new genericPOI(geo1,"poi1");
 		poi2 = new genericPOI(geo2,"poi2");
-		mock = new DarDeBajaPOIDesdeRESTMock();
+		mock = new DarDeBajaPOIDesdeRESTMock(null, null);
 	}
 	
 	@Test
@@ -38,8 +36,6 @@ public class BajaDePOIsTest {
 	
 	@Test
 	public void RepoBorrarDosPOITest(){
-		
-		System.out.println("\n\n\n\n"+cantidadDePoiAntesDeModificacion+"\n\n\n\n");
 		repo.agregarNuevosPoi(poi1);
 		repo.agregarNuevosPoi(poi2);
 		cantidadDePoiAntesDeModificacion= repo.size();

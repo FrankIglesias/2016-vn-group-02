@@ -14,7 +14,7 @@ public class TestActualizacionDeLC {
 	
 	@Before
 	public void init(){
-		actualizador = new ActualizadorDeLC();
+		actualizador = new ActualizadorDeLC(null, null);
 		repo = RepoPOIs.getInstance();
 		repo.inicializarPuntosDeIntereses();
 		actualizador.setArchivoALevantar("LocalesComerciales.txt");

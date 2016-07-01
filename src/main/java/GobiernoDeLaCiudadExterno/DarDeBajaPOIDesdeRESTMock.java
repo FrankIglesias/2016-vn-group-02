@@ -23,14 +23,24 @@ import com.sun.jersey.api.client.WebResource;
 import DesignDreamTeamErrors.ErrorHandler;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamProcesses.GestorDeProcesos;
+import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorio.RepoPOIs;
 import TypePois.POI;
 import TypePois.genericPOI;
- 
-public class DarDeBajaPOIDesdeRESTMock extends TimerTask implements ProcessDarDeBajaPOInterface {
+
+public class DarDeBajaPOIDesdeRESTMock extends DesignDreamTeamProcess implements ProcessDarDeBajaPOInterface {
 	ErrorHandler AccionDeError;
+
+	public DarDeBajaPOIDesdeRESTMock(ErrorHandler accion, Date date) {
+		super(accion, date);
+	}
+
+	public void setAccionDeError(ErrorHandler accionDeError) {
+		AccionDeError = accionDeError;
+	}
+
 	String noProcesado;
-	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
+	Map<Geolocalizacion, LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion, LocalDateTime>();
 	private Client client;
 	private static final String API_GOOGLE = "https://demo4399221.mockable.io/";
 	private static final String RESOURCE = "MyExampleRest";
@@ -38,73 +48,94 @@ public class DarDeBajaPOIDesdeRESTMock extends TimerTask implements ProcessDarDe
 	@Override
 	public void run() {
 		try {
-		System.out.println("Obteniendo datos...");
-		noProcesado = this.obtenerStream();
-		System.out.println("Procesando datos...");
-		POIsAEliminar = procesarPedido(noProcesado);
-		System.out.println("Por realizarse...");
-		this.eliminarPOIs();
-		System.out.println("Realizado Correctamente");
+			System.out.println("Obteniendo datos...");
+			noProcesado = this.obtenerStream();
+			System.out.println("Procesando datos...");
+			POIsAEliminar = procesarPedido(noProcesado);
+			System.out.println("Por realizarse...");
+			this.eliminarPOIs();
+			System.out.println("Realizado Correctamente");
+		} catch (RuntimeException e) {
+			AccionDeError.ejecutarAccion(new Date(), this);
+
 		}
-		catch(RuntimeException e){
-			AccionDeError.ejecutarAccion(new Date(),this);
-			
-		}
-		
+
 		SemVamoASincronizarno_signal();
 	}
 
 	private void SemVamoASincronizarno_signal() {
 		GestorDeProcesos.sem.release();
 	}
-	
-	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) { //Procesa el string json para transformarlo en un Map
+
+	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) { // Procesa
+																					// el
+																					// string
+																					// json
+																					// para
+																					// transformarlo
+																					// en
+																					// un
+																					// Map
 		Gson gson = new Gson();
-		java.lang.reflect.Type tipo = new TypeToken<List<POIAEliminarADapter>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
+		java.lang.reflect.Type tipo = new TypeToken<List<POIAEliminarADapter>>() {
+		}.getType(); // Copiado de ApiDeBancoMock. La fecha es un string
 		List<POIAEliminarADapter> POIsPrev = gson.fromJson(noProcesado, tipo);
-		
-		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>(); //para transformar la fecha en LocalDateTime
-		
-		for(POIAEliminarADapter i : POIsPrev)
-		{
+
+		Map<Geolocalizacion, LocalDateTime> POIs = new HashMap<Geolocalizacion, LocalDateTime>(); // para
+																									// transformar
+																									// la
+																									// fecha
+																									// en
+																									// LocalDateTime
+
+		for (POIAEliminarADapter i : POIsPrev) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			Date d = null;
 			try {
 				d = sdf.parse(i.deletedAt);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
-			
+
 			LocalDateTime dateTime = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
 
 			Geolocalizacion geo = new Geolocalizacion(i.latitud, i.longitud, null, null);
 			POIs.put(geo, dateTime);
 		}
-		
+
 		return POIs;
 	}
-	
+
 	public POI getPOI(Geolocalizacion geo) {
-		POI p = new genericPOI(geo,""); //crea un POI generico para comparar (no tengo los datos para saber que tipo de poi es, ni me interesa tenerlos)
+		POI p = new genericPOI(geo, ""); // crea un POI generico para comparar
+											// (no tengo los datos para saber
+											// que tipo de poi es, ni me
+											// interesa tenerlos)
 		return p;
 	}
 
 	public void eliminarPOIs() {
-		for (Entry<Geolocalizacion,LocalDateTime> POI : POIsAEliminar.entrySet()) {
+		for (Entry<Geolocalizacion, LocalDateTime> POI : POIsAEliminar.entrySet()) {
 			Geolocalizacion clave = POI.getKey();
 			LocalDateTime valor = POI.getValue();
-			if(valor.isBefore(LocalDateTime.now())) {
-				RepoPOIs.getInstance().sacarPoi(this.getPOI(clave)); //borra el poi si la fecha es mayor a la actual
+			if (valor.isBefore(LocalDateTime.now())) {
+				RepoPOIs.getInstance().sacarPoi(this.getPOI(clave)); // borra el
+																		// poi
+																		// si la
+																		// fecha
+																		// es
+																		// mayor
+																		// a la
+																		// actual
 			}
 		}
 	}
-	
+
 	public String obtenerStream() {
 		ClientResponse response = this.getBookByFilter("latitud", "");
 		return response.getEntity(String.class);
 	}
-	
+
 	public ClientResponse getBookByFilter(String filter, String value) {
 		this.client = Client.create();
 		WebResource recurso = this.client.resource(API_GOOGLE).path(RESOURCE);

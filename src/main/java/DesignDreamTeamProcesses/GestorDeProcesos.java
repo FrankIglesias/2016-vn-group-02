@@ -7,20 +7,19 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.TreeSet;
 import java.util.concurrent.Semaphore;
 
 public class GestorDeProcesos {
 
-	SortedSet<Proceso> listaDeProcesos = new TreeSet<>(Comparator.comparing(Proceso::getDate));
+	SortedSet<DesignDreamTeamProcess> listaDeProcesos = new TreeSet<>(Comparator.comparing(DesignDreamTeamProcess::getDate));
 	Timer timer = new Timer();
 	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public final static Semaphore sem = new Semaphore(0);
 
-	public void setProceso(TimerTask actua, Date fecha) {
-		Proceso unProceso = new Proceso(actua,fecha);
-		listaDeProcesos.add(unProceso);
+	public void setProceso(DesignDreamTeamProcess procesoArealizar) {
+		
+		listaDeProcesos.add(procesoArealizar);
 	}
 
 	private void SemVamoASincronizarno_wait() {
@@ -48,10 +47,10 @@ public class GestorDeProcesos {
 		return date;
 	}
 
-	private void correrProceso(Proceso unProceso) {
+	private void correrProceso(DesignDreamTeamProcess unProceso) {
 		System.out.println("Esperando la hora:  " + unProceso.getDate().getHours() + ":"
 				+ unProceso.getDate().getMinutes() + ":" + unProceso.getDate().getSeconds() + "....");
-		timer.schedule(unProceso.getProceso(), unProceso.getDate());
+		timer.schedule(unProceso, unProceso.getDate());
 		SemVamoASincronizarno_wait();
 
 	}

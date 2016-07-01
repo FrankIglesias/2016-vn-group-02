@@ -25,7 +25,7 @@ public class GestorDeProcesosTest {
 	@Before
 	public void init() {
 		gestor = new GestorDeProcesos();
-		actualizador = new ActualizadorDeLC();
+		actualizador = new ActualizadorDeLC(null, date);
 		repo = RepoPOIs.getInstance();
 		repo.inicializarPuntosDeIntereses();
 		numero = repo.size(); // hace que por cada test se instancie en 0
@@ -37,7 +37,7 @@ public class GestorDeProcesosTest {
 		 
 		date = gestor.setFecha("2016-06-30 01:58:00");
 		
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
+		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
 		gestor.correrProcesos();
 		Assert.assertTrue(repo.size() > 0);
 	}
@@ -47,8 +47,8 @@ public class GestorDeProcesosTest {
 		
 		date = gestor.setFecha("2016-06-30 01:58:00");
 		
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
-		gestor.setProceso(new ActualizadorDeLC(), date);
+		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
+		gestor.setProceso(new ActualizadorDeLC(null, date));
 		gestor.correrProcesos();
 		Assert.assertEquals(repo.size(),4);
 	}
@@ -56,12 +56,11 @@ public class GestorDeProcesosTest {
 	@Test
 	public void testVariosProcesosenMismosHorarios() {
 		
-		date = gestor.setFecha("2016-06-30 23:06:00");
-		date1 = gestor.setFecha("2016-06-30 23:45:00");
-
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
-		gestor.setProceso(new ActualizadorDeLC(), date1);
+		date = gestor.setFecha("2016-06-30 15:06:00");
+		date1 = gestor.setFecha("2016-06-30 15:45:00");
+		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
+		gestor.setProceso(new ActualizadorDeLC(null, date));
 		gestor.correrProcesos();
-		Assert.assertEquals(repo.size(),4);
+		Assert.assertEquals(repo.size(),1);
 	}
 }
