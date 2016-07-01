@@ -55,7 +55,7 @@ public class GestorDeProcesosTest {
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.setProceso(new ActualizadorDeLC(), date);
 		gestor.correrProcesos();
-		Assert.assertTrue(repo.size() > numero);
+		Assert.assertEquals(repo.size(),4);
 	}
 
 	@Test
@@ -70,6 +70,6 @@ public class GestorDeProcesosTest {
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.setProceso(new ActualizadorDeLC(), date1);
 		gestor.correrProcesos();
-		Assert.assertTrue(repo.size() > numero);
+		Assert.assertEquals(repo.size(),4);
 	}
 }
