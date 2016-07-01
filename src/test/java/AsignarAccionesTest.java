@@ -51,6 +51,7 @@ public class AsignarAccionesTest {
 		usuario1 = new Usuario(new Geolocalizacion(0, 0, domicilio1, new Localidad("", "", "")));
 		usuario2 = new Usuario(new Geolocalizacion(0, 0, domicilio2, new Localidad("", "", "")));
 		usuario3 = new Usuario(new Geolocalizacion(0, 0, domicilio2, new Localidad("", "", "")));
+		repoUsuarios.inicializarListaUsuarios();
 		repoUsuarios.add(usuario1);
 		repoUsuarios.add(usuario2);
 		repoUsuarios.add(usuario3);
@@ -69,15 +70,21 @@ public class AsignarAccionesTest {
 		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
 		proceso.asignarAcciones(repoUsuarios);
 		Assert.assertTrue(usuario1.getListaDeAcciones().contains(accionDesactivar));
-		/*
-		 * }
-		 * 
-		 * @Test public void AsignarAccionUsuarioListaVaciaTest(){ }
-		 * 
-		 * @Test public void seleccionarUsuariosTest(){ }
-		 */
+
 	}
+
+	@Test
+	public void seleccionarUsuariosTest() {
+		acciones.add(accionDesactivar);
+		criterios.add(criterioComuna);
+		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
+		preSeleccionados = proceso.seleccionarUsuarios(repoUsuarios);
+		Assert.assertTrue(preSeleccionados.contains(usuario2));
+		Assert.assertTrue(preSeleccionados.contains(usuario3));
+	}
+
 }
+
 /*
  * ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) { return
  * repoUsuario.getUsuarios().stream() .filter(unUsuario ->

@@ -23,7 +23,7 @@ public class AsignarAccionesUsuarios extends TimerTask {
 		this.listaDeCriterios = listaDeCriterios;
 	}
 
-	ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) {
+	public ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) {
 		return repoUsuario.getUsuarios().stream()
 				.filter(unUsuario -> listaDeCriterios.stream()
 						.allMatch(unCriterio -> unCriterio.esCumplidoPor(unUsuario)))
