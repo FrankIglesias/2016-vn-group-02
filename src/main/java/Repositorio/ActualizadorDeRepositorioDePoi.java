@@ -13,6 +13,10 @@ public class ActualizadorDeRepositorioDePoi extends TimerTask {
 		ApiDeBancoMock actualizadorDeBancos = new ApiDeBancoMock();
 		repositorioDePois.agregarVariosPoiDeListaDeBancos(actualizadorDeBancos.obtenerBancoDesdeString());
 		System.out.println("Finalizado agregar bancos...");
+		
+		System.out.println("Comenzando a agregar cgps...");
+		repositorioDePois.agregarVariosPoi(RepositorioCGPExternoAdapter.obtenerCGPDesdeRepositorioExterno("4637-2355"));
+		System.out.println("Finalizado agregar cgps...");
 		SemVamoASincronizarno_signal();
 	}
 

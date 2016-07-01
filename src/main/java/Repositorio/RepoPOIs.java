@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import TypePois.Banco;
+import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
 
@@ -44,13 +45,16 @@ public class RepoPOIs {
 	}
 
 	public void agregarVariosPoi(List<POI> listaDePoi) {
-		listaDePoi.forEach(unPoi -> puntosDeIntereses.add(unPoi));
+		puntosDeIntereses.addAll(listaDePoi);
 
 	}
 
-	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDePoi) {
-		listaDePoi.forEach(unPoi -> puntosDeIntereses.add(unPoi));
-
+	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDeBanco) {
+		puntosDeIntereses.addAll(listaDeBanco);
+	}
+	
+	public void agregarVariosCGPDeListaDeCGP(List<CGP> listaDeCGP){
+		puntosDeIntereses.addAll(listaDeCGP);
 	}
 	
 	public List<POI> tieneUnLocalConNombre(String nombre) {
