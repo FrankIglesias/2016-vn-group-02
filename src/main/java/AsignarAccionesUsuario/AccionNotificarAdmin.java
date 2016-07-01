@@ -13,14 +13,10 @@ public class AccionNotificarAdmin implements Accion {
 		super();
 		this.mailAdmin = mail;
 	}
-
-	/*public void ejecutarAccion(Usuario usuario){
-		usuario.quitar(accion);
-		}
 	
 	public void ejecutarAccion(Usuario usuario) {
 		GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
 		gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido", "");
-	}*/
+	}
 
 }

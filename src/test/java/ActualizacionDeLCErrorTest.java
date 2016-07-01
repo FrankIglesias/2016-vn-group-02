@@ -15,7 +15,7 @@ public class ActualizacionDeLCErrorTest {
 		actualizador = new ActualizadorDeLC();
 		repo = RepoPOIs.getInstance();
 		repo.inicializarPuntosDeIntereses();
-		actualizador.setArchivoALevantar("LocalesComerciales2");
+		actualizador.setArchivoALevantar("LocalesComerciales2.txt");
 	}
 	
 	@Test

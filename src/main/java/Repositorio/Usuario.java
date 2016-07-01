@@ -19,8 +19,8 @@ public class Usuario {
 		return point.getDomicilio().getComuna();
 	}
 	
-	public void addAccion(ArrayList<Accion> acciones){
-		listaDeAcciones.addAll(acciones);
+	public void addAccion(Accion accion){
+		listaDeAcciones.add(accion);
 	}
 
 	public void quitar(Accion accion) {
