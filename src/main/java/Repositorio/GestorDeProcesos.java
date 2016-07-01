@@ -2,34 +2,45 @@ package Repositorio;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.SortedSet;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeSet;
 import java.util.concurrent.Semaphore;
 
 public class GestorDeProcesos {
 
-	ArrayList<Timer> agendaDeProcesos = new ArrayList<Timer>();
+	SortedSet<Proceso> listaDeProcesos = new TreeSet<>(Comparator.comparing(Proceso::getDate));
 	Timer timer = new Timer();
 	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public final static Semaphore sem = new Semaphore(0);
-	public void setProceso(TimerTask actua,Date fecha) {
-		System.out.println("Esperando la hora:  "+ fecha.getHours()+":"+fecha.getMinutes()+fecha.getSeconds()+ "....");
-		timer.schedule(actua,fecha);
+
+	public void setProceso(TimerTask actua, Date fecha) {
+		Proceso unProceso = new Proceso(actua,fecha);
+		listaDeProcesos.add(unProceso);
+	}
+
+	private void SemVamoASincronizarno_wait() {
+
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void correrProcesos() {
+		listaDeProcesos.forEach(unProceso -> correrProceso(unProceso));
+	}
+
+	private void correrProceso(Proceso unProceso) {
+		System.out.println("Esperando la hora:  " + unProceso.getDate().getHours() + ":"
+				+ unProceso.getDate().getMinutes() + ":" + unProceso.getDate().getSeconds() + "....");
+		timer.schedule(unProceso.getProceso(), unProceso.getDate());
 		SemVamoASincronizarno_wait();
+
 	}
-
-
-
-private void SemVamoASincronizarno_wait(){
-	
-	try {
-		sem.acquire();
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
 }

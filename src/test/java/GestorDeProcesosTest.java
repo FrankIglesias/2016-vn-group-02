@@ -29,7 +29,7 @@ public class GestorDeProcesosTest {
 		repo = RepoPOIs.getInstance();
 		repo.inicializarPuntosDeIntereses();
 		numero = repo.size(); // hace que por cada test se instancie en 0
-
+		repo.addLocal("LoDeMari", new ArrayList<String>());
 	}
 
 	@Test
@@ -58,11 +58,27 @@ public class GestorDeProcesosTest {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		repo.addLocal("LoDeMari", new ArrayList<String>());
 		gestor.setProceso(new ActualizadorDeLC(), date);
 
 		Assert.assertTrue(repo.size() > numero);
 	}
 
+	@Test
+	public void testVariosProcesosenMismosHorarios() throws Exception {
+		try {
+			date = formatoFecha.parse("2016-06-30 23:06:00");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
+		numero = repo.size(); // aca se acarrea el del primer procesos
+		try {
+			date = formatoFecha.parse("2016-06-30 23:06:00");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		gestor.setProceso(new ActualizadorDeLC(), date);
+		Assert.assertTrue(repo.size() > numero);
+	}
 }
