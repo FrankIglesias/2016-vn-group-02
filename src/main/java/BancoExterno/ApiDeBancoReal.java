@@ -29,7 +29,7 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		this.client = Client.create();
 	}
 	
-	public ClientResponse getBookByFilter(String filter, String value) {
+	public ClientResponse obtenerBancosApi(String filter, String value) {
 		WebResource recurso = this.client.resource(API_GOOGLE).path(RESOURCE);
 		WebResource recursoConParametros = recurso.queryParam("banks", filter + ": " + value);
 		WebResource.Builder builder = recursoConParametros.accept(MediaType.APPLICATION_JSON);
@@ -37,20 +37,7 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 		return response;
 	}
 
-	public ClientResponse getBookByFilter(String filter, String value, String fields) {
-		ClientResponse response = this.client.resource(API_GOOGLE).path(RESOURCE)
-				.queryParam("banks", filter + ":" + value).queryParam("fields", fields)
-				.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-		return response;
-	}
-
-	public ClientResponse getBookAndSendHeader(String filter, String value, String header, String headerValue) {
-		ClientResponse response = this.client.resource(API_GOOGLE).path(RESOURCE)
-				.queryParam("banks", filter + ":" + value).header(header, headerValue)
-				.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-		return response;
-	}
-
+	
 	public List<Banco> obtenerBancoDesdeString() {
 		Gson gson = new Gson();
 		String json = obtenerStream();
@@ -64,7 +51,7 @@ public class ApiDeBancoReal implements ApiDeBancoInterface {
 	}
 
 	public String obtenerStream() {
-		ClientResponse response = this.getBookByFilter("sucursal", "Avellaneda");
+		ClientResponse response = this.obtenerBancosApi("sucursal", "Avellaneda");
 		return response.getEntity(String.class);
 	}
 }

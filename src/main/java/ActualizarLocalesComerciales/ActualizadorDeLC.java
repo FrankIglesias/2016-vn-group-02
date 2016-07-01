@@ -46,9 +46,9 @@ public class ActualizadorDeLC extends TimerTask {
 	}
 
 	public void run() {
-		System.out.println("Por realizarse...");
+		System.out.println("Realizando la actualizacion de locales...");
 		this.actualizarListaDeLC();
-		System.out.println("Realizado Correctamente");
+		System.out.println("Actualizacion realizada correctamente");
 		SemVamoASincronizarno_signal();
 	}
 private void SemVamoASincronizarno_signal(){

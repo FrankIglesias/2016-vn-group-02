@@ -10,16 +10,14 @@ public class ActualizadorDeRepositorioDePoi extends TimerTask {
 
 	public void run() {
 		System.out.println("Comenzando a agregar bancos...");
-		// ActualizadorDeLC actualizadorDeLocalesComerciales = new
-		// ActualizadorDeLC();
-		// actualizadorDeLocalesComerciales.actualizarListaDeLC();
 		ApiDeBancoMock actualizadorDeBancos = new ApiDeBancoMock();
 		repositorioDePois.agregarVariosPoiDeListaDeBancos(actualizadorDeBancos.obtenerBancoDesdeString());
 		System.out.println("Finalizado agregar bancos...");
 		SemVamoASincronizarno_signal();
 	}
-private void SemVamoASincronizarno_signal(){
-	GestorDeProcesos.sem.release();
-}
+
+	private void SemVamoASincronizarno_signal() {
+		GestorDeProcesos.sem.release();
+	}
 
 }
