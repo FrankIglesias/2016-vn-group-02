@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
-import Repositorio.GestorDeProcesos;
+import DesignDreamTeamProcesses.GestorDeProcesos;
 import Repositorio.RepoUsuarios;
 import Repositorio.Usuario;
 

@@ -5,15 +5,17 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import DesignDreamTeamErrors.FileNotFounException;
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.Banco;
 
 public class ApiDeBancoMock implements ApiDeBancoInterface {
+	
+	private static String rutaDeArchivo  = "prueba.json";
 	private String jsonBanco = "[{"
 			+ "\"banco\":\"Banco de la Plaza\","
 			+ "\"x\":-35.9338322,"
@@ -33,6 +35,12 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 			+ "\"servicios\": ["
 			+ "\"depositos\", \"extracciones\", \"transferencias\", \"seguros\""
 			+ "]}" + "]";
+	
+	
+	
+	public static void setRutaDeArchivo(String ruta) {
+		rutaDeArchivo = ruta;
+	}
 
 	public static Banco obtenerBancoDesdeArchivo() {
 		Gson gson = new Gson();
@@ -48,11 +56,12 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 		Reader read = null;
 		try {
 			read = new FileReader(System.getProperty("user.dir")
-					+ System.getProperty("file.separator") + "prueba.json");
+					+ System.getProperty("file.separator")+ rutaDeArchivo );
 			System.out.println(read);
 		} catch (FileNotFoundException e) {
 			System.out
 					.println("FALLO ABRIR EL ARCHIVO CON EL BANCO DE PRUEBA!!!!!!\n");
+			throw new FileNotFounException();
 		}
 		return read;
 	}

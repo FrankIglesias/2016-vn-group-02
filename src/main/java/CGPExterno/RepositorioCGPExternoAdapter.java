@@ -1,8 +1,4 @@
-package Repositorio;
-import CGPExterno.CentroDTO;
-import CGPExterno.RangoServicioDTO;
-import CGPExterno.RepositorioCGPExterno;
-import CGPExterno.ServicioDTO;
+package CGPExterno;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.HorarioYDia;
