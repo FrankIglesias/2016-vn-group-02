@@ -37,9 +37,6 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 		System.out.println("Obteniendo datos...");
 		noProcesado = this.obtenerStream();
 		System.out.println("Procesando datos...");
-		
-		System.out.println(noProcesado);
-		
 		POIsAEliminar = procesarPedido(noProcesado);
 		System.out.println("Por realizarse...");
 		this.eliminarPOIs();
@@ -84,7 +81,6 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 			LocalDateTime valor = POI.getValue();
 			if(valor.isBefore(LocalDateTime.now())) {
 				RepoPOIs.getInstance().sacarPoi(this.getPOI(clave)); //borra el poi si la fecha es mayor a la actual
-				System.out.println("sangalanga");
 			}
 		}
 	}

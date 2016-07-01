@@ -20,8 +20,8 @@ public class BajaDePOIsTest {
 	@Before
 	public void init() {
 		repo = RepoPOIs.getInstance();
-		geo1 = new Geolocalizacion(48.2088611, 16.3698108, null, null);
-		geo2 = new Geolocalizacion(16.3990259, 48.2146077, null, null);
+		geo1 = new Geolocalizacion(48.2088623046875, 16.369810104370117, null, null);
+		geo2 = new Geolocalizacion(16.399024963378906, 48.21460723876953, null, null);
 		poi1 = new genericPOI(geo1,"poi1");
 		poi2 = new genericPOI(geo2,"poi2");
 		mock = new DarDeBajaPOIMock();
@@ -35,14 +35,14 @@ public class BajaDePOIsTest {
 	}
 	
 	@Test
-	public void RepoBrrarUnPOITest(){
+	public void RepoBorrarDosPOITest(){
 		mock.run();
-		System.out.println(repo.size());
 		Assert.assertEquals(repo.size(), 0);
 	}
 	
 	@Test
-	public void testName() throws Exception {
-		System.out.println(mock.obtenerStream());
+	public void RestJsonCorrectamente() throws Exception {
+		String json = mock.obtenerStream();
+		Assert.assertNotEquals("", json);
 	}
 }

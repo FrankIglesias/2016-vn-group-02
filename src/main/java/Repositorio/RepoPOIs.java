@@ -30,7 +30,7 @@ public class RepoPOIs {
 
 	public void sacarPoi(POI POIaSacar) {
 		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> sonIguales(unPoi, POIaSacar))
-				.collect(Collectors.toList()).get(1));
+				.collect(Collectors.toList()).get(0));
 
 	}
 
