@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,8 +37,8 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 	
 	
 	
-	public void setRutaDeArchivo(String rutaDeArchivo) {
-		this.rutaDeArchivo = rutaDeArchivo;
+	public static void setRutaDeArchivo(String ruta) {
+		rutaDeArchivo = ruta;
 	}
 
 	public static Banco obtenerBancoDesdeArchivo() {
