@@ -9,6 +9,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import DesignDreamTeamErrors.FileNotFounException;
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.Banco;
 
@@ -60,7 +61,7 @@ public class ApiDeBancoMock implements ApiDeBancoInterface {
 		} catch (FileNotFoundException e) {
 			System.out
 					.println("FALLO ABRIR EL ARCHIVO CON EL BANCO DE PRUEBA!!!!!!\n");
-			throw new RuntimeException();
+			throw new FileNotFounException();
 		}
 		return read;
 	}

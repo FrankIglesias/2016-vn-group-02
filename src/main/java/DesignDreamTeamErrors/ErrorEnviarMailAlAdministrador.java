@@ -15,7 +15,7 @@ public class ErrorEnviarMailAlAdministrador implements ErrorHandler {
 
 	@Override
 	public void ejecutarAccion(Date fecha, TimerTask proceso) {
-		gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Ha ocurrido un error en el sistema", "");
+		gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Ha ocurrido un error en el sistema, " + fecha, "");
 		
 	}
 	
