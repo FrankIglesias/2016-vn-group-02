@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class RepoUsuarios {
 	
-	static ArrayList<Usuario> listaUsuarios; 
+	static public ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>(); 
 	static RepoUsuarios instancia;
 	
 	public static RepoUsuarios getInstance() {
