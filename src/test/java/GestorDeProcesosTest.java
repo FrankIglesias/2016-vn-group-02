@@ -1,5 +1,4 @@
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +35,7 @@ public class GestorDeProcesosTest {
 	@Test
 	public void actualizacionProgramadaYConcretadaTest() {
 		 
-		date = gestor.setFecha("2016-06-30 01:59:00");
+		date = gestor.setFecha("2016-06-30 01:58:00");
 		
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.correrProcesos();
@@ -46,7 +45,7 @@ public class GestorDeProcesosTest {
 	@Test
 	public void testVariosProcesosenDistintosHorarios() throws Exception {
 		
-		date = gestor.setFecha("2016-06-30 01:59:00");
+		date = gestor.setFecha("2016-06-30 01:58:00");
 		
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		gestor.setProceso(new ActualizadorDeLC(), date);

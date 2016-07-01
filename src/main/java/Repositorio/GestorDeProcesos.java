@@ -40,7 +40,7 @@ public class GestorDeProcesos {
 	public Date setFecha(String fecha){
 		Date date = null;
 		try {
-			date = formatoFecha.parse("2016-06-30 01:59:00");
+			date = formatoFecha.parse(fecha);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
