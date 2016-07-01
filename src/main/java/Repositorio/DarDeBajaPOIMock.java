@@ -1,16 +1,24 @@
 package Repositorio;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
+import javax.ws.rs.core.MediaType;
+
 import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.POI;
@@ -18,13 +26,16 @@ import TypePois.genericPOI;
  
 public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 	
-	String noProcesado = "[{\"latitud\":-35.9338322,\"longitud\":72.348353,\"fecha\":\"1986-04-08 12:30\"},"
-			+ " {\"latitud\":-35.9566622,\"longitud\":72.566653,\"fecha\":\"2017-04-08 12:30\"}]";
+	String noProcesado;
 	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
+	private Client client;
+	private static final String API_GOOGLE = "https://demo4399221.mockable.io/";
+	private static final String RESOURCE = "MyExampleRest";
 
 	@Override
 	public void run() { //realiza el proceso. lo copié de otro proceso
 		System.out.println("Obteniendo datos...");
+		noProcesado = this.obtenerStream();
 		System.out.println("Procesando datos...");
 		
 		System.out.println(noProcesado);
@@ -42,11 +53,19 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 		
 		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>(); //para transformar la fecha en LocalDateTime
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //formato para la fecha
-		
 		for(restPOIAEliminar i : POIsPrev)
 		{
-			LocalDateTime dateTime = LocalDateTime.parse(i.fecha, formatter);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			Date d = null;
+			try {
+				d = sdf.parse(i.deletedAt);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			LocalDateTime dateTime = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+
 			Geolocalizacion geo = new Geolocalizacion(i.latitud, i.longitud, null, null);
 			POIs.put(geo, dateTime);
 		}
@@ -63,9 +82,24 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 		for (Entry<Geolocalizacion,LocalDateTime> POI : POIsAEliminar.entrySet()) {
 			Geolocalizacion clave = POI.getKey();
 			LocalDateTime valor = POI.getValue();
-			if(valor.toInstant(null).isAfter(LocalDateTime.now().toInstant(null))) {
+			if(valor.isBefore(LocalDateTime.now())) {
 				RepoPOIs.getInstance().sacarPoi(this.getPOI(clave)); //borra el poi si la fecha es mayor a la actual
+				System.out.println("sangalanga");
 			}
 		}
+	}
+	
+	public String obtenerStream() {
+		ClientResponse response = this.getBookByFilter("latitud", "");
+		return response.getEntity(String.class);
+	}
+	
+	public ClientResponse getBookByFilter(String filter, String value) {
+		this.client = Client.create();
+		WebResource recurso = this.client.resource(API_GOOGLE).path(RESOURCE);
+		WebResource recursoConParametros = recurso.queryParam("banks", filter + ": " + value);
+		WebResource.Builder builder = recursoConParametros.accept(MediaType.APPLICATION_JSON);
+		ClientResponse response = builder.get(ClientResponse.class);
+		return response;
 	}
 }
