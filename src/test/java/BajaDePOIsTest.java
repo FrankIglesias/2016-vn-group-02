@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import DesignDreamTeamLocation.Geolocalizacion;
-import Repositorio.DarDeBajaPOIMock;
+import GobiernoDeLaCiudadExterno.DarDeBajaPOIDesdeRESTMock;
 import Repositorio.RepoPOIs;
 import TypePois.genericPOI;
 
@@ -15,7 +15,7 @@ public class BajaDePOIsTest {
 	genericPOI poi2;
 	Geolocalizacion geo1;
 	Geolocalizacion geo2;
-	DarDeBajaPOIMock mock;
+	DarDeBajaPOIDesdeRESTMock mock;
 	int cantidadDePoiAntesDeModificacion;
 	@Before
 	public void init() {
@@ -25,7 +25,7 @@ public class BajaDePOIsTest {
 		geo2 = new Geolocalizacion(16.399024963378906, 48.21460723876953, null, null);
 		poi1 = new genericPOI(geo1,"poi1");
 		poi2 = new genericPOI(geo2,"poi2");
-		mock = new DarDeBajaPOIMock();
+		mock = new DarDeBajaPOIDesdeRESTMock();
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-package Repositorio;
+package GobiernoDeLaCiudadExterno;
 
 import java.util.Date;
 import java.text.ParseException;
@@ -20,12 +20,15 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import DesignDreamTeamErrors.ErrorHandler;
 import DesignDreamTeamLocation.Geolocalizacion;
+import Repositorio.GestorDeProcesos;
+import Repositorio.RepoPOIs;
 import TypePois.POI;
 import TypePois.genericPOI;
  
-public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
-	
+public class DarDeBajaPOIDesdeRESTMock extends TimerTask implements ProcessDarDeBajaPOInterface {
+	ErrorHandler AccionDeError;
 	String noProcesado;
 	Map<Geolocalizacion,LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion,LocalDateTime>();
 	private Client client;
@@ -33,7 +36,8 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 	private static final String RESOURCE = "MyExampleRest";
 
 	@Override
-	public void run() { //realiza el proceso. lo copié de otro proceso
+	public void run() {
+		try {
 		System.out.println("Obteniendo datos...");
 		noProcesado = this.obtenerStream();
 		System.out.println("Procesando datos...");
@@ -41,16 +45,27 @@ public class DarDeBajaPOIMock extends TimerTask implements processDarDeBajaPOI {
 		System.out.println("Por realizarse...");
 		this.eliminarPOIs();
 		System.out.println("Realizado Correctamente");
+		}
+		catch(RuntimeException e){
+			AccionDeError.ejecutarAccion(new Date(),this);
+			
+		}
+		
+		SemVamoASincronizarno_signal();
 	}
 
+	private void SemVamoASincronizarno_signal() {
+		GestorDeProcesos.sem.release();
+	}
+	
 	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) { //Procesa el string json para transformarlo en un Map
 		Gson gson = new Gson();
-		java.lang.reflect.Type tipo = new TypeToken<List<restPOIAEliminar>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
-		List<restPOIAEliminar> POIsPrev = gson.fromJson(noProcesado, tipo);
+		java.lang.reflect.Type tipo = new TypeToken<List<POIAEliminarADapter>>() {}.getType(); //Copiado de ApiDeBancoMock. La fecha es un string
+		List<POIAEliminarADapter> POIsPrev = gson.fromJson(noProcesado, tipo);
 		
 		Map<Geolocalizacion,LocalDateTime> POIs = new HashMap<Geolocalizacion,LocalDateTime>(); //para transformar la fecha en LocalDateTime
 		
-		for(restPOIAEliminar i : POIsPrev)
+		for(POIAEliminarADapter i : POIsPrev)
 		{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			Date d = null;
