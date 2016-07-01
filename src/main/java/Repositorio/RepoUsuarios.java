@@ -23,4 +23,8 @@ public class RepoUsuarios {
 		return listaUsuarios;
 	}
 	
+	public void add(Usuario usuario){
+		listaUsuarios.add(usuario);
+	}
+	
 }

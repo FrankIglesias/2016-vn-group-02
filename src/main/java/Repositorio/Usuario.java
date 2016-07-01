@@ -27,5 +27,7 @@ public class Usuario {
 		}
 	}
 	
-	
+	public ArrayList<Accion> getListaDeAcciones() {
+		return listaDeAcciones;
+	}
 }
