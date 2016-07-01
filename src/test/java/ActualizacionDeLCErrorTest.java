@@ -1,14 +1,12 @@
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import Repositorio.RepoPOIs;
 
-public class TestActualizacionDeLC {
-	
+public class ActualizacionDeLCErrorTest {
+
 	ActualizadorDeLC actualizador;
 	RepoPOIs repo;
 	
@@ -17,38 +15,19 @@ public class TestActualizacionDeLC {
 		actualizador = new ActualizadorDeLC();
 		repo = RepoPOIs.getInstance();
 		repo.inicializarPuntosDeIntereses();
-		actualizador.setArchivoALevantar("LocalesComerciales.txt");
+		actualizador.setArchivoALevantar("LocalesComerciales2");
 	}
 	
 	@Test
-	public void RepoVacioTest() {
-		Assert.assertTrue(repo.isEmpty());
-	}
-	
-	@Test
-	public void RepoSinLocalesComercialesEntoncesNoAgregaTest(){
-		actualizador.actualizarListaDeLC();
-		Assert.assertEquals(repo.size(), 0);
-	}
-	
-	@Test
-	public void RepoActualizadoCorrectamenteTest(){
+	public void ActualizadorDeLCNoLograLevantarArchivoYNoHaceNada(){
 		repo.addLocal("Carrousel", new ArrayList<String>());
 		repo.addLocal("LoDeMari", new ArrayList<String>());
 		actualizador.actualizarListaDeLC();
 		ArrayList<String> palabrasClaves1 = actualizador.getPalabrasClavesDeLinea("Carrousel");
 		ArrayList<String> palabrasClaves2 = actualizador.getPalabrasClavesDeLinea("LoDeMari");
-		Assert.assertTrue(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClaves2));
+		Assert.assertFalse(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClaves2));
 		Assert.assertFalse(repo.tieneLasPalabrasClaves("Carrousel", palabrasClaves1));
 	}
 	
-	@Test
-	public void RepoActualizadoUnSoloLocalTest(){
-		repo.addLocal("LoDeMari", new ArrayList<String>());
-		actualizador.actualizarListaDeLC();
-		ArrayList<String> palabrasClaves2 = actualizador.getPalabrasClavesDeLinea("LoDeMari");
-		Assert.assertTrue(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClaves2));
-	}
-
 
 }

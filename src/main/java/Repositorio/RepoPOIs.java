@@ -87,5 +87,9 @@ public class RepoPOIs {
 		localito.setPalabrasClave(palabrasClave);
 		puntosDeIntereses.add(localito);
 	}
+	public boolean tieneLasPalabrasClaves(String poi, ArrayList<String> palabrasClaves)
+	{
+		return puntosDeIntereses.stream().anyMatch(unPOI -> unPOI.getNombre().equals(poi) && unPOI.tenesTodasLasPalabrasClaves(palabrasClaves));
+	}
 
 }

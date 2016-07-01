@@ -33,6 +33,10 @@ public abstract class POI {
 	public double distanciaConUnPOI(POI unPoi) {
 		return this.getPoint().distanciaCon(unPoi.getPoint());
 	}
+	public boolean tenesTodasLasPalabrasClaves(ArrayList<String> palabrasClaves)
+	{
+		return(palabrasClaves.stream().allMatch(unaPalabraClave -> this.palabrasClave.contains(unaPalabraClave)));
+	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
 		return distanciaMenor(this.getPoint().distanciaCon(point), 500);
