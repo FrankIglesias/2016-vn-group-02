@@ -1,24 +1,17 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
-import javax.ws.rs.core.MediaType;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import Repositorio.ActualizadorDeRepositorioDePoi;
 import Repositorio.GestorDeProcesos;
 import Repositorio.RepoPOIs;
-
-
 
 public class GestorDeProcesosTest {
 
@@ -47,7 +40,7 @@ public class GestorDeProcesosTest {
 			e.printStackTrace();
 		}
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
-		Assert.assertTrue(repo.size() > 0 );
+		Assert.assertTrue(repo.size() > 0);
 	}
 
 	@Test
@@ -57,7 +50,7 @@ public class GestorDeProcesosTest {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(), date);
 		numero = repo.size(); // aca se acarrea el del primer procesos
 		try {
@@ -65,9 +58,11 @@ public class GestorDeProcesosTest {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+
+		repo.addLocal("LoDeMari", new ArrayList<String>());
 		gestor.setProceso(new ActualizadorDeLC(), date);
+
 		Assert.assertTrue(repo.size() > numero);
 	}
-	
-	
+
 }
