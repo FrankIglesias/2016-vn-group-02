@@ -1,7 +1,9 @@
 package Repositorio;
 import java.util.ArrayList;
+import java.util.List;
 
 import AsignarAccionesUsuario.Accion;
+import AsignarAccionesUsuario.Criterio;
 import DesignDreamTeamLocation.Geolocalizacion;
 
 public class Usuario {
@@ -29,5 +31,10 @@ public class Usuario {
 	
 	public ArrayList<Accion> getListaDeAcciones() {
 		return listaDeAcciones;
+	}
+
+	public void ingresarALista(List<Criterio> listaDeCriterios, ArrayList<Usuario> filtro) {
+		if(listaDeCriterios.stream().allMatch(criterio->criterio.esCumplidoPor(this)))
+			filtro.add(this);
 	}
 }
