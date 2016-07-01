@@ -38,6 +38,7 @@ public class AsignarAccionesTest {
 	ArrayList<Accion> acciones = new ArrayList<Accion>();
 
 	CriterioComuna criterioComuna;
+	CriterioComuna criterioComuna2;
 	CriterioPreSeleccionados criterioPreSeleccionados;
 	CriterioTodosUsuarios criterioTodosUsuarios;
 	ArrayList<Criterio> criterios = new ArrayList<Criterio>();
@@ -51,20 +52,21 @@ public class AsignarAccionesTest {
 		usuario1 = new Usuario(new Geolocalizacion(0, 0, domicilio1, new Localidad("", "", "")));
 		usuario2 = new Usuario(new Geolocalizacion(0, 0, domicilio2, new Localidad("", "", "")));
 		usuario3 = new Usuario(new Geolocalizacion(0, 0, domicilio2, new Localidad("", "", "")));
-		repoUsuarios.inicializarListaUsuarios();
+		repoUsuarios = repoUsuarios.getInstance();
 		repoUsuarios.add(usuario1);
 		repoUsuarios.add(usuario2);
 		repoUsuarios.add(usuario3);
-		preSeleccionados.add(usuario1);
+		preSeleccionados.add(usuario3);
 
 		accionDesactivar = new AccionDesactivar(accionDesactivar);
 		accionNotificarAdmin = new AccionNotificarAdmin("mailprueba@gmail.com");
 		criterioComuna = new CriterioComuna(1);
+		criterioComuna2 = new CriterioComuna(15);
 		criterioPreSeleccionados = new CriterioPreSeleccionados(preSeleccionados);
 	}
 
 	@Test
-	public void AsignarAccionUsuarioTest() {
+	public void seAsignanLasAccionesALosUsuarioTest() {
 		acciones.add(accionDesactivar);
 		criterios.add(criterioTodosUsuarios);
 		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
@@ -74,13 +76,34 @@ public class AsignarAccionesTest {
 	}
 
 	@Test
-	public void seleccionarUsuariosTest() {
+	public void seFiltranLosUsuariosCorrectamenteTest() {
 		acciones.add(accionDesactivar);
 		criterios.add(criterioComuna);
 		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
 		preSeleccionados = proceso.seleccionarUsuarios(repoUsuarios);
 		Assert.assertTrue(preSeleccionados.contains(usuario2));
 		Assert.assertTrue(preSeleccionados.contains(usuario3));
+	}
+
+	@Test
+	public void unUsuarioCumpleLosCriteriosPrevistosTest() {
+		acciones.add(accionDesactivar);
+		criterios.add(criterioComuna);
+		criterios.add(criterioTodosUsuarios);
+		criterios.add(criterioPreSeleccionados);
+		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
+		Assert.assertFalse(proceso.cumpleCriterios(usuario1));
+		Assert.assertTrue(proceso.cumpleCriterios(usuario3));
+	}
+	@Test
+	public void ningunUsuarioCumpleLosCriteriosTest() {
+		acciones.add(accionDesactivar);
+		criterios.add(criterioComuna);
+		criterios.add(criterioComuna2);
+		proceso = new AsignarAccionesUsuarios(repoUsuarios, acciones, criterios);
+		preSeleccionados = proceso.seleccionarUsuarios(repoUsuarios);
+		Assert.assertFalse(proceso.cumpleCriterios(usuario1));
+		Assert.assertFalse(proceso.cumpleCriterios(usuario3));
 	}
 
 }
