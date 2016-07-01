@@ -13,10 +13,10 @@ public class AsignarAccionesUsuarios extends TimerTask {
 
 	RepoUsuarios repoUsuario;
 	ArrayList<Accion> listaDeAcciones = new ArrayList<Accion>();
-	List<Criterio> listaDeCriterios = new ArrayList<Criterio>();
-	
+	ArrayList<Criterio> listaDeCriterios = new ArrayList<Criterio>();
+
 	public AsignarAccionesUsuarios(RepoUsuarios repoUsuario, ArrayList<Accion> listaDeAcciones,
-			List<Criterio> listaDeCriterios) {
+			ArrayList<Criterio> listaDeCriterios) {
 		super();
 		this.repoUsuario = repoUsuario;
 		this.listaDeAcciones = listaDeAcciones;
@@ -24,15 +24,19 @@ public class AsignarAccionesUsuarios extends TimerTask {
 	}
 
 	public ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) {
-		return repoUsuario.getUsuarios().stream()
-				.filter(unUsuario -> listaDeCriterios.stream()
-						.allMatch(unCriterio -> unCriterio.esCumplidoPor(unUsuario)))
+		return RepoUsuarios.getUsuarios().stream().filter(unUsuario -> cumpleCriterios(unUsuario))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
-	
-	public void asignarAcciones(RepoUsuarios repoUsuarios){
+
+	public boolean cumpleCriterios(Usuario unUsuario) {
+		if(listaDeCriterios.isEmpty())
+			System.out.println("ListaDeCriterios vacia");
+		return this.listaDeCriterios.stream().allMatch(unCriterio -> unCriterio.esCumplidoPor(unUsuario));
+	}
+
+	public void asignarAcciones(RepoUsuarios repoUsuarios) {
 		ArrayList<Usuario> usuarios = seleccionarUsuarios(repoUsuarios);
-		usuarios.forEach(usuario-> usuario.addAccion(listaDeAcciones));
+		usuarios.forEach(usuario -> usuario.addAccion(listaDeAcciones));
 	}
 
 	@Override
@@ -46,5 +50,4 @@ public class AsignarAccionesUsuarios extends TimerTask {
 	private void SemVamoASincronizarno_signal() {
 		GestorDeProcesos.sem.release();
 	}
-	
 }
