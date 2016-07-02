@@ -36,17 +36,18 @@ public class TestActualizacionDeLC {
 		repo.addLocal("Carrousel", new ArrayList<String>());
 		repo.addLocal("LoDeMari", new ArrayList<String>());
 		actualizador.actualizarListaDeLC();
-		ArrayList<String> palabrasClaves1 = actualizador.getPalabrasClavesDeLinea("Carrousel");
-		ArrayList<String> palabrasClaves2 = actualizador.getPalabrasClavesDeLinea("LoDeMari");
-		Assert.assertTrue(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClaves2));
-		Assert.assertFalse(repo.tieneLasPalabrasClaves("Carrousel", palabrasClaves1));
+		//ArrayList<String> palabrasClaves1 = actualizador.getPalabrasClavesDeLinea("Carrousel");
+		//ArrayList<String> palabrasClaves2 = actualizador.getPalabrasClavesDeLinea("LoDeMari");
+		ArrayList<ArrayList<String>> palabrasClave = ActualizadorDeLC.getLista();
+		Assert.assertTrue(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClave));
+		Assert.assertTrue(repo.tieneLasPalabrasClaves("Carrousel", palabrasClave));
 	}
 	
 	@Test
 	public void RepoActualizadoUnSoloLocalTest(){
 		repo.addLocal("LoDeMari", new ArrayList<String>());
 		actualizador.actualizarListaDeLC();
-		ArrayList<String> palabrasClaves2 = actualizador.getPalabrasClavesDeLinea("LoDeMari");
+		ArrayList<ArrayList<String>> palabrasClaves2 = ActualizadorDeLC.getLista();
 		Assert.assertTrue(repo.tieneLasPalabrasClaves("LoDeMari", palabrasClaves2));
 	}
 

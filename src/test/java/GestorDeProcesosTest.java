@@ -50,7 +50,7 @@ public class GestorDeProcesosTest {
 		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
 		gestor.setProceso(new ActualizadorDeLC(null, date));
 		gestor.correrProcesos();
-		Assert.assertEquals(repo.size(),4);
+		Assert.assertEquals(repo.size(),7);
 	}
 
 	@Test

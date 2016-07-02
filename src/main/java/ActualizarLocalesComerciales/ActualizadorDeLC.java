@@ -18,7 +18,8 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 	private RepoPOIs repo = RepoPOIs.getInstance();
 	private String archivoALevantar;
 	private ErrorHandler AccionDeError;
-
+	private static ArrayList<ArrayList<String>> listaDeListasDePalabrasClaves = new ArrayList<ArrayList<String>>();
+	
 	public ActualizadorDeLC(ErrorHandler accion, Date date) {
 		super(accion, date);
 	}
@@ -31,54 +32,28 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 
 		try {
 			File archivo = new File(
-					System.getProperty("user.dir") + System.getProperty("file.separator") + archivoALevantar);
+			System.getProperty("user.dir") + System.getProperty("file.separator") + archivoALevantar);
 			FileReader fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
 			String linea;
-
 			while ((linea = br.readLine()) != null) {
 				parsearYAgregarLocal(linea, repo);
 			}
-
+				br.close();
 		} catch (Exception e) {
 			System.out.println("NO SE PUDO ABRIR EL ARCHIVO DE LOCALES COMERCIALES\n");
-			throw new RuntimeException();
+			
 		}
 	}
 
 	public void setAccionDeError(ErrorHandler accionDeError) {
 		AccionDeError = accionDeError;
 	}
+public static ArrayList<ArrayList<String>> getLista()
+{
+	return listaDeListasDePalabrasClaves;
+}
 
-	public ArrayList<String> getPalabrasClavesDeLinea(String unPOI) {
-
-		ArrayList<String> palabrasClaves = null;
-		try {
-			File archivo = new File(
-					System.getProperty("user.dir") + System.getProperty("file.separator") + archivoALevantar);
-			FileReader fr = new FileReader(archivo);
-			BufferedReader br = new BufferedReader(fr);
-			String linea;
-			while ((linea = br.readLine()) != null) {
-				if (unPOI == this.obtenerNombreDePOIDeLinea(linea))
-					;
-				{
-					palabrasClaves = this.obtenerPalabrasClavesDePOIDeLinea(linea);
-				}
-			}
-			return palabrasClaves;
-		} catch (Exception e) {
-			System.out.println("NO SE PUDO ABRIR EL ARCHIVO DE LOCALES COMERCIALES\n");
-
-		}
-		return palabrasClaves;
-	}
-
-	public String obtenerNombreDePOIDeLinea(String unaLinea) {
-		String[] nombreYPalabras = unaLinea.split(";");
-		return nombreYPalabras[0];
-
-	}
 
 	public ArrayList<String> obtenerPalabrasClavesDePOIDeLinea(String unaLinea) {
 		String[] nombreYPalabras = unaLinea.split(";");
@@ -93,10 +68,14 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 			String[] linea3 = nombreYpalabras[1].split(" ");
 			ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea3));
 			repositorio.actualizarLocal(nombreYpalabras[0], palabrasClave);
-		}
+			ActualizadorDeLC.agregarListaPalabrasClaves(palabrasClave);		
+			}
 
 	}
-
+public static void agregarListaPalabrasClaves(ArrayList<String> palabrasClaves)
+{
+	listaDeListasDePalabrasClaves.add(palabrasClaves);
+}
 	public void run() {
 		try {
 			System.out.println("Realizando la actualizacion de locales...");
