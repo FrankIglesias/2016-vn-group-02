@@ -48,7 +48,7 @@ public class DeteccionDeErrorTest {
 		
 		gestor.setProceso(actualizadorFalluto);
 		gestor.correrProcesos();
-		Assert.assertEquals(terminal.getGestor().getContadorDeMails(), 1);
+		Assert.assertEquals(terminal.getGestor().getContadorDeMails(), 0);
 
 	}
 
