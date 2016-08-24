@@ -2,7 +2,7 @@ package BancoExterno;
 
 import java.util.ArrayList;
 
-public class BancoTrucho {
+public class BancoAdapter {
 	public String banco;
 	public double x;
 	public double y;

@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ActualizarLocalesComerciales.ActualizadorDeLC;
-import Repositorio.RepoPOIs;
+import Repositorios.RepoPOIs;
 
 public class TestActualizacionDeLC {
 	

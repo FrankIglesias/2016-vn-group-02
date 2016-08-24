@@ -1,7 +1,7 @@
 package AsignarAccionesUsuario;
 import java.util.List;
 
-import Repositorio.Usuario;
+import Repositorios.Usuario;
 
 public class CriterioPreSeleccionados implements Criterio {
 	List<Usuario> usuariosSeleccionados;

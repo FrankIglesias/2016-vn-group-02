@@ -4,7 +4,7 @@ import javax.mail.Message;
 
 import GestorDeMail.GestorDeMailTrucho;
 import GestorDeMail.GestorMailInterface;
-import Repositorio.Usuario;
+import Repositorios.Usuario;
 
 public class AccionNotificarAdmin implements Accion {
 	String mailAdmin;

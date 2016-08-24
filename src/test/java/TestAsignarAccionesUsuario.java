@@ -17,8 +17,8 @@ import AsignarAccionesUsuario.CriterioTodosUsuarios;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
-import Repositorio.RepoUsuarios;
-import Repositorio.Usuario;
+import Repositorios.RepoUsuarios;
+import Repositorios.Usuario;
 
 public class TestAsignarAccionesUsuario {
 

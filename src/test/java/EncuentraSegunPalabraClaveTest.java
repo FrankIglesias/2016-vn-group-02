@@ -1,4 +1,5 @@
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -6,18 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
-import Repositorio.Buscador;
-import Repositorio.Terminal;
+import Repositorios.Buscador;
+import Repositorios.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;
 import TypePois.POI;
 
+public class EncuentraSegunPalabraClaveTest {
 
-
-public class EncuentraSegunPalabraClaveTest  {
-
-	
 	public Banco banco;
 	public Banco banco2;
 	public CGP cgp;
@@ -33,7 +31,12 @@ public class EncuentraSegunPalabraClaveTest  {
 		buscador = new Buscador();
 		banco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
 		cgp = GlobalTestVariables.crearUnCGP(null);
-		banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
+		try {
+			banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		colectivo = GlobalTestVariables.crearUnColectivo();
 
 		fraseABuscar = "quiero un banco que tenga depositos";
@@ -51,19 +54,18 @@ public class EncuentraSegunPalabraClaveTest  {
 	@Test
 	public void encontrarPOISegunPalabra() {
 		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 2);
-		Assert.assertEquals("Cantidad de elementos en el array", 2, buscador.buscarSegunPalabraClave("depositos", terminal).size());
+		Assert.assertEquals("Cantidad de elementos en el array", 2,
+				buscador.buscarSegunPalabraClave("depositos", terminal).size());
 	}
 
 	@Test
 	public void noEncuentraPOISegunPalabraClave() {
 		Assert.assertFalse(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
 	}
-	
+
 	@Test
-	public void encuentraACGP()
-	{
-		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(),1);
+	public void encuentraACGP() {
+		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(), 1);
 	}
-	
 
 }

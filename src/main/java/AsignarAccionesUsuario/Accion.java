@@ -1,6 +1,6 @@
 package AsignarAccionesUsuario;
 
-import Repositorio.Usuario;
+import Repositorios.Usuario;
 
 public interface Accion {
 	

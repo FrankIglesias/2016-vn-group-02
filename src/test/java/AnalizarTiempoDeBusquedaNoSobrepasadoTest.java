@@ -5,8 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import Repositorio.Buscador;
-import Repositorio.Terminal;
+import Repositorios.Buscador;
+import Repositorios.Terminal;
 
 
 

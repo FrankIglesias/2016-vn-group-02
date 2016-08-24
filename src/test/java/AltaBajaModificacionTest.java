@@ -1,9 +1,8 @@
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import BancoExterno.ApiDeBancoMock;
-import Repositorio.RepoPOIs;
+import Repositorios.RepoPOIs;
 
 
 public class AltaBajaModificacionTest {
@@ -44,7 +43,7 @@ public class AltaBajaModificacionTest {
 		ApiDeBancoMock requesterFalso = new ApiDeBancoMock();
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
 		unaBase.agregarNuevosPoi(GlobalTestVariables.crearUnColectivo());
-		unaBase.agregarVariosPoiDeListaDeBancos(requesterFalso.obtenerBancoDesdeString());
+		unaBase.agregarVariosPoi(requesterFalso.obtenerBancoDesdeString());
 		// de los bancos siempre devuelve 2 - 
 		Assert.assertEquals(unaBase.cantidadDePOI(), 4);
 

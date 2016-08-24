@@ -3,9 +3,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import BancoExterno.ApiDeBancoMock;
 import BancoExterno.ApiDeBancoReal;
-import BancoExterno.BancoTrucho;
+import BancoExterno.BancoAdapter;
 import BancoExterno.JsonFactory;
 import TypePois.Banco;
+import TypePois.POI;
 public class ApiDeBancoTest {
 
 	ApiDeBancoReal requester = new ApiDeBancoReal();
@@ -20,26 +21,26 @@ public class ApiDeBancoTest {
 
 	@Test
 	public void testObtenerBancoDesdeReal() throws Exception {
-		List<Banco> listaDeBancos  = requester.obtenerBancoDesdeString();
+		List<POI> listaDeBancos  = requester.obtenerBancoDesdeString();
 		Assert.assertTrue(listaDeBancos.size()==2);
 
 	}
 
 	@Test
 	public void testDeObtenerBancosDesdeString() throws Exception {
-		List<Banco> listaDeBancos = secondRequester.obtenerBancoDesdeString();
+		List<POI> listaDeBancos = secondRequester.obtenerBancoDesdeString();
 		Assert.assertTrue(listaDeBancos.size()==2);
 
 	}
 	@Test
 	public void testDeObtenerUnBancoObjetoDeMockDeArchivo() throws Exception {
-		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
+		Banco unBanco = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		Assert.assertEquals(unBanco.getNombre(), "Banco de la Plaza");
 
 	}
 	@Test
 	public void testDeObtenerUnBancoObjetoDeMockDeArchivoContieneUnServicio() throws Exception {
-		Banco unBanco = secondRequester.obtenerBancoDesdeArchivo();
+		Banco unBanco = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		Assert.assertTrue(unBanco.getPalabrasClave().contains("cobro cheques"));
 	}
 
@@ -49,9 +50,9 @@ public class ApiDeBancoTest {
 				+ "\"sucursal\": \"Avellaneda\"," + "\"gerente\": \"Javier Loeschbor\","
 				+ "\"extra_property\": \"Does not fail because mapper is configured to not fail with unknown properties\""
 				+ "}";
-		 BancoTrucho unBanco;
+		 BancoAdapter unBanco;
 		  JsonFactory jsonFactory = new JsonFactory();
-		 unBanco = jsonFactory.fromJson(jsonStudent, BancoTrucho.class);
+		 unBanco = jsonFactory.fromJson(jsonStudent, BancoAdapter.class);
 		Assert.assertEquals(unBanco.gerente, "Javier Loeschbor");
 	}
 }

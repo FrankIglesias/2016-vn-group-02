@@ -1,4 +1,4 @@
-package Repositorio;
+package Repositorios;
 import java.time.LocalDate;
 
 public class Busqueda {
@@ -18,7 +18,7 @@ public class Busqueda {
 		this.analizaElTiempoDeBusqueda();
 	}
 
-	public boolean conFechaDe(LocalDate fecha) {
+	public boolean esDeLaFecha(LocalDate fecha) {
 		return this.fecha.isEqual(fecha);
 	}
 

@@ -1,21 +1,14 @@
 package GobiernoDeLaCiudadExterno;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TimerTask;
 
 import javax.ws.rs.core.MediaType;
 
@@ -25,59 +18,44 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import DesignDreamTeamErrors.ErrorHandler;
+import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamLocation.Geolocalizacion;
-import DesignDreamTeamProcesses.GestorDeProcesos;
-import Repositorio.RepoPOIs;
+import DesignDreamTeamProcesses.DesignDreamTeamProcess;
+import Repositorios.RepoPOIs;
 import TypePois.POI;
-import TypePois.genericPOI;
 
-public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBajaPOInterface {
-	ErrorHandler AccionDeError;
-	String url;
+public class DarDeBajaPOIMock extends DesignDreamTeamProcess implements ProcessDarDeBajaPOInterface {
+	DDTErrorHandler AccionDeError;
+	String noProcesado;
 	Map<Geolocalizacion, LocalDateTime> POIsAEliminar = new HashMap<Geolocalizacion, LocalDateTime>();
 	private Client client;
-	private static String API_GOOGLE;
-	private static String RESOURCE;
+	private static final String API_GOOGLE = "https://demo4399221.mockable.io/";
+	private static final String RESOURCE = "MyExampleRest";
 
-	public static void setRutaRest(String api, String res) {
-		API_GOOGLE = api;
-		RESOURCE = res;
+	public DarDeBajaPOIMock(DDTErrorHandler accion, Date date) {
+		super(accion, date);
 	}
 
-	@Override
+	public void setAccionDeError(DDTErrorHandler accionDeError) {
+		AccionDeError = accionDeError;
+	}
+
 	public void run() {
 		try {
-			String noProcesado = null;
-			System.out.println("Obteniendo datos...");
-			noProcesado = httpGet(url);
-			if (noProcesado != null) {
-				System.out.println("Procesando datos...");
-				POIsAEliminar = procesarPedido(noProcesado);
-				System.out.println("Por realizarse...");
-				this.eliminarPOIs();
-				System.out.println("Realizado Correctamente");
-			} else {
-				throw new RuntimeException();
-			}
-		} catch (RuntimeException | IOException e) {
+			noProcesado = this.obtenerStream();
+			POIsAEliminar = procesarPedido(noProcesado);
+			this.eliminarPOIs();
+		} catch (RuntimeException e) {
 			AccionDeError.ejecutarAccion(new Date(), this);
 		}
-
-		SemVamoASincronizarno_signal();
-	}
-
-	private void SemVamoASincronizarno_signal() {
-		GestorDeProcesos.sem.release();
 	}
 
 	public Map<Geolocalizacion, LocalDateTime> procesarPedido(String noProcesado) {
 		Gson gson = new Gson();
 		java.lang.reflect.Type tipo = new TypeToken<List<POIAEliminarADapter>>() {
-		}.getType(); // Copiado de ApiDeBancoMock. La fecha es un string
+		}.getType();
 		List<POIAEliminarADapter> POIsPrev = gson.fromJson(noProcesado, tipo);
 		Map<Geolocalizacion, LocalDateTime> POIs = new HashMap<Geolocalizacion, LocalDateTime>();
-
 		for (POIAEliminarADapter i : POIsPrev) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			Date d = null;
@@ -97,7 +75,7 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 	}
 
 	public POI getPOI(Geolocalizacion geo) {
-		POI p = new genericPOI(geo, "");
+		POI p = new POIGCBAdapter(geo, "");
 		return p;
 	}
 
@@ -105,38 +83,18 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 		for (Entry<Geolocalizacion, LocalDateTime> POI : POIsAEliminar.entrySet()) {
 			Geolocalizacion clave = POI.getKey();
 			LocalDateTime valor = POI.getValue();
-			if (valor.toInstant(null).isAfter(LocalDateTime.now().toInstant(null))) {
+			if (valor.isBefore(LocalDateTime.now())) {
 				RepoPOIs.getInstance().sacarPoi(this.getPOI(clave));
 			}
 		}
 	}
 
-	public static String httpGet(String urlStr) throws IOException {
-		URL url = new URL(urlStr);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-		if (conn.getResponseCode() != 200) {
-			throw new IOException(conn.getResponseMessage());
-		}
-
-		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = rd.readLine()) != null) {
-			sb.append(line);
-		}
-		rd.close();
-
-		conn.disconnect();
-		return sb.toString();
-	}
-
 	public String obtenerStream() {
-		ClientResponse response = this.obtenerJsonDeUrl("latitud", "");
+		ClientResponse response = this.obtenerPOIDesdeRESTGCBA("latitud", "");
 		return response.getEntity(String.class);
 	}
 
-	public ClientResponse obtenerJsonDeUrl(String filter, String value) {
+	public ClientResponse obtenerPOIDesdeRESTGCBA(String filter, String value) {
 		this.client = Client.create();
 		WebResource recurso = this.client.resource(API_GOOGLE).path(RESOURCE);
 		WebResource recursoConParametros = recurso.queryParam("banks", filter + ": " + value);
@@ -144,5 +102,4 @@ public class DarDeBajaPOIDesdeREST extends TimerTask implements ProcessDarDeBaja
 		ClientResponse response = builder.get(ClientResponse.class);
 		return response;
 	}
-
 }

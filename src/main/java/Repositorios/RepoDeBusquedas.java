@@ -1,4 +1,4 @@
-package Repositorio;
+package Repositorios;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class RepoDeBusquedas {
 	}
 
 	public int cantidadDeBusquedasPorFecha(LocalDate fecha) {
-		return busquedas.stream().filter(unaBusqueda -> unaBusqueda.conFechaDe(fecha)).collect(Collectors.toList())
+		return busquedas.stream().filter(unaBusqueda -> unaBusqueda.esDeLaFecha(fecha)).collect(Collectors.toList())
 				.size();
 	}
 

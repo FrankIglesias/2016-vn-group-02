@@ -9,12 +9,11 @@ import org.junit.Test;
 
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import BancoExterno.ApiDeBancoMock;
-import DesignDreamTeamErrors.ErrorEnviarMailAlAdministrador;
-import DesignDreamTeamErrors.ErrorHandler;
+import DesignDreamTeamErrorHandlers.ErrorEnviarMailAlAdministrador;
+import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamProcesses.GestorDeProcesos;
-import Repositorio.ActualizadorDeRepositorioDePoi;
-import Repositorio.RepoPOIs;
-import Repositorio.Terminal;
+import Repositorios.RepoPOIs;
+import Repositorios.Terminal;
 
 public class DeteccionDeErrorTest {
 
@@ -41,15 +40,7 @@ public class DeteccionDeErrorTest {
 
 	@Test
 	public void testDeErrorHandlerMandarUnMailAlAdministrador() {
-		date = gestor.setFecha("2016-06-30 01:58:00");
-		ActualizadorDeRepositorioDePoi actualizadorFalluto  =new ActualizadorDeRepositorioDePoi(accionDeErrorDePrueba, date);
-		ApiDeBancoMock.setRutaDeArchivo("juaniGato.txt");
-		actualizadorFalluto.setAccionDeError(accionDeErrorDePrueba);
-		
-		gestor.setProceso(actualizadorFalluto);
-		gestor.correrProcesos();
-		Assert.assertEquals(terminal.getGestor().getContadorDeMails(), 0);
-
+		// TODO
 	}
 
 }

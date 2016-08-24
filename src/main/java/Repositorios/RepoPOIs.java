@@ -1,4 +1,5 @@
-package Repositorio;
+package Repositorios;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,16 +53,17 @@ public class RepoPOIs {
 	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDeBanco) {
 		puntosDeIntereses.addAll(listaDeBanco);
 	}
-	
-	public void agregarVariosCGPDeListaDeCGP(List<CGP> listaDeCGP){
+
+	public void agregarVariosCGPDeListaDeCGP(List<CGP> listaDeCGP) {
 		puntosDeIntereses.addAll(listaDeCGP);
 	}
-	
+
 	public List<POI> tieneUnLocalConNombre(String nombre) {
 
-		return puntosDeIntereses.stream().filter(unLocal -> unLocal.getNombre().equals(nombre)).collect(Collectors.toList());
+		return puntosDeIntereses.stream().filter(unLocal -> unLocal.getNombre().equals(nombre))
+				.collect(Collectors.toList());
 	}
-	
+
 	public void actualizarLocal(String nombre, ArrayList<String> palabrasClave) {
 
 		POI localAModificar = this.tieneUnLocalConNombre(nombre).get(0);
@@ -79,17 +81,18 @@ public class RepoPOIs {
 	public int size() {
 		return puntosDeIntereses.size();
 	}
-	
-	public void addLocal(String nombre, ArrayList<String> palabrasClave){
+
+	public void addLocal(String nombre, ArrayList<String> palabrasClave) {
 		Local localito = new Local(null, nombre, null, null, null);
-		
+
 		puntosDeIntereses.remove(localito);
 		localito.setPalabrasClave(palabrasClave);
 		puntosDeIntereses.add(localito);
 	}
-	public boolean tieneLasPalabrasClaves(String poi, ArrayList<ArrayList<String>> palabrasClaves)
-	{
-		return puntosDeIntereses.stream().anyMatch(unPOI -> (unPOI.getNombre().equals(poi)) && palabrasClaves.stream().anyMatch((unaLista -> unPOI.tenesTodasLasPalabrasClaves(unaLista))));
+
+	public boolean tieneLasPalabrasClaves(String poi, ArrayList<ArrayList<String>> palabrasClaves) {
+		return puntosDeIntereses.stream().anyMatch(unPOI -> (unPOI.getNombre().equals(poi))
+				&& palabrasClaves.stream().anyMatch((unaLista -> unPOI.tenesTodasLasPalabrasClaves(unaLista))));
 	}
 
 }

@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import ActualizarLocalesComerciales.ActualizadorDeLC;
 import DesignDreamTeamProcesses.GestorDeProcesos;
-import Repositorio.ActualizadorDeRepositorioDePoi;
-import Repositorio.RepoPOIs;
+import Repositorios.RepoPOIs;
 
 public class GestorDeProcesosTest {
 
@@ -34,33 +33,25 @@ public class GestorDeProcesosTest {
 
 	@Test
 	public void actualizacionProgramadaYConcretadaTest() {
-		 
-		date = gestor.setFecha("2016-06-30 01:58:00");
-		
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
-		gestor.correrProcesos();
-		Assert.assertTrue(repo.size() > 0);
+
+		// TODO
 	}
 
 	@Test
 	public void testVariosProcesosenDistintosHorarios() throws Exception {
-		
-		date = gestor.setFecha("2016-06-30 01:58:00");
-		
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
+
+		// TODO agregar otro proceso
 		gestor.setProceso(new ActualizadorDeLC(null, date));
 		gestor.correrProcesos();
-		Assert.assertEquals(repo.size(),7);
+		Assert.assertEquals(repo.size(), 7);
 	}
 
 	@Test
 	public void testVariosProcesosenMismosHorarios() {
-		
-		date = gestor.setFecha("2016-06-30 15:06:00");
-		date1 = gestor.setFecha("2016-06-30 15:45:00");
-		gestor.setProceso(new ActualizadorDeRepositorioDePoi(null, date));
+
+		// TODO agregar otro proceso
 		gestor.setProceso(new ActualizadorDeLC(null, date));
 		gestor.correrProcesos();
-		Assert.assertEquals(repo.size(),1);
+		Assert.assertEquals(repo.size(), 1);
 	}
 }

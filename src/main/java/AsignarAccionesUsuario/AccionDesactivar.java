@@ -1,17 +1,17 @@
 package AsignarAccionesUsuario;
 
-import Repositorio.Usuario;
+import Repositorios.Usuario;
 
 public class AccionDesactivar implements Accion {
-	Accion accion;
+	Accion accionAquitar;
 
 	public AccionDesactivar(Accion accion) {
 		super();
-		this.accion = accion;
+		this.accionAquitar = accion;
 	}
 
 	public void ejecutarAccion(Usuario usuario) {
-			usuario.quitar(accion);
+			usuario.quitar(accionAquitar);
 			usuario.quitar(this);
 	}
 
