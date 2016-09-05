@@ -27,7 +27,7 @@ public class DarDeBajaPOIMock extends DesignDreamTeamProcess implements ProcessD
 	@Override
 	public void run() {
 
-		Gson gson = new Gson();
+		Gson gson = new Gson(); 
 		java.lang.reflect.Type listaDeGeolocalizaciones = new TypeToken<List<Geolocalizacion>>() {
 		}.getType();
 		List<Geolocalizacion> listita = gson.fromJson(restJson, listaDeGeolocalizaciones);

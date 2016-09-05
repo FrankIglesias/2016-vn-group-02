@@ -49,7 +49,7 @@ public class TestMockDarDeBaja {
 		repo.agregarNuevosPoi(poi1);
 		repo.agregarNuevosPoi(poi2);
 		cantidadDePoiAntesDeModificacion = repo.size();
-		mock.run();
+		mock.run ();
 		
 		Assert.assertEquals(repo.size(), cantidadDePoiAntesDeModificacion - 2);
 	}

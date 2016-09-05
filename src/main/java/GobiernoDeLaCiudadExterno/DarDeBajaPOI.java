@@ -39,7 +39,7 @@ public class DarDeBajaPOI extends DesignDreamTeamProcess implements ProcessDarDe
 		}
 
 	public String obtenerStream() {
-		ClientResponse response = this.getBookByFilter("latitud", "");
+		ClientResponse response = this.getBookByFilter("latitud", ""); 
 		return response.getEntity(String.class);
 	}
 	

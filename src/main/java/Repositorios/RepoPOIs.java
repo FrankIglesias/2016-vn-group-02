@@ -96,7 +96,7 @@ public class RepoPOIs {
 				&& palabrasClaves.stream().anyMatch((unaLista -> unPOI.tenesTodasLasPalabrasClaves(unaLista))));
 	}
 
-	public void sacarPoiConGeo(Geolocalizacion geo) {
+	public void sacarPoiConGeo (Geolocalizacion geo) {
 		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> mismaGeolocalizacion(geo, unPoi))
 				.collect(Collectors.toList()).get(0));
 	}

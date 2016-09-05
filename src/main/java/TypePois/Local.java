@@ -16,7 +16,7 @@ public class Local extends POI{
 		this.rubro = rubro;
 	}
 	
-	public Geolocalizacion getDireccion() {
+	public Geolocalizacion getDireccion() { 
 		return getPoint();
 	}
 

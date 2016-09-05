@@ -23,8 +23,8 @@ public class BajaDePOIsTest {
 		geo2 = new Geolocalizacion(16.399024963378906, 48.21460723876953, null, null);
 		poi1 = new POIGCBAdapter(geo1,"poi1");
 		poi2 = new POIGCBAdapter(geo2,"poi2");
-		mock = new DarDeBajaPOIMock(null, null);
-	}
+		mock = new DarDeBajaPOIMock(null, null); 
+	} 
 	
 	@Test
 	public void RepoCargarDosPOITest(){
