@@ -43,9 +43,9 @@ public class BajaDePOIsTest {
 		Assert.assertEquals(repo.size(), cantidadDePoiAntesDeModificacion -2);
 	}
 	
-	@Test
+	/*@Test
 	public void RestJsonCorrectamente() throws Exception {
 		String json = mock.obtenerStream();
 		Assert.assertNotEquals("latitud", json);
-	}
+	}*/
 }

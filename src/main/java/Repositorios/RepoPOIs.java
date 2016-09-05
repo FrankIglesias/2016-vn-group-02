@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/Repositorio/RepoPOIs.java
-package Repositorio;
-=======
 package Repositorios;
->>>>>>> b5e038a2e81651373e8338fc68702ca47a9e8e78:src/main/java/Repositorios/RepoPOIs.java
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,18 +94,15 @@ public class RepoPOIs {
 	public boolean tieneLasPalabrasClaves(String poi, ArrayList<ArrayList<String>> palabrasClaves) {
 		return puntosDeIntereses.stream().anyMatch(unPOI -> (unPOI.getNombre().equals(poi))
 				&& palabrasClaves.stream().anyMatch((unaLista -> unPOI.tenesTodasLasPalabrasClaves(unaLista))));
-<<<<<<< HEAD:src/main/java/Repositorio/RepoPOIs.java
 	}
 
-	public void removerPorGeolocalizacion(Geolocalizacion geo) {
+	public void sacarPoiConGeo(Geolocalizacion geo) {
 		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> mismaGeolocalizacion(geo, unPoi))
 				.collect(Collectors.toList()).get(0));
 	}
 
 	private Boolean mismaGeolocalizacion(Geolocalizacion geo, POI unPoi) {
 		return geo.getLatitud() == unPoi.getPoint().getLatitud() && geo.getLongitud() == unPoi.getPoint().getLongitud();
-=======
->>>>>>> b5e038a2e81651373e8338fc68702ca47a9e8e78:src/main/java/Repositorios/RepoPOIs.java
 	}
 
 }
