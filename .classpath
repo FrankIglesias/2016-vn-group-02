@@ -20,4 +20,9 @@
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.4/jackson-databind-2.4.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.4/jackson-annotations-2.4.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.4/jackson-core-2.4.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
 </classpath>
