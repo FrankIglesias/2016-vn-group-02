@@ -59,6 +59,7 @@ public class TestAsignarAccionesUsuario {
 		criterioComuna = new CriterioComuna(1);
 		criterioComuna2 = new CriterioComuna(15);
 		criterioPreSeleccionados = new CriterioPreSeleccionados(preSeleccionados);
+		criterioTodosUsuarios = new CriterioTodosUsuarios();
 	}
 
 	@Test

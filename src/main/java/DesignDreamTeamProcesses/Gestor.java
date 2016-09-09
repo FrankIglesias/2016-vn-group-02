@@ -34,5 +34,8 @@ public class Gestor {
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("SimpleJob").startNow().build();
 		sched.scheduleJob(job, trigger);
 		System.out.println("reinosa te quiero");
+		
+		sched.start();
+		sched.resumeAll();
 	}
 }
