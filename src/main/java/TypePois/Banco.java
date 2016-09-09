@@ -9,7 +9,6 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
-
 public class Banco extends POI {
 
 	private static HorarioYDia horarioBancario = new HorarioYDia();

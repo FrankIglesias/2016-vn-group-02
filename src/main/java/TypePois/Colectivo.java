@@ -7,9 +7,11 @@ import java.util.List;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
-
+import javax.persistence.*;
 public class Colectivo extends POI {
-
+	
+	
+	@Id
 	private String linea;
 
 	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, String linea,

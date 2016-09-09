@@ -7,11 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
 public abstract class POI {
+
 
 	private Geolocalizacion point;
 	private String nombre;
