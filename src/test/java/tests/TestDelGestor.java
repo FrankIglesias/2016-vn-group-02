@@ -1,3 +1,4 @@
+package tests;
 import org.junit.Test;
 import org.quartz.SchedulerException;
 

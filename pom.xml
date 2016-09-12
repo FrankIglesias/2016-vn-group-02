@@ -6,6 +6,7 @@
 	<version>1-SNAPSHOT</version>
 	<properties>
 		<jackson.version>2.4.4</jackson.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -20,16 +21,19 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+		
+			<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>jpa-java8-extras</artifactId>
+			<version>1.0-alpha-1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.26</version>
 		</dependency>
-		<dependency>
-			<groupId>org.uqbar-project</groupId>
-			<artifactId>jpa-java8-extras</artifactId>
-			<version>1.0-alpha-1</version>
-		</dependency>
+	
 
 		<dependency>
 

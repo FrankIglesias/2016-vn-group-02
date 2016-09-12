@@ -24,6 +24,8 @@ public abstract class POI {
 	protected HorarioYDia horario = new HorarioYDia();
 	protected List<Feriado> feriados;
 
+	public POI()
+	{};
 	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
 			List<Feriado> feriados) {
 		super();

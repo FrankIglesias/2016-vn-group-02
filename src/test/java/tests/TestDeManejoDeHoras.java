@@ -1,3 +1,4 @@
+package tests;
 import java.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Before;
