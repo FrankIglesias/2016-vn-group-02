@@ -1,4 +1,7 @@
 package TypePois;
+import javax.persistence.*;
+
+import static javax.persistence.InheritanceType.JOINED;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,22 +10,56 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
+import static javax.persistence.InheritanceType.JOINED;
+import static javax.persistence.InheritanceType.SINGLE_TABLE;
+import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
 
+@Entity
+@Table(name="Pois")
+@DiscriminatorColumn(name="tipo_poi")
+@Inheritance(strategy=JOINED)
 public abstract class POI {
 
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_poi")
+	private Long id;
+	
+	@OneToOne
 	private Geolocalizacion point;
+	
+	@Column(name="nombre_poi")
 	private String nombre;
+	
+	//@ManyToMany
+	//@JoinTable(name="PalabraClaveXPoi")
+	//@ElementCollection
+	//@CollectionTable(name="PalabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
+	@Transient
 	private ArrayList<String> palabrasClave = new ArrayList<String>();
+	
+	//@ManyToOne
+	//@JoinColumn(name="id_poi")
+	@Transient
 	protected HorarioYDia horario = new HorarioYDia();
+	
+	//@ManyToMany
+	//@JoinTable(name="FeriadoXPoi")
+	@Transient
 	protected List<Feriado> feriados;
+	
+	public void setId(Long unID)
+	{
+		this.id = unID;
+	}
+	
+	public Long getId()
+	{
+		return this.id;
+	}
 
 	public POI()
 	{};

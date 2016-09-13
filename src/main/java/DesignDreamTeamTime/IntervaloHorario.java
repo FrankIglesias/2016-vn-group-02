@@ -1,11 +1,22 @@
 package DesignDreamTeamTime;
+import javax.persistence.*;
+
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import java.time.LocalTime;
 
+@Entity
 public class IntervaloHorario {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Convert(converter=LocalDateTimeConverter.class)
 	LocalTime horaInicio;
+	@Convert(converter=LocalDateTimeConverter.class)
 	LocalTime horaFin;
+	@Convert(converter=LocalDateTimeConverter.class)
 	LocalTime mediaNoche = LocalTime.MIDNIGHT;
 
 	public IntervaloHorario(LocalTime horaInicial, LocalTime horaFinal) {

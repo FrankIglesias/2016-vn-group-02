@@ -1,7 +1,14 @@
 package DesignDreamTeamLocation;
+import javax.persistence.*;
 
+@Entity
 public class Domicilio {
 
+	
+	@Id
+	@GeneratedValue
+	@Column(name="id_domicilio")
+	private Long id;
 	private String callePrincipal;
 	private String entreCalles;
 	private String altura;
@@ -9,6 +16,7 @@ public class Domicilio {
 	private String unidad;
 	private String codigoPostal;
 	private int comuna;
+	
 
 	public Domicilio(String callePrincipal, String entreCalles, String altura, String piso, String unidad,
 			String codigoPostal,int comuna) {
@@ -21,6 +29,8 @@ public class Domicilio {
 		this.codigoPostal = codigoPostal;
 		this.comuna = comuna;
 	}
+
+	
 
 	public String getCallePrincipal() {
 		return this.callePrincipal;

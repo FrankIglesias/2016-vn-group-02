@@ -11,26 +11,11 @@ import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 @Entity
-@Table(name="Bancos")
 public class Banco extends POI {
 	
-	@Id
-	@GeneratedValue
-	@Column(name="banco_id")
-	private Long id;
 	@Transient
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
-	
-	public Long getId()
-	{
-		return id;
-	}
-	
-	public void setId(Long unId)
-	{
-		this.id = unId;
-	}
 	public Banco()
 	{};
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {

@@ -1,11 +1,18 @@
 package DesignDreamTeamLocation;
+import javax.persistence.*;
 
+@Entity
 public class Geolocalizacion {
 
 	private double latitud;
 	private double longitud;
+	@OneToOne
 	private Domicilio domicilio;
+	@OneToOne
 	private Localidad localidad;
+	@Id
+	@GeneratedValue
+	private Long GeolocalizacionId;
 
 	public Geolocalizacion(double latitud, double longitud, Domicilio domicilio, Localidad localidad) {
 		super();
