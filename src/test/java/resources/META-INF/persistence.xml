@@ -5,36 +5,24 @@
     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
     version="1.0"> 
   
-    <persistence-unit name="tests" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-    	<class>canchas.Cancha</class>
-    	<class>canchas.Predio</class>
-    	<class>canchas.Color</class>
-    	<class>canchas.Fabricante</class>
-    	<class>canchas.Inscripcion</class>
-    	<class>canchas.Jugador</class>
-		<class>canchas.JugadorAmateur</class>
-    	<class>canchas.JugadorSemiProfesional</class>
-    	<class>canchas.JugadorProfesional</class>
-    	<class>canchas.Paleta</class>
-    	<class>canchas.Reserva</class>
     	
-    	
-    	 
+    	<class>TypePois.Banco</class>
+    	<class>Persistencia.PersistenciaPOIS</class>
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
-        
-            <!--property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+      
+           <!--  <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/prueba" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="mysql" /--> 
+            <property name="hibernate.connection.password" value="mysql" />--> 
 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-tests" /> 
             <property name="hibernate.connection.username" value="sa" /> 
             <property name="hibernate.connection.password" value="" /> 
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-
                             
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 

@@ -24,9 +24,7 @@ public void setUp()
 @Test
 public void alPedirleQueGuardeUnPOIPersiste() {
 	Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoVacio());
-  persistirPoi.registrar(unBanco);
-  
-
+  persistirPoi.registrar(unBanco);  
   assertEquals(persistirPoi.obtenerCancha(unBanco.getId()), unBanco);
 }
 
