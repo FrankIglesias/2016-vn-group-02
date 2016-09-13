@@ -34,12 +34,11 @@ public abstract class POI {
 	@Column(name="nombre_poi")
 	private String nombre;
 	
-	//@ManyToMany
-	//@JoinTable(name="PalabraClaveXPoi")
-	//@ElementCollection
-	//@CollectionTable(name="PalabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
-	@Transient
+	
+
 	private ArrayList<String> palabrasClave = new ArrayList<String>();
+	
+	
 	
 	//@ManyToOne
 	//@JoinColumn(name="id_poi")
@@ -152,6 +151,9 @@ public abstract class POI {
 		this.nombre = nombre;
 	}
 
+	@ElementCollection
+	@CollectionTable(name="PalabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
+	@Column(name="palabraClave")
 	public ArrayList<String> getPalabrasClave() {
 		return palabrasClave;
 	}
