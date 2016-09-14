@@ -18,24 +18,26 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="Pois")
-@DiscriminatorColumn(name="tipo_poi")
-@Inheritance(strategy=JOINED)
 public abstract class POI {
-
+	
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_poi")
 	private Long id;
 	
 	@OneToOne
+	@JoinColumn(name="geolocalizacion")
 	private Geolocalizacion point;
 	
 	@Column(name="nombre_poi")
 	private String nombre;
 	
 	
-
+	//@ElementCollection
+	//@CollectionTable(name="palabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
+	@Transient
 	private ArrayList<String> palabrasClave = new ArrayList<String>();
 	
 	

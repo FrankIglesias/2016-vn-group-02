@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import DesignDreamTeamLocation.Geolocalizacion;
+import javax.persistence.*;
+import DesignDreamTeamTime.Feriado;
+import DesignDreamTeamTime.HorarioYDia;
+
 
 public class Rubro {
 

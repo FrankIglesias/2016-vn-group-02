@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Colectivo extends POI {
 	
 	
-	@Id
+	//@Id
 	private String linea;
 
 	public Colectivo(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, String linea,

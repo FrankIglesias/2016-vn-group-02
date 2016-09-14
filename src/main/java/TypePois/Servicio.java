@@ -1,5 +1,5 @@
 package TypePois;
-
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,8 +11,13 @@ import DesignDreamTeamTime.HorarioYDia;
 
 public class Servicio {
 
+	//@Id
+	//@GeneratedValue
+	private Long id;
+	//@Transient
 	private HorarioYDia horario;
 	private String nombreDelServicio;
+	//@Transient
 	protected List<Feriado> feriados;
 
 	public Servicio(String nombre, HorarioYDia agenda, List<Feriado> feriados) {

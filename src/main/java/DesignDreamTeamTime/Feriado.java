@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
-@Entity
+//@Entity
 public class Feriado {
 
 	@Id

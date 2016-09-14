@@ -12,7 +12,7 @@ import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 @Entity
 public class Banco extends POI {
-	
+		
 	@Transient
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 

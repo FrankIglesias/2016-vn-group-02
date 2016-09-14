@@ -5,7 +5,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import java.time.LocalTime;
 
-@Entity
+//@Entity
 public class IntervaloHorario {
 
 	@Id
