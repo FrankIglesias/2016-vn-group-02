@@ -9,15 +9,22 @@ import java.util.stream.Collectors;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
+@Entity
 public class Servicio {
 
-	//@Id
-	//@GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
-	//@Transient
+	
+	
+	@OneToOne
 	private HorarioYDia horario;
+	
+	
 	private String nombreDelServicio;
-	//@Transient
+
+	@OneToMany
+	@JoinColumn(name="id_poi")
 	protected List<Feriado> feriados;
 
 	public Servicio(String nombre, HorarioYDia agenda, List<Feriado> feriados) {

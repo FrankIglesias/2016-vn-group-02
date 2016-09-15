@@ -17,8 +17,6 @@ public class Banco extends POI {
 	@Transient
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
-	public Banco()
-	{};
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, horarioBancario, feriados);
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));

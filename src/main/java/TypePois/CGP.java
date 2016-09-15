@@ -3,13 +3,18 @@ package TypePois;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Scanner;
+import javax.persistence.*;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
+@Entity
 public class CGP extends POI {
+	
+	
+	
+	@OneToMany
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
 	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {

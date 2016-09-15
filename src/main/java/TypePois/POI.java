@@ -1,21 +1,27 @@
 package TypePois;
-import javax.persistence.*;
-
-import org.hibernate.annotations.NotFound;
-
-import static javax.persistence.InheritanceType.JOINED;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
-import static javax.persistence.InheritanceType.JOINED;
-import static javax.persistence.InheritanceType.SINGLE_TABLE;
-import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -36,10 +42,9 @@ public abstract class POI {
 	private String nombre;
 	
 	
-	//@ElementCollection
-	//@CollectionTable(name="palabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
-	@Transient
-	private ArrayList<String> palabrasClave = new ArrayList<String>();
+	@ElementCollection
+	@CollectionTable(name="palabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
+	public List<String> palabrasClave = new ArrayList<String>();
 	
 	
 	
@@ -152,10 +157,7 @@ public abstract class POI {
 		this.nombre = nombre;
 	}
 
-	@ElementCollection
-	@CollectionTable(name="PalabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
-	@Column(name="palabraClave")
-	public ArrayList<String> getPalabrasClave() {
+	public List<String> getPalabrasClave() {
 		return palabrasClave;
 	}
 

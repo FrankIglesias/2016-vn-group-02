@@ -1,16 +1,15 @@
 package TypePois;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import DesignDreamTeamLocation.Geolocalizacion;
-import javax.persistence.*;
-import DesignDreamTeamTime.Feriado;
-import DesignDreamTeamTime.HorarioYDia;
 
-
+@Entity
 public class Rubro {
 
+	@Id
+	public long idRubro;
 	private String nombre;
 	private int radioDeCercania;
 
