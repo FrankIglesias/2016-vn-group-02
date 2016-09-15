@@ -2,6 +2,7 @@ package tests;
 import org.junit.Test;
 import org.quartz.SchedulerException;
 
+import ActualizarLocalesComerciales.ActualizadorMock;
 import DesignDreamTeamProcesses.Gestor;
 
 public class TestDelGestor {
@@ -10,7 +11,9 @@ public class TestDelGestor {
 
 	@Test
 	public void agregarProcesoYCorrerloOK() throws SchedulerException, InterruptedException {
-		gestor.correrAgenda();
+		ActualizadorMock actualizador = new ActualizadorMock();
+		
+		gestor.correrAgenda(actualizador);
 		Thread.sleep(2000);
 	}
 }
