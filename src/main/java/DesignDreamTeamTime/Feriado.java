@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
-//@Entity
+@Entity
 public class Feriado {
 
 	@Id
-	@GeneratedValue
 	@Column(name="id_feriado")
 	private Long id;
 	
 	protected int mes;
 	protected int dia;
 	
+	//@OneToOne
 	@OneToOne
 	protected IntervaloHorario intervaloFeriado;
 

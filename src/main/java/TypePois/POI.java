@@ -44,13 +44,12 @@ public abstract class POI {
 	
 	
 	//@ManyToOne
-	@Transient
+	@OneToOne
 	protected HorarioYDia horario = new HorarioYDia();
 	
-	//@ManyToMany
-	//@JoinTable(name="FeriadoXPoi")
-	@Transient
-	protected List<Feriado> feriados;
+	@OneToMany
+	@JoinColumn(name="id_poi")
+	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
 	public void setId(Long unID)
 	{

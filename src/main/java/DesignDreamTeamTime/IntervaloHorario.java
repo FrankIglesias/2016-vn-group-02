@@ -7,7 +7,7 @@ import java.awt.List;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-//@Entity
+@Entity
 public class IntervaloHorario {
 
 	@Id

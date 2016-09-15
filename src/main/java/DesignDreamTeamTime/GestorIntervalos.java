@@ -1,9 +1,18 @@
 package DesignDreamTeamTime;
-
+import javax.persistence.*;
 import java.util.ArrayList;
 
+@Entity
 public class GestorIntervalos {
-
+	
+	@Id
+	@Column(name="id_gestor")
+	private Long id;
+	
+	
+	/*@ElementCollection
+	@CollectionTable(name="intervalosHorarios", joinColumns=@JoinColumn(name="id_poi"))*/
+	@Transient
 	private ArrayList<IntervaloHorario> intervalosHorarios = new ArrayList<IntervaloHorario> ();
 
 	public ArrayList<IntervaloHorario> getIntervalosHorarios() {

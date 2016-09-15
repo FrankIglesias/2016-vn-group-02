@@ -8,19 +8,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-//@Entity
+@Entity
 public class HorarioYDia {
 	
+	@Id
+	@Column(name="id_horarioYDia")
+	private Long id;
+	
 	@ElementCollection
-	@JoinTable(name="Agenda", joinColumns=@JoinColumn(name="id_agenda"))
+	@JoinTable(name="Agenda", joinColumns=@JoinColumn(name="id_horarioYDia"))
 	@MapKeyColumn (name="dia")
-	@Column(name="VALUE")
+	@Column(name="gestor_intervalo")
 	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
 
 	public HorarioYDia() {
 		super();
 	}
+	
+	
 
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long unID)
+	{
+		this.id = unID;
+	}
 	public HorarioYDia(Map<DayOfWeek, GestorIntervalos> horario) {
 		super();
 		agenda = horario;
