@@ -1,15 +1,15 @@
 package TypePois;
 import javax.persistence.*;
 
-import static javax.persistence.InheritanceType.JOINED;
+import org.hibernate.annotations.NotFound;
 
+import static javax.persistence.InheritanceType.JOINED;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
@@ -29,6 +29,7 @@ public abstract class POI {
 	
 	@OneToOne
 	@JoinColumn(name="geolocalizacion")
+
 	private Geolocalizacion point;
 	
 	@Column(name="nombre_poi")
@@ -43,7 +44,6 @@ public abstract class POI {
 	
 	
 	//@ManyToOne
-	//@JoinColumn(name="id_poi")
 	@Transient
 	protected HorarioYDia horario = new HorarioYDia();
 	

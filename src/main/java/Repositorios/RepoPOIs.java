@@ -10,7 +10,7 @@ import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
 
-public class RepoPOIs {
+public class RepoPOIs extends RepositorioSQL{
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
 

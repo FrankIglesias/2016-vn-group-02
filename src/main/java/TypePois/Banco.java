@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
+import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 @Entity
@@ -21,13 +22,14 @@ public class Banco extends POI {
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, horarioBancario, feriados);
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
-		List<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
+		ArrayList<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
 		intervaloBancario.add(intervaloUnico);
+		GestorIntervalos gestor = new GestorIntervalos(intervaloBancario);
 
-		horarioBancario.agregarIntervalo(DayOfWeek.MONDAY, intervaloBancario);
-		horarioBancario.agregarIntervalo(DayOfWeek.TUESDAY, intervaloBancario);
-		horarioBancario.agregarIntervalo(DayOfWeek.WEDNESDAY, intervaloBancario);
-		horarioBancario.agregarIntervalo(DayOfWeek.THURSDAY, intervaloBancario);
-		horarioBancario.agregarIntervalo(DayOfWeek.FRIDAY, intervaloBancario);
+		horarioBancario.agregarIntervalo(DayOfWeek.MONDAY, gestor);
+		horarioBancario.agregarIntervalo(DayOfWeek.TUESDAY, gestor);
+		horarioBancario.agregarIntervalo(DayOfWeek.WEDNESDAY, gestor);
+		horarioBancario.agregarIntervalo(DayOfWeek.THURSDAY, gestor);
+		horarioBancario.agregarIntervalo(DayOfWeek.FRIDAY, gestor);
 	}
 }

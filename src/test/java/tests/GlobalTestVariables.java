@@ -8,6 +8,7 @@ import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
+import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 import TypePois.Banco;
@@ -70,12 +71,13 @@ public class GlobalTestVariables {
 	public static HorarioYDia crearUnHorarioDeLunesAViernes (LocalTime horaInicial, LocalTime horaFinal){
 		HorarioYDia horario = new HorarioYDia();
 		IntervaloHorario intervalo = new IntervaloHorario(horaInicial, horaFinal);
-		List<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
-		horario.agregarIntervalo(DayOfWeek.MONDAY, listaDeIntervalos);
-		horario.agregarIntervalo(DayOfWeek.TUESDAY, listaDeIntervalos);
-		horario.agregarIntervalo(DayOfWeek.WEDNESDAY, listaDeIntervalos);
-		horario.agregarIntervalo(DayOfWeek.THURSDAY, listaDeIntervalos);
-		horario.agregarIntervalo(DayOfWeek.FRIDAY, listaDeIntervalos);
+		ArrayList<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
+		GestorIntervalos gestorIntervalos = new GestorIntervalos(listaDeIntervalos);
+		horario.agregarIntervalo(DayOfWeek.MONDAY, gestorIntervalos);
+		horario.agregarIntervalo(DayOfWeek.TUESDAY, gestorIntervalos);
+		horario.agregarIntervalo(DayOfWeek.WEDNESDAY, gestorIntervalos);
+		horario.agregarIntervalo(DayOfWeek.THURSDAY, gestorIntervalos);
+		horario.agregarIntervalo(DayOfWeek.FRIDAY, gestorIntervalos);
 
 		listaDeIntervalos.add(intervalo);
 		

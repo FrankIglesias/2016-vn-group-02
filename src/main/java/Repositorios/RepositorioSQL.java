@@ -8,14 +8,23 @@ import TypePois.*;
 
 public class RepositorioSQL implements WithGlobalEntityManager{
 
+	public void persistirObjeto(POI unObjeto){
+		entityManager().persist(unObjeto);
+	}
 	
-	public void persistirNuevoObjeto(POI objeto)
+	public POI obtenerObjeto(Long id){
+	
+		return entityManager().find(POI.class, id);
+		
+	}
+
+	/*public void persistirNuevoObjeto(POI objeto)
 	{
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction tx = entityManager.getTransaction();
-		tx.begin();
+		//EntityTransaction tx = entityManager.getTransaction();
+		//tx.begin();
 		entityManager.persist(objeto);
-		tx.commit();
+		//tx.commit();
 	}
 	
 	public Object obtenerObjeto(Long id)
@@ -37,5 +46,5 @@ public class RepositorioSQL implements WithGlobalEntityManager{
 		tx.begin();
 		entityManager.remove(objeto);
 		tx.commit();
-	}
+	}*/
 }

@@ -3,7 +3,9 @@ import javax.persistence.*;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
+import java.awt.List;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 //@Entity
 public class IntervaloHorario {
@@ -18,13 +20,15 @@ public class IntervaloHorario {
 	LocalTime horaFin;
 	@Convert(converter=LocalDateTimeConverter.class)
 	LocalTime mediaNoche = LocalTime.MIDNIGHT;
-
+	
+	
 	public IntervaloHorario(LocalTime horaInicial, LocalTime horaFinal) {
 		super();
 		horaInicio = horaInicial;
 		horaFin = horaFinal;
+	
 	}
-
+	
 	public boolean incluyeHora(LocalTime hora) {
 		if (horaInicio == hora){
 			return true;

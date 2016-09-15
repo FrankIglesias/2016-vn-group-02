@@ -1,6 +1,7 @@
 package CGPExterno;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 import TypePois.CGP;
@@ -63,10 +64,11 @@ public class RepositorioCGPExternoAdapter {
 		LocalTime horarioInicio = LocalTime.of(unHorario.getHoraDesde(), unHorario.getMinutoDesde());
 		LocalTime horarioFin = LocalTime.of(unHorario.getHoraHasta(), unHorario.getMinutoHasta());
 		IntervaloHorario intervalo = new IntervaloHorario(horarioInicio, horarioFin);
-		List<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
+		ArrayList<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
+		GestorIntervalos gestor = new GestorIntervalos(listaDeIntervalos);
 		listaDeIntervalos.add(intervalo);
-		Map<DayOfWeek, List<IntervaloHorario>> agenda = new HashMap<DayOfWeek, List<IntervaloHorario>>();
-		agenda.put(dia, listaDeIntervalos);
+		Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
+		agenda.put(dia, gestor);
 		unHorarioYDia.setAgenda(agenda);
 
 	}
