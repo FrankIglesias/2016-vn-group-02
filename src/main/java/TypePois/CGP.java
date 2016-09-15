@@ -14,8 +14,8 @@ public class CGP extends POI {
 	
 	
 	
-	//@OneToMany
-	@Transient
+	@OneToMany
+	@JoinColumn(name="id_poi")
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
 	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {

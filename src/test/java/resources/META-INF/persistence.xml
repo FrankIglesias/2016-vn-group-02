@@ -11,6 +11,10 @@
     	<class>TypePois.POI</class>
     	<class>TypePois.Banco</class>
     	<class>TypePois.Colectivo</class>
+    	<class>TypePois.Rubro</class>
+    	<class>TypePois.CGP</class>
+    	<class>TypePois.Servicio</class>
+    	<class>TypePois.Local</class>
     	<class>DesignDreamTeamLocation.Domicilio</class>
     	<class>DesignDreamTeamLocation.Localidad</class>
     	<class>DesignDreamTeamLocation.Geolocalizacion</class>
@@ -19,8 +23,7 @@
     	<class>DesignDreamTeamTime.GestorIntervalos</class>
     	<class>DesignDreamTeamTime.IntervaloHorario</class>
     	<class>DesignDreamTeamTime.Feriado</class>
-    	<class>TypePois.Rubro</class>
-    	<class>TypePois.CGP</class>
+    	
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
       
