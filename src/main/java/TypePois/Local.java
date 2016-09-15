@@ -10,9 +10,11 @@ import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
 @Entity
+@Table(name="Locales")
 public class Local extends POI{
 	
 	@ManyToOne
+	@JoinColumn(name="id_rubro")
 	private Rubro rubro;
 
 	public Local(Geolocalizacion point, String nombre, HorarioYDia horario, Rubro rubro, List<Feriado> feriados) {

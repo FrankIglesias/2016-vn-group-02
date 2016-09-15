@@ -1,15 +1,19 @@
 package TypePois;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 
 @Entity
+@Table(name="Rubro")
 public class Rubro {
 
 	@Id
-	public long idRubro;
+	@Column(name="id_rubro")
+	public Long idRubro;
 	private String nombre;
 	private int radioDeCercania;
 
