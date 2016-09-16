@@ -29,7 +29,10 @@ public class CGP extends POI {
 	public boolean estasCercaDeUnPunto(Geolocalizacion otroPoint) {
 		return distanciaMenor(getPoint().distanciaCon(otroPoint), 500);
 	}
-
+	public List<Servicio> getServicios()
+	{
+		return this.servicios;
+	}
 	public Servicio buscarServicio(String nombreDelServicio) {
 		Servicio elServicioBuscado = servicios.stream()
 				.filter(unServicio -> unServicio.getNombre().equals(nombreDelServicio)).findFirst().get();

@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +104,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 		Colectivo unColectivo = (Colectivo) repositorioPOI.obtenerObjeto(colectivo.getId());
 		Assert.assertTrue(unColectivo.getNombre() == "colectivo1");
+		Assert.assertTrue(unColectivo.getUnFeriado(LocalDate.of(2016, 9, 15)) == feriado);
 
 	}
 
@@ -113,6 +115,31 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(unBanco.getId());
 		Assert.assertTrue(otroBanco.getPoint().getLatitud() == -34.5735632);
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
+	}
+
+	@Test
+	public void persistoCGPYObtengoListaDeServicios() {
+		LocalTime hora1 = LocalTime.of(10, 00);
+		LocalTime hora2 = LocalTime.of(15, 00);
+		IntervaloHorario intervalo1 = new IntervaloHorario(hora1, hora2);
+		Feriado feriado = new Feriado(9, 15, intervalo1);
+
+		LocalTime hora3 = LocalTime.of(14, 00);
+		LocalTime hora4 = LocalTime.of(12, 00);
+		IntervaloHorario intervalo2 = new IntervaloHorario(hora3, hora4);
+		Feriado feriado2 = new Feriado(10, 20, intervalo2);
+
+		ArrayList<Feriado> feriados = new ArrayList<Feriado>();
+		feriados.add(feriado);
+		feriados.add(feriado2);
+		CGP unCGP = GlobalTestVariables.crearUnCGP(feriados);
+		unCGP.setId(1);
+		repositorioPOI.persistirObjeto(unCGP);
+
+		CGP otroCGP = (CGP) repositorioPOI.obtenerObjeto(1);
+
+		Assert.assertTrue(otroCGP.getServicios() == unCGP.getServicios());
+
 	}
 
 	@Test
