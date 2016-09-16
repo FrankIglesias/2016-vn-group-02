@@ -13,7 +13,7 @@ public class Buscador {
 	static double tiempoMax = 0.0001;
 
 	public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal) {
-		double inicio, fin;
+		 double inicio, fin;
 		inicio = System.currentTimeMillis();
 		List<POI> puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase))
 				.collect(Collectors.toList());
