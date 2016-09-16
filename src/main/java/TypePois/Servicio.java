@@ -14,7 +14,7 @@ public class Servicio {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	
 	
 	@OneToOne

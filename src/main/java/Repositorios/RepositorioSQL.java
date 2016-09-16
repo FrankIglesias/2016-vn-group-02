@@ -12,7 +12,7 @@ public class RepositorioSQL implements WithGlobalEntityManager{
 		entityManager().persist(unObjeto);
 	}
 	
-	public POI obtenerObjeto(Long id){
+	public POI obtenerObjeto(int id){
 	
 		return entityManager().find(POI.class, id);
 		

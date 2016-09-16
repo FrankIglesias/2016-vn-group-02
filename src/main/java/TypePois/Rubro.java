@@ -13,7 +13,7 @@ public class Rubro {
 
 	@Id
 	@Column(name="id_rubro")
-	public Long idRubro;
+	public int idRubro;
 	private String nombre;
 	private int radioDeCercania;
 

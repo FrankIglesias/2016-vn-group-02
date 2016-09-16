@@ -19,7 +19,7 @@ import TypePois.POI;
 @Table(name = "Busqueda")
 public class Busqueda {
 	@Id
-	private Long id;
+	private int id;
 
 	@ManyToMany
 	List<POI> puntosObtenidos;
@@ -29,7 +29,6 @@ public class Busqueda {
 	Terminal terminal;
 	String frase;
 	double tiempo;
-	@Transient
 	double tiempoMax;
 
 	public Busqueda(Terminal terminal, String frase, double tiempo, double tiempoMax, List<POI> puntosObtenidos) {

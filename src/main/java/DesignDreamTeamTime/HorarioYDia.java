@@ -13,7 +13,7 @@ public class HorarioYDia {
 	
 	@Id
 	@Column(name="id_horarioYDia")
-	private Long id;
+	private int id;
 	
 	@ElementCollection
 	@JoinTable(name="Agenda", joinColumns=@JoinColumn(name="id_horarioYDia"))
@@ -27,11 +27,11 @@ public class HorarioYDia {
 	
 	
 
-	public Long getId()
+	public int getId()
 	{
 		return this.id;
 	}
-	public void setId(Long unID)
+	public void setId(int unID)
 	{
 		this.id = unID;
 	}

@@ -14,7 +14,7 @@ import DesignDreamTeamTime.IntervaloHorario;
 @Entity
 public class Banco extends POI {
 		
-	@Transient
+	@OneToOne
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {

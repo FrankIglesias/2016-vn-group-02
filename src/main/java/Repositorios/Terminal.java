@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,12 +22,17 @@ import TypePois.POI;
 @Table(name = "Terminal")
 public class Terminal {
 	@Id
+	@Column(name="name_terminal")
 	private String nombre;
-	@Transient
+	
+	@ElementCollection
+	@CollectionTable(name="reporteParcialPorTerminal", joinColumns=@JoinColumn(name="nombre_terminal"))
 	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
+	
 	@Transient
 	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
-	@Transient
+
+	
 	private String mailAdmin = "mailprueba@gmail.com";
 
 	public Terminal(String nombre) {

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Colectivo extends POI {
 	
+	@Column(name="linea_colectivo")
 	private String linea;
 	public Colectivo()
 	{

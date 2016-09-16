@@ -31,11 +31,10 @@ public abstract class POI {
 	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	@Column(name="id_poi")
-	private Long id;
+	private int id;
 	
 	@OneToOne
 	@JoinColumn(name="geolocalizacion")
-
 	private Geolocalizacion point;
 	
 	@Column(name="nombre_poi")
@@ -46,9 +45,6 @@ public abstract class POI {
 	@CollectionTable(name="palabrasClaves", joinColumns=@JoinColumn(name="id_poi"))
 	public List<String> palabrasClave = new ArrayList<String>();
 	
-	
-	
-	//@ManyToOne
 	@OneToOne
 	protected HorarioYDia horario = new HorarioYDia();
 	
@@ -56,12 +52,12 @@ public abstract class POI {
 	@JoinColumn(name="id_poi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
-	public void setId(Long unID)
+	public void setId(int unID)
 	{
 		this.id = unID;
 	}
 	
-	public Long getId()
+	public int getId()
 	{
 		return this.id;
 	}

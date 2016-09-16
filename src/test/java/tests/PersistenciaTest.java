@@ -46,7 +46,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void alPedirleQueGuardeUnBancoPersiste() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1L);
+		unBanco.setId(1);
 
 		repositorioPOI.persistirObjeto(unBanco);
 
@@ -57,7 +57,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void persistoUnCGPyMeLoTraigoSanoYsalvo() {
 
 		CGP unCGP = GlobalTestVariables.crearUnCGP(null);
-		unCGP.setId(2L);
+		unCGP.setId(2);
 
 		repositorioPOI.persistirObjeto(unCGP);
 		assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
@@ -68,7 +68,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	public void persistoUnColecYmeLoTraigoSanoYSalvo() {
 		Colectivo unColec = GlobalTestVariables.crearUnColectivo();
-		unColec.setId(2L);
+		unColec.setId(2);
 
 		repositorioPOI.persistirObjeto(unColec);
 		assertEquals(repositorioPOI.obtenerObjeto(unColec.getId()), unColec);
@@ -78,7 +78,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	public void persistoUnLocalYmeLoTraigoSanoYSalvo() {
 		Local lodemari = GlobalTestVariables.crearUnLocal(null);
-		lodemari.setId(2L);
+		lodemari.setId(2);
 
 		repositorioPOI.persistirObjeto(lodemari);
 		assertEquals(repositorioPOI.obtenerObjeto(lodemari.getId()), lodemari);
@@ -88,9 +88,9 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void alObtenerUnPOICoincideConElPersistido() {
 
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1L);
+		unBanco.setId(1);
 		repositorioPOI.persistirObjeto(unBanco);
-		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1L);
+		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1);
 		Assert.assertEquals(otroBanco.getNombre(), "Banco Rio");
 
 	}
@@ -104,10 +104,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Colectivo colectivo = new Colectivo();
 		colectivo.setNombre("colectivo1");
 		colectivo.addFeriado(feriado);
-		colectivo.setId(2L);
+		colectivo.setId(2);
 		repositorioPOI.persistirObjeto(colectivo);
 
-		Colectivo unColectivo = (Colectivo) repositorioPOI.obtenerObjeto(2L);
+		Colectivo unColectivo = (Colectivo) repositorioPOI.obtenerObjeto(2);
 		Assert.assertTrue(unColectivo.getNombre() == "colectivo1");
 		//Assert.assertTrue(unColectivo.getUnFeriado(LocalDate.now()) == feriado); 
 
@@ -116,11 +116,11 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void persistoUnBancoYMeTraigoSuLatitud() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1L);
+		unBanco.setId(1);
 
 		repositorioPOI.persistirObjeto(unBanco);
 
-		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1L);
+		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1);
 
 		Assert.assertTrue(otroBanco.getPoint().getLatitud() == -34.5735632);
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
@@ -130,11 +130,11 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	public void persistoUnBancoYMeTraigoSusPalabrasClave() {
 		Banco unBanquito = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoNoAbierto());
-		unBanquito.setId(2L);
+		unBanquito.setId(2);
 
 		repositorioPOI.persistirObjeto(unBanquito);
 
-		Banco otroBanquito = (Banco) repositorioPOI.obtenerObjeto(2L);
+		Banco otroBanquito = (Banco) repositorioPOI.obtenerObjeto(2);
 
 		Assert.assertEquals(otroBanquito.getPalabrasClave(), unBanquito.getPalabrasClave());
 
