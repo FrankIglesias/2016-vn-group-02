@@ -9,10 +9,21 @@ import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+public class RepoPOIs implements WithGlobalEntityManager {
 
-public class RepoPOIs extends RepositorioSQL{
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
+
+	public void persistirObjeto(POI unObjeto) {
+		entityManager().persist(unObjeto);
+	}
+
+	public POI obtenerObjeto(Integer id) {
+
+		return entityManager().find(POI.class, id);
+
+	}
 
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
@@ -96,7 +107,7 @@ public class RepoPOIs extends RepositorioSQL{
 				&& palabrasClaves.stream().anyMatch((unaLista -> unPOI.tenesTodasLasPalabrasClaves(unaLista))));
 	}
 
-	public void sacarPoiConGeo (Geolocalizacion geo) {
+	public void sacarPoiConGeo(Geolocalizacion geo) {
 		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> mismaGeolocalizacion(geo, unPoi))
 				.collect(Collectors.toList()).get(0));
 	}

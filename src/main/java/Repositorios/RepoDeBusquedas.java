@@ -7,14 +7,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import TypePois.POI;
 
-public class RepoDeBusquedas {
+public class RepoDeBusquedas implements WithGlobalEntityManager {
 
 	private static RepoDeBusquedas instancia = null;
 	List<Busqueda> busquedas;
 	Map<LocalDate, Integer> reportePorFecha;
 	RepoTerminales repoTerminales;
+
+	public void persistirObjeto(Busqueda unObjeto) {
+		entityManager().persist(unObjeto);
+	}
+
+	public Busqueda obtenerObjeto(Integer id) {
+		return entityManager().find(Busqueda.class, id);
+	}
 
 	public static RepoDeBusquedas getInstance() {
 		if (instancia == null) {
@@ -22,6 +32,10 @@ public class RepoDeBusquedas {
 			instancia.inicializarBaseDeDatos();
 		}
 		return instancia;
+	}
+
+	public List<Busqueda> getBusquedas() {
+		return busquedas;
 	}
 
 	public void inicializarBaseDeDatos() {
