@@ -24,7 +24,7 @@ public class Servicio {
 	private String nombreDelServicio;
 
 	@OneToMany
-	@JoinColumn(name="id_poi")
+	@JoinColumn(name="id_servicio")
 	protected List<Feriado> feriados;
 
 	public Servicio(String nombre, HorarioYDia agenda, List<Feriado> feriados) {
