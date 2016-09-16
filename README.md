@@ -1,8 +1,9 @@
 "# 2016 Viernes noche Design Dream Team" 
-PARA HACER ANDAR EL XML DEL HIBERNATE
 
+<strong>PARA HACER ANDAR EL XML DEL HIBERNATE</strong><br>
 Bajarse el mysql-connector-java-6.0.3.jar
-Ir a las propiedades del proyecto -> Java Build Path -> Libraries -> Add External JAR
-Ir a Source -> Add Folder -> La carpetita donde esta el xml, test/resources/meta-info creo
-Mandarle mecha 
-Source?
+
+1 - <em>https://downloads.mysql.com/archives/c-j/</em><br>
+Ir a las <strong>propiedades del proyecto </strong> -> <strong>Java Build Path </strong> -><strong> Libraries</strong> -> <strong>Add External JAR</strong><br>
+Ir a  <strong>Source </strong> ->  <strong>Add Folder </strong> ->  <strong>test/resources/meta-info  </strong><br>
+<strong>MANDALE GAS AMIWO</strong>
