@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
+import AsignarAccionesUsuario.AccionNotificarAdmin;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.IntervaloHorario;
 import Repositorios.Buscador;
@@ -133,7 +134,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		feriados.add(feriado);
 		feriados.add(feriado2);
 		CGP unCGP = GlobalTestVariables.crearUnCGP(feriados);
-		unCGP.setId(1);
 		repositorioPOI.persistirObjeto(unCGP);
 
 		CGP otroCGP = (CGP) repositorioPOI.obtenerObjeto(1);
@@ -164,5 +164,19 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Busqueda busqueda1 = repo.getBusquedas().get(0);
 		repo.persistirObjeto(repo.getBusquedas().get(0));
 		Assert.assertEquals(repo.obtenerObjeto(busqueda1.getId()), busqueda1);
+	}
+	
+	@Test
+	public void persistirUnaAccionDeBusqueda() {
+		AccionNotificarAdmin unaAccion = new AccionNotificarAdmin("hola");
+		
+		RepoDeBusquedas repo = RepoDeBusquedas.getInstance();
+		
+		repo.persistirObjeto(unaAccion);
+		
+		System.out.print(repo.obtenerObjeto(unaAccion.getId()));
+		
+		Assert.assertEquals(repo.obtenerObjeto(unaAccion.getId()), unaAccion);
+		
 	}
 }

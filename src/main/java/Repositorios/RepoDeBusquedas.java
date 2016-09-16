@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import AsignarAccionesUsuario.Accion;
 import TypePois.POI;
 
 public class RepoDeBusquedas implements WithGlobalEntityManager {
@@ -21,6 +22,12 @@ public class RepoDeBusquedas implements WithGlobalEntityManager {
 	public void persistirObjeto(Busqueda unObjeto) {
 		entityManager().persist(unObjeto);
 	}
+	
+	//TODO abstraer estas cosas a una clase que se encargue de persistir todo 
+	public void persistirObjeto(Accion unObjeto) {
+		entityManager().persist(unObjeto);
+	}
+	
 
 	public Busqueda obtenerObjeto(Integer id) {
 		return entityManager().find(Busqueda.class, id);

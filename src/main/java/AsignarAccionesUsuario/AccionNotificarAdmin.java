@@ -22,5 +22,12 @@ public class AccionNotificarAdmin extends Accion {
 		GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
 		gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido", "");
 	}
+	
+	@Override
+	public int getId() {
+		return this.id;
+		
+	}
+
 
 }

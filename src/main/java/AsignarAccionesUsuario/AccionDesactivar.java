@@ -21,4 +21,10 @@ public class AccionDesactivar extends Accion {
 		usuario.quitar(this);
 	}
 
+	@Override
+	public int getId() {
+		return this.id;
+		
+	}
+
 }

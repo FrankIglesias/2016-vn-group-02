@@ -1,6 +1,7 @@
 package AsignarAccionesUsuario;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -12,9 +13,12 @@ import Repositorios.Usuario;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Accion")
 public abstract class Accion {
+	
 	@Id
-	private Long id;
+	@GeneratedValue
+	protected int id;
 	
 	public abstract void ejecutarAccion(Usuario usuario);
+	public abstract int getId();
 
 }
