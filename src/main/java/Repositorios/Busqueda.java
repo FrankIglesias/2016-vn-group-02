@@ -7,6 +7,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,6 +26,7 @@ public class Busqueda {
 	private Integer id;
 
 	@ManyToMany
+	@JoinTable(name="PuntosPorBusqueda")
 	List<POI> puntosObtenidos;
 	@Convert(converter = LocalDateConverter.class)
 	LocalDate fecha;
