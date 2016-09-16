@@ -1,14 +1,15 @@
 package AsignarAccionesUsuario;
 
 import javax.mail.Message;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 
 import GestorDeMail.GestorDeMailTrucho;
 import GestorDeMail.GestorMailInterface;
 import Repositorios.Usuario;
 
 @Entity
+@DiscriminatorValue (value  = "n")
 public class AccionNotificarAdmin extends Accion {
 
 	String mailAdmin;

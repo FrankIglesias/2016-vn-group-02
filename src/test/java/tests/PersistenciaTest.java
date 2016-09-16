@@ -118,7 +118,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
 	}
 
-	/*@Test
+	@Test
 	public void persistoCGPYObtengoListaDeServicios() {
 		LocalTime hora1 = LocalTime.of(10, 00);
 		LocalTime hora2 = LocalTime.of(15, 00);
@@ -134,14 +134,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		feriados.add(feriado);
 		feriados.add(feriado2);
 		CGP unCGP = GlobalTestVariables.crearUnCGP(feriados);
-		unCGP.setId(1);
 		repositorioPOI.persistirObjeto(unCGP);
+		Assert.assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
 
-		CGP otroCGP = (CGP) repositorioPOI.obtenerObjeto(1);
-
-		Assert.assertTrue(otroCGP == unCGP);
-
-	}*/
+	}
 
 	@Test
 	public void persistoUnBancoYMeTraigoSusPalabrasClave() {
@@ -166,17 +162,12 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		repo.persistirObjeto(repo.getBusquedas().get(0));
 		Assert.assertEquals(repo.obtenerObjeto(busqueda1.getId()), busqueda1);
 	}
-	
+
 	@Test
 	public void persistirUnaAccionDeBusqueda() {
 		AccionNotificarAdmin unaAccion = new AccionNotificarAdmin("hola");
-		
-		RepoDeBusquedas repo = new RepoDeBusquedas();
-		unaAccion.setId(1);
+		RepoDeBusquedas repo = RepoDeBusquedas.getInstance();
 		repo.persistirObjeto(unaAccion);
-		
-		//System.out.print(repo.obtenerObjeto(unaAccion.getId()));
-		
 		AccionNotificarAdmin otraAccion = (AccionNotificarAdmin) repo.obtenerObjetoAccion(1);
 		Assert.assertTrue(otraAccion == unaAccion);
 	}
