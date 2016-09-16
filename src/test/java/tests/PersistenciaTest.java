@@ -1,10 +1,11 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,12 +13,13 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import DesignDreamTeamLocation.Domicilio;
-import DesignDreamTeamLocation.Geolocalizacion;
-import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.IntervaloHorario;
+import Repositorios.Buscador;
+import Repositorios.Busqueda;
+import Repositorios.RepoDeBusquedas;
 import Repositorios.RepoPOIs;
+import Repositorios.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;
@@ -46,7 +48,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void alPedirleQueGuardeUnBancoPersiste() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1);
 
 		repositorioPOI.persistirObjeto(unBanco);
 
@@ -57,8 +58,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void persistoUnCGPyMeLoTraigoSanoYsalvo() {
 
 		CGP unCGP = GlobalTestVariables.crearUnCGP(null);
-		unCGP.setId(2);
-
 		repositorioPOI.persistirObjeto(unCGP);
 		assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
 
@@ -68,7 +67,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	public void persistoUnColecYmeLoTraigoSanoYSalvo() {
 		Colectivo unColec = GlobalTestVariables.crearUnColectivo();
-		unColec.setId(2);
 
 		repositorioPOI.persistirObjeto(unColec);
 		assertEquals(repositorioPOI.obtenerObjeto(unColec.getId()), unColec);
@@ -78,7 +76,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	public void persistoUnLocalYmeLoTraigoSanoYSalvo() {
 		Local lodemari = GlobalTestVariables.crearUnLocal(null);
-		lodemari.setId(2);
 
 		repositorioPOI.persistirObjeto(lodemari);
 		assertEquals(repositorioPOI.obtenerObjeto(lodemari.getId()), lodemari);
@@ -88,11 +85,9 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void alObtenerUnPOICoincideConElPersistido() {
 
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1);
 		repositorioPOI.persistirObjeto(unBanco);
-		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1);
+		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(unBanco.getId());
 		Assert.assertEquals(otroBanco.getNombre(), "Banco Rio");
-
 	}
 
 	@Test
@@ -104,40 +99,43 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Colectivo colectivo = new Colectivo();
 		colectivo.setNombre("colectivo1");
 		colectivo.addFeriado(feriado);
-		colectivo.setId(2);
 		repositorioPOI.persistirObjeto(colectivo);
 
-		Colectivo unColectivo = (Colectivo) repositorioPOI.obtenerObjeto(2);
+		Colectivo unColectivo = (Colectivo) repositorioPOI.obtenerObjeto(colectivo.getId());
 		Assert.assertTrue(unColectivo.getNombre() == "colectivo1");
-		//Assert.assertTrue(unColectivo.getUnFeriado(LocalDate.now()) == feriado); 
 
 	}
 
 	@Test
 	public void persistoUnBancoYMeTraigoSuLatitud() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		unBanco.setId(1);
-
 		repositorioPOI.persistirObjeto(unBanco);
-
-		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(1);
-
+		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(unBanco.getId());
 		Assert.assertTrue(otroBanco.getPoint().getLatitud() == -34.5735632);
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
 	}
 
 	@Test
-
 	public void persistoUnBancoYMeTraigoSusPalabrasClave() {
 		Banco unBanquito = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoNoAbierto());
-		unBanquito.setId(2);
-
 		repositorioPOI.persistirObjeto(unBanquito);
-
-		Banco otroBanquito = (Banco) repositorioPOI.obtenerObjeto(2);
-
+		Banco otroBanquito = (Banco) repositorioPOI.obtenerObjeto(unBanquito.getId());
 		Assert.assertEquals(otroBanquito.getPalabrasClave(), unBanquito.getPalabrasClave());
 
 	}
 
+	@Test
+	public void persistirUnaBusqueda() {
+		Buscador buscador2 = new Buscador();
+		List<TypePois.POI> lista2 = new ArrayList<TypePois.POI>();
+		Terminal terminal = new Terminal("TerminalPepito");
+		lista2.add(GlobalTestVariables.crearUnBanco(null));
+		buscador2.setTiempoMaximoDeBusqueda(0.01);
+		Buscador.setPuntosDeIntereses(lista2);
+		buscador2.buscarSegunPalabraClave("banelco", terminal);
+		RepoDeBusquedas repo = RepoDeBusquedas.getInstance();
+		Busqueda busqueda1 = repo.getBusquedas().get(0);
+		repo.persistirObjeto(repo.getBusquedas().get(0));
+		Assert.assertEquals(repo.obtenerObjeto(busqueda1.getId()), busqueda1);
+	}
 }

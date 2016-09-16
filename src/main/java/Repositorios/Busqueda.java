@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -18,8 +19,10 @@ import TypePois.POI;
 @Entity
 @Table(name = "Busqueda")
 public class Busqueda {
+
 	@Id
-	private int id;
+	@GeneratedValue
+	private Integer id;
 
 	@ManyToMany
 	List<POI> puntosObtenidos;
@@ -29,6 +32,8 @@ public class Busqueda {
 	Terminal terminal;
 	String frase;
 	double tiempo;
+
+	@Transient
 	double tiempoMax;
 
 	public Busqueda(Terminal terminal, String frase, double tiempo, double tiempoMax, List<POI> puntosObtenidos) {
@@ -39,6 +44,10 @@ public class Busqueda {
 		this.tiempoMax = tiempoMax;
 		this.puntosObtenidos = puntosObtenidos;
 		this.analizaElTiempoDeBusqueda();
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public boolean esDeLaFecha(LocalDate fecha) {
