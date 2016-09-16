@@ -13,7 +13,6 @@ import DesignDreamTeamTime.HorarioYDia;
 public class Servicio {
 
 	@Id
-	@GeneratedValue
 	private int id;
 	
 	

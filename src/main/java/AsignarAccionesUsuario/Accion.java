@@ -1,5 +1,6 @@
 package AsignarAccionesUsuario;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,9 +16,19 @@ import Repositorios.Usuario;
 public abstract class Accion {
 	
 	@Id
-	@GeneratedValue
+	@Column(name="id_accion")
 	protected int id;
 	
+	
+	public void setId(int unID)
+	{
+		this.id = unID;
+	}
+	
+	public int getID()
+	{
+		return id;
+	}
 	public abstract void ejecutarAccion(Usuario usuario);
 	public abstract int getId();
 

@@ -28,7 +28,9 @@ public class RepoDeBusquedas implements WithGlobalEntityManager {
 		entityManager().persist(unObjeto);
 	}
 	
-
+	public Accion obtenerObjetoAccion(Integer id) {
+		return entityManager().find(Accion.class, id);
+	}
 	public Busqueda obtenerObjeto(Integer id) {
 		return entityManager().find(Busqueda.class, id);
 	}

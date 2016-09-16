@@ -23,6 +23,10 @@
     	<class>DesignDreamTeamTime.GestorIntervalos</class>
     	<class>DesignDreamTeamTime.IntervaloHorario</class>
     	<class>DesignDreamTeamTime.Feriado</class>
+    	<class>Repositorios.Busqueda</class>
+    	<class>Repositorios.Terminal</class>
+    	<class>AsignarAccionesUsuario.AccionNotificarAdmin</class>
+    	<class>AsignarAccionesUsuario.Accion</class>
     	
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
