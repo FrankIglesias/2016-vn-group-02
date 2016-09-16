@@ -1,10 +1,13 @@
 package Repositorios;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import TypePois.POI;
 
 public class RepoDeBusquedas {
 
@@ -27,8 +30,9 @@ public class RepoDeBusquedas {
 		repoTerminales = RepoTerminales.getInstance();
 	}
 
-	public Busqueda addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax) {
-		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax);
+	public Busqueda addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax,
+			List<POI> puntosObtenidos) {
+		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax, puntosObtenidos);
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
 		repoTerminales.add(terminal);

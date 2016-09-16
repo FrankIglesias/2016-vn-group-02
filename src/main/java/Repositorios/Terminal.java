@@ -1,19 +1,29 @@
 package Repositorios;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import GestorDeMail.GestorDeMailTrucho;
 import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
+@Entity
+@Table(name = "Terminal")
 public class Terminal {
-
+	@Id
 	private String nombre;
+	@Transient
 	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
+	@Transient
 	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
+	@Transient
 	private String mailAdmin = "mailprueba@gmail.com";
 
 	public Terminal(String nombre) {

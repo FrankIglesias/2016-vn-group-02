@@ -1,8 +1,14 @@
 package AsignarAccionesUsuario;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
 import Repositorios.Usuario;
 
-public class AccionDesactivar implements Accion {
+@Entity
+public class AccionDesactivar extends Accion {
+
+	@OneToOne
 	Accion accionAquitar;
 
 	public AccionDesactivar(Accion accion) {
@@ -11,8 +17,8 @@ public class AccionDesactivar implements Accion {
 	}
 
 	public void ejecutarAccion(Usuario usuario) {
-			usuario.quitar(accionAquitar);
-			usuario.quitar(this);
+		usuario.quitar(accionAquitar);
+		usuario.quitar(this);
 	}
 
 }
