@@ -8,7 +8,7 @@ public class Geolocalizacion {
 	private double longitud;
 	@OneToOne
 	private Domicilio domicilio;
-	@OneToOne
+	@Embedded
 	private Localidad localidad;
 	@Id
 	@GeneratedValue
@@ -58,6 +58,10 @@ public class Geolocalizacion {
 
 	public Domicilio getDomicilio() {
 		return this.domicilio;
+	}
+	public Localidad getLocalidad()
+	{
+		return this.localidad;
 	}
 
 }

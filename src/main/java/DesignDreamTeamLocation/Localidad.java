@@ -1,13 +1,9 @@
 package DesignDreamTeamLocation;
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Localidad {
 	
-	@Id
-	@GeneratedValue
-	@Column(name="id_localidad")
-	private Long id;
 	private String ciudad;
 	private String provincia;
 	private String pais;
@@ -16,6 +12,11 @@ public class Localidad {
 		ciudad = unaCiudad;
 		provincia = unaProvincia;
 		pais = unPais;
+	}
+	
+	public String getCiudad()
+	{
+		return this.ciudad;
 	}
 
 }

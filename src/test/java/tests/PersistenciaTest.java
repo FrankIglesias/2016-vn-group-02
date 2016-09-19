@@ -15,6 +15,8 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import AsignarAccionesUsuario.AccionNotificarAdmin;
+import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.IntervaloHorario;
 import Repositorios.Buscador;
@@ -30,10 +32,33 @@ import TypePois.Local;
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	private RepoPOIs repositorioPOI;
+	LocalTime hora1;
+	LocalTime hora2;
+	IntervaloHorario intervalo1;
+	Feriado feriado;
+	LocalTime hora3;
+	LocalTime hora4;
+	IntervaloHorario intervalo2;
+	Feriado feriado2;
+	ArrayList<Feriado> feriados;
+	
 
 	@Before
 	public void setUp() {
 		repositorioPOI = new RepoPOIs();
+		hora1 = LocalTime.of(10, 00);
+		hora2 = LocalTime.of(15, 00);
+		intervalo1 = new IntervaloHorario(hora1, hora2);
+		feriado = new Feriado(9, 15, intervalo1);
+
+		hora3 = LocalTime.of(14, 00);
+		hora4 = LocalTime.of(12, 00);
+		intervalo2 = new IntervaloHorario(hora3, hora4);
+		feriado2 = new Feriado(10, 20, intervalo2);
+
+		feriados = new ArrayList<Feriado>();
+		feriados.add(feriado);
+		feriados.add(feriado2);
 	}
 
 	@Test
@@ -117,22 +142,23 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Assert.assertTrue(otroBanco.getPoint().getLatitud() == -34.5735632);
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
 	}
+	@Test 
+	public void persistoUnLocalYObtengoSuCiudad()
+	{
+		Local unLocal = GlobalTestVariables.crearUnLocal(feriados);
+		
+		repositorioPOI.persistirObjeto(unLocal);
+		Local otroLocal = (Local) repositorioPOI.obtenerObjeto(unLocal.getId());
+		String ciudadLocal = otroLocal.getPoint().getLocalidad().getCiudad();
+		Assert.assertTrue(unLocal.getPoint().getLocalidad().getCiudad() == ciudadLocal);
+		
+		
+		
+	}
 
 	@Test
 	public void persistoCGPYObtengoListaDeServicios() {
-		LocalTime hora1 = LocalTime.of(10, 00);
-		LocalTime hora2 = LocalTime.of(15, 00);
-		IntervaloHorario intervalo1 = new IntervaloHorario(hora1, hora2);
-		Feriado feriado = new Feriado(9, 15, intervalo1);
-
-		LocalTime hora3 = LocalTime.of(14, 00);
-		LocalTime hora4 = LocalTime.of(12, 00);
-		IntervaloHorario intervalo2 = new IntervaloHorario(hora3, hora4);
-		Feriado feriado2 = new Feriado(10, 20, intervalo2);
-
-		ArrayList<Feriado> feriados = new ArrayList<Feriado>();
-		feriados.add(feriado);
-		feriados.add(feriado2);
+		
 		CGP unCGP = GlobalTestVariables.crearUnCGP(feriados);
 		repositorioPOI.persistirObjeto(unCGP);
 		Assert.assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
