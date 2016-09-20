@@ -6,10 +6,12 @@ public class Geolocalizacion {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id_geo")
+	@Column(name="idGeo")
 	private int GeolocalizacionId;
+	
 	private double latitud;
 	private double longitud;
+	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Domicilio domicilio;
 	@Embedded

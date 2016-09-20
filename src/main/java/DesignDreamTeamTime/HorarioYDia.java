@@ -17,7 +17,7 @@ public class HorarioYDia {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id_horarioYDia")
+	@Column(name="idHorarioYDia")
 	private int id;
 	
 	/*@ElementCollection

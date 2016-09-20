@@ -12,7 +12,7 @@ public class IntervaloHorario {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_intervalo")
+	@Column(name="idIntervalo")
 	private int id;
 	
 	@Convert(converter=LocalDateTimeConverter.class)

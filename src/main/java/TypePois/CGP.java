@@ -15,7 +15,7 @@ public class CGP extends POI {
 	
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="id_poi")
+	@JoinColumn(name="idPoi")
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
 	public CGP()

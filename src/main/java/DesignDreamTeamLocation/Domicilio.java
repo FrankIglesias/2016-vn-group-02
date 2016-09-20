@@ -7,8 +7,9 @@ public class Domicilio {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id_domicilio")
+	@Column(name="idDomicilio")
 	private int id;
+	
 	private String callePrincipal;
 	private String entreCalles;
 	private String altura;

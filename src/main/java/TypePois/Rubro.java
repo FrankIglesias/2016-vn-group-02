@@ -2,6 +2,7 @@ package TypePois;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,8 +13,10 @@ import DesignDreamTeamLocation.Geolocalizacion;
 public class Rubro {
 
 	@Id
-	@Column(name="id_rubro")
-	public int idRubro;
+	@GeneratedValue
+	@Column(name="idRubro")
+	private int idRubro;
+	
 	private String nombre;
 	private int radioDeCercania;
 

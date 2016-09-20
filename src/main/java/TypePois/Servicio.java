@@ -13,6 +13,8 @@ import DesignDreamTeamTime.HorarioYDia;
 public class Servicio {
 
 	@Id
+	@GeneratedValue
+	@Column(name="idServicio")
 	private int id;
 	
 	
@@ -23,7 +25,7 @@ public class Servicio {
 	private String nombreDelServicio;
 
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="id_servicio")
+	@JoinColumn(name="idServicio")
 	protected List<Feriado> feriados;
 
 	public Servicio(String nombre, HorarioYDia agenda, List<Feriado> feriados) {

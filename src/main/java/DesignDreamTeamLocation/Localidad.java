@@ -13,6 +13,7 @@ public class Localidad {
 		
 	}
 	public Localidad(String unaCiudad, String unaProvincia, String unPais) {
+		super();
 		ciudad = unaCiudad;
 		provincia = unaProvincia;
 		pais = unPais;

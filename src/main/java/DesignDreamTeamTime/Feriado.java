@@ -9,13 +9,12 @@ public class Feriado {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_feriado")
+	@Column(name="idFeriado")
 	private int id;
 	
 	protected int mes;
 	protected int dia;
 	
-	//@OneToOne
 	@OneToOne(cascade = CascadeType.PERSIST)
 	protected IntervaloHorario intervaloFeriado;
 

@@ -31,7 +31,7 @@ import DesignDreamTeamTime.HorarioYDia;
 public abstract class POI {
 
 	@Id
-	@Column(name = "id_poi")
+	@Column(name = "idPoi")
 	@GeneratedValue
 	private int id;
 
@@ -39,7 +39,7 @@ public abstract class POI {
 	@JoinColumn(name = "geolocalizacion")
 	private Geolocalizacion point;
 
-	@Column(name = "nombre_poi")
+	@Column(name = "nombrePoi")
 	private String nombre;
 
 	@ElementCollection
@@ -50,7 +50,7 @@ public abstract class POI {
 	protected HorarioYDia horario = new HorarioYDia();
 
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_poi")
+	@JoinColumn(name = "idPoi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 
 	public void setId(int unID) {
