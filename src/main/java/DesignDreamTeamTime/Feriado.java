@@ -24,6 +24,14 @@ public class Feriado {
 		this.intervaloFeriado = unIntervalo;
 	}
 
+	public int getId()
+	{
+		return this.id;
+	}
+	public int getMes()
+	{
+		return this.mes;
+	}
 	public boolean comparateConDiaYMes(LocalDate unaFecha) {
 		return (dia == unaFecha.getDayOfMonth() && mes == unaFecha.getMonthValue());
 	}

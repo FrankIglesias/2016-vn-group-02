@@ -4,25 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import DesignDreamTeamLocation.Geolocalizacion;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 public class RepoPOIs implements WithGlobalEntityManager {
 
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
+	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
-
+	public void persist(POI unPOI)
+	{
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.rollback();
+		transaccion.begin();
+		entityManager.persist(unPOI);
+		transaccion.commit();
+	}
 	public void persistirObjeto(POI unObjeto) {
 		entityManager().persist(unObjeto);
 	}
 
-	public POI obtenerObjeto(Integer id) {
+	public POI obtenerObjeto(int id) {
 
-		return entityManager().find(POI.class, id);
+		return entityManager.find(POI.class, id);
 
 	}
 
