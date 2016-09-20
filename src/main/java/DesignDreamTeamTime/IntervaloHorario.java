@@ -12,7 +12,8 @@ public class IntervaloHorario {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	@Column(name="id_intervalo")
+	private int id;
 	
 	@Convert(converter=LocalDateTimeConverter.class)
 	LocalTime horaInicio;

@@ -3,17 +3,23 @@ import javax.persistence.*;
 
 @Entity
 public class Geolocalizacion {
-
+	
+	@Id
+	@GeneratedValue
+	@Column(name="id_geo")
+	private int GeolocalizacionId;
 	private double latitud;
 	private double longitud;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Domicilio domicilio;
 	@Embedded
 	private Localidad localidad;
-	@Id
-	@GeneratedValue
-	private Long GeolocalizacionId;
+	
 
+	public Geolocalizacion()
+	{
+		
+	}
 	public Geolocalizacion(double latitud, double longitud, Domicilio domicilio, Localidad localidad) {
 		super();
 		this.latitud = latitud;

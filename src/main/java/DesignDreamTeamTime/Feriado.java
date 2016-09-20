@@ -8,14 +8,15 @@ import java.time.Month;
 public class Feriado {
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_feriado")
-	private Long id;
+	private int id;
 	
 	protected int mes;
 	protected int dia;
 	
 	//@OneToOne
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	protected IntervaloHorario intervaloFeriado;
 
 	public Feriado(int unMes, int unDia, IntervaloHorario unIntervalo) {

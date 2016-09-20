@@ -8,7 +8,7 @@ public class Domicilio {
 	@Id
 	@GeneratedValue
 	@Column(name="id_domicilio")
-	private Long id;
+	private int id;
 	private String callePrincipal;
 	private String entreCalles;
 	private String altura;
@@ -17,6 +17,10 @@ public class Domicilio {
 	private String codigoPostal;
 	private int comuna;
 	
+public Domicilio()
+{
+	
+}
 
 	public Domicilio(String callePrincipal, String entreCalles, String altura, String piso, String unidad,
 			String codigoPostal,int comuna) {
@@ -29,8 +33,11 @@ public class Domicilio {
 		this.codigoPostal = codigoPostal;
 		this.comuna = comuna;
 	}
-
-	
+ 
+	public int getID()
+	{
+		return this.id;
+	}
 
 	public String getCallePrincipal() {
 		return this.callePrincipal;

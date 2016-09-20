@@ -14,9 +14,13 @@ import DesignDreamTeamTime.IntervaloHorario;
 @Entity
 public class Banco extends POI {
 		
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
+	public Banco()
+	{
+		
+	}
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, horarioBancario, feriados);
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));

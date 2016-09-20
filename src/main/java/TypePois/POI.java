@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -32,9 +33,9 @@ public abstract class POI {
 	@Id
 	@Column(name = "id_poi")
 	@GeneratedValue
-	private Integer id;
+	private int id;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "geolocalizacion")
 	private Geolocalizacion point;
 
@@ -45,18 +46,18 @@ public abstract class POI {
 	@CollectionTable(name = "palabrasClaves", joinColumns = @JoinColumn(name = "id_poi"))
 	public List<String> palabrasClave = new ArrayList<String>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	protected HorarioYDia horario = new HorarioYDia();
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_poi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 
-	public void setId(Integer unID) {
+	public void setId(int unID) {
 		this.id = unID;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 

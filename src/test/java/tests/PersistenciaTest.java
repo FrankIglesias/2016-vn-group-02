@@ -8,13 +8,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import AsignarAccionesUsuario.AccionNotificarAdmin;
+import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
@@ -28,6 +33,8 @@ import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;
 import TypePois.Local;
+
+
 
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
@@ -71,26 +78,55 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		withTransaction(() -> {
 		});
 	}
-
+	
 	@Test
-	public void alPedirleQueGuardeUnBancoPersiste() {
-		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
+	public void persistoDomicilio()
+	{
+		Domicilio unDomicilio = new Domicilio("basavilbaso", "guido y eva peron", "1420", "0", "1", "1824", 1);
+		//	repositorioPOI.persistirObjeto(unBanco);
+			EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+			EntityTransaction transaccion = entityManager.getTransaction();
+			transaccion.rollback();
+			transaccion.begin();
+			entityManager.persist(unDomicilio);
+			transaccion.commit();
+			Domicilio unDom = entityManager.find(Domicilio.class, 2);
+			assertEquals(2, unDom.getID());
+			assertEquals("basavilbaso", unDom.getCallePrincipal());
 
-		repositorioPOI.persistirObjeto(unBanco);
-
-		assertEquals(repositorioPOI.obtenerObjeto(unBanco.getId()), unBanco);
-	}
-
+			Assert.assertTrue("basavilbaso" == unDomicilio.getCallePrincipal());
+	}		
 	@Test
 	public void persistoUnCGPyMeLoTraigoSanoYsalvo() {
 
 		CGP unCGP = GlobalTestVariables.crearUnCGP(null);
-		repositorioPOI.persistirObjeto(unCGP);
-		assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.rollback();
+		transaccion.begin();
+		entityManager.persist(unCGP);
+		transaccion.commit();
+		assertEquals(entityManager.find(CGP.class, unCGP.getId()), unCGP);
 
 	}
+	/*@Test
+	public void alPedirleQueGuardeUnBancoPersiste() {
+		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
+	//	repositorioPOI.persistirObjeto(unBanco);
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.rollback();
+		transaccion.begin();
+		entityManager.persist(unBanco);
+		transaccion.commit();
+		Banco otroBanco = entityManager.find(Banco.class, 1);
 
-	@Test
+		Assert.assertTrue(unBanco.getId() == otroBanco.getId());
+	}
+
+	
+
+	/*@Test
 
 	public void persistoUnColecYmeLoTraigoSanoYSalvo() {
 		Colectivo unColec = GlobalTestVariables.crearUnColectivo();
@@ -196,5 +232,5 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		repo.persistirObjeto(unaAccion);
 		AccionNotificarAdmin otraAccion = (AccionNotificarAdmin) repo.obtenerObjetoAccion(1);
 		Assert.assertTrue(otraAccion == unaAccion);
-	}
+	}*/
 }

@@ -14,10 +14,14 @@ public class CGP extends POI {
 	
 	
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_poi")
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 
+	public CGP()
+	{
+		
+	}
 	public CGP(Geolocalizacion point, String nombre, List<Servicio> servicios, List<Feriado> feriados) {
 		super(point, nombre, new ArrayList<String>(), new HorarioYDia(), feriados);
 		this.servicios = servicios;

@@ -7,7 +7,7 @@ public class GestorIntervalos {
 	
 	@Id
 	@Column(name="id_gestor")
-	private Long id;
+	private int id;
 	
 	
 	/*@ElementCollection

@@ -1,5 +1,9 @@
 package DesignDreamTeamTime;
 import javax.persistence.*;
+import org.hibernate.annotations.CascadeType;
+
+import org.hibernate.annotations.Cascade;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,13 +16,16 @@ import java.util.Set;
 public class HorarioYDia {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="id_horarioYDia")
 	private int id;
 	
-	@ElementCollection
-	@JoinTable(name="Agenda", joinColumns=@JoinColumn(name="id_horarioYDia"))
+	/*@ElementCollection
+	@JoinTable(name="AgendaHorario", joinColumns=@JoinColumn(name="id_horarioYDia"))
 	@MapKeyColumn (name="dia")
 	@Column(name="gestor_intervalo")
+	@Cascade(value = CascadeType.PERSIST)*/
+	@Transient
 	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
 
 	public HorarioYDia() {

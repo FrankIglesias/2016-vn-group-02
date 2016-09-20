@@ -15,6 +15,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
 
+
 	public void persistirObjeto(POI unObjeto) {
 		entityManager().persist(unObjeto);
 	}

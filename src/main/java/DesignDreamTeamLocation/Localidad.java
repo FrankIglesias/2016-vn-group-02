@@ -8,6 +8,10 @@ public class Localidad {
 	private String provincia;
 	private String pais;
 
+	public Localidad()
+	{
+		
+	}
 	public Localidad(String unaCiudad, String unaProvincia, String unPais) {
 		ciudad = unaCiudad;
 		provincia = unaProvincia;

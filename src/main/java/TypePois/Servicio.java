@@ -16,13 +16,13 @@ public class Servicio {
 	private int id;
 	
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private HorarioYDia horario;
 	
 	
 	private String nombreDelServicio;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_servicio")
 	protected List<Feriado> feriados;
 
