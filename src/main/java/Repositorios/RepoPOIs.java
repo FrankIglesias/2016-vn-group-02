@@ -29,9 +29,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		entityManager.persist(unPOI);
 		transaccion.commit();
 	}
-	public void persistirObjeto(POI unObjeto) {
-		entityManager().persist(unObjeto);
-	}
+	
 
 	public POI obtenerObjeto(int id) {
 
