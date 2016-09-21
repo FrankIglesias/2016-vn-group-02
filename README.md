@@ -11,10 +11,10 @@ Bajarse el mysql-connector-java-6.0.3.jar
 <strong> PARA VINCULAR EL TP CON MYSQL </strong><br>
 1 - ir al persistence.xml del proyecto, descomentar lo siguiente 
 
- <!-- <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tp_anual" /> 
-            <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="juani" />--> 
+  <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+  <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tp_anual" /> 
+  <property name="hibernate.connection.username" value="root" /> 
+ <property name="hibernate.connection.password" value="juani" /> <br>
             
         y comentar 
         <!--  <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
