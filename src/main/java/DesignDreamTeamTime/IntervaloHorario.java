@@ -15,11 +15,14 @@ public class IntervaloHorario {
 	@Column(name="idIntervalo")
 	private int id;
 	
-	@Convert(converter=LocalDateTimeConverter.class)
+	//@Convert(converter=LocalDateTimeConverter.class)
+	@Column(name="horaInicio")
 	LocalTime horaInicio;
-	@Convert(converter=LocalDateTimeConverter.class)
+	//@Convert(converter=LocalDateTimeConverter.class)
+	@Column(name="horaFin")
 	LocalTime horaFin;
-	@Convert(converter=LocalDateTimeConverter.class)
+	//@Convert(converter=LocalDateTimeConverter.class)
+	@Column(name="medianoche")
 	LocalTime mediaNoche = LocalTime.MIDNIGHT;
 	
 	

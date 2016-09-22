@@ -105,6 +105,19 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	}
 	@Test
+	public void persistirIntervaloHorario()
+	{
+		IntervaloHorario unIntervalo = new IntervaloHorario(LocalTime.now(), LocalTime.now());
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.rollback();
+		transaccion.begin();
+		entityManager.persist(unIntervalo);
+		transaccion.commit();
+	
+		
+	}
+	@Test
 	public void alPedirleQueGuardeUnBancoPersiste() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
 	//	repositorioPOI.persistirObjeto(unBanco);
