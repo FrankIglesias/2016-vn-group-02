@@ -19,7 +19,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
-	/*EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
 	public void persist(POI unPOI)
 	{
@@ -35,7 +35,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 		return entityManager.find(POI.class, id);
 
-	}*/
+	}
 
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
