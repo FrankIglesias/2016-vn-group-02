@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoUsuarios;
 import Repositorios.Usuario;
@@ -28,7 +31,6 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	private List<Usuario> usuariosAsignados = new ArrayList<Usuario>();
 
 	public AsignarAccionesUsuarios(RepoUsuarios repoUsuario, Criterio criterio, Accion accion) {
-		super(null, null); // TODO
 		this.repoUsuario = repoUsuario;
 		this.accion = accion;
 		this.criterio = criterio;
@@ -53,7 +55,7 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	}
 
 	@Override
-	public void run() {
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		System.out.println("Asignando Acciones al usuario.");
 		this.asignarAcciones();
 		System.out.println("Realizado Correctamente");

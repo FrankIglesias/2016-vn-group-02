@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
@@ -15,12 +17,8 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 
 	private RepoPOIs repo = RepoPOIs.getInstance();
 	private String archivoALevantar;
-	private DDTErrorHandler AccionDeError;
+	private DDTErrorHandler accionDeError;
 	private static ArrayList<ArrayList<String>> listaDeListasDePalabrasClaves = new ArrayList<ArrayList<String>>();
-
-	public ActualizadorDeLC(DDTErrorHandler accion, Date date) {
-		super(accion, date);
-	}
 
 	public void setArchivoALevantar(String unArchivo) {
 		this.archivoALevantar = unArchivo;
@@ -45,7 +43,7 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 	}
 
 	public void setAccionDeError(DDTErrorHandler accionDeError) {
-		AccionDeError = accionDeError;
+		this.accionDeError = accionDeError;
 	}
 
 	public static ArrayList<ArrayList<String>> getLista() {
@@ -74,11 +72,17 @@ public class ActualizadorDeLC extends DesignDreamTeamProcess {
 		listaDeListasDePalabrasClaves.add(palabrasClaves);
 	}
 
-	public void run() {
+	public void run() throws JobExecutionException {
 		try {
 			this.actualizarListaDeLC();
 		} catch (RuntimeException e) {
-			AccionDeError.ejecutarAccion(new Date(), this);
+			accionDeError.ejecutarAccion(this, e);
 		}
+	}
+
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		this.actualizarListaDeLC();
+		
 	}
 }

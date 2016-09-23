@@ -10,7 +10,17 @@ import javax.mail.internet.MimeMessage;
 
 public class GestorDeMailTrucho implements GestorMailInterface {
 
-	int contadorDeMails = 0;
+	public static GestorDeMailTrucho instancia = null;
+	static int contadorDeMails = 0;
+	
+	public static GestorDeMailTrucho getInstance() {
+		if (instancia == null) {
+			contadorDeMails = 0;
+			instancia = new GestorDeMailTrucho();
+		}
+		contadorDeMails = 0;
+		return instancia;
+	}
 
 	public boolean enviarMail(Message.RecipientType tipoDeCopia, String usuarioTo, String asunto,
 			String cuerpoDelMail) {

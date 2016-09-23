@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
@@ -18,18 +21,13 @@ import Repositorios.RepoPOIs;
 
 public class DarDeBajaPOI extends DesignDreamTeamProcess implements ProcessDarDeBajaPOInterface {
 
-	public DarDeBajaPOI(DDTErrorHandler accion, Date date) {
-		super(accion, date);
-		// TODO Auto-generated constructor stub
-	}
-
 	private Client client;
 	private static final String API_GOOGLE = "https://demo4399221.mockable.io/";
 	private static final String RESOURCE = "MyExampleRest";
 	String jsonDePois = null;
 	RepoPOIs repoPoi = RepoPOIs.getInstance();
 
-	public void run() {
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Gson gson = new Gson();
 		java.lang.reflect.Type listaDeGeolocalizaciones = new TypeToken<List<Geolocalizacion>>() {
 		}.getType();

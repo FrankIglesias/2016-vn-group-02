@@ -1,47 +1,41 @@
 package tests;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.quartz.JobExecutionException;
 
-import ActualizarLocalesComerciales.ActualizadorDeLC;
-import BancoExterno.ApiDeBancoMock;
+import ActualizarLocalesComerciales.ActualizadorMock;
+import DesignDreamTeamErrorHandlers.ErrorEjecutarNVeces;
 import DesignDreamTeamErrorHandlers.ErrorEnviarMailAlAdministrador;
-import DesignDreamTeamErrorHandlers.DDTErrorHandler;
-import DesignDreamTeamProcesses.GestorDeProcesos;
-import Repositorios.RepoPOIs;
-import Repositorios.Terminal;
+import GestorDeMail.GestorDeMailTrucho;
 
 public class DeteccionDeErrorTest {
 
-	GestorDeProcesos gestor;
-	ActualizadorDeLC actualizador;
-	RepoPOIs repo;
-	DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	int numero = 0;
-	Date date;
-	Date date1;
-	Terminal terminal = new Terminal("TerminalPepito");
+	ActualizadorMock actualizador;
 	ErrorEnviarMailAlAdministrador accionDeErrorDePrueba  = new ErrorEnviarMailAlAdministrador();
+	ErrorEjecutarNVeces accionEjecutarNveces  = new ErrorEjecutarNVeces();
+	GestorDeMailTrucho gestor = GestorDeMailTrucho.getInstance();
+	
 	@Before
 	public void init() {
-		gestor = new GestorDeProcesos();
-		actualizador = new ActualizadorDeLC(null, date);
-		repo = RepoPOIs.getInstance();
-		repo.inicializarPuntosDeIntereses();
-		numero = repo.size();
-		repo.addLocal("LoDeMari", new ArrayList<String>());
-		
-		// faltarian los error handler
+		actualizador = new ActualizadorMock();
+		actualizador.habilitarError();
 	}
 
 	@Test
-	public void testDeErrorHandlerMandarUnMailAlAdministrador() {
-		// TODO
+	public void testDeErrorHandlerMandarUnMailAlAdministrador() throws JobExecutionException {
+		actualizador.setAccionDeError(accionDeErrorDePrueba);
+		actualizador.execute(null);
+		Assert.assertEquals(gestor.getContadorDeMails(), 1);
+	}
+	
+	@Test
+	public void testDeErrorHandlerReintentar2VecesNoPuedeYMandaMail() throws JobExecutionException {
+		accionEjecutarNveces.setNumeroFinal(2);
+		accionEjecutarNveces.setAccionDeError(accionDeErrorDePrueba);
+		actualizador.setAccionDeError(accionEjecutarNveces);
+		actualizador.execute(null);
+		Assert.assertEquals(gestor.getContadorDeMails(), 1);
 	}
 
 }

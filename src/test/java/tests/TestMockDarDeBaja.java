@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.quartz.JobExecutionException;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import Repositorios.RepoPOIs;
@@ -32,8 +33,8 @@ public class TestMockDarDeBaja {
 		poi1 = new Banco(geo1, "poi1", list, null);
 		poi2 = new Banco(geo2, "poi2", list, null);
 
-		mock = new DarDeBajaPOIMock(null, null);
-		posta = new DarDeBajaPOI(null, null);
+		mock = new DarDeBajaPOIMock();
+		posta = new DarDeBajaPOI();
 	}
 
 	@Test
@@ -46,11 +47,11 @@ public class TestMockDarDeBaja {
 	}
 
 	@Test
-	public void BorrarDosPoiDeMockTest() {
+	public void BorrarDosPoiDeMockTest() throws JobExecutionException {
 		repo.agregarNuevosPoi(poi1);
 		repo.agregarNuevosPoi(poi2);
 		cantidadDePoiAntesDeModificacion = repo.size();
-		mock.run ();
+		mock.execute (null);
 		
 		Assert.assertEquals(repo.size(), cantidadDePoiAntesDeModificacion - 2);
 	}

@@ -1,5 +1,6 @@
 package tests;
 import org.junit.Test;
+import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
 import ActualizarLocalesComerciales.ActualizadorMock;
@@ -16,4 +17,12 @@ public class TestDelGestor {
 		gestor.correrAgenda(actualizador);
 		Thread.sleep(2000);
 	}
+	
+	@Test
+	public void ejecutarTarea() throws JobExecutionException {
+		ActualizadorMock actualizador = new ActualizadorMock();
+		actualizador.execute(null);
+	}
+	
+	
 }

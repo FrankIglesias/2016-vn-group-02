@@ -30,7 +30,7 @@ public class Terminal {
 	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
 	
 	@Transient
-	private GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
+	private GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
 
 	
 	private String mailAdmin = "mailprueba@gmail.com";

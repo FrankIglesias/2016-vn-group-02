@@ -1,25 +1,31 @@
 package DesignDreamTeamErrorHandlers;
 
-import java.util.Date;
+import org.quartz.Job;
+import org.quartz.JobExecutionException;
 
-public class ErrorEjecutarNVeces implements DDTErrorHandler {
+public class ErrorEjecutarNVeces extends DDTErrorHandler {
 
 	private int numeroFinal;
+	int numeroDeVeces = 0;
+	DDTErrorHandler accionDeError;
 
 	public void setNumeroFinal(int numero) {
 		numeroFinal = numero;
 	}
-
-	@Override
-	public void ejecutarAccion(Date fecha, Runnable proceso) {
-		int numeroDeVeces = 0;
-		try {
-			proceso.run();
-
-		} catch (RuntimeException e) {
-			if (numeroDeVeces < numeroFinal)
+	
+	public void setAccionDeError(DDTErrorHandler accionDeError) {
+		this.accionDeError = accionDeError;
+	}
+	
+	public void ejecutarAccion(Job proceso, Exception e) throws JobExecutionException {
+			super.ejecutarAccion(null, e);
+			if (numeroDeVeces < numeroFinal) {
 				numeroDeVeces++;
-		}
+				proceso.execute(null);
+				 }
+			else
+				accionDeError.ejecutarAccion(null, e);
+		
 	}
 
 }

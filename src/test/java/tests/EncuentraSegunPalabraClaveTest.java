@@ -35,7 +35,6 @@ public class EncuentraSegunPalabraClaveTest {
 		try {
 			banco2 = ApiDeBancoMock.obtenerBancoDesdeArchivo();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		colectivo = GlobalTestVariables.crearUnColectivo();
