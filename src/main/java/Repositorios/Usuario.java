@@ -40,9 +40,9 @@ public class Usuario {
 	}
 
 	public void quitar(Accion accion) {
-		// if(listaDeAcciones.contains(accion)){
+		
 		listaDeAcciones.remove(accion);
-		// }
+	
 	}
 
 	public List<Accion> getListaDeAcciones() {

@@ -20,11 +20,11 @@ public class HorarioYDia {
 	@Column(name="idHorarioYDia")
 	private int id;
 	
-	/*@ElementCollection
+	@ElementCollection
 	@JoinTable(name="AgendaHorario", joinColumns=@JoinColumn(name="id_horarioYDia"))
 	@MapKeyColumn (name="dia")
 	@Column(name="gestor_intervalo")
-	@Cascade(value = CascadeType.PERSIST)*/
+	//@Cascade(cascade = CascadeType.PERSIST)
 	@Transient
 	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
 

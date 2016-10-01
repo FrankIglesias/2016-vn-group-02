@@ -86,10 +86,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		//	repositorioPOI.persistirObjeto(unBanco);
 			EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 			EntityTransaction transaccion = entityManager.getTransaction();
-			transaccion.rollback();
-			transaccion.begin();
+			
+			
 			entityManager.persist(unDomicilio);
-			transaccion.commit();
+			
 			Domicilio unDom = entityManager.find(Domicilio.class, unDomicilio.getID());
 			assertEquals("basavilbaso", unDom.getCallePrincipal());
 
@@ -110,10 +110,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		IntervaloHorario unIntervalo = new IntervaloHorario(LocalTime.now(), LocalTime.now());
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.rollback();
-		transaccion.begin();
+		
+		
 		entityManager.persist(unIntervalo);
-		transaccion.commit();
+		
 	
 		
 	}
@@ -123,10 +123,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	//	repositorioPOI.persistirObjeto(unBanco);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.rollback();
-		transaccion.begin();
+		
+		
 		entityManager.persist(unBanco);
-		transaccion.commit();
+		
 		Banco otroBanco = entityManager.find(Banco.class, unBanco.getId());
 
 		Assert.assertTrue(unBanco == otroBanco);
@@ -159,10 +159,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		//repositorioPOI.persistirObjeto(unBanco);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.rollback();
-		transaccion.begin();
 		entityManager.persist(unBanco);
-		transaccion.commit();
 		Banco otroBanco = entityManager.find(Banco.class, unBanco.getId());
 		Assert.assertEquals(otroBanco.getNombre(), "Banco Rio");
 	}
@@ -179,10 +176,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		//repositorioPOI.persistirObjeto(colectivo);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.rollback();
-		transaccion.begin();
+		
+		
 		entityManager.persist(feriado);
-		transaccion.commit();
+		
 
 		Feriado unFeriado = entityManager.find(Feriado.class, feriado.getId());
 		Assert.assertTrue(unFeriado.getMes() == feriado.getMes());

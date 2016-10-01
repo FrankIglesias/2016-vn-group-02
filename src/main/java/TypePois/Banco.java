@@ -15,7 +15,6 @@ import DesignDreamTeamTime.IntervaloHorario;
 public class Banco extends POI {
 		
 	//@OneToOne(cascade = CascadeType.PERSIST)
-	@Transient
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
 	public Banco()
