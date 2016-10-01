@@ -12,9 +12,9 @@ public class Geolocalizacion {
 	private double latitud;
 	private double longitud;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private Domicilio domicilio;
 	@Embedded
+	private Domicilio domicilio;
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Localidad localidad;
 	
 

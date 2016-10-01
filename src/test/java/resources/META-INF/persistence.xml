@@ -15,7 +15,6 @@
     	<class>TypePois.CGP</class>
     	<class>TypePois.Servicio</class>
     	<class>TypePois.Local</class>
-    	<class>DesignDreamTeamLocation.Domicilio</class>
     	<class>DesignDreamTeamLocation.Localidad</class>
     	<class>DesignDreamTeamLocation.Geolocalizacion</class>
     	<class>Persistencia.PersistenciaPOIS</class>

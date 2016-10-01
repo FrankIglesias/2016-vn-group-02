@@ -80,20 +80,17 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	}
 	
 	@Test
-	public void persistoDomicilio()
+	public void persistoLocalidad()
 	{
-		Domicilio unDomicilio = new Domicilio("basavilbaso", "guido y eva peron", "1420", "0", "1", "1824", 1);
-		//	repositorioPOI.persistirObjeto(unBanco);
+		Localidad unaLocalidad = new Localidad("Lanus", "Buenos Aires", "Argentina");
 			EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 			EntityTransaction transaccion = entityManager.getTransaction();
-			
-			
-			entityManager.persist(unDomicilio);
-			
-			Domicilio unDom = entityManager.find(Domicilio.class, unDomicilio.getID());
-			assertEquals("basavilbaso", unDom.getCallePrincipal());
-
-			Assert.assertTrue("basavilbaso" == unDomicilio.getCallePrincipal());
+			transaccion.rollback();
+			transaccion.begin();
+			entityManager.persist(unaLocalidad);
+			transaccion.commit();
+			Localidad otraLocalidad = entityManager.find(Localidad.class, unaLocalidad.getID());
+			assertEquals("Lanus", otraLocalidad.getCiudad());
 	}	
 	
 	@Test

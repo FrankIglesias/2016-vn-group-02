@@ -1,14 +1,9 @@
 package DesignDreamTeamLocation;
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Domicilio {
 
-	
-	@Id
-	@GeneratedValue
-	@Column(name="idDomicilio")
-	private int id;
 	
 	private String callePrincipal;
 	private String entreCalles;
@@ -35,10 +30,7 @@ public Domicilio()
 		this.comuna = comuna;
 	}
  
-	public int getID()
-	{
-		return this.id;
-	}
+
 
 	public String getCallePrincipal() {
 		return this.callePrincipal;
