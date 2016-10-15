@@ -3,10 +3,8 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -18,17 +16,10 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import AsignarAccionesUsuario.AccionNotificarAdmin;
-import DesignDreamTeamLocation.Domicilio;
-import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.IntervaloHorario;
-import Repositorios.Buscador;
-import Repositorios.Busqueda;
-import Repositorios.RepoDeBusquedas;
 import Repositorios.RepoPOIs;
-import Repositorios.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;
