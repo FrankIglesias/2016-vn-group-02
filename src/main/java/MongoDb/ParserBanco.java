@@ -5,39 +5,36 @@ import java.net.UnknownHostException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 
-import DesignDreamTeamLocation.Geolocalizacion;
-import TypePois.Banco;
+import BancoExterno.BancoAdapter;
+
+
 
 public class ParserBanco {
-	public static void guardarBanco(Banco unBanco) {
+	public static void guardarBanco (BancoAdapter unBanco) {
 		MongoClient cliente = null;
-		try {
-			cliente = new MongoClient();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				cliente = new MongoClient();
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 		DB database = cliente.getDB("Banco");
 		DBCollection collection = database.getCollection("Banco");
 		BasicDBObject doc = new BasicDBObject();
 		doc.put("id", unBanco.getId());
-		doc.put("nombre", unBanco.getNombre());
-		doc.put("palabras clave", unBanco.getPalabrasClave());
-		doc.put("Geolocalizacion", parsearUnPoint(unBanco.getPoint()));
-		doc.put("Feriados", null);
+		doc.put("nombre", unBanco.getBanco());
+		doc.put("palabras clave", unBanco.getServicios());
+		doc.put("Geolocalizacion", parsearUnPoint(unBanco));
 		collection.drop();
 		collection.save(doc);
 	}
 
-	private static BasicDBObject parsearUnPoint(Geolocalizacion point) {
+	private static BasicDBObject parsearUnPoint(BancoAdapter unBanco) {
 		BasicDBObject objeto = new BasicDBObject();
-		objeto.put("Latitud", point.getLatitud());
-		objeto.put("Domicilio", "");
-		objeto.put("Longitud", point.getLongitud());
-		objeto.put("Localidad", "");
+		objeto.put("Latitud", unBanco.getY());
+		objeto.put("Longitud", unBanco.getX());
 		return objeto;
 	}
+	
 }

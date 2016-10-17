@@ -25,8 +25,7 @@ public class Busqueda {
 	@GeneratedValue
 	private Integer id;
 
-	@ManyToMany
-	@JoinTable(name="PuntosPorBusqueda")
+	@Transient
 	List<POI> puntosObtenidos;
 	@Convert(converter = LocalDateConverter.class)
 	LocalDate fecha;
