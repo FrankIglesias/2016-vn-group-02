@@ -9,6 +9,7 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
+
 @Entity
 public class CGP extends POI {
 	

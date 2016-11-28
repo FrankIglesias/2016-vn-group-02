@@ -6,3 +6,4 @@ import TypePois.POI;
 public interface ApiDeBancoInterface {
 	public List<POI> obtenerBancoDesdeString();
 }
+

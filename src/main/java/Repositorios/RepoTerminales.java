@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class RepoTerminales {
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;

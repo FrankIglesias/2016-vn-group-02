@@ -3,6 +3,7 @@ package CGPExterno;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CentroDTO {
 
 	private int comuna;

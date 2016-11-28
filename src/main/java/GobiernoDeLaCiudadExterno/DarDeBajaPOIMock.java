@@ -12,6 +12,7 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoPOIs;
 
+
 public class DarDeBajaPOIMock extends DesignDreamTeamProcess implements ProcessDarDeBajaPOInterface {
 
 	private String restJson = "[{" + "\"latitud\":" + "48.2088611," + "\"longitud\":" + "16.3698108," + "\"deletedAt\":"

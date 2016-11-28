@@ -6,6 +6,8 @@ import org.quartz.JobExecutionException;
 import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 
+
+
 public class ActualizadorMock extends DesignDreamTeamProcess {
 
 	DDTErrorHandler accionDeError;

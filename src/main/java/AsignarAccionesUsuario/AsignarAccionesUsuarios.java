@@ -18,6 +18,8 @@ import Repositorios.Usuario;
 
 @Entity
 @Table(name = "Acciones_manager")
+
+
 public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	@Id
 	private Long id;

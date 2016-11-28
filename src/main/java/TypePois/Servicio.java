@@ -17,6 +17,7 @@ import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
 @Entity
+
 public class Servicio {
 
 	@Id

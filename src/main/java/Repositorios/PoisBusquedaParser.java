@@ -10,6 +10,7 @@ import com.mongodb.MongoClient;
 
 import TypePois.POI;
 
+
 public class PoisBusquedaParser {
 	
 	

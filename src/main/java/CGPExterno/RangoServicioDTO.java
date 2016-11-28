@@ -1,5 +1,6 @@
 package CGPExterno;
 
+
 public class RangoServicioDTO {
 
 	private int diaSemana;

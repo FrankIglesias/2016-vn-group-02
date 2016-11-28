@@ -3,6 +3,7 @@ import java.util.List;
 
 import Repositorios.Usuario;
 
+
 public class CriterioPreSeleccionados implements Criterio {
 	List<Usuario> usuariosSeleccionados;
 

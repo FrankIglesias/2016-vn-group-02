@@ -26,6 +26,8 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Pois")

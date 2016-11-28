@@ -2,6 +2,7 @@ package DesignDreamTeamErrorHandlers;
 
 import java.time.LocalDate;
 
+
 public class ErrorLog {
 	
 	public LocalDate fecha;

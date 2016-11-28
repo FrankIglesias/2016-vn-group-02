@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import TypePois.POI;
 
+
 public class Buscador {
 
 	static List<POI> puntosDeIntereses = new ArrayList<POI>();

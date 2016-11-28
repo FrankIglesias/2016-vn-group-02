@@ -12,6 +12,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import AsignarAccionesUsuario.Accion;
 import TypePois.POI;
 
+
 public class RepoDeBusquedas implements WithGlobalEntityManager {
 
 	private static RepoDeBusquedas instancia = null;

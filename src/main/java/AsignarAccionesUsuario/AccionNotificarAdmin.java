@@ -10,6 +10,7 @@ import Repositorios.Usuario;
 
 @Entity
 @DiscriminatorValue (value  = "n")
+
 public class AccionNotificarAdmin extends Accion {
 
 	String mailAdmin;

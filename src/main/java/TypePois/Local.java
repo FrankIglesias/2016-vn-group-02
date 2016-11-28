@@ -10,6 +10,7 @@ import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
 @Entity
+
 @Table(name="Locales")
 public class Local extends POI{
 	

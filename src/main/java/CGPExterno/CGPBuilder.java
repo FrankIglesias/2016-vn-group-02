@@ -1,5 +1,6 @@
 package CGPExterno;
 
+
 public class CGPBuilder {
 
 	private CentroDTO cgp;

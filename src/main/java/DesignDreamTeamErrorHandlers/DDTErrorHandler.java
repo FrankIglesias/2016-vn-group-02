@@ -7,6 +7,7 @@ import java.util.List;
 import org.quartz.Job;
 import org.quartz.JobExecutionException;
 
+
 public abstract class DDTErrorHandler {
 	
 	List<ErrorLog> logDeErrores = new ArrayList<ErrorLog>();

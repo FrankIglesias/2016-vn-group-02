@@ -2,6 +2,7 @@ package DesignDreamTeamLocation;
 import javax.persistence.*;
 
 @Embeddable
+
 public class Domicilio {
 
 	

@@ -17,6 +17,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import TypePois.POI;
 
+
 @Entity
 @Table(name = "Busqueda")
 public class Busqueda {

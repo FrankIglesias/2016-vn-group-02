@@ -8,3 +8,4 @@ public class CriterioTodosUsuarios implements Criterio {
 		return true;
 	}
 }
+

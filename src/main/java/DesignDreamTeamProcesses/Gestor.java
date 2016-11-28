@@ -10,6 +10,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+
 public class Gestor {
 
 	Scheduler sched;

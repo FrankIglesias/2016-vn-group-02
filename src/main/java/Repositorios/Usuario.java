@@ -13,6 +13,7 @@ import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.Criterio;
 import DesignDreamTeamLocation.Geolocalizacion;
 
+
 @Entity
 @Table(name = "Usuario")
 public class Usuario {

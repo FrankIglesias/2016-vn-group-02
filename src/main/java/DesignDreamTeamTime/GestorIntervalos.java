@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
+
 public class GestorIntervalos {
 	
 	@Id

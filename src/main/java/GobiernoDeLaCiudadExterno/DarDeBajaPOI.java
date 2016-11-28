@@ -19,6 +19,7 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoPOIs;
 
+
 public class DarDeBajaPOI extends DesignDreamTeamProcess implements ProcessDarDeBajaPOInterface {
 
 	private Client client;

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import DesignDreamTeamLocation.Geolocalizacion;
 
 @Entity
+
 @Table(name="Rubro")
 public class Rubro {
 

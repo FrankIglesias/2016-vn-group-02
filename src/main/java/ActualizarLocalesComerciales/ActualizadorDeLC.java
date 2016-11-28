@@ -13,6 +13,7 @@ import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoPOIs;
 
+
 public class ActualizadorDeLC extends DesignDreamTeamProcess {
 
 	private RepoPOIs repo = RepoPOIs.getInstance();

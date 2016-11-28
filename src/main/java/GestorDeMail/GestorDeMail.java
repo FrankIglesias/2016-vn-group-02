@@ -7,6 +7,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public abstract class GestorDeMail implements GestorMailInterface {
 
 	private String usuarioFrom;

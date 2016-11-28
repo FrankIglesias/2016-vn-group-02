@@ -18,6 +18,7 @@ import GestorDeMail.GestorDeMailTrucho;
 import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
+
 @Entity
 @Table(name = "Terminal")
 public class Terminal {

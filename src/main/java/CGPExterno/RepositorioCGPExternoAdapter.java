@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+
 public class RepositorioCGPExternoAdapter {
 	public static ArrayList<POI> obtenerCGPDesdeRepositorioExterno(String criterio) {
 		ArrayList<POI> pois = new ArrayList<POI>();

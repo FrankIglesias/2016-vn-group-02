@@ -9,6 +9,7 @@ import org.quartz.JobExecutionException;
 
 import GestorDeMail.GestorDeMailTrucho;
 
+
 public class ErrorEnviarMailAlAdministrador extends DDTErrorHandler {
 
 	private GestorDeMailTrucho gestorDeMail = GestorDeMailTrucho.getInstance();

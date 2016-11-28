@@ -2,6 +2,7 @@ package DesignDreamTeamLocation;
 import javax.persistence.*;
 
 @Entity
+
 public class Geolocalizacion {
 	
 	@Id
