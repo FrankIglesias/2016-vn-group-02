@@ -37,4 +37,5 @@ public class MongoManager {
 		collection.drop();
 		collection.save(doc);
 	}
+	
 }
