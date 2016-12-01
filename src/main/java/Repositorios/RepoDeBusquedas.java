@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import AsignarAccionesUsuario.Accion;
 import TypePois.POI;
 
-
-public class RepoDeBusquedas implements WithGlobalEntityManager {
+public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 
 	private static RepoDeBusquedas instancia = null;
 	List<Busqueda> busquedas;
@@ -21,27 +22,30 @@ public class RepoDeBusquedas implements WithGlobalEntityManager {
 	RepoTerminales repoTerminales;
 
 	public void persistirBusqueda(Busqueda unObjeto) {
-		entityManager().persist(unObjeto);
+		withTransaction(() -> {
+			persist(unObjeto);
+		});
 	}
-	
-	//TODO abstraer estas cosas a una clase que se encargue de persistir todo 
+
+	// TODO abstraer estas cosas a una clase que se encargue de persistir todo
 	public void persistirAccion(Accion unObjeto) {
 		entityManager().persist(unObjeto);
+
 	}
-	
+
 	public Accion obtenerObjetoAccion(Integer id) {
 		return entityManager().find(Accion.class, id);
 	}
+
 	public Busqueda obtenerUnaBusqueda(Integer id) {
 		return entityManager().find(Busqueda.class, id);
 	}
-	
-	public List<Busqueda> listar() {
-	    return entityManager()//
-	        .createQuery("from Consultora", Busqueda.class) //
-	        .getResultList();
-	  }
 
+	public List<Busqueda> listar() {
+		return entityManager()//
+				.createQuery("from Consultora", Busqueda.class) //
+				.getResultList();
+	}
 
 	public static RepoDeBusquedas getInstance() {
 		if (instancia == null) {

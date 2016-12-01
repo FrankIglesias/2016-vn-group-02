@@ -9,6 +9,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -18,22 +19,22 @@ import GestorDeMail.GestorDeMailTrucho;
 import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
-
 @Entity
 @Table(name = "Terminal")
 public class Terminal {
 	@Id
-	@Column(name="name_terminal")
+	@GeneratedValue
+	Integer id;
+	@Column(name = "name_terminal")
 	private String nombre;
-	
+
 	@ElementCollection
-	@CollectionTable(name="reporteParcialPorTerminal", joinColumns=@JoinColumn(name="nombre_terminal"))
+	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
 	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
-	
+
 	@Transient
 	private GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
 
-	
 	private String mailAdmin = "mailprueba@gmail.com";
 
 	public Terminal(String nombre) {
