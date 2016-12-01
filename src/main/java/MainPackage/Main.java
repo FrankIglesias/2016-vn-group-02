@@ -18,7 +18,14 @@ public class Main {
 	    
 	    staticFileLocation("/templates");
 		
-        get("/hello", home::mostrar, engine);
+        get("/", home::mostrar, engine);
+        get("/administrador.html", home::mostrarAdmin, engine);
+        get("/usuario.html", home::mostrarUser, engine);
+        get("/admin_terminales.html", home::mostrarTerminales, engine);
+        get("/admin_pois.html", home::mostrarPois, engine);
+        get("/admin_consultas.html", home::mostrarConsultas, engine);
+        
+        
     }
 }
 	
