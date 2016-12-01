@@ -17,7 +17,6 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import TypePois.POI;
 
-
 @Entity
 @Table(name = "Busqueda")
 public class Busqueda {
@@ -37,6 +36,9 @@ public class Busqueda {
 
 	@Transient
 	double tiempoMax;
+
+	protected Busqueda() {
+	}
 
 	public Busqueda(Terminal terminal, String frase, double tiempo, double tiempoMax, List<POI> puntosObtenidos) {
 		this.terminal = terminal;

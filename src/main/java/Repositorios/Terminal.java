@@ -37,6 +37,9 @@ public class Terminal {
 
 	private String mailAdmin = "mailprueba@gmail.com";
 
+	protected Terminal() {
+	}
+
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}

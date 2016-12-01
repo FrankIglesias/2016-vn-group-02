@@ -43,7 +43,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 
 	public List<Busqueda> listar() {
 		return entityManager()//
-				.createQuery("from Consultora", Busqueda.class) //
+				.createQuery(" FROM Busqueda", Busqueda.class) //
 				.getResultList();
 	}
 
