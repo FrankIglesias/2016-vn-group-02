@@ -12,6 +12,16 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.datastax.cassandra</groupId>
+			<artifactId>cassandra-driver-core </artifactId>
+			<version> 3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20151123</version>
@@ -21,7 +31,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>org.uqbar-project</groupId>
 			<artifactId>jpa-java8-extras</artifactId>
 			<version>1.0-alpha-1</version>
@@ -33,10 +43,10 @@
 		</dependency>
 
 		<dependency>
-   		 	<groupId>org.hsqldb</groupId>
-   		 	<artifactId>hsqldb</artifactId>
-   		 	<version>2.2.8</version>
-   	 	</dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.8</version>
+		</dependency>
 		<dependency>
 
 			<groupId>org.uqbar-project</groupId>
@@ -95,17 +105,17 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
-  <dependency>
-        <groupId>org.mongodb.morphia</groupId>
-        <artifactId>morphia</artifactId>
-        <version>1.2.1</version>
-    </dependency>
+		<dependency>
+			<groupId>org.mongodb.morphia</groupId>
+			<artifactId>morphia</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 
-    <dependency>
-     <groupId>org.mongodb</groupId>
-     <artifactId>mongo-java-driver</artifactId>
-     <version>2.10.1</version>
-    </dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.10.1</version>
+		</dependency>
 
 	</dependencies>
 

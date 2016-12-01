@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+.body1 
+{
+	font-family: 'Raleway', Arial, sans-serif;
+	width: 1024px;
+	height: 768px;
+	font-weight: 400;
+	background: linear-gradient(to bottom,#FBAB00,#ffd300);
+	background-repeat:no-repeat;
+	margin:0px;
+	padding:0px;
+	
+}
+
+.header
+{
+	background: linear-gradient(to bottom,#FBAB00,#ffd300);
+	background-repeat:no-repeat;
+	width:1910px;
+	height:150px;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	text-align:center;
+	color:white;
+	margin-top:-10px;
+	margin-left:-10px;
+}
+
+.body2
+{
+	font-family: 'Raleway', Arial, sans-serif;
+	width: 1024px;
+	height: 768px;
+	font-weight: 400;
+	background-color:#FFFFFF;
+	background-repeat:no-repeat;
+	margin:0px;
+	padding:0px;
+}
+
+.login
+{
+	align-content: center;
+	height: 420px;
+	width: 350px;
+	margin-top:200px;
+	margin-left: 350px;
+	background-color: #FDFFF4;
+	border-radius: 10px;
+
+}
+
+.guiapagina
+{
+	/*border: 1px dotted;*/
+	width: 1024px;
+	height:768px;
+	
+}
+
+.login_text{
+	margin-top:50px;
+	text-align:center;
+	font-family: 'Raleway', Arial, sans-serif;
+}
+
+.campos{
+	margin-left:100px; 
+}
+
+
+.boton
+{
+	width: 100px;
+	height: 30px;
+	color: black;
+	background-color: #BBBBBB;
+	border: 0px;
+	border-radius: 6px;
+	margin-left:125px;
+	margin-top:50px;
+}
+
+.botones_adm
+{
+	width: 200px;
+	height: 75px;
+	color: white;
+	background-color: #4B4B4B;
+	border: 0px;
+	border-radius: 6px;
+	margin-left:125px;
+	margin-top:350px;
+	font-size:18px;
+
+}
+
+.map
+{
+	background: #FFFFFF;
+	align-content: center;
+	
+}
+
+#h1 
+{
+	font-family: 'Raleway', Arial, sans-serif;
+	color:white;
+	font-size:50px;
+	font-weight:bold;
+}
+
+.historial_tabla
+{
+
+	background: linear-gradient(to bottom, #FFC958 ,#FFEA8D);
+	background-repeat:no-repeat;
+	border-radius:10px;	
+	font-family: 'Raleway', Arial, sans-serif;
+	margin-right: 15px;
+	margin-left:15px;
+	margin-top:10px;
+	color:#454545;
+	align-content:center;
+	text-align:center;
+	padding:8px;
+	font-size:18px;
+	margin-bottom:0px;
+}
+
+.historial_tabla_textos
+{
+	text-align:center;
+	font-family: 'Raleway', Arial, sans-serif;
+
+}
+
+.btn_Detalles
+{
+	background: linear-gradient(to bottom,#FBAB00,#ffd300); 
+	background-repeat:no-repeat;
+	border-radius:10px; 
+	font-family: 'Raleway', Arial, sans-serif; 
+	font-weight:bold; color: #454545; 
+	text-align:center; margin-right:400px; 
+	margin-top:-80px; padding:10px;  
+	height:45px; width:100px; 
+	float:right; 
+	align-content:center; 
+	font-size:16px;
+	cursor:pointer;
+}
+
