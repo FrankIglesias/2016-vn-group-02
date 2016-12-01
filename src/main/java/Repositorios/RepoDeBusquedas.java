@@ -20,21 +20,28 @@ public class RepoDeBusquedas implements WithGlobalEntityManager {
 	Map<LocalDate, Integer> reportePorFecha;
 	RepoTerminales repoTerminales;
 
-	public void persistirObjeto(Busqueda unObjeto) {
+	public void persistirBusqueda(Busqueda unObjeto) {
 		entityManager().persist(unObjeto);
 	}
 	
 	//TODO abstraer estas cosas a una clase que se encargue de persistir todo 
-	public void persistirObjeto(Accion unObjeto) {
+	public void persistirAccion(Accion unObjeto) {
 		entityManager().persist(unObjeto);
 	}
 	
 	public Accion obtenerObjetoAccion(Integer id) {
 		return entityManager().find(Accion.class, id);
 	}
-	public Busqueda obtenerObjeto(Integer id) {
+	public Busqueda obtenerUnaBusqueda(Integer id) {
 		return entityManager().find(Busqueda.class, id);
 	}
+	
+	public List<Busqueda> listar() {
+	    return entityManager()//
+	        .createQuery("from Consultora", Busqueda.class) //
+	        .getResultList();
+	  }
+
 
 	public static RepoDeBusquedas getInstance() {
 		if (instancia == null) {
@@ -60,6 +67,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager {
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
 		repoTerminales.add(terminal);
+		persistirBusqueda(busqueda);
 		return busqueda;
 	}
 
