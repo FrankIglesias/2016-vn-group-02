@@ -11,27 +11,30 @@ import DesignDreamTeamTime.HorarioYDia;
 
 @Entity
 
-@Table(name="Locales")
-public class Local extends POI{
-	
+@Table(name = "Locales")
+public class Local extends POI {
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="idRubro")
+	@JoinColumn(name = "idRubro")
 	private Rubro rubro;
 
 	public Local(Geolocalizacion point, String nombre, HorarioYDia horario, Rubro rubro, List<Feriado> feriados) {
 		super(point, nombre, new ArrayList<String>(), horario, feriados);
 		this.rubro = rubro;
 	}
-	
-	public Geolocalizacion getDireccion() { 
+
+	protected Local() {
+	}
+
+	public Geolocalizacion getDireccion() {
 		return getPoint();
 	}
 
 	public boolean estasCercaDeUnPunto(Geolocalizacion point) {
 		return rubro.estasCercaDeUnPunto(point, this);
 	}
-	
-	public void setPalabrasClave(ArrayList<String> palabrasClave){
+
+	public void setPalabrasClave(ArrayList<String> palabrasClave) {
 		super.setPalabrasClave(palabrasClave);
 	}
 }

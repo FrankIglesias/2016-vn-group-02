@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import TypePois.POI;
 
-
 public class Buscador {
 
 	static List<POI> puntosDeIntereses = new ArrayList<POI>();
@@ -16,17 +15,34 @@ public class Buscador {
 	static double tiempoMax = 0.0001;
 
 	public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal) {
-		 double inicio, fin;
+		double inicio, fin;
 		inicio = System.currentTimeMillis();
 		String[] linea = unaFrase.split(" ");
 		ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea));
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
-		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
+		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
+				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
 		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 		return puntosSegunPalabra;
+	}
+
+	public List<POI> verMas(String unaFrase, Terminal unTerminal) {
+		double inicio, fin;
+		inicio = System.currentTimeMillis();
+		String[] linea = unaFrase.split(" ");
+		ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea));
+		List<POI> puntosSegunPalabra = new ArrayList<POI>();
+		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
+				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
+		fin = System.currentTimeMillis();
+		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
+		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
+		return puntosSegunPalabra;
+
 	}
 
 	public void setTiempoMaximoDeBusqueda(double tiempoMax) {

@@ -48,7 +48,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	
 	public List<POI> obtenerDeHibernateSegunPalabrasClave(String palabraClave) {
 		return entityManager() 
-		        .createQuery("from POI p join pc ON p.idPoi = pc.id_poi WHERE pc.palabrasClave like :palabraClave", POI.class) //
+		        .createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class) 
 		        .setParameter("palabraClave", palabraClave) 
 		        .getResultList();
 	}

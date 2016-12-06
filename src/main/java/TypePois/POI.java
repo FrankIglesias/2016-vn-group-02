@@ -46,7 +46,7 @@ public abstract class POI {
 	private String nombre;
 
 	@ElementCollection
-	@CollectionTable(name = "palabrasClaves", joinColumns = @JoinColumn(name = "id_poi"))
+	@CollectionTable(name = "palabrasClaves")
 	public List<String> palabrasClave = new ArrayList<String>();
 
 	@OneToOne(cascade = CascadeType.PERSIST)

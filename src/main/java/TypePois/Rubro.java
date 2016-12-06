@@ -20,7 +20,7 @@ public class Rubro {
 	
 	private String nombre;
 	private int radioDeCercania;
-
+	public Rubro(){}
 	public Rubro(String name, int radioDeCercania) {
 		super();
 		this.nombre = name;
