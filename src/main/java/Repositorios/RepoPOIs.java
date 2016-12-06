@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.bson.types.ObjectId;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -118,13 +119,24 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		}
 	}
 
-
 	public void sincronizarBDs() {
 		levantarTodoDeMongo();
 		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi))
 				.collect(Collectors.toList());
 		aHibernate.forEach(unPoi -> persistirEnHibernate(unPoi));
-		// borrar de mongo
+		aHibernate.stream().forEach(unPoint -> borrarDeMongo(unPoint));
+	}
+
+	public void borrarDeMongo(POI unPoi) {
+		MongoClient cliente = null;
+		try {
+			cliente = new MongoClient();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		DB database = cliente.getDB("POIS");
+		DBCollection collection = database.getCollection("POIS");
+		collection.remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));
 	}
 
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
