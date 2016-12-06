@@ -111,9 +111,13 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		while (cursor.hasNext()) {
 			java.lang.reflect.Type tipoPOI = new TypeToken<POI>() {
 			}.getType();
-			puntosDeIntereses.add(gson.fromJson(cursor.next().toString(), tipoPOI));
+			String id = cursor.next().get("_id").toString();
+			POI poiAGuardar = gson.fromJson(cursor.next().toString(), tipoPOI);
+			poiAGuardar.setIdMongo(id);
+			puntosDeIntereses.add(poiAGuardar);
 		}
 	}
+
 
 	public void sincronizarBDs() {
 		levantarTodoDeMongo();
