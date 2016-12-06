@@ -78,7 +78,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		collection.save(doc);
 	}
 
-	public List<POI> traerDeMongo(String palabra) {
+	public List<POI> obtenerDeMongoSegunPalabrasClave(String palabra) {
 		List<POI> pois = new ArrayList<POI>();
 		MongoClient cliente = null;
 		try {
