@@ -73,6 +73,10 @@ public abstract class POI {
 		ultimaFechaBusqueda = LocalDateTime.now();
 	}
 	
+	public LocalDateTime getFechaDeBusqueda() {
+		return ultimaFechaBusqueda;
+	}
+	
 	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
 			List<Feriado> feriados) {
 		super();

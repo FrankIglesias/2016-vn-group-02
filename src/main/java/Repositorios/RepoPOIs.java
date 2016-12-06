@@ -2,6 +2,8 @@ package Repositorios;
 
 
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,23 +11,26 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import DesignDreamTeamLocation.Geolocalizacion;
-import TypePois.Banco;
-import TypePois.CGP;
-import TypePois.Local;
-import TypePois.POI;
-
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
+
+import DesignDreamTeamLocation.Geolocalizacion;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Local;
+import TypePois.POI;
 public class RepoPOIs implements WithGlobalEntityManager {
 
 	List<POI> puntosDeIntereses;
@@ -81,6 +86,34 @@ public class RepoPOIs implements WithGlobalEntityManager {
 //		
 //	}
 //	
+	public void levantarTodoDeMongo() {
+		MongoClient cliente = null;
+		try {
+			cliente = new MongoClient();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		DB database = cliente.getDB("POIS");
+		DBCollection collection = database.getCollection("POIS");
+		DBCursor cursor = collection.find();
+		Gson gson = new Gson();
+		while(cursor.hasNext()) {
+			java.lang.reflect.Type tipoPOI = new TypeToken<POI>() {
+			}.getType();
+			puntosDeIntereses.add(gson.fromJson(cursor.next().toString(), tipoPOI));
+		}
+	}
+	
+	public void sincronizarBDs() {
+		levantarTodoDeMongo();
+		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi)).collect(Collectors.toList());
+		aHibernate.forEach(unPoi -> persistirEnHibernate(unPoi));
+		//borrar de mongo 
+	}
+	
+	public boolean noSeConsultoEn7Dias(POI unPoi) {
+			return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
+	}
 	
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
