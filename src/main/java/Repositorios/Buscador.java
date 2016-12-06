@@ -1,6 +1,7 @@
 package Repositorios;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,13 +12,17 @@ public class Buscador {
 
 	static List<POI> puntosDeIntereses = new ArrayList<POI>();
 	static RepoDeBusquedas baseDeDatos = RepoDeBusquedas.getInstance();
+	static RepoPOIs baseDeDatosDePois = RepoPOIs.getInstance();
 	static double tiempoMax = 0.0001;
 
 	public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal) {
 		 double inicio, fin;
 		inicio = System.currentTimeMillis();
-		List<POI> puntosSegunPalabra = puntosDeIntereses.stream().filter(unPunto -> unPunto.tenesUnaPalabraDe(unaFrase))
-				.collect(Collectors.toList());
+		String[] linea = unaFrase.split(" ");
+		ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea));
+		List<POI> puntosSegunPalabra = new ArrayList<POI>();
+		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);

@@ -20,7 +20,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
@@ -28,8 +27,9 @@ import DesignDreamTeamTime.HorarioYDia;
 
 
 
+
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "Pois")
 public abstract class POI {
 
@@ -55,6 +55,8 @@ public abstract class POI {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idPoi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
+	
+	public LocalDateTime ultimaFechaBusqueda;
 
 	public void setId(int unID) {
 		this.id = unID;
@@ -67,6 +69,10 @@ public abstract class POI {
 	public POI() {
 	};
 
+	public void setUltimaFechaDeBusqueda() {
+		ultimaFechaBusqueda = LocalDateTime.now();
+	}
+	
 	public POI(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, HorarioYDia horario,
 			List<Feriado> feriados) {
 		super();

@@ -88,8 +88,8 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void persistoUnCGPyMeLoTraigoSanoYsalvo() {
 
 		CGP unCGP = GlobalTestVariables.crearUnCGP(null);
-		repositorioPOI.persist(unCGP);
-		assertEquals(repositorioPOI.obtenerObjeto(unCGP.getId()), unCGP);
+		repositorioPOI.persistirEnHibernate(unCGP);
+		assertEquals(repositorioPOI.obtenerDeHibernate(unCGP.getId()), unCGP);
 
 	}
 	@Test
@@ -127,17 +127,17 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void persistoUnColecYmeLoTraigoSanoYSalvo() {
 		Colectivo unColec = GlobalTestVariables.crearUnColectivo();
 
-		repositorioPOI.persist(unColec);
-		assertEquals(repositorioPOI.obtenerObjeto(unColec.getId()), unColec);
+		repositorioPOI.persistirEnHibernate(unColec);
+		assertEquals(repositorioPOI.obtenerDeHibernate(unColec.getId()), unColec);
 	}
 
 	@Test
 
 	public void persistoUnLocalYmeLoTraigoSanoYSalvo() {
 		Local lodemari = GlobalTestVariables.crearUnLocal(null);
-		repositorioPOI.persist(lodemari);
+		repositorioPOI.persistirEnHibernate(lodemari);
 		//repositorioPOI.persistirObjeto(lodemari);
-		assertEquals(repositorioPOI.obtenerObjeto(lodemari.getId()), lodemari);
+		assertEquals(repositorioPOI.obtenerDeHibernate(lodemari.getId()), lodemari);
 	}
 
 	@Test
@@ -177,8 +177,8 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void persistoUnBancoYMeTraigoSuLatitud() {
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		repositorioPOI.persist(unBanco);
-		Banco otroBanco = (Banco) repositorioPOI.obtenerObjeto(unBanco.getId());
+		repositorioPOI.persistirEnHibernate(unBanco);
+		Banco otroBanco = (Banco) repositorioPOI.obtenerDeHibernate(unBanco.getId());
 		Assert.assertTrue(otroBanco.getPoint().getLatitud() == -34.5735632);
 		Assert.assertTrue(otroBanco.getNombre() == "Banco Rio");
 	}
@@ -188,8 +188,8 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Local unLocal = GlobalTestVariables.crearUnLocal(feriados);
 		
 		//repositorioPOI.persistirObjeto(unLocal);
-		repositorioPOI.persist(unLocal);
-		Local otroLocal = (Local) repositorioPOI.obtenerObjeto(unLocal.getId());
+		repositorioPOI.persistirEnHibernate(unLocal);
+		Local otroLocal = (Local) repositorioPOI.obtenerDeHibernate(unLocal.getId());
 		String ciudadLocal = otroLocal.getPoint().getLocalidad().getCiudad();
 		Assert.assertTrue(unLocal.getPoint().getLocalidad().getCiudad() == ciudadLocal);
 		
