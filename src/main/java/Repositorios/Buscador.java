@@ -21,7 +21,7 @@ public class Buscador {
 		ArrayList<String> palabrasClave = new ArrayList<String>(Arrays.asList(linea));
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
 		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
-				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
+				.addAll(baseDeDatosDePois.obtenerDeMongoSegunPalabrasClave(palabrita)));
 		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
