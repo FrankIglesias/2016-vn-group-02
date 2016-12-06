@@ -1,6 +1,5 @@
 package Repositorios;
 
-
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -31,38 +30,35 @@ import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
+
 public class RepoPOIs implements WithGlobalEntityManager {
 
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
-	public void persistirEnHibernate(POI unPOI)
-	{
+	public void persistirEnHibernate(POI unPOI) {
 		EntityTransaction transaccion = entityManager.getTransaction();
 		transaccion.rollback();
 		transaccion.begin();
 		entityManager.persist(unPOI);
 		transaccion.commit();
 	}
-	
 
 	public POI obtenerDeHibernate(int id) {
 		return entityManager.find(POI.class, id);
 	}
-	
+
 	public List<POI> obtenerDeHibernateSegunPalabrasClave(String palabraClave) {
-		return entityManager() 
-		        .createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class) 
-		        .setParameter("palabraClave", palabraClave) 
-		        .getResultList();
+		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
+				.setParameter("palabraClave", palabraClave).getResultList();
 	}
-	
+
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
 		ObjectMapper map = new ObjectMapper();
 		return map.writeValueAsString(unPoi);
 	}
-	
+
 	public void persistirEnMongo(POI unPOI) {
 		MongoClient cliente = null;
 		try {
@@ -78,14 +74,29 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		collection.drop();
 		collection.save(doc);
 	}
 
-//	public POI obtenerDeMongo(int id) {
-//		
-//	}
-//	
+	public List<POI> traerDeMongo(String palabra) {
+		List<POI> pois = new ArrayList<POI>();
+		MongoClient cliente = null;
+		try {
+			cliente = new MongoClient();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		DB database = cliente.getDB("POIS");
+		DBCollection collection = database.getCollection("POIS");
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.put("palabrasClave", palabra);
+		DBCursor cursor = collection.find(whereQuery);
+		while (cursor.hasNext()) {
+			System.out.println(cursor.next() + "\n");
+		}
+		return pois;
+
+	}
+
 	public void levantarTodoDeMongo() {
 		MongoClient cliente = null;
 		try {
@@ -97,24 +108,25 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		DBCollection collection = database.getCollection("POIS");
 		DBCursor cursor = collection.find();
 		Gson gson = new Gson();
-		while(cursor.hasNext()) {
+		while (cursor.hasNext()) {
 			java.lang.reflect.Type tipoPOI = new TypeToken<POI>() {
 			}.getType();
 			puntosDeIntereses.add(gson.fromJson(cursor.next().toString(), tipoPOI));
 		}
 	}
-	
+
 	public void sincronizarBDs() {
 		levantarTodoDeMongo();
-		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi)).collect(Collectors.toList());
+		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi))
+				.collect(Collectors.toList());
 		aHibernate.forEach(unPoi -> persistirEnHibernate(unPoi));
-		//borrar de mongo 
+		// borrar de mongo
 	}
-	
+
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
-			return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
+		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
 	}
-	
+
 	public static RepoPOIs getInstance() {
 		if (instancia == null) {
 			instancia = new RepoPOIs();
