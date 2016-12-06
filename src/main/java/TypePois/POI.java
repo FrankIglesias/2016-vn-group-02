@@ -51,6 +51,9 @@ public abstract class POI {
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	protected HorarioYDia horario = new HorarioYDia();
+	
+	@Transient
+	public String idMongo = ""; 
 
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idPoi")
@@ -68,6 +71,15 @@ public abstract class POI {
 
 	public POI() {
 	};
+	
+	public void setIdMongo(String clave) {
+		idMongo = clave;
+	}
+	
+	public String getIdMongo(String clave) {
+		return idMongo;
+	}
+
 
 	public void setUltimaFechaDeBusqueda() {
 		ultimaFechaBusqueda = LocalDateTime.now();
