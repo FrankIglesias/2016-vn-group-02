@@ -27,7 +27,6 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		});
 	}
 
-	// TODO abstraer estas cosas a una clase que se encargue de persistir todo
 	public void persistirAccion(Accion unObjeto) {
 		entityManager().persist(unObjeto);
 
@@ -41,10 +40,11 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		return entityManager().find(Busqueda.class, id);
 	}
 
-	public List<Busqueda> listar() {
-		return entityManager()//
+	public List<Busqueda> listarTodo() {
+		busquedas = entityManager()//
 				.createQuery(" FROM Busqueda", Busqueda.class) //
 				.getResultList();
+		return busquedas;
 	}
 
 	public static RepoDeBusquedas getInstance() {

@@ -31,13 +31,35 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	private Criterio criterio;
 	@Transient
 	private List<Terminal> terminalesAsignadas = new ArrayList<Terminal>();
+	
+	@Transient
+	public static AsignarAccionesUsuarios instancia;
 
 	public AsignarAccionesUsuarios(Criterio criterio, Accion accion) {
 		this.repoTerminales = RepoTerminales.getInstance();
 		this.accion = accion;
 		this.criterio = criterio;
 	}
+	
+	public AsignarAccionesUsuarios() {
+		
+	}
+	public static AsignarAccionesUsuarios getInstance() {
+		if (instancia == null) {
+			instancia = new AsignarAccionesUsuarios();
+		}
+		return instancia;
+	}
 
+	public void setCriterio(Criterio criterio) {
+		this.criterio = criterio;
+	}
+	
+	public void setAccion(Accion accion) {
+		this.accion = accion;
+	}
+	
+	
 	public ArrayList<Terminal> seleccionarTerminales(RepoTerminales repoTerminales) {
 		return repoTerminales.seleccionaUsuarios(this);
 
@@ -53,7 +75,13 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	}
 
 	public void ejecutarAccion(Accion unaAccion) {
-		terminalesAsignadas.stream().forEach(unUsuario -> unUsuario.ejecutaUnaAccion(unaAccion));
+		terminalesAsignadas.stream().forEach((unaTerminal -> unaTerminal.ejecutaUnaAccion(unaAccion)));
+	}
+	
+	public void analizarAccionesParaUnaTerminal(Terminal unTerminal) {
+		if(cumpleCriterio(unTerminal)) {
+			unTerminal.ejecutarTodasLasAcciones();
+		}
 	}
 
 	@Override

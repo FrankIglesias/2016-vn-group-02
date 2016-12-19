@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 import TypePois.POI;
 
 public class Buscador {
@@ -26,6 +27,7 @@ public class Buscador {
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
+		AsignarAccionesUsuarios.getInstance().analizarAccionesParaUnaTerminal(unTerminal);
 		return puntosSegunPalabra;
 	}
 

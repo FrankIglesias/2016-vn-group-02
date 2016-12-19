@@ -104,6 +104,7 @@ public class Terminal {
 	}
 	
 	public void addAccion(Accion accion) {
+		if(!listaDeAcciones.contains(accion))
 		listaDeAcciones.add(accion);
 	}
 
@@ -128,5 +129,9 @@ public class Terminal {
 
 	public void ejecutaUnaAccion(Accion unaAccion) {
 		unaAccion.ejecutarAccion(this);
+	}
+	
+	public void ejecutarTodasLasAcciones() {
+		listaDeAcciones.forEach(unaAccion -> unaAccion.ejecutarAccion(this));
 	}
 }

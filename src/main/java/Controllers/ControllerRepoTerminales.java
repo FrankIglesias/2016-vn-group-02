@@ -2,6 +2,7 @@ package Controllers;
 
 import java.util.List;
 
+import AsignarAccionesUsuario.Accion;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 
@@ -35,6 +36,14 @@ public class ControllerRepoTerminales {
 			unaTerminal = new Terminal(nombre, comuna);
 		
 		modeloTerminales.persistirTerminal(unaTerminal);
+	}
+	
+	public void setearAccionParaUnaTerminal(Terminal unaTerminal, Accion unaAccion) {
+		unaTerminal.addAccion(unaAccion);
+	}
+	
+	public void removerAccionParaUnaTerminal(Terminal unaTerminal, Accion unaAccion) {
+		unaTerminal.quitar(unaAccion);
 	}
 	
 }

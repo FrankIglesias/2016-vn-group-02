@@ -1,6 +1,5 @@
 package Repositorios;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,6 +51,14 @@ public class Busqueda {
 	public Integer getId() {
 		return id;
 	}
+	
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+	
+	public Terminal getTerminal() {
+		return terminal;
+	}
 
 	public boolean esDeLaFecha(LocalDateTime fecha) {
 		return this.fecha.isEqual(fecha);
@@ -63,8 +70,13 @@ public class Busqueda {
 		}
 
 	}
-
-	public LocalDateTime getFecha() {
-		return fecha;
+	
+	public boolean estaEntreDosFechas(LocalDateTime antes, LocalDateTime despues) {
+		return (fecha.isAfter(antes) && fecha.isBefore(despues));
 	}
+
+	public int cantidadDePoisObtenidos() {
+		return puntosObtenidos.size();
+	}
+	
 }
