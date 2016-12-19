@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityTransaction;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
+import TypePois.POI;
 
 public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 	List<Terminal> terminales;
@@ -26,11 +30,28 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		terminales = new ArrayList<Terminal>();
 		reporteBusquedasTotales = new HashMap<String, Integer>();
 	}
-public void persistirTerminal(Terminal terminal){
+	
+	public void persistirTerminal(Terminal terminal){
 	withTransaction(() -> {
 		persist(terminal);});
 	
 }
+	
+	public List<Terminal> obtenerTerminales(int comuna) {
+		
+		if(comuna != -1) {
+			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
+		}
+		else {
+			return entityManager().createQuery("from Terminal WHERE comuna = :comuna", Terminal.class).setParameter("comuna", comuna).getResultList();
+		}
+		
+	}
+	
+	public void eliminarUnaTerminal(Terminal unaTerminal) {
+		entityManager().remove(unaTerminal);
+	}
+	
 	public void add(Terminal terminal) {
 
 		if (!terminales.contains(terminal)) {

@@ -77,10 +77,13 @@ public abstract class POI {
 		idMongo = clave;
 	}
 	
-	public String getIdMongo(String clave) {
+	public String getIdMongo() {
 		return idMongo;
 	}
-
+	
+	public void setGeo(Geolocalizacion unaGeo) {
+		point = unaGeo;
+	}
 
 	public void setUltimaFechaDeBusqueda() {
 		ultimaFechaBusqueda = LocalDateTime.now();

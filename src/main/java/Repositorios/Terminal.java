@@ -27,6 +27,7 @@ public class Terminal {
 	Integer id;
 	@Column(name = "name_terminal")
 	private String nombre;
+	public int comuna; 
 
 	@ElementCollection
 	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
@@ -43,7 +44,12 @@ public class Terminal {
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
+	public Terminal(String nombre, int comuna) {
+		this.nombre = nombre;
+		this.comuna = comuna;
+	}
+	
 	public void setGestorDeMail(GestorMailInterface gestorDeMail) {
 		this.gestorDeMail = gestorDeMail;
 	}
