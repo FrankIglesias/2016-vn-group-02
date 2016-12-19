@@ -1,4 +1,4 @@
-package Repositorios;
+package Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,15 @@ import java.util.List;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
+import Repositorios.RepoPOIs;
+import Repositorios.RepoTerminales;
+import Repositorios.Terminal;
 import TypePois.POI;
 
 public class ControllerRepoPoi {
 	
 	
 	RepoPOIs modeloPOI = RepoPOIs.getInstance();
-	RepoTerminales modeloTerminales = RepoTerminales.getInstance();
 
 	public List<POI> listarPOIsParaAdmin(String nombre, String tipo) {
 
@@ -46,34 +48,5 @@ public class ControllerRepoPoi {
 			modeloPOI.borrarDeMongo(unPoi);
 			modeloPOI.borrarDeHibernate(unPoi);	
 		}
-	
-	
-	public List<Terminal> listarTerminales(int comuna) {
 
-		return modeloTerminales.obtenerTerminales(comuna);
-	}
-	
-	public void eliminarUnaTerminal(Terminal unaTerminal) {
-		modeloTerminales.eliminarUnaTerminal(unaTerminal);
-	}
-	
-	public void agregarUnaTerminal(String nombre, int comuna) {
-		Terminal unaTerminal = new Terminal(nombre, comuna);
-		modeloTerminales.persistirTerminal(unaTerminal);
-	}
-	
-	public void editarUnaTerminal(Terminal terminalVieja, String nombre, int comuna) {
-		Terminal unaTerminal;
-		
-		if(nombre.isEmpty()) 
-			unaTerminal = new Terminal(terminalVieja.getNombre(), comuna);
-		
-		if(comuna == -1)
-			unaTerminal = new Terminal(nombre, terminalVieja.comuna);
-		else 
-			unaTerminal = new Terminal(nombre, comuna);
-		
-		modeloTerminales.persistirTerminal(unaTerminal);
-	}
-	
 }
