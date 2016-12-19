@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import Repositorios.ControllerRepoPoi;
 import TypePois.POI;
 import spark.ModelAndView;
 import spark.Request;
@@ -36,7 +35,7 @@ public class MainController {
 
 		if (!(Objects.isNull(nombreFiltro) || nombreFiltro.isEmpty() || tipoFiltro.equals("vacio"))) {
 			System.out.println("Alla");
-			List<POI> pois = new ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 			viewModel.put("listadoPOIs", pois);
 		}
 		return new ModelAndView(null, "admin_pois.hbs");
