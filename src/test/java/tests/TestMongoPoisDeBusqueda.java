@@ -43,7 +43,7 @@ public class TestMongoPoisDeBusqueda {
 	@Test
 	public void encuentraMasDeUnPOIExternoYNoExternoSegunPalabraClave() throws UnknownHostException
 	{
-		PoisBusquedaParser.guardarPoisDeUnaBusqueda(buscador.buscarSegunPalabraClave(fraseABuscar, terminal));
+		PoisBusquedaParser.guardarPoisDeUnaBusqueda(buscador.buscarPoisMongo(fraseABuscar, terminal));
 		
 		MongoClient cliente = new MongoClient();
 		DB database = cliente.getDB("PoisDeBusquedas");

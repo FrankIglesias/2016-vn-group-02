@@ -26,7 +26,7 @@ public class BaseDeDatosTest {
 		repoTerminales = RepoTerminales.getInstance();
 		repoTerminales.inicializarRepoTerminales();
 		terminal = new Terminal("mari");
-		buscador.buscarSegunPalabraClave("prueba", terminal);
+		buscador.buscarPoisMongo("prueba", terminal);
 		
 	}
 	

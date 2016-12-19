@@ -49,13 +49,13 @@ public class CGPExternoTest {
 
 	@Test
 	public void encuentraSoloAlPOIExternoSegunPalabraClave() {
-		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 1);
+		Assert.assertEquals(buscador.buscarPoisMongo(fraseABuscar, terminal).size(), 1);
 	}
 	
 	@Test
 	public void encuentraMasDeUnPOIExternoYNoExternoSegunPalabraClave()
 	{
-		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(), 2);
+		Assert.assertEquals(buscador.buscarPoisMongo(fraseABuscar2, terminal).size(), 2);
 	}
 	
 	

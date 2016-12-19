@@ -13,8 +13,8 @@ public class Buscador {
 	static RepoDeBusquedas baseDeDatos = RepoDeBusquedas.getInstance();
 	static RepoPOIs baseDeDatosDePois = RepoPOIs.getInstance();
 	static double tiempoMax = 0.0001;
-
-	public List<POI> buscarSegunPalabraClave(String unaFrase, Terminal unTerminal) {
+	
+	public List<POI> buscarPoisMongo(String unaFrase, Terminal unTerminal) {
 		double inicio, fin;
 		inicio = System.currentTimeMillis();
 		String[] linea = unaFrase.split(" ");
@@ -29,7 +29,7 @@ public class Buscador {
 		return puntosSegunPalabra;
 	}
 
-	public List<POI> verMas(String unaFrase, Terminal unTerminal) {
+	public List<POI> buscarPoisHibernate(String unaFrase, Terminal unTerminal) {
 		double inicio, fin;
 		inicio = System.currentTimeMillis();
 		String[] linea = unaFrase.split(" ");

@@ -1,25 +1,28 @@
 package MainPackage;
 
+import spark.Spark;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
 public class Main {
 
 	public static void main(String[] args) {
-
-		/*
-		 * System.out.println("Iniciando servidor");
-		 * 
-		 * HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-		 * MainController home = new MainController();
-		 * 
-		 * staticFileLocation("/templates");
-		 * 
-		 * get("/", home::mostrar, engine); get("/administrador.html",
-		 * home::mostrarAdmin, engine); get("/usuario.html", home::mostrarUser,
-		 * engine); get("/admin_terminales.html", home::mostrarTerminales,
-		 * engine); get("/admin_pois.html", home::mostrarPois, engine);
-		 * get("/admin_consultas.html", home::mostrarConsultas, engine);
-		 * 
-		 */
-	}
+		Spark.port(7776);
+		
+		  System.out.println("Iniciando servidor");
+		  
+		  HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
+		  MainController home = new MainController();
+		  
+		  Spark.staticFileLocation("/templates");
+		  
+		  Spark.get("/", home::mostrar, engine);
+		  Spark.get("/administrador.html",home::mostrarAdmin, engine);
+		  Spark.get("/usuario.html", home::mostrarUser, engine);
+		  Spark.get("/admin_terminales.html", home::mostrarTerminales, engine);
+		  Spark.get("/admin_pois.html", home::mostrarPois, engine);
+		  Spark.get("/admin_consultas.html", home::mostrarConsultas, engine);
+		  Spark.put("/admin_pois.html", home::filtrarNombreTipoPois, engine);
+		 	}
 }
 
 /*

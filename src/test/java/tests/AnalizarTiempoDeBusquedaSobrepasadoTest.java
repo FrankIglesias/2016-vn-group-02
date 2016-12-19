@@ -24,7 +24,7 @@ public class AnalizarTiempoDeBusquedaSobrepasadoTest {
 		}
 		buscador2.setTiempoMaximoDeBusqueda(0.01);
 		Buscador.setPuntosDeIntereses(lista2);
-		buscador2.buscarSegunPalabraClave("banelco", terminal);
+		buscador2.buscarPoisMongo("banelco", terminal);
 	}
 	
 	@Test

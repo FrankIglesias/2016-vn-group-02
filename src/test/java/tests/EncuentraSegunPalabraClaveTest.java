@@ -47,25 +47,25 @@ public class EncuentraSegunPalabraClaveTest {
 		puntosDeInteres.add(cgp);
 
 		Buscador.setPuntosDeIntereses(puntosDeInteres);
-		buscador.buscarSegunPalabraClave(fraseABuscar2, terminal);
+		buscador.buscarPoisMongo(fraseABuscar2, terminal);
 
 	}
 
 	@Test
 	public void encontrarPOISegunPalabra() {
-		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).size(), 2);
+		Assert.assertEquals(buscador.buscarPoisMongo(fraseABuscar, terminal).size(), 2);
 		Assert.assertEquals("Cantidad de elementos en el array", 2,
-				buscador.buscarSegunPalabraClave("depositos", terminal).size());
+				buscador.buscarPoisMongo("depositos", terminal).size());
 	}
 
 	@Test
 	public void noEncuentraPOISegunPalabraClave() {
-		Assert.assertFalse(buscador.buscarSegunPalabraClave(fraseABuscar, terminal).contains(colectivo));
+		Assert.assertFalse(buscador.buscarPoisMongo(fraseABuscar, terminal).contains(colectivo));
 	}
 
 	@Test
 	public void encuentraACGP() {
-		Assert.assertEquals(buscador.buscarSegunPalabraClave(fraseABuscar2, terminal).size(), 1);
+		Assert.assertEquals(buscador.buscarPoisMongo(fraseABuscar2, terminal).size(), 1);
 	}
 
 }
