@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 @Entity
 @DiscriminatorValue (value = "d")
@@ -18,9 +18,9 @@ public class AccionDesactivar extends Accion {
 		this.accionAquitar = accion;
 	}
 
-	public void ejecutarAccion(Usuario usuario) {
-		usuario.quitar(accionAquitar);
-		usuario.quitar(this);
+	public void ejecutarAccion(Terminal terminal) {
+		terminal.quitar(accionAquitar);
+		terminal.quitar(this);
 	}
 
 	@Override

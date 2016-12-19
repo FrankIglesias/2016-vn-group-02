@@ -1,11 +1,11 @@
 package AsignarAccionesUsuario;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 
 
 public interface Criterio {
 
-	boolean esCumplidoPor(Usuario unUsuario);
+	boolean esCumplidoPor(Terminal terminal);
 
 }

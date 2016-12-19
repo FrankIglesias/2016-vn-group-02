@@ -1,6 +1,6 @@
 package AsignarAccionesUsuario;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 
 
@@ -12,11 +12,12 @@ public class CriterioComuna implements Criterio {
 		this.comuna = comuna;
 	}
 
-	public boolean esCumplidoPor(Usuario unUsuario) {
-		if (unUsuario.getComuna() == comuna) {
+	public boolean esCumplidoPor(Terminal unaTerminal) {
+		if (unaTerminal.getComuna() == comuna) {
 			return true;
 		}
 		return false;
 	}
+
 
 }

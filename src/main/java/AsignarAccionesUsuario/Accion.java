@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 @Entity
 @Inheritance
@@ -26,7 +26,7 @@ public abstract class Accion {
 		return id;
 	}
 
-	public abstract void ejecutarAccion(Usuario usuario);
+	public abstract void ejecutarAccion(Terminal terminal);
 
 	public abstract int getId();
 

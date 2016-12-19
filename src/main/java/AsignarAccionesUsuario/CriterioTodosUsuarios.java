@@ -1,10 +1,10 @@
 package AsignarAccionesUsuario;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 public class CriterioTodosUsuarios implements Criterio {
 
-	public boolean esCumplidoPor(Usuario unUsuario) {
+	public boolean esCumplidoPor(Terminal unaTerminal) {
 		return true;
 	}
 }

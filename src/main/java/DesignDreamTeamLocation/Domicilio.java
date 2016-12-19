@@ -45,4 +45,7 @@ public Domicilio()
 		return comuna;
 	}
 
+	public void setComuna(int comuna){
+		this.comuna = comuna;
+	}
 }

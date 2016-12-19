@@ -1,6 +1,6 @@
 package Repositorios;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +18,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 
 	private static RepoDeBusquedas instancia = null;
 	List<Busqueda> busquedas;
-	Map<LocalDate, Integer> reportePorFecha;
+	Map<LocalDateTime, Integer> reportePorFecha;
 	RepoTerminales repoTerminales;
 
 	public void persistirBusqueda(Busqueda unObjeto) {
@@ -61,7 +61,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 
 	public void inicializarBaseDeDatos() {
 		busquedas = new ArrayList<Busqueda>();
-		reportePorFecha = new HashMap<LocalDate, Integer>();
+		reportePorFecha = new HashMap<LocalDateTime, Integer>();
 		repoTerminales = RepoTerminales.getInstance();
 	}
 
@@ -75,16 +75,16 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		return busqueda;
 	}
 
-	public int cantidadDeBusquedasPorFecha(LocalDate fecha) {
+	public int cantidadDeBusquedasPorFecha(LocalDateTime fecha) {
 		return busquedas.stream().filter(unaBusqueda -> unaBusqueda.esDeLaFecha(fecha)).collect(Collectors.toList())
 				.size();
 	}
 
-	public void addBusquedasPorFechaAlReporte(LocalDate fecha) {
+	public void addBusquedasPorFechaAlReporte(LocalDateTime fecha) {
 		reportePorFecha.put(fecha, this.cantidadDeBusquedasPorFecha(fecha));
 	}
 
-	public Map<LocalDate, Integer> getReportePorFecha() {
+	public Map<LocalDateTime, Integer> getReportePorFecha() {
 		return reportePorFecha;
 	}
 

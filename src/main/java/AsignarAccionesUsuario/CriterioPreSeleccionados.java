@@ -1,19 +1,19 @@
 package AsignarAccionesUsuario;
 import java.util.List;
 
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 
 public class CriterioPreSeleccionados implements Criterio {
-	List<Usuario> usuariosSeleccionados;
+	List<Terminal> terminalesSeleccionados;
 
-	public CriterioPreSeleccionados(List<Usuario> preSeleccionados) {
+	public CriterioPreSeleccionados(List<Terminal> preSeleccionados) {
 		super();
-		this.usuariosSeleccionados = preSeleccionados;
+		this.terminalesSeleccionados = preSeleccionados;
 	}
 
-	public boolean esCumplidoPor(Usuario unUsuario) {
-		return usuariosSeleccionados.stream().anyMatch(seleccionado -> seleccionado.equals(unUsuario));
+	public boolean esCumplidoPor(Terminal unaTerminal) {
+		return terminalesSeleccionados.stream().anyMatch(seleccionado -> seleccionado.equals(unaTerminal));
 	}
 
 }

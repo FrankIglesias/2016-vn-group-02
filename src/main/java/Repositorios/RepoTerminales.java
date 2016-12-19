@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.EntityTransaction;
+import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-import TypePois.POI;
+import AsignarAccionesUsuario.Accion;
+import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 
 public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 	List<Terminal> terminales;
@@ -70,6 +70,19 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 	public Map<String, Integer> getReporteBusquedasTotales() {
 		addReportesPorTerminal();
 		return reporteBusquedasTotales;
+	}
+	
+	public boolean todosTienenLaAccion(Accion unaAccion){
+		return terminales.stream().allMatch(unaTerminal -> unaTerminal.getListaDeAcciones().get(0).equals(unaAccion));
+	}
+	
+	public int size(){
+		return terminales.size();
+	}
+	
+	public ArrayList<Terminal> seleccionaUsuarios(AsignarAccionesUsuarios proceso){
+		return terminales.stream().filter(unaTerminal -> proceso.cumpleCriterio(unaTerminal))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 }

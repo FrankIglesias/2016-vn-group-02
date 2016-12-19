@@ -1,12 +1,11 @@
 package AsignarAccionesUsuario;
 
-import javax.mail.Message;
+import java.time.LocalDateTime;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import GestorDeMail.GestorDeMailTrucho;
-import GestorDeMail.GestorMailInterface;
-import Repositorios.Usuario;
+import Repositorios.Terminal;
 
 @Entity
 @DiscriminatorValue (value  = "n")
@@ -14,15 +13,16 @@ import Repositorios.Usuario;
 public class AccionNotificarAdmin extends Accion {
 
 	String mailAdmin;
+	String mensaje;
 
-	public AccionNotificarAdmin(String mail) {
+	public AccionNotificarAdmin(String mensaje) {
 		super();
-		this.mailAdmin = mail;
+		this.mensaje = mensaje;
 	}
 
-	public void ejecutarAccion(Usuario usuario) {
-		GestorMailInterface gestorDeMail = new GestorDeMailTrucho();
-		gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, "Tiempo Excedido", "");
+	public void ejecutarAccion(Terminal terminal) {
+		terminal.enviarMailAlAdmin(mensaje, LocalDateTime.now(), terminal.getNombre());
+		
 	}
 	
 	@Override

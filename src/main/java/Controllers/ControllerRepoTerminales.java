@@ -30,7 +30,7 @@ public class ControllerRepoTerminales {
 			unaTerminal = new Terminal(terminalVieja.getNombre(), comuna);
 		
 		if(comuna == -1)
-			unaTerminal = new Terminal(nombre, terminalVieja.comuna);
+			unaTerminal = new Terminal(nombre, terminalVieja.getComuna());
 		else 
 			unaTerminal = new Terminal(nombre, comuna);
 		

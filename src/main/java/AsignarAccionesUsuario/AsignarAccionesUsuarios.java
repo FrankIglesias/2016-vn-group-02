@@ -13,8 +13,8 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
-import Repositorios.RepoUsuarios;
-import Repositorios.Usuario;
+import Repositorios.RepoTerminales;
+import Repositorios.Terminal;
 
 @Entity
 @Table(name = "Acciones_manager")
@@ -24,36 +24,36 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	@Id
 	private Long id;
 	@Transient
-	private RepoUsuarios repoUsuario;
+	private RepoTerminales repoTerminales;
 	@OneToOne
 	private Accion accion;
 	@Transient
 	private Criterio criterio;
 	@Transient
-	private List<Usuario> usuariosAsignados = new ArrayList<Usuario>();
+	private List<Terminal> terminalesAsignadas = new ArrayList<Terminal>();
 
-	public AsignarAccionesUsuarios(RepoUsuarios repoUsuario, Criterio criterio, Accion accion) {
-		this.repoUsuario = repoUsuario;
+	public AsignarAccionesUsuarios(Criterio criterio, Accion accion) {
+		this.repoTerminales = RepoTerminales.getInstance();
 		this.accion = accion;
 		this.criterio = criterio;
 	}
 
-	public ArrayList<Usuario> seleccionarUsuarios(RepoUsuarios repoUsuario) {
-		return repoUsuario.seleccionaUsuarios(this);
+	public ArrayList<Terminal> seleccionarTerminales(RepoTerminales repoTerminales) {
+		return repoTerminales.seleccionaUsuarios(this);
 
 	}
 
-	public boolean cumpleCriterio(Usuario unUsuario) {
-		return criterio.esCumplidoPor(unUsuario);
+	public boolean cumpleCriterio(Terminal unaTerminal) {
+		return criterio.esCumplidoPor(unaTerminal);
 	}
 
 	public void asignarAcciones() {
-		usuariosAsignados = seleccionarUsuarios(repoUsuario);
-		usuariosAsignados.forEach(usuario -> usuario.addAccion(accion));
+		terminalesAsignadas = seleccionarTerminales(repoTerminales);
+		terminalesAsignadas.forEach(unaTerminal -> unaTerminal.addAccion(accion));
 	}
 
 	public void ejecutarAccion(Accion unaAccion) {
-		usuariosAsignados.stream().forEach(unUsuario -> unUsuario.ejecutaUnaAccion(unaAccion));
+		terminalesAsignadas.stream().forEach(unUsuario -> unUsuario.ejecutaUnaAccion(unaAccion));
 	}
 
 	@Override
