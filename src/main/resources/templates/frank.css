@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-.body1 
+.body1
 {
 	font-family: 'Raleway', Arial, sans-serif;
 	width: 1024px;
@@ -10,21 +10,18 @@
 	background-repeat:no-repeat;
 	margin:0px;
 	padding:0px;
-	
+
 }
 
 .header
 {
 	background: linear-gradient(to bottom,#FBAB00,#ffd300);
 	background-repeat:no-repeat;
-	width:1910px;
 	height:150px;
 	border-bottom-left-radius:15px;
 	border-bottom-right-radius:15px;
 	text-align:center;
 	color:white;
-	margin-top:-10px;
-	margin-left:-10px;
 }
 
 .body2
@@ -56,7 +53,7 @@
 	/*border: 1px dotted;*/
 	width: 1024px;
 	height:768px;
-	
+
 }
 
 .login_text{
@@ -66,7 +63,7 @@
 }
 
 .campos{
-	margin-left:100px; 
+	margin-left:100px;
 }
 
 
@@ -100,10 +97,10 @@
 {
 	background: #FFFFFF;
 	align-content: center;
-	
+
 }
 
-#h1 
+#h1
 {
 	font-family: 'Raleway', Arial, sans-serif;
 	color:white;
@@ -116,7 +113,7 @@
 
 	background: linear-gradient(to bottom, #FFC958 ,#FFEA8D);
 	background-repeat:no-repeat;
-	border-radius:10px;	
+	border-radius:10px;
 	font-family: 'Raleway', Arial, sans-serif;
 	margin-right: 15px;
 	margin-left:15px;
@@ -138,12 +135,11 @@
 
 .btn_Detalles
 {
- background: linear-gradient(to bottom,#FBAB00,#ffd300); 
+ background: linear-gradient(to bottom,#FBAB00,#ffd300);
  background-repeat:no-repeat;
- border-radius:10px; 
- font-family: 'Raleway', Arial, sans-serif; 
- font-weight:bold; color: #454545; 
+ border-radius:10px;
+ font-family: 'Raleway', Arial, sans-serif;
+ font-weight:bold; color: #454545;
  font-size:16px;
  cursor:pointer;
  }
-
