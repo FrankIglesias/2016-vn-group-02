@@ -71,7 +71,7 @@ public class ControllerRepoPoi {
 		if(comuna == -1)
 			unaTerminal = new Terminal(nombre, terminalVieja.comuna);
 		else 
-			unaTerminal = new Terminal(nombre	, comuna);
+			unaTerminal = new Terminal(nombre, comuna);
 		
 		modeloTerminales.persistirTerminal(unaTerminal);
 	}

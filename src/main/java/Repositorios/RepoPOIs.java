@@ -54,12 +54,12 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
 				.setParameter("palabraClave", palabraClave).getResultList();
 	}
-	
+
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
 		ObjectMapper map = new ObjectMapper();
 		return map.writeValueAsString(unPoi);
 	}
-	
+
 	public DBCollection conexionAMongo() {
 		MongoClient cliente = null;
 		try {
@@ -68,10 +68,10 @@ public class RepoPOIs implements WithGlobalEntityManager {
 			e.printStackTrace();
 		}
 		DB database = cliente.getDB("POIS");
-		DBCollection collection = database.getCollection("POIS");;
-		return collection; 
+		DBCollection collection = database.getCollection("POIS");
+		;
+		return collection;
 	}
-	
 
 	public void persistirEnMongo(POI unPOI) {
 
@@ -121,12 +121,14 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void borrarDeMongo(POI unPoi) {
-		conexionAMongo().remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));;
+		conexionAMongo().remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));
+		;
 	}
 
 	public void borrarDeHibernate(POI unPoi) {
 		entityManager.remove(unPoi);
 	}
+
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
 		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
 	}
@@ -164,34 +166,31 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void modificarUnPoi(POI unPoi, String nombre, Geolocalizacion unaGeo) {
-		
-		 BasicDBObject aModificar = new BasicDBObject().append("_id", unPoi.getIdMongo());
-		 BasicDBObject modificado = new BasicDBObject("$set", 
-		    		new BasicDBObject().
-		    		append("nombre", nombre).
-		    		append("point", new BasicDBObject().
-		    				append("latitud", unaGeo.getLatitud()).
-		    				append("longitud", unaGeo.getLongitud()).
-		    				append("domicilio", new BasicDBObject().
-		    						append("callePrincipal", unaGeo.getDomicilio().getCallePrincipal()).
-		    						append("altura", unaGeo.getDomicilio().getAltura()))));
-		 
-		 POI poiAModificar = obtenerDeHibernate(unPoi.getId());
-		 poiAModificar.setNombre(nombre);
-		 poiAModificar.setGeo(unaGeo);
-		 
-		if(!unPoi.idMongo.isEmpty())
-		{
+
+		BasicDBObject aModificar = new BasicDBObject().append("_id", unPoi.getIdMongo());
+		BasicDBObject modificado = new BasicDBObject("$set",
+				new BasicDBObject()
+						.append("nombre",
+								nombre)
+						.append("point", new BasicDBObject().append("latitud", unaGeo.getLatitud())
+								.append("longitud", unaGeo.getLongitud()).append("domicilio",
+										new BasicDBObject()
+												.append("callePrincipal", unaGeo.getDomicilio().getCallePrincipal())
+												.append("altura", unaGeo.getDomicilio().getAltura()))));
+
+		POI poiAModificar = obtenerDeHibernate(unPoi.getId());
+		poiAModificar.setNombre(nombre);
+		poiAModificar.setGeo(unaGeo);
+
+		if (!unPoi.idMongo.isEmpty()) {
 			conexionAMongo().update(aModificar, modificado);
 			entityManager.merge(poiAModificar);
-		}
-		else
-		{
+		} else {
 			entityManager.merge(poiAModificar);
 		}
-		
+
 	}
-	
+
 	public void actualizarLocal(String nombre, ArrayList<String> palabrasClave) {
 
 		POI localAModificar = this.tieneUnLocalConNombre(nombre).get(0);
@@ -201,7 +200,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		puntosDeIntereses.add(localAModificar);
 
 	}
-	
+
 	public void addLocal(String nombre, ArrayList<String> palabrasClave) {
 		Local localito = new Local(null, nombre, null, null, null);
 
@@ -224,4 +223,30 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		return geo.getLatitud() == unPoi.getPoint().getLatitud() && geo.getLongitud() == unPoi.getPoint().getLongitud();
 	}
 
+	public void agregarNuevosPoi(POI nuevoPOI) {
+		puntosDeIntereses.add(nuevoPOI);
+	}
+
+	public void sacarPoi(POI POIaSacar) {
+		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> sonIguales(unPoi, POIaSacar))
+				.collect(Collectors.toList()).get(0));
+
+	}
+
+	public int cantidadDePOI() {
+		return puntosDeIntereses.size();
+	}
+
+	public void agregarVariosPoi(List<POI> listaDePoi) {
+		puntosDeIntereses.addAll(listaDePoi);
+
+	}
+
+	public boolean isEmpty() {
+		return puntosDeIntereses.isEmpty();
+	}
+
+	public int size() {
+		return puntosDeIntereses.size();
+	}
 }
