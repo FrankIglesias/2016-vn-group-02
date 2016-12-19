@@ -37,6 +37,10 @@ public Domicilio()
 		return this.callePrincipal;
 	}
 	
+	public String getAltura() {
+		return this.altura;
+	}
+	
 	public int getComuna(){
 		return comuna;
 	}

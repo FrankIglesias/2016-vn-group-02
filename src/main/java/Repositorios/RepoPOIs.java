@@ -2,13 +2,13 @@ package Repositorios;
 
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.swing.text.Document;
 
 import org.bson.types.ObjectId;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
@@ -54,13 +54,13 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
 				.setParameter("palabraClave", palabraClave).getResultList();
 	}
-
+	
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
 		ObjectMapper map = new ObjectMapper();
 		return map.writeValueAsString(unPoi);
 	}
-
-	public void persistirEnMongo(POI unPOI) {
+	
+	public DBCollection conexionAMongo() {
 		MongoClient cliente = null;
 		try {
 			cliente = new MongoClient();
@@ -68,7 +68,14 @@ public class RepoPOIs implements WithGlobalEntityManager {
 			e.printStackTrace();
 		}
 		DB database = cliente.getDB("POIS");
-		DBCollection collection = database.getCollection("POIS");
+		DBCollection collection = database.getCollection("POIS");;
+		return collection; 
+	}
+	
+
+	public void persistirEnMongo(POI unPOI) {
+
+		DBCollection collection = conexionAMongo();
 		DBObject doc = new BasicDBObject();
 		try {
 			doc = (DBObject) JSON.parse(mappearUnPoi(unPOI));
@@ -80,14 +87,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 	public List<POI> obtenerDeMongoSegunPalabrasClave(String palabra) {
 		List<POI> pois = new ArrayList<POI>();
-		MongoClient cliente = null;
-		try {
-			cliente = new MongoClient();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		DB database = cliente.getDB("POIS");
-		DBCollection collection = database.getCollection("POIS");
+		DBCollection collection = conexionAMongo();
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.put("palabrasClave", palabra);
 		DBCursor cursor = collection.find(whereQuery);
@@ -99,14 +99,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void levantarTodoDeMongo() {
-		MongoClient cliente = null;
-		try {
-			cliente = new MongoClient();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		DB database = cliente.getDB("POIS");
-		DBCollection collection = database.getCollection("POIS");
+		DBCollection collection = conexionAMongo();
 		DBCursor cursor = collection.find();
 		Gson gson = new Gson();
 		while (cursor.hasNext()) {
@@ -128,17 +121,12 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void borrarDeMongo(POI unPoi) {
-		MongoClient cliente = null;
-		try {
-			cliente = new MongoClient();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		DB database = cliente.getDB("POIS");
-		DBCollection collection = database.getCollection("POIS");
-		collection.remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));
+		conexionAMongo().remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));;
 	}
 
+	public void borrarDeHibernate(POI unPoi) {
+		entityManager.remove(unPoi);
+	}
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
 		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
 	}
@@ -155,29 +143,10 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		puntosDeIntereses = new ArrayList<POI>();
 	}
 
-	public void agregarNuevosPoi(POI nuevoPOI) {
-		puntosDeIntereses.add(nuevoPOI);
-	}
-
-	public void sacarPoi(POI POIaSacar) {
-		puntosDeIntereses.remove(puntosDeIntereses.stream().filter(unPoi -> sonIguales(unPoi, POIaSacar))
-				.collect(Collectors.toList()).get(0));
-
-	}
-
-	public int cantidadDePOI() {
-		return puntosDeIntereses.size();
-	}
-
 	private boolean sonIguales(POI point1, POI point2) {
 		return point1.getPoint().getLatitud() == point2.getPoint().getLatitud()
 				&& point1.getPoint().getLongitud() == point2.getPoint().getLongitud();
 		// dos point son iguales si estan exactamente en el mismo punto.
-	}
-
-	public void agregarVariosPoi(List<POI> listaDePoi) {
-		puntosDeIntereses.addAll(listaDePoi);
-
 	}
 
 	public void agregarVariosPoiDeListaDeBancos(List<Banco> listaDeBanco) {
@@ -194,6 +163,35 @@ public class RepoPOIs implements WithGlobalEntityManager {
 				.collect(Collectors.toList());
 	}
 
+	public void modificarUnPoi(POI unPoi, String nombre, Geolocalizacion unaGeo) {
+		
+		 BasicDBObject aModificar = new BasicDBObject().append("_id", unPoi.getIdMongo());
+		 BasicDBObject modificado = new BasicDBObject("$set", 
+		    		new BasicDBObject().
+		    		append("nombre", nombre).
+		    		append("point", new BasicDBObject().
+		    				append("latitud", unaGeo.getLatitud()).
+		    				append("longitud", unaGeo.getLongitud()).
+		    				append("domicilio", new BasicDBObject().
+		    						append("callePrincipal", unaGeo.getDomicilio().getCallePrincipal()).
+		    						append("altura", unaGeo.getDomicilio().getAltura()))));
+		 
+		 POI poiAModificar = obtenerDeHibernate(unPoi.getId());
+		 poiAModificar.setNombre(nombre);
+		 poiAModificar.setGeo(unaGeo);
+		 
+		if(!unPoi.idMongo.isEmpty())
+		{
+			conexionAMongo().update(aModificar, modificado);
+			entityManager.merge(poiAModificar);
+		}
+		else
+		{
+			entityManager.merge(poiAModificar);
+		}
+		
+	}
+	
 	public void actualizarLocal(String nombre, ArrayList<String> palabrasClave) {
 
 		POI localAModificar = this.tieneUnLocalConNombre(nombre).get(0);
@@ -203,15 +201,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		puntosDeIntereses.add(localAModificar);
 
 	}
-
-	public boolean isEmpty() {
-		return puntosDeIntereses.isEmpty();
-	}
-
-	public int size() {
-		return puntosDeIntereses.size();
-	}
-
+	
 	public void addLocal(String nombre, ArrayList<String> palabrasClave) {
 		Local localito = new Local(null, nombre, null, null, null);
 

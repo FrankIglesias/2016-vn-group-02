@@ -25,6 +25,7 @@ public class Colectivo extends POI {
 		super(point, nombre, palabrasClave, new HorarioYDia(), feriados);
 		this.linea = linea;
 		this.addPalabrasClaves(linea);
+		this.addPalabrasClaves("Colectivo");
 	}
 
 	

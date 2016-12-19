@@ -24,6 +24,7 @@ public class Banco extends POI {
 	}
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, horarioBancario, feriados);
+		palabrasClave.add("Banco");
 		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
 		ArrayList<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
 		intervaloBancario.add(intervaloUnico);
