@@ -8,9 +8,9 @@
       }
 function fucionValidarUsuario(){
 	if(document.getElementById('nombreDeUsuario').value == 'admin'){
-		window.location.href = "admin.html";
+		window.location.href = "admin.hbs";
 	}else {
-		window.location.href = "usuario.html";
+		window.location.href = "usuario.hbs";
 	}
 	
 }
