@@ -19,8 +19,8 @@ public class CargaDePrueba {
 	List<POI> poisAPersistir;
 	@Before
 	public void init() {
-		RepoPOIs repoPois = new RepoPOIs();
-		List<POI> poisAPersistir = new ArrayList<POI>();
+		repoPois = RepoPOIs.getInstance();
+		poisAPersistir = new ArrayList<POI>();
 		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 		unBanco.setUltimaFechaDeBusqueda(LocalDateTime.now().minusDays(10));
 		
@@ -35,7 +35,7 @@ public class CargaDePrueba {
 		poisAPersistir.add(unCGP);
 		poisAPersistir.add(GlobalTestVariables.crearOtroCGP(GlobalTestVariables.crearFeriadoAbierto()));
 		poisAPersistir.add(GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto()));
-		
+		repoPois.limpiarMongo();
 	}
 	
 	@Test
