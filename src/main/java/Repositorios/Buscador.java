@@ -1,9 +1,9 @@
 package Repositorios;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 import TypePois.POI;
@@ -23,7 +23,7 @@ public class Buscador {
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
 		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
 				.addAll(baseDeDatosDePois.obtenerDeMongoSegunPalabrasClave(palabrita)));
-		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
@@ -39,7 +39,7 @@ public class Buscador {
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
 		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
 				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
-		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda());
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);

@@ -6,7 +6,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 public class Main {
 
 	public static void main(String[] args) {
-		Spark.port(10022);
+		Spark.port(10023);
 		
 		  System.out.println("Iniciando servidor");
 		  
