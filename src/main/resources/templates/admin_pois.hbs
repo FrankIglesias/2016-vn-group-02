@@ -8,15 +8,15 @@
 </head>
 
 <header class="header"><br><br>
-	<p id="h1"> Administrador De POIs</p>
+	<p id="h1"> Administrador De Pois</p>
 </header>
 
 <body style="height:100%;width: 100%; ">
 	
 	<form method="get" action="/admin_pois" >
-	<center>	<p class="login_text" style="color:#454545; margin-right:370px "><strong>   Ingrese el nombre del POI:</strong>
-		<input type="text" style="border-radius:5px;" name="nombreFiltro" placeholder="">
-		<strong>Seleccione el tipo de POI:</strong>
+		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
+		<input type="text" style="border-radius:5px;" name="nombreFiltro">
+		<strong>Ingrese el tipo de POI:</strong>
 		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
 		  <option value="vacio">-</option>
 		  <option value="banco">Banco</option>
@@ -26,16 +26,16 @@
 		  </select>
 		  
 		<input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
-		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></p></center>
-		</form>	
-
+		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></center></p>
+		</form>
+	
 	<table>
-	 <td style="width: 150px">
-	 <div style="overflow-y: auto; max-height: 500px">
-	 {{#listadoPOIs}}
-	 <hr color="#FBAB00">
-	  <div style="">
+	 <td >
+	<div style="overflow-y: auto; max-height: 500px">
+	 <hr>
+	  <div style="margin-bottom: 5px;">
 	  <center>
+	  
 	  <table>
 	   <tr>
 	   <td>
@@ -54,27 +54,41 @@
 		   <td><t>{{coordenadas}}</t></td>
 		   </tr>
 	  
-			<tr>
-				<td><t>{{<n></n>ombre}}</t></td>
-				<td><t>{{direccion}}</t></td>
-			</tr>
-		
 	   </table>	
-		  
-		 <img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" width="30px" style="margin-left: 10px; margin-right: 10px; margin-top: 10px;">
-		 <img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" width="30px" style="margin-left: 10px; margin-right: 10px">
-		 <img src="img/WhatsApp Image 2016-12-20 at 00.11.55 (1).jpeg" height="30px" width="30px" style="margin-left: 10px; margin-right: 10px">
+		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
+		
+		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
+		
+		<img src="img/WhatsApp Image 2016-12-20 at 00.11.55 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
 		</center>
 		</div>
-		<hr color="#FBAB00">
-		{{/listadoPOIs}}
-		</div>
-	  
+		<hr>
+	  </div>  
 		</td>
 	<td style="width: 50% ">    
 	<div id="map" style="height: 500px; width: 500px;"></div>
 	</td>
 	</table>
+	<script>
+	function initMap() {
+        var myLatLng = {lat: -25.363, lng: 131.044};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          scrollwheel: false,
+          zoom: 3
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'Hello World!'
+        });
+      }
+	
+	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
 			async defer></script>
 </body>
