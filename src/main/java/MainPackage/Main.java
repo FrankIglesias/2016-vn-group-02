@@ -6,7 +6,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 public class Main {
 
 	public static void main(String[] args) {
-		Spark.port(10023);
+		Spark.port(10024);
 		
 		  System.out.println("Iniciando servidor");
 		  
@@ -17,6 +17,7 @@ public class Main {
 		  Spark.get("/", home::mostrar, engine);
 		  Spark.get("/administrador",home::mostrarAdmin, engine);
 		  Spark.get("/usuario", home::mostrarUser, engine);
+		  Spark.get("/editar_poi", home::mostrarEditarPoi, engine);
 		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
 		  Spark.get("/admin_pois", home::mostrarPois, engine);
 		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
