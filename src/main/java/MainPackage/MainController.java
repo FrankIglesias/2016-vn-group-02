@@ -11,7 +11,7 @@ import spark.Response;
 
 public class MainController {
 	public ModelAndView mostrar(Request request, Response response) {
-		System.out.println("mostrar");
+		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
 	}
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
@@ -29,22 +29,22 @@ public class MainController {
 	}
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
-		System.out.println("mostrarAdmin");
+		System.out.println("Mostrar Panel Admin");
 		return new ModelAndView(null, "Administrador.hbs");
 	}
 
 	public ModelAndView mostrarUser(Request request, Response response) {
-		System.out.println("mostrarUser");
+		System.out.println("Mostrar Usuario");
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
 	public ModelAndView mostrarTerminales(Request request, Response response) {
-		System.out.println("mostrarTerminales");
+		System.out.println("Mostrar Admin Terminales");
 		return new ModelAndView(null, "admin_terminales.hbs");
 	}
 
 	public ModelAndView mostrarPois(Request request, Response response) {
-		System.out.println("mostrarPois");
+		System.out.println("Mostrar Pois");
 
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
