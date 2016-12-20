@@ -7,7 +7,17 @@ import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 
 public class ControllerRepoTerminales {
+	
+	private static ControllerRepoTerminales instancia;
 	public RepoTerminales modeloTerminales = RepoTerminales.getInstance();
+	
+	public static ControllerRepoTerminales getInstance() {
+		if (instancia == null) {
+			instancia = new ControllerRepoTerminales ();
+		}
+		return instancia;
+	}
+	
 
 
 	public List<Terminal> listarTerminales(int comuna) {
