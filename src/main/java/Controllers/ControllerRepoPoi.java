@@ -14,7 +14,16 @@ import TypePois.POI;
 public class ControllerRepoPoi {
 	
 	
+	private static ControllerRepoPoi instancia;
 	RepoPOIs modeloPOI = RepoPOIs.getInstance();
+	
+	public static ControllerRepoPoi getInstance() {
+		if (instancia == null) {
+			instancia = new ControllerRepoPoi ();
+		}
+		return instancia;
+	}
+	
 
 	public List<POI> listarPOIsParaAdmin(String nombre, String tipo) {
 

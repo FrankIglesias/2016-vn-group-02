@@ -20,6 +20,16 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 	List<Busqueda> busquedas;
 	Map<LocalDateTime, Integer> reportePorFecha;
 	RepoTerminales repoTerminales;
+	
+
+	public static RepoDeBusquedas getInstance() {
+		if (instancia == null) {
+			instancia = new RepoDeBusquedas();
+			instancia.inicializarBaseDeDatos();
+		}
+		return instancia;
+	}
+
 
 	public void persistirBusqueda(Busqueda unObjeto) {
 		withTransaction(() -> {
@@ -45,14 +55,6 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 				.createQuery(" FROM Busqueda", Busqueda.class) //
 				.getResultList();
 		return busquedas;
-	}
-
-	public static RepoDeBusquedas getInstance() {
-		if (instancia == null) {
-			instancia = new RepoDeBusquedas();
-			instancia.inicializarBaseDeDatos();
-		}
-		return instancia;
 	}
 
 	public List<Busqueda> getBusquedas() {
