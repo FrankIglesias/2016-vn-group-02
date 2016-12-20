@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
 	<link href= "frank.css" rel="stylesheet" type= "text/css">
 	<script src="Frank.js"></script>
@@ -9,67 +8,71 @@
 </head>
 
 <header class="header"><br><br>
-<p id="h1"> Administrador De Pois</p>
+	<p id="h1"> Administrador De Pois</p>
 </header>
 
 <body style="height:100%;width: 100%; ">
+	<center>
+	<form method="get" action="/admin_pois" >
+	<!--<input type="text" style="font-family: 'Raleway', Arial, sans-serif; border-radius:5px;  width:80%px; height:20px; margin-top: 50px" placeholder = " Ingrese ID de bsqueda">-->
+		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Ingrese el nombre del poi:</strong>
+		<input type="text" style="border-radius:5px;" name="nombreFiltro" value="Nombre">
+		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
+		  <option value="vacio">-</option>
+		  <option value="banco">Banco</option>
+		  <option value="cgp">CGP</option>
+		  <option value="colectivo">Colectivo</option>
+		  <option value="local">Local</option>
+		  </select>
+		  
+		<input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
+		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar">
+		</form>
+		</p>
+	</center>
 
-<center>
-<!--<input type="text" style="font-family: 'Raleway', Arial, sans-serif; border-radius:5px;  width:80%px; height:20px; margin-top: 50px" placeholder = " Ingrese ID de bsqueda">-->
-<p class="login_text" style="color:#454545; margin-right:370px "><strong>Ingrese el nombre del poi:</strong>
-<input type="text" style="border-radius:5px;" name="nombreFiltro" value="Nombre">
-<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
-  <option value="vacio">-</option>
-  <option value="banco">Banco</option>
-  <option value="cgp">CGP</option>
-  <option value="colectivo">Colectivo</option>
-  <option value="local">Local</option>
-  </select>
-<input type="submit" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px; font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar">
-</p></center>
-
-<table>
- <td style="">
-  <div style="background-color: #ffd300;margin-bottom: 5px;">
-  <center>
-  <table>
-   <tr>
-   <td>
-   <t>Nombre:</t><br>
-   </td>
-   <td><t>{{nombre}}</t></td>
-   </tr>
-   <tr>
-   <td>
-	<t>Direccion:</t><br></td>
-	   <td><t>{{direccion}}</t></td>
+	<table>
+	 <td style="">
+	  <div style="background-color: #ffd300;margin-bottom: 5px;">
+	  <center>
+	  <table>
+	   <tr>
+	   <td>
+	   <t>Nombre:</t><br>
+	   </td>
+	   <td><t>{{nombre}}</t></td>
 	   </tr>
-   <tr>
-   <td>
-	<t>Coordenadas:</t><br></td>
-	   <td><t>{{coordenadas}}</t></td>
-	   </tr>
-  {{#listadoPOIs}}
-		<tr>
-			<td>{{nombre}}</td>
-			<td>{{direccion}}</td>
-			<td>{{coordenadas}}</td>
-		<!--	<td><button class="btn btn-primary" onclick="location='datosPoiAdmin?id={{idPoi}}'">Ver mas Datos</button></td> -->
-		<!--	<td><button class="btn btn-primary" onclick="location='eliminarPoi?id={{idPoi}}'">Eliminar Poi</button></td> -->
-		</tr>
-	{{/listadoPOIs}}				
-	
-  
-  
-   </table>	
-    <button type="button" class="btn_Detalles"  style=" margin-top: 15px"> Detalles </button></center></div>
-  
-    </td>
-<td style="width: 50% ">    
-<div id="map" style="height: 500px; width: 500px;"></div>
-</td>
-</table>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
-        async defer></script>
+	   <tr>
+	   <td>
+		<t>Direccion:</t><br></td>
+		   <td><t>{{direccion}}</t></td>
+		   </tr>
+	   <tr>
+	   <td>
+		<t>Coordenadas:</t><br></td>
+		   <td><t>{{coordenadas}}</t></td>
+		   </tr>
+	  {{#listadoPOIs}}
+			<tr>
+				<td>{{nombre}}</td>
+				<td>{{direccion}}</td>
+				<td>{{coordenadas}}</td>
+			<!--	<td><button class="btn btn-primary" onclick="location='datosPoiAdmin?id={{idPoi}}'">Ver mas Datos</button></td> -->
+			<!--	<td><button class="btn btn-primary" onclick="location='eliminarPoi?id={{idPoi}}'">Eliminar Poi</button></td> -->
+			</tr>
+		{{/listadoPOIs}}				
+		
+	  
+	  
+	   </table>	
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> Detalles </button></center></div>
+	  
+		</td>
+	<td style="width: 50% ">    
+	<div id="map" style="height: 500px; width: 500px;"></div>
+	</td>
+	</table>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+			async defer></script>
 </body>
 </html>

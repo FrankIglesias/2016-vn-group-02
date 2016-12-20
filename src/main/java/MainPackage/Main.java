@@ -6,7 +6,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 public class Main {
 
 	public static void main(String[] args) {
-		Spark.port(1515);
+		Spark.port(10020);
 		
 		  System.out.println("Iniciando servidor");
 		  
@@ -14,15 +14,15 @@ public class Main {
 		  MainController home = new MainController();
 		  
 		  Spark.staticFileLocation("/templates");
-		  
 		  Spark.get("/", home::mostrar, engine);
-		  Spark.get("/administrador.hbs",home::mostrarAdmin, engine);
-		  Spark.get("/usuario.hbs", home::mostrarUser, engine);
-		  Spark.get("/admin_terminales.hbs", home::mostrarTerminales, engine);
-		  Spark.get("/admin_pois.hbs", home::mostrarPois, engine);
-		  Spark.get("/admin_consultas.hbs", home::mostrarConsultas, engine);
-		  Spark.put("/admin_pois.hbs", home::filtrarNombreTipoPois, engine);
-		 	}
+		  Spark.get("/administrador",home::mostrarAdmin, engine);
+		  Spark.get("/usuario", home::mostrarUser, engine);
+		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
+		  Spark.get("/admin_pois", home::mostrarPois, engine);
+		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
+		  Spark.put("/admin_pois", home::filtrarNombreTipoPois, engine);
+		  Spark.post("/admin_pois",home::imprimiQueLlegueAca,engine);
+	}
 }
 
 /*
