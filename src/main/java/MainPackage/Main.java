@@ -20,7 +20,7 @@ public class Main {
 		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
 		  Spark.get("/admin_pois", home::mostrarPois, engine);
 		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
-		  Spark.put("/admin_pois", home::filtrarNombreTipoPois, engine);
+		  Spark.put("/admin_pois", home::mostrarPois, engine);
 		  Spark.post("/admin_pois",home::imprimiQueLlegueAca,engine);
 		  Spark.get("/usuarioBusqueda",home::imprimiQueLlegueAca,engine);
 	}

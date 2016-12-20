@@ -45,18 +45,6 @@ public class MainController {
 	public ModelAndView mostrarConsultas(Request request, Response response) {
 		return new ModelAndView(null, "admin_consultas.hbs");
 	}
-
-	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
-		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = request.queryParams("nombreFiltro");
-		String tipoFiltro = request.queryParams("tipoFiltro");
-
-		if (!(Objects.isNull(nombreFiltro) || nombreFiltro.isEmpty() || tipoFiltro.equals("vacio"))) {
-			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-			viewModel.put("listadoPOIs", pois);
-		}
-		return new ModelAndView(null, "admin_pois.hbs");
-	}
 	
 	public ModelAndView imprimiQueLlegueAca(Request r,Response res){
 		return new ModelAndView(null, "admin_pois.hbs");

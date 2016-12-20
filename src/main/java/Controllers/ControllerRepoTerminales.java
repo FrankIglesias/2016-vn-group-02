@@ -17,8 +17,6 @@ public class ControllerRepoTerminales {
 		}
 		return instancia;
 	}
-	
-
 
 	public List<Terminal> listarTerminales(int comuna) {
 
