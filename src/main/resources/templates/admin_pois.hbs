@@ -12,13 +12,12 @@
 </header>
 
 <body style="height:100%;width: 100%; ">
-	
 	<form method="get" action="/buscar_pois" >
 		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
 		<input type="text" style="border-radius:5px;" name="nombreFiltro">
 		<strong>Ingrese el tipo de POI:</strong>
 		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
-		  <option value="vacio">-</option>
+		  <option value="">-</option>
 		  <option value="banco">Banco</option>
 		  <option value="cgp">CGP</option>
 		  <option value="colectivo">Colectivo</option>
@@ -40,21 +39,15 @@
 	  <table>
 	   <tr>
 	   <td>
-	   <t>Nombre:</t><br>
+	   <t class="login_text">Nombre:</t><br>
 	   </td>
-	   <td><t>{{nombre}}</t></td>
+	   <td><t class="login_text">{{nombre}}</t></td>
 	   </tr>
 	   <tr>
 	   <td>
-		<t>Direccion:</t><br></td>
-		   <td><t>{{point.domicilio.altura}}</t></td>
+		<t class="login_text">Direccion:</t><br></td>
+		   <td><t class="login_text">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
-	   <tr>
-	   <td>
-		<t>Coordenadas:</t><br></td>
-		   <td><t>{{coordenadas}}</t></td>
-		   </tr>
-	  
 	   </table>	
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
 		<a href="/editar_poi">
@@ -73,21 +66,23 @@
 	</table>
 	<script>
 	function initMap() {
-        var myLatLng = {{{{foo}}}};
+        
 
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
+          center: {lat: -34.6130556, lng: -58.377222222 },
           scrollwheel: false,
-          zoom: 3
+          zoom: 11
         });
 
-        // Create a marker and set its position.
+       
+        
+        {{#each latitudes}}
         var marker = new google.maps.Marker({
           map: map,
-          position: myLatLng,
-          title: 'Hello World!'
+          position: {{this}}
         });
+        {{/each}}
       }
 	
 	</script>

@@ -1,5 +1,6 @@
 package MainPackage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -14,15 +15,17 @@ public class MainController {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
 	}
+
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
 		System.out.println("Editar Terminal");
 		return new ModelAndView(null, "editar_terminal.hbs");
 	}
+
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
 		return new ModelAndView(null, "admin_acciones.hbs");
 	}
-	
+
 	public ModelAndView mostrarEditarPoi(Request request, Response response) {
 		System.out.println("Editar POI");
 		return new ModelAndView(null, "editar_poi.hbs");
@@ -70,19 +73,23 @@ public class MainController {
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		String tipoFiltro = request.queryParams("tipoFiltro");
 
-		if (!(Objects.isNull(nombreFiltro) || nombreFiltro.isEmpty() || tipoFiltro.equals("vacio"))) {
-			System.out.println("Alla");
-			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-			viewModel.put("listadoPOIs", pois);
-		}
-		return new ModelAndView(null, "admin_pois.hbs");
+		System.out.println("Alla");
+		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+		viewModel.put("listadoPOIs", pois);
+
+		List<String> coordenadas = new ArrayList<String>();
+		pois.forEach(unPoi -> coordenadas
+				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
+		viewModel.put("latitudes", coordenadas);
+		return new ModelAndView(viewModel, "admin_pois.hbs");
 	}
-	
-	public ModelAndView imprimiQueLlegueAca(Request r,Response res){
+
+	public ModelAndView imprimiQueLlegueAca(Request r, Response res) {
 		System.out.println("IMPRIMRI");
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-	public ModelAndView busquedaUsuario(Request request,Response response){
+
+	public ModelAndView busquedaUsuario(Request request, Response response) {
 		System.out.println("busquedaUsuario");
 		return new ModelAndView(null, "usuario.hbs");
 	}
