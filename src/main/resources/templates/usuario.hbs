@@ -21,9 +21,11 @@
 		</form>
 	</center>
 
-	<table>		
-{{#listadoPOIs}}		
+	<table style="">		
+
 		<td style="">
+		<div style="overflow-y: auto; max-height: 500px">
+		{{#listadoPOIs}}		
 		<div style="background-color: #ffd300;margin-bottom: 5px;">
 		<center>
 		<table>
@@ -41,9 +43,10 @@
 		   </tr>
 		</table>	
 		<button type="button" class="btn_Detalles"  style=" margin-top: 15px; margin-bottom: 5px;"> Detalles </button></center></div>
-	  
-		</td>
 		{{/listadoPOIs}}
+		</div>
+		</td>
+		
 	
 	<td style="width: 50% ">    
 	<div id="map" style="height: 500px; width: 500px;"></div>
