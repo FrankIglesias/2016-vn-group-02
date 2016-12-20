@@ -14,7 +14,15 @@ public class MainController {
 		System.out.println("mostrar");
 		return new ModelAndView(null, "home.hbs");
 	}
-
+	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
+		System.out.println("Editar Terminal");
+		return new ModelAndView(null, "editar_terminal.hbs");
+	}
+	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
+		System.out.println("Administrar acciones por terminal");
+		return new ModelAndView(null, "admin_acciones.hbs");
+	}
+	
 	public ModelAndView mostrarEditarPoi(Request request, Response response) {
 		System.out.println("Editar POI");
 		return new ModelAndView(null, "editar_poi.hbs");

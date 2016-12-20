@@ -19,6 +19,8 @@ public class Main {
 		  Spark.get("/usuario", home::mostrarUser, engine);
 		  Spark.get("/editar_poi", home::mostrarEditarPoi, engine);
 		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
+		  Spark.get("/editar_terminal", home::mostrarEditarTerminal, engine);
+		  Spark.get("/admin_acciones", home::mostrarEditarTerminal, engine);
 		  Spark.get("/admin_pois", home::mostrarPois, engine);
 		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
 		  Spark.put("/admin_pois", home::mostrarPois, engine);
