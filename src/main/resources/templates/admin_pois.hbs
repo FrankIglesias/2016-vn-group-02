@@ -13,7 +13,7 @@
 
 <body style="height:100%;width: 100%; ">
 	
-	<form method="get" action="/admin_pois" >
+	<form method="get" action="/buscar_pois" >
 		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
 		<input type="text" style="border-radius:5px;" name="nombreFiltro">
 		<strong>Ingrese el tipo de POI:</strong>
@@ -32,6 +32,7 @@
 	<table>
 	 <td >
 	<div style="overflow-y: auto; max-height: 500px">
+	{{#listadoPOIs}}
 	 <hr>
 	  <div style="margin-bottom: 5px;">
 	  <center>
@@ -46,7 +47,7 @@
 	   <tr>
 	   <td>
 		<t>Direccion:</t><br></td>
-		   <td><t>{{direccion}}</t></td>
+		   <td><t>{{point.domicilio.altura}}</t></td>
 		   </tr>
 	   <tr>
 	   <td>
@@ -63,6 +64,7 @@
 		</center>
 		</div>
 		<hr>
+	{{/listadoPOIs}}
 	  </div>  
 		</td>
 	<td style="width: 50% ">    
@@ -71,7 +73,7 @@
 	</table>
 	<script>
 	function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
+        var myLatLng = {{{{foo}}}};
 
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
