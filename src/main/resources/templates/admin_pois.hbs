@@ -14,7 +14,6 @@
 <body style="height:100%;width: 100%; ">
 	<center>
 	<form method="get" action="/admin_pois" >
-	<!--<input type="text" style="font-family: 'Raleway', Arial, sans-serif; border-radius:5px;  width:80%px; height:20px; margin-top: 50px" placeholder = " Ingrese ID de bsqueda">-->
 		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Ingrese el nombre del poi:</strong>
 		<input type="text" style="border-radius:5px;" name="nombreFiltro" placeholder=" Nombre">
 		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
@@ -57,8 +56,7 @@
 				<td>{{nombre}}</td>
 				<td>{{direccion}}</td>
 				<td>{{coordenadas}}</td>
-			<!--	<td><button class="btn btn-primary" onclick="location='datosPoiAdmin?id={{idPoi}}'">Ver mas Datos</button></td> -->
-			<!--	<td><button class="btn btn-primary" onclick="location='eliminarPoi?id={{idPoi}}'">Eliminar Poi</button></td> -->
+			
 			</tr>
 		{{/listadoPOIs}}				
 		
