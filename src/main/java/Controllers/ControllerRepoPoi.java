@@ -37,6 +37,10 @@ public class ControllerRepoPoi {
 			palabras.forEach(palabrita -> listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(palabrita)));
 		}
 		
+		if(nombre.isEmpty() && tipo.isEmpty()) {
+			listadoDePOIs.addAll(modeloPOI.levantarTodoDeHibernate());
+		}
+		
 		return listadoDePOIs;
 	}
 	

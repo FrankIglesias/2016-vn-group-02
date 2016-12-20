@@ -49,6 +49,11 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	public POI obtenerDeHibernate(int id) {
 		return entityManager.find(POI.class, id);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<POI> levantarTodoDeHibernate() {
+		return entityManager().createQuery("from POI").getResultList();
+	}
 
 	public List<POI> obtenerDeHibernateSegunPalabrasClave(String palabraClave) {
 		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
