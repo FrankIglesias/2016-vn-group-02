@@ -8,14 +8,15 @@
 </head>
 
 <header class="header"><br><br>
-	<p id="h1"> Administrador De Pois</p>
+	<p id="h1"> Administrador De POIs</p>
 </header>
 
 <body style="height:100%;width: 100%; ">
-	<center>
+	
 	<form method="get" action="/admin_pois" >
-		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Ingrese el nombre del poi:</strong>
-		<input type="text" style="border-radius:5px;" name="nombreFiltro" placeholder=" Nombre">
+	<center>	<p class="login_text" style="color:#454545; margin-right:370px "><strong>   Ingrese el nombre del POI:</strong>
+		<input type="text" style="border-radius:5px;" name="nombreFiltro" placeholder="">
+		<strong>Seleccione el tipo de POI:</strong>
 		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
 		  <option value="vacio">-</option>
 		  <option value="banco">Banco</option>
@@ -25,14 +26,15 @@
 		  </select>
 		  
 		<input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
-		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar">
-		</form>
-		</p>
-	</center>
+		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></p></center>
+		</form>	
 
 	<table>
-	 <td>
-	  <div style="background-color: #ffd300;margin-bottom: 5px;">
+	 <td style="width: 150px">
+	 <div style="overflow-y: auto; max-height: 500px">
+	 {{#listadoPOIs}}
+	 <hr color="#FBAB00">
+	  <div style="">
 	  <center>
 	  <table>
 	   <tr>
@@ -51,16 +53,20 @@
 		<t>Coordenadas:</t><br></td>
 		   <td><t>{{coordenadas}}</t></td>
 		   </tr>
-	  {{#listadoPOIs}}
+	  
 			<tr>
-				<td><t>{{nombre}}</t></td>
+				<td><t>{{<n></n>ombre}}</t></td>
 				<td><t>{{direccion}}</t></td>
-				<td><t>{{coordenadas}}</t></td>
-			
 			</tr>
-		{{/listadoPOIs}}
+		
 	   </table>	
-		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> Detalles </button></center></div>
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> lapicito </button>
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> tachito </button>
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> mas </button></center>
+		</div>
+		<hr color="#FBAB00">
+		{{/listadoPOIs}}
+		</div>
 	  
 		</td>
 	<td style="width: 50% ">    
