@@ -130,6 +130,10 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		;
 	}
 
+	public void limpiarMongo() {
+		conexionAMongo().drop();
+	}
+	
 	public void borrarDeHibernate(POI unPoi) {
 		entityManager.remove(unPoi);
 	}
