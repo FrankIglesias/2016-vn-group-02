@@ -28,14 +28,3 @@ public class Main {
 		  Spark.get("/usuarioBusqueda",home::imprimiQueLlegueAca,engine);
 	}
 }
-
-/*
- * public static void main(String[] args) { System.out.println(
- * "Iniciando servidor"); HandlebarsTemplateEngine engine = new
- * HandlebarsTemplateEngine(); MainController home = new MainController();
- * port(5050); // staticFileLocation("/public"); get("/", home::mostrar,
- * engine); get("/index.html", (request, response) -> { response.redirect("/");
- * return null; }); }
- */
-
-// }
