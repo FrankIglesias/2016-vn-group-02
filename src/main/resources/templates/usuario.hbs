@@ -1,12 +1,79 @@
-
+<!doctype html>
 <html>
 <head>
 <link href= "frank.css" rel="stylesheet" type= "text/css">
     <link href="funciones.js">
 <meta charset="utf-8">
-<title>Documento sin título</title>
+<title>	Visualizar Pois</title>
 </head>
 
-<body>
+<header class="header"><br><br>
+	<p id="h1"> Busqueda de Pois</p>
+</header>
+
+<body style="height:100%;width: 100%; ">
+	<center>
+	<form method="get" action="/usuarioBusqueda" >
+		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Buscar POIs segun:</strong>
+		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Nombre:</strong>
+		<input type="text" style="border-radius:5px;" name="nombreFiltro" value="Nombre"></p>
+		<p class="login_text" style="color:#454545; margin-right:370px "><strong>Localidad:</strong>
+		<input type="text" style="border-radius:5px;" name="localidadFiltro" value="localidadFiltro"></p>
+		<input type="submit" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
+		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar">
+		</form>
+	</center>
+
+	<table>
+	 <td style="">
+	  <div style="background-color: #ffd300;margin-bottom: 5px;">
+	  <center>
+		<table>
+			<tr>
+				<td><t>Nombre:</t></td>
+				<td><t>{{nombre}}</t></td>
+			</tr>
+			<tr>
+				<td><t>Direccion:</t></td>
+				<td><t>{{direccion}}</t></td>
+			</tr>
+			<tr>
+				<td><t>Coordenadas:</t></td>
+				<td><t>{{coordenadas}}</t></td>
+		   </tr>
+	   </table>	
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> Detalles </button></center></div>
+	  
+		</td>
+		
+		{{#listadoPOIs}}
+		<td style="">
+		<div style="background-color: #ffd300;margin-bottom: 5px;">
+		<center>
+		<table>
+			<tr>
+				<td><t>Nombre:</t></td>
+				<td><t>{{nombre}}</t></td>
+			</tr>
+			<tr>
+				<td><t>Localidad:</t></td>
+				<td><t>{{localidad}}</t></td>
+			</tr>
+			<tr>
+				<td><t>Coordenadas:</t></td>
+				<td><t>{{coordenadas}}</t></td>
+		   </tr>
+		</table>	
+		<button type="button" class="btn_Detalles"  style=" margin-top: 15px"> Detalles </button></center></div>
+	  
+		</td>
+		{{/listadoPOIs}}
+	
+	<td style="width: 50% ">    
+	<div id="map" style="height: 500px; width: 500px;"></div>
+	</td>
+	</table>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+			async defer></script>
 </body>
 </html>

@@ -68,7 +68,10 @@ public class MainController {
 	public ModelAndView imprimiQueLlegueAca(Request r,Response res){
 		System.out.println("IMPRIMRI");
 		return new ModelAndView(null, "admin_pois.hbs");
-		
+	}
+	public ModelAndView busquedaUsuario(Request request,Response response){
+		System.out.println("busquedaUsuario");
+		return new ModelAndView(null, "usuario.hbs");
 	}
 
 }
