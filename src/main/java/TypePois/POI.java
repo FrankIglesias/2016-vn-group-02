@@ -85,8 +85,8 @@ public abstract class POI {
 		point = unaGeo;
 	}
 
-	public void setUltimaFechaDeBusqueda() {
-		ultimaFechaBusqueda = LocalDateTime.now();
+	public void setUltimaFechaDeBusqueda(LocalDateTime unaFecha) {
+		ultimaFechaBusqueda = unaFecha;
 	}
 	
 	public LocalDateTime getFechaDeBusqueda() {
