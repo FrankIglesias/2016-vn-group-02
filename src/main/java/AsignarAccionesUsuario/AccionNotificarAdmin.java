@@ -14,6 +14,8 @@ public class AccionNotificarAdmin extends Accion {
 
 	String mailAdmin;
 	String mensaje;
+	
+	String nombre = "Notificar Administrador";
 
 	public AccionNotificarAdmin(String mensaje) {
 		super();
@@ -29,6 +31,11 @@ public class AccionNotificarAdmin extends Accion {
 	public int getId() {
 		return this.id;
 		
+	}
+
+	@Override
+	public String getNombre() {
+		return nombre;
 	}
 
 

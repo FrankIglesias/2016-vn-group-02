@@ -46,6 +46,10 @@ public class ControllerRepoTerminales {
 		modeloTerminales.persistirTerminal(unaTerminal);
 	}
 	
+	public List<String> listarAccionesTerminal(Terminal unaTerminal) {
+		return unaTerminal.getNombreDeAcciones();
+	}
+	
 	public void setearAccionParaUnaTerminal(Terminal unaTerminal, Accion unaAccion) {
 		unaTerminal.addAccion(unaAccion);
 	}

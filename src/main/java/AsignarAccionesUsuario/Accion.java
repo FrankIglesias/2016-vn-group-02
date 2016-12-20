@@ -30,4 +30,6 @@ public abstract class Accion {
 
 	public abstract int getId();
 
+	public abstract String getNombre();
+
 }

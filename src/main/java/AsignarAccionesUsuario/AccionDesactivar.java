@@ -12,6 +12,8 @@ public class AccionDesactivar extends Accion {
 
 	@OneToOne
 	Accion accionAquitar;
+	
+	String nombre = "Desactivar una accion";
 
 	public AccionDesactivar(Accion accion) {
 		super();
@@ -27,6 +29,11 @@ public class AccionDesactivar extends Accion {
 	public int getId() {
 		return this.id;
 		
+	}
+
+	@Override
+	public String getNombre() {
+		return nombre;
 	}
 
 }

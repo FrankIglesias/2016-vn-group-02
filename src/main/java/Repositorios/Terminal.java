@@ -134,4 +134,10 @@ public class Terminal {
 	public void ejecutarTodasLasAcciones() {
 		listaDeAcciones.forEach(unaAccion -> unaAccion.ejecutarAccion(this));
 	}
+
+	public List<String> getNombreDeAcciones() {
+		List<String> listaADevolver = new ArrayList<String>();
+		listaDeAcciones.stream().forEach(unaAccion -> listaADevolver.add(unaAccion.getNombre()));
+		return listaADevolver;
+	}
 }
