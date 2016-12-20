@@ -1,14 +1,13 @@
 package Controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import Repositorios.RepoPOIs;
-import Repositorios.RepoTerminales;
-import Repositorios.Terminal;
 import TypePois.POI;
 
 public class ControllerRepoPoi {
@@ -31,11 +30,11 @@ public class ControllerRepoPoi {
 		
 		if(!tipo.isEmpty()) {
 			listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(tipo));
-			listadoDePOIs.addAll(modeloPOI.obtenerDeMongoSegunPalabrasClave(tipo));
 		}
 		if(!nombre.isEmpty()) {
-			listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(nombre));
-			listadoDePOIs.addAll(modeloPOI.obtenerDeMongoSegunPalabrasClave(nombre));
+			String[] linea = nombre.split(" ");
+			ArrayList<String> palabras = new ArrayList<String>(Arrays.asList(linea));
+			palabras.forEach(palabrita -> listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(palabrita)));
 		}
 		
 		return listadoDePOIs;
