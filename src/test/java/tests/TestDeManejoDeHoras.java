@@ -1,4 +1,5 @@
 package tests;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,17 +10,17 @@ import DesignDreamTeamTime.IntervaloHorario;
 public class TestDeManejoDeHoras {
 	private IntervaloHorario unIntervalofacil;
 	private IntervaloHorario unIntervalonocturno;
-	private LocalTime hora1;
-	private LocalTime hora2;
-	private LocalTime hora3;
+	private LocalDateTime hora1;
+	private LocalDateTime hora2;
+	private LocalDateTime hora3;
 
 	@Before
 	public void init() {
-		unIntervalofacil = new IntervaloHorario(LocalTime.of(8, 00), LocalTime.of(17, 00));
-		unIntervalonocturno = new IntervaloHorario(LocalTime.of(14, 00), LocalTime.of(3, 00));
-		hora1 = LocalTime.of(14, 00);
-		hora2 = LocalTime.of(8, 00);
-		hora3 = LocalTime.of(2, 00);
+		unIntervalofacil = new IntervaloHorario(LocalDateTime.now().withHour(8).withMinute(00), LocalDateTime.now().withHour(17).withMinute(00));
+		unIntervalonocturno = new IntervaloHorario(LocalDateTime.now().withHour(14).withMinute(00), LocalDateTime.now().withHour(3).withMinute(00));
+		hora1 = LocalDateTime.now().withHour(14).withMinute(00);
+		hora2 = LocalDateTime.now().withHour(8).withMinute(00);
+		hora3 = LocalDateTime.now().withHour(2).withMinute(00);
 	}
 
 	@Test

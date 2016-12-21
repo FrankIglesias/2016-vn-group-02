@@ -1,16 +1,16 @@
 package DesignDreamTeamTime;
-import javax.persistence.*;
-import org.hibernate.annotations.CascadeType;
-
-import org.hibernate.annotations.Cascade;
-
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 
@@ -22,11 +22,10 @@ public class HorarioYDia {
 	private int id;
 	
 	@ElementCollection
-	@JoinTable(name="AgendaHorario", joinColumns=@JoinColumn(name="id_horarioYDia"))
-	@MapKeyColumn (name="dia")
-	@Column(name="gestor_intervalo")
-	//@Cascade(cascade = CascadeType.PERSIST)
-	@Transient
+	 
+	//@JoinTable(name="AgendaHorario", joinColumns=@JoinColumn(name="id_horarioYDia"))
+	//@MapKeyColumn (name="dia")
+	//@Column(name="gestor_intervalo")
 	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
 
 	public HorarioYDia() {
@@ -39,10 +38,12 @@ public class HorarioYDia {
 	{
 		return this.id;
 	}
+	
 	public void setId(int unID)
 	{
 		this.id = unID;
 	}
+	
 	public HorarioYDia(Map<DayOfWeek, GestorIntervalos> horario) {
 		super();
 		agenda = horario;
@@ -61,10 +62,10 @@ public class HorarioYDia {
 	public boolean incluyeHorario(LocalDateTime horario) {
 
 		Set<DayOfWeek> diasDeLaAgenda = agenda.keySet();
-		ArrayList<IntervaloHorario> intervaloHorario = agenda.get(horario.getDayOfWeek()).getIntervalosHorarios();
+		List<IntervaloHorario> intervaloHorario = agenda.get(horario.getDayOfWeek()).getIntervalosHorarios();
 
 		if (diasDeLaAgenda.stream().filter(unDia -> unDia == (horario.getDayOfWeek())) != null) {
-			return intervaloHorario.stream().anyMatch(unIntervalo -> unIntervalo.incluyeHora(horario.toLocalTime()));
+			return intervaloHorario.stream().anyMatch(unIntervalo -> unIntervalo.incluyeHora(horario));
 		} else {
 			return false;
 		}

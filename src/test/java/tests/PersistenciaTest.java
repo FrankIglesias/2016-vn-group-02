@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -28,12 +29,12 @@ import TypePois.Local;
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	private RepoPOIs repositorioPOI;
-	LocalTime hora1;
-	LocalTime hora2;
+	LocalDateTime hora1;
+	LocalDateTime hora2;
 	IntervaloHorario intervalo1;
 	Feriado feriado;
-	LocalTime hora3;
-	LocalTime hora4;
+	LocalDateTime hora3;
+	LocalDateTime hora4;
 	IntervaloHorario intervalo2;
 	Feriado feriado2;
 	ArrayList<Feriado> feriados;
@@ -41,13 +42,13 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Before
 	public void setUp() {
 		repositorioPOI = new RepoPOIs();
-		hora1 = LocalTime.of(10, 00);
-		hora2 = LocalTime.of(15, 00);
+		hora1 = LocalDateTime.now().withHour(10).withMinute(00);
+		hora2 =  LocalDateTime.now().withHour(15).withMinute(00);
 		intervalo1 = new IntervaloHorario(hora1, hora2);
 		feriado = new Feriado(9, 15, intervalo1);
 
-		hora3 = LocalTime.of(14, 00);
-		hora4 = LocalTime.of(12, 00);
+		hora3 = LocalDateTime.now().withHour(14).withMinute(00);
+		hora4 = LocalDateTime.now().withHour(12).withMinute(00);
 		intervalo2 = new IntervaloHorario(hora3, hora4);
 		feriado2 = new Feriado(10, 20, intervalo2);
 
@@ -91,11 +92,13 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	@Test
 	public void persistirIntervaloHorario() {
-		IntervaloHorario unIntervalo = new IntervaloHorario(LocalTime.now(), LocalTime.now());
+		IntervaloHorario unIntervalo = new IntervaloHorario(LocalDateTime.now(), LocalDateTime.now());
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
-
+		transaccion.rollback();
+		transaccion.begin();
 		entityManager.persist(unIntervalo);
+		transaccion.commit();
 
 	}
 
@@ -127,7 +130,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void persistoUnLocalYmeLoTraigoSanoYSalvo() {
 		Local lodemari = GlobalTestVariables.crearUnLocal(null);
 		repositorioPOI.persistirEnHibernate(lodemari);
-		// repositorioPOI.persistirObjeto(lodemari);
 		assertEquals(repositorioPOI.obtenerDeHibernate(lodemari.getId()), lodemari);
 	}
 
@@ -135,7 +137,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	public void alObtenerUnPOICoincideConElPersistido() {
 
 		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		// repositorioPOI.persistirObjeto(unBanco);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		RepoPOIs.getInstance().persistirEnHibernate(unBanco);
 		Banco otroBanco = entityManager.find(Banco.class, unBanco.getId());
@@ -144,14 +145,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	@Test
 	public void persistoUnFeriado() {
-		LocalTime hora1 = LocalTime.of(10, 00);
-		LocalTime hora2 = LocalTime.of(15, 00);
+		LocalDateTime hora1 = LocalDateTime.now().withHour(10).withMinute(00);
+		LocalDateTime hora2 = LocalDateTime.now().withHour(15).withMinute(00);
 		IntervaloHorario intervalo1 = new IntervaloHorario(hora1, hora2);
 		Feriado feriado = new Feriado(9, 15, intervalo1);
-		// Colectivo colectivo = GlobalTestVariables.crearUnColectivo();
-		// colectivo.setNombre("colectivo1");
-		// colectivo.addFeriado(feriado);
-		// repositorioPOI.persistirObjeto(colectivo);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
 

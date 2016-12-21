@@ -46,21 +46,6 @@ public class MainController {
 		return new ModelAndView(null, "admin_terminales.hbs");
 	}
 
-	public ModelAndView mostrarPois(Request request, Response response) {
-		System.out.println("Mostrar Pois");
-
-		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = request.queryParams("nombreFiltro");
-		String tipoFiltro = request.queryParams("tipoFiltro");
-
-		if (!(Objects.isNull(nombreFiltro) || nombreFiltro.isEmpty() || tipoFiltro.equals("vacio"))) {
-			System.out.println("Alla");
-			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-			viewModel.put("listadoPOIs", pois);
-		}
-		return new ModelAndView(null, "admin_pois.hbs");
-	}
-
 	public ModelAndView mostrarConsultas(Request request, Response response) {
 		System.out.println("mostrarConsultas");
 		return new ModelAndView(null, "admin_consultas.hbs");
@@ -82,11 +67,6 @@ public class MainController {
 				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "admin_pois.hbs");
-	}
-
-	public ModelAndView imprimiQueLlegueAca(Request r, Response res) {
-		System.out.println("IMPRIMRI");
-		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
 	public ModelAndView busquedaUsuario(Request request, Response response) {

@@ -1,30 +1,35 @@
 package DesignDreamTeamTime;
-import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 @Entity
 
 public class GestorIntervalos {
 	
 	@Id
-	@Column(name="id_gestor")
-	private int id;
+	@GeneratedValue
+	public int id;
 	
 	
-	/*@ElementCollection
-	@CollectionTable(name="intervalosHorarios", joinColumns=@JoinColumn(name="id_poi"))*/
-	@Transient
-	private ArrayList<IntervaloHorario> intervalosHorarios = new ArrayList<IntervaloHorario> ();
+	@ElementCollection
+	//@CollectionTable(name="intervalosHorarios", joinColumns=@JoinColumn(name="id_poi"))
+	public List<IntervaloHorario> intervalosHorarios = new ArrayList<IntervaloHorario> ();
 
-	public ArrayList<IntervaloHorario> getIntervalosHorarios() {
+	public List<IntervaloHorario> getIntervalosHorarios() {
 		return intervalosHorarios;
 	}
 
-	public void setIntervalosHorarios(ArrayList<IntervaloHorario> intervalosHorarios) {
+	public void setIntervalosHorarios(List<IntervaloHorario> intervalosHorarios) {
 		this.intervalosHorarios = intervalosHorarios;
 	}
 	
-	public GestorIntervalos(ArrayList<IntervaloHorario> intervalos)
+	public GestorIntervalos(List<IntervaloHorario> intervalos)
 	{
 		super();
 		this.intervalosHorarios = intervalos;

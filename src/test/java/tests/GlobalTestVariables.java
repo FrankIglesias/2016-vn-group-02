@@ -1,9 +1,11 @@
 package tests;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
@@ -19,22 +21,12 @@ import TypePois.Rubro;
 import TypePois.Servicio;
 
 public class GlobalTestVariables {
-	/*
-	 * FERIADOS: 9 DE JULIO, 25 DE MAYO COLECTIVO: GEOLOCALIZACION:
-	 * (-34.5730928, -58.511029), LINEA: 127, PALABRASCLAVE: "colectivo"
-	 * "transporte" "publico" "rueditas" "127" CGP: GEOLOCALIZACION:
-	 * (-34.5730009,-58.5047724), COMUNA: 12 VENTADEVOS: HORARIO: BANCARIO,
-	 * NOMBRE: "Tarjeta vos" BANCO: HORARIO: BANCARIO, NOMBRE: "Banco Rio"
-	 * PALABRASCLAVE: "dinero" "cuenta" "banco" "banelco" LOCAL: NOMBRE:
-	 * "lo de mari", GEOLOCALIZACION: (-34.5735632,-58.5105945), RUBRO: NOMBRE:
-	 * "Ventas chetas", DISTANCIA: 3000
-	 */
 
 	public static List<Feriado> crearFeriado(int horaInicial, int horaFinal, int mes, int dia) {
 		List<Feriado> feriados = new ArrayList<Feriado>();
 
-		LocalTime hora1 = LocalTime.of(horaInicial, 00);
-		LocalTime hora2 = LocalTime.of(horaFinal, 00);
+		LocalDateTime hora1 = LocalDateTime.now().withHour(horaInicial).withMinute(00);
+		LocalDateTime hora2 =  LocalDateTime.now().withHour(horaFinal).withMinute(00);
 		IntervaloHorario intervalo1 = new IntervaloHorario(hora1, hora2);
 		Feriado feriado1 = new Feriado(mes, dia, intervalo1);
 
@@ -68,7 +60,7 @@ public class GlobalTestVariables {
 				LocalDate.now().getDayOfMonth());
 	}
 
-	public static HorarioYDia crearUnHorarioDeLunesAViernes (LocalTime horaInicial, LocalTime horaFinal){
+	public static HorarioYDia crearUnHorarioDeLunesAViernes (LocalDateTime horaInicial, LocalDateTime horaFinal){
 		HorarioYDia horario = new HorarioYDia();
 		IntervaloHorario intervalo = new IntervaloHorario(horaInicial, horaFinal);
 		ArrayList<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
@@ -121,19 +113,20 @@ public class GlobalTestVariables {
 				"PB", "", "1419", 0);
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
-		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
+		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalDateTime.now().withHour(10).withMinute(00), LocalDateTime.now().withHour(15).withMinute(00)), feriados);
 		List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
 		serviciosDelCGP.add(ventaDeVOS);
 		CGP centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);
 		return centroDeCGP;
 	}
+	
 	public static CGP crearOtroCGP(List<Feriado> feriados)
 	{
 		Domicilio domicilioCGP = new Domicilio("Av. Rivadavia 7202", "Jose Pascual Tamborini e Ibera", "5836",
 				"PB", "", "1419", 0);
 		Localidad localidadCGP = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionCGP = new Geolocalizacion(-34.5730009, -58.5047724, domicilioCGP, localidadCGP);
-		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalTime.of(10, 00), LocalTime.of(15, 00)), feriados);
+		Servicio ventaDeVOS = new Servicio("Tarjeta vos", crearUnHorarioDeLunesAViernes(LocalDateTime.now().withHour(10).withMinute(00), LocalDateTime.now().withHour(15).withMinute(00)), feriados);
 		List<Servicio> serviciosDelCGP = new ArrayList<Servicio>();
 		serviciosDelCGP.add(ventaDeVOS);
 		CGP centroDeCGP = new CGP(geolocalizacionCGP, "Comuna 12", serviciosDelCGP, feriados);
@@ -147,7 +140,7 @@ public class GlobalTestVariables {
 		Localidad localidadLocal = new Localidad("Capital Federal", "Buenos Aires", "Argentina");
 		Geolocalizacion geolocalizacionLocal = new Geolocalizacion(-34.5735632, -58.5105945, domicilioLocal,
 				localidadLocal);
-		Local unLocal = new Local(geolocalizacionLocal, "lo de mari", crearUnHorarioDeLunesAViernes(LocalTime.of(8, 00), LocalTime.of(17, 00)), unRubro,
+		Local unLocal = new Local(geolocalizacionLocal, "lo de mari", crearUnHorarioDeLunesAViernes(LocalDateTime.now().withHour(8).withMinute(00), LocalDateTime.now().withHour(17).withMinute(00)), unRubro,
 				feriados);
 		return unLocal;
 		

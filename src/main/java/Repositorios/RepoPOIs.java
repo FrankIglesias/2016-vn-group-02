@@ -59,6 +59,10 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
 				.setParameter("palabraClave", palabraClave).getResultList();
 	}
+	
+	public POI obtenerDeHibernateSegunId(String idPoi) {
+		return entityManager().createQuery("from POI p WHERE idPoi = :id", POI.class).setParameter("id", idPoi).getResultList().get(0);
+	}
 
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
 		ObjectMapper map = new ObjectMapper();
