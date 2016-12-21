@@ -15,7 +15,7 @@
 	<center>
 	<form method="get" action="/usuarioBusqueda" style= "margin-top: 50px;" >
 		
-		<input type="text" style="border-radius:5px; width: 80%; height: 25px;" name="nombreFiltro" placeholder="  Ingrese frase a buscar">
+		<input  id="Buscador" type="text" style="border-radius:5px; width: 80%; height: 25px;" name="nombreFiltro" placeholder="  Ingrese frase a buscar">
 		<input type="submit" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
 		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px; " value="Buscar">
 		</form>
@@ -45,6 +45,7 @@
 		<button type="button" class="btn_Detalles"  style=" margin-top: 15px; margin-bottom: 5px;"> Detalles </button></center></div>
 		{{/listadoPOIs}}
 		</div>
+		<div><center><form action="'/ver_mas'document.getElementById('Buscador').value"><input class="login_text" type="submit"> Ver mas</center></div>
 		</td>
 		
 	

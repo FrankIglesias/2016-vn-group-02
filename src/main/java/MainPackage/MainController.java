@@ -83,6 +83,19 @@ public class MainController {
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
+	public ModelAndView verMas(Request request, Response response) {
+		System.out.println("Ver mas");
+		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombreFiltro = request.queryParams("nombreFiltro");
+		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, new Terminal(nombreUsuario));
+		viewModel.put("listadoPOIs", pois);
+		List<String> coordenadas = new ArrayList<String>();
+		pois.forEach(unPoi -> coordenadas
+				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
+		viewModel.put("latitudes", coordenadas);
+		return new ModelAndView(viewModel, "usuario.hbs");
+	}
+
 	public ModelAndView buscarPois(Request request, Response response) {
 		System.out.println("busquedaUsuario");
 
@@ -94,7 +107,6 @@ public class MainController {
 		pois.forEach(unPoi -> coordenadas
 				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
 		viewModel.put("latitudes", coordenadas);
-
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 

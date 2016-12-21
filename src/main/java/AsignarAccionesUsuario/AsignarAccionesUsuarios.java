@@ -19,7 +19,6 @@ import Repositorios.Terminal;
 @Entity
 @Table(name = "Acciones_manager")
 
-
 public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	@Id
 	private Long id;
@@ -28,22 +27,23 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	@OneToOne
 	private Accion accion;
 	@Transient
-	private Criterio criterio;
+	private Criterio criterio = null;
 	@Transient
 	private List<Terminal> terminalesAsignadas = new ArrayList<Terminal>();
-	
+
 	@Transient
-	public static AsignarAccionesUsuarios instancia;
+	public static AsignarAccionesUsuarios instancia = null;
 
 	public AsignarAccionesUsuarios(Criterio criterio, Accion accion) {
 		this.repoTerminales = RepoTerminales.getInstance();
 		this.accion = accion;
 		this.criterio = criterio;
 	}
-	
+
 	public AsignarAccionesUsuarios() {
-		
+
 	}
+
 	public static AsignarAccionesUsuarios getInstance() {
 		if (instancia == null) {
 			instancia = new AsignarAccionesUsuarios();
@@ -54,12 +54,11 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	public void setCriterio(Criterio criterio) {
 		this.criterio = criterio;
 	}
-	
+
 	public void setAccion(Accion accion) {
 		this.accion = accion;
 	}
-	
-	
+
 	public ArrayList<Terminal> seleccionarTerminales(RepoTerminales repoTerminales) {
 		return repoTerminales.seleccionaUsuarios(this);
 
@@ -77,12 +76,13 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	public void ejecutarAccion(Accion unaAccion) {
 		terminalesAsignadas.stream().forEach((unaTerminal -> unaTerminal.ejecutaUnaAccion(unaAccion)));
 	}
-	
+
 	public void analizarAccionesParaUnaTerminal(Terminal unTerminal) {
-		if(!criterio.equals(null)) {
-		if(cumpleCriterio(unTerminal)) {
-			unTerminal.ejecutarTodasLasAcciones();
-		}
+		if (!(criterio == null)) {
+			if (cumpleCriterio(unTerminal)) {
+
+				unTerminal.ejecutarTodasLasAcciones();
+			}
 		}
 	}
 
