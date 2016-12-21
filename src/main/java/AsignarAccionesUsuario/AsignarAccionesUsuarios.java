@@ -79,8 +79,10 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	}
 	
 	public void analizarAccionesParaUnaTerminal(Terminal unTerminal) {
+		if(!criterio.equals(null)) {
 		if(cumpleCriterio(unTerminal)) {
 			unTerminal.ejecutarTodasLasAcciones();
+		}
 		}
 	}
 

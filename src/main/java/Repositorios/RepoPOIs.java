@@ -120,12 +120,14 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		String id = json.get("_id").toString();
 
 		POI poiAGuardar = null;
+		
 		try {
 			poiAGuardar = (POI) gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
 		} catch (JsonSyntaxException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		poiAGuardar.ultimaFechaBusqueda = LocalDateTime.of(
 				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("year"),
 				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("monthValue"),
