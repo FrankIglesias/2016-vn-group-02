@@ -51,6 +51,11 @@ public class MainController {
 		return new ModelAndView(null, "admin_consultas.hbs");
 	}
 
+	public ModelAndView mostrarPois(Request request, Response response) {
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
+	
+	
 	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 
