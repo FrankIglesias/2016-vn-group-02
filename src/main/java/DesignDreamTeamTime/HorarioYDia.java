@@ -11,14 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import HashMapeameEsta.HashMapeameEsta;
+
 @javax.persistence.Entity
 public class HorarioYDia {
 	
 	@Id
 	@GeneratedValue
 	private int id;
-	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
-
+	private HashMapeameEsta agenda = new HashMapeameEsta();
 	public HorarioYDia() {
 		super();
 	}
@@ -35,7 +36,7 @@ public class HorarioYDia {
 		this.id = unID;
 	}
 	
-	public HorarioYDia(Map<DayOfWeek, GestorIntervalos> horario) {
+	public HorarioYDia(HashMapeameEsta horario) {
 		super();
 		agenda = horario;
 	}
@@ -46,7 +47,7 @@ public class HorarioYDia {
 
 	}
 
-	public void setAgenda(Map<DayOfWeek, GestorIntervalos> unaAgenda) {
+	public void setAgenda(HashMapeameEsta unaAgenda) {
 		this.agenda = unaAgenda;
 	}
 

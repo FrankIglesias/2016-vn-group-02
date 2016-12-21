@@ -12,6 +12,7 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
+import HashMapeameEsta.HashMapeameEsta;
 import TypePois.CGP;
 import TypePois.POI;
 import TypePois.Servicio;
@@ -69,7 +70,7 @@ public class RepositorioCGPExternoAdapter {
 		ArrayList<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
 		GestorIntervalos gestor = new GestorIntervalos(listaDeIntervalos);
 		listaDeIntervalos.add(intervalo);
-		Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
+		HashMapeameEsta agenda = new HashMapeameEsta();
 		agenda.put(dia, gestor);
 		unHorarioYDia.setAgenda(agenda);
 
