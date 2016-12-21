@@ -13,10 +13,11 @@
 <body>
 <center><table style="margin-top: 70px;">
   <tbody >
+    {{#poi}}
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{nombre}}">
     </td>
     </tr>
     <tr>
@@ -25,66 +26,67 @@
      <tr>
     <td><p class=" historial_tabla_textos"> Calle Principal:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{callePrincipal}}">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Entre calles:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{entreCalles}}">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Altura:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{altura}}">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Piso:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{piso}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Unidad:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{unidad}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Codigo postal:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{codigoPostal}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
     <td>
-    	<input type="number" min="1">
+    	<input type="number" min="1" values="{{comuna}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Ciudad:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{ciudad}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Provincia:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{provincia}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Pais:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" values="{{pais}}">
     </td>
     </tr>
+	{{/poi}}
     
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
