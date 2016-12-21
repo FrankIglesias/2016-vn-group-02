@@ -1,24 +1,25 @@
 package DesignDreamTeamTime;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import HashMapeameEsta.HashMapeameEsta;
 
-@javax.persistence.Entity
+@Entity
 public class HorarioYDia {
 	
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private HashMapeameEsta agenda = new HashMapeameEsta();
 	public HorarioYDia() {
 		super();
