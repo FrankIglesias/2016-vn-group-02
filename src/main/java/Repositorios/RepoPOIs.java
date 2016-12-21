@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import org.bson.types.ObjectId;
 import org.json.JSONObject;
@@ -39,11 +38,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
 	public void persistirEnHibernate(POI unPOI) {
-		EntityTransaction transaccion = entityManager.getTransaction();
-		// transaccion.rollback();
-		transaccion.begin();
-		entityManager.persist(unPOI);
-		transaccion.commit();
+		entityManager().persist(unPOI);
 	}
 
 	public POI obtenerDeHibernate(int id) {
