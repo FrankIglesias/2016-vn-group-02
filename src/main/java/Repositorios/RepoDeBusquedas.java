@@ -33,22 +33,13 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		return instancia;
 	}
 
-	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-
 	public void persistirBusqueda(Busqueda unObjeto) {
-		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.begin();
-		entityManager.persist(unObjeto);
-		transaccion.commit();
+		entityManager().persist(unObjeto);
 
 	}
 
 	public void persistirAccion(Accion unObjeto) {
-		EntityTransaction transaccion = entityManager.getTransaction();
-		// transaccion.rollback();
-		transaccion.begin();
-		entityManager.persist(unObjeto);
-		transaccion.commit();
+		entityManager().persist(unObjeto);
 	}
 
 	public Accion obtenerObjetoAccion(Integer id) {
@@ -82,7 +73,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
 		repoTerminales.add(terminal);
-		
+
 		persistirBusqueda(busqueda);
 		return busqueda;
 	}

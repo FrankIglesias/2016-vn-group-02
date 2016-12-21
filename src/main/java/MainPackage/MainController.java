@@ -91,7 +91,6 @@ public class MainController {
 		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, new Terminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
 		List<String> coordenadas = new ArrayList<String>();
-		
 		pois.forEach(unPoi -> coordenadas
 				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
 		viewModel.put("latitudes", coordenadas);

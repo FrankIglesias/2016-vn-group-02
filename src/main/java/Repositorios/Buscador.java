@@ -28,6 +28,7 @@ public class Buscador {
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 		AsignarAccionesUsuarios.getInstance().analizarAccionesParaUnaTerminal(unTerminal);
+		
 		return puntosSegunPalabra;
 	}
 

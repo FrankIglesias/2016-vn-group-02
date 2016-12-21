@@ -36,11 +36,7 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 	}
 
 	public void persistirTerminal(Terminal terminal) {
-		withTransaction(() -> {
-			persist(terminal);
-		});
-
-		System.out.println("fjadfiojadifo");
+		entityManager().persist(terminal);
 	}
 
 	public List<Terminal> obtenerTerminales(int comuna) {
