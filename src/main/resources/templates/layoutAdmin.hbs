@@ -13,11 +13,10 @@
 <body>
 <center><table style="margin-top: 70px;">
   <tbody >
-    {{#poi}}
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
     <td>
-    	<input type="text" values="{{nombre}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
@@ -26,67 +25,66 @@
      <tr>
     <td><p class=" historial_tabla_textos"> Calle Principal:</p></td>
     <td>
-    	<input type="text" values="{{callePrincipal}}">
+    	<input type="text">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Entre calles:</p></td>
     <td>
-    	<input type="text" values="{{entreCalles}}">
+    	<input type="text">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Altura:</p></td>
     <td>
-    	<input type="text" values="{{altura}}">
+    	<input type="text">
     </td>
     </tr>
    
     <tr>
     <td><p class=" historial_tabla_textos"> Piso:</p></td>
     <td>
-    	<input type="text" values="{{piso}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Unidad:</p></td>
     <td>
-    	<input type="text" values="{{unidad}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Codigo postal:</p></td>
     <td>
-    	<input type="text" values="{{codigoPostal}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
     <td>
-    	<input type="number" min="1" values="{{comuna}}">
+    	<input type="number" min="1">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Ciudad:</p></td>
     <td>
-    	<input type="text" values="{{ciudad}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Provincia:</p></td>
     <td>
-    	<input type="text" values="{{provincia}}">
+    	<input type="text">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Pais:</p></td>
     <td>
-    	<input type="text" values="{{pais}}">
+    	<input type="text">
     </td>
     </tr>
-	{{/poi}}
     
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
@@ -120,9 +118,7 @@
 	</center>
     <br>
     <center>
-	<form method="post">
-    <button type="submit" href="/admin_pois" class="btn_Detalles" > Aceptar </button>
-	</form>
+    <button type="button" class="btn_Detalles" > Aceptar </button>
     <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button></center>		
 
 </body>

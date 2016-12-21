@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<link href= "frank.css" rel="stylesheet" type= "text/css">
+ <script src="Frank.js"></script>
+<meta charset="utf-8">
+
+<title>Detalles del POI</title>
+</head>
+<header class="header"><br><br>
+<p id="h1"> Detalles POI</p>
+</header>
+<body>
+<center><table style="margin-top: 70px;">
+  <tbody >
+  
+    {{#poi}}
+    <tr><td><p class=" historial_tabla_textos"> Nombre: {{nombre}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Direcci&oacute;n:</p></td></tr>
+		<tr><p class=" historial_tabla_textos"> Calle Principal:{{callePrincipal}}</p>
+			<p class=" historial_tabla_textos"> Entre calles:{{entreCalles}}</p>
+			<p class=" historial_tabla_textos"> Altura: {{altura}}</p>
+			<p class=" historial_tabla_textos"> Piso: {{piso}}</p>
+			<p class=" historial_tabla_textos"> Unidad: {{unidad}}</p></tr>
+    <tr><td><p class=" historial_tabla_textos"> Codigo postal: {{codigoPostal}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Numero de comuna: {{comuna}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Ciudad:{{ciudad}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Provincia: {{provincia}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Pais:</p></td></tr>
+	{{/poi}}
+    
+    <tr>
+    <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
+    <td>
+		<div id="map" style="height: 300px; width: 300px;"></div>
+	</td>
+	<script>
+	function initMap() {
+        var myLatLng = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          scrollwheel: false,
+          zoom: 3
+        });
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'Hello World!'
+        });
+      }
+	
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+			async defer></script>
+
+    </td>
+    </tr> 
+    
+     </tbody>
+</table>
+	</center>
+    <br>
+    <center>
+	<form method="post">
+    <button type="submit" href="/admin_pois" class="btn_Detalles" > Aceptar </button>
+	</form>
+    <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button></center>		
+
+</body>
+</html>
