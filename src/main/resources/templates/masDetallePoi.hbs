@@ -11,24 +11,23 @@
 <p id="h1"> Detalles POI</p>
 </header>
 <body>
-<center><table style="margin-top: 70px;">
+<center>
+ <table style="margin-top: 70px;">
   <tbody >
   
     {{#poi}}
-    <tr><td><p class=" historial_tabla_textos"> Nombre: {{nombre}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Direcci&oacute;n:</p></td></tr>
-		<tr><p class=" historial_tabla_textos"> Calle Principal:{{callePrincipal}}</p>
+    <tr><td><p class=" historial_tabla_textos"> Nombre:</p></td><td><p class=" historial_tabla_textos"> {{nombre}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Direcci&oacute;n:</p></td>
+		<td><p class=" historial_tabla_textos"> Calle Principal:{{callePrincipal}}</p>
 			<p class=" historial_tabla_textos"> Entre calles:{{entreCalles}}</p>
 			<p class=" historial_tabla_textos"> Altura: {{altura}}</p>
 			<p class=" historial_tabla_textos"> Piso: {{piso}}</p>
-			<p class=" historial_tabla_textos"> Unidad: {{unidad}}</p></tr>
-    <tr><td><p class=" historial_tabla_textos"> Codigo postal: {{codigoPostal}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Numero de comuna: {{comuna}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Ciudad:{{ciudad}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Provincia: {{provincia}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Pais:</p></td></tr>
-	{{/poi}}
-    
+			<p class=" historial_tabla_textos"> Unidad: {{unidad}}</p>
+    <tr><td><p class=" historial_tabla_textos"> Codigo postal:</p></td><td><p class=" historial_tabla_textos"> {{codigoPostal}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Numero de comuna:</p></td><td><p class=" historial_tabla_textos">{{comuna}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Ciudad:</p></td><td><p class=" historial_tabla_textos">{{ciudad}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Provincia:</p></td><td><p class=" historial_tabla_textos">{{provincia}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> Pais:</p></td><td><p class=" historial_tabla_textos">{{pais}}</p></td></tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
     <td>
@@ -55,7 +54,7 @@
 
     </td>
     </tr> 
-    
+    {{/poi}}
      </tbody>
 </table>
 	</center>
@@ -63,8 +62,9 @@
     <center>
 	<form method="post">
     <button type="submit" href="/admin_pois" class="btn_Detalles" > Aceptar </button>
+    <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button>
 	</form>
-    <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button></center>		
+    </center>		
 
 </body>
 </html>
