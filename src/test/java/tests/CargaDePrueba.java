@@ -22,30 +22,31 @@ public class CargaDePrueba {
 		repoPois = RepoPOIs.getInstance();
 		poisAPersistir = new ArrayList<POI>();
 		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
-		unBanco.setUltimaFechaDeBusqueda(LocalDateTime.now().minusDays(10));
+		unBanco.setUltimaFechaBusqueda(LocalDateTime.now().minusDays(10));
 		
 		Colectivo unColec = GlobalTestVariables.crearUnColectivo();
-		unColec.setUltimaFechaDeBusqueda(LocalDateTime.now().minusDays(10));
+		unColec.setUltimaFechaBusqueda(LocalDateTime.now().minusDays(10));
 		
 		CGP unCGP = GlobalTestVariables.crearUnCGP(GlobalTestVariables.crearFeriadoAbierto());
-		unCGP.setUltimaFechaDeBusqueda(LocalDateTime.now().minusDays(10));
+		unCGP.setUltimaFechaBusqueda(LocalDateTime.now().minusDays(10));
 		
 		poisAPersistir.add(unBanco);
 		poisAPersistir.add(unColec);
 		poisAPersistir.add(unCGP);
 		poisAPersistir.add(GlobalTestVariables.crearOtroCGP(GlobalTestVariables.crearFeriadoAbierto()));
 		poisAPersistir.add(GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto()));
-		repoPois.limpiarMongo();
 	}
 	
 	@Test
 	public void cargarTodoEnMongo() {
+		repoPois.limpiarMongo();
 		poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnMongo(unPoi));
+		repoPois.sincronizarBDs();
 	}
 	
 	@Test
 	public void llevarAMongoLoMasConsultado() {
-		repoPois.sincronizarBDs();
+		
 	}
 	
 }

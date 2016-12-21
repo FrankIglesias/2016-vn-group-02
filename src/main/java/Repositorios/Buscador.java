@@ -23,7 +23,7 @@ public class Buscador {
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
 		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
 				.addAll(baseDeDatosDePois.obtenerDeMongoSegunPalabrasClave(palabrita)));
-		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda(LocalDateTime.now()));
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
@@ -39,7 +39,7 @@ public class Buscador {
 		List<POI> puntosSegunPalabra = new ArrayList<POI>();
 		palabrasClave.stream().forEach(palabrita -> puntosSegunPalabra
 				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
-		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaDeBusqueda(LocalDateTime.now()));
+		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);

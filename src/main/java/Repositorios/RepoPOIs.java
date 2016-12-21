@@ -8,16 +8,16 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.swing.text.Document;
 
 import org.bson.types.ObjectId;
+import org.json.JSONObject;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonSyntaxException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -40,7 +40,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 	public void persistirEnHibernate(POI unPOI) {
 		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.rollback();
+	//	transaccion.rollback();
 		transaccion.begin();
 		entityManager.persist(unPOI);
 		transaccion.commit();
@@ -49,7 +49,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	public POI obtenerDeHibernate(int id) {
 		return entityManager.find(POI.class, id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<POI> levantarTodoDeHibernate() {
 		return entityManager().createQuery("from POI").getResultList();
@@ -59,9 +59,10 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		return entityManager().createQuery("from POI p join p.palabrasClave pc  WHERE pc = :palabraClave", POI.class)
 				.setParameter("palabraClave", palabraClave).getResultList();
 	}
-	
+
 	public POI obtenerDeHibernateSegunId(String idPoi) {
-		return entityManager().createQuery("from POI p WHERE idPoi = :id", POI.class).setParameter("id", idPoi).getResultList().get(0);
+		return entityManager().createQuery("from POI p WHERE idPoi = :id", POI.class).setParameter("id", idPoi)
+				.getResultList().get(0);
 	}
 
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
@@ -78,7 +79,6 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		}
 		DB database = cliente.getDB("POIS");
 		DBCollection collection = database.getCollection("POIS");
-		;
 		return collection;
 	}
 
@@ -91,6 +91,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		doc.put("Tipo", unPOI.getClass().toString());
 		collection.save(doc);
 	}
 
@@ -112,13 +113,27 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		DBCursor cursor = collection.find();
 		Gson gson = new Gson();
 		while (cursor.hasNext()) {
-			java.lang.reflect.Type tipoPOI = new TypeToken<POI>() {
-			}.getType();
-			String id = cursor.next().get("_id").toString();
-			POI poiAGuardar = gson.fromJson(cursor.next().toString(), tipoPOI);
+			DBObject json = cursor.next();
+			String id = json.get("_id").toString();
+
+			POI poiAGuardar = null;
+			try {
+				poiAGuardar = gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
+			} catch (JsonSyntaxException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			poiAGuardar.ultimaFechaBusqueda = LocalDateTime.of(
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("year"),
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("monthValue"),
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("dayOfMonth"),
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("hour"),
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("minute"),
+					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("second"));
 			poiAGuardar.setIdMongo(id);
 			puntosDeIntereses.add(poiAGuardar);
 		}
+
 	}
 
 	public void sincronizarBDs() {
@@ -137,13 +152,13 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	public void limpiarMongo() {
 		conexionAMongo().drop();
 	}
-	
+
 	public void borrarDeHibernate(POI unPoi) {
 		entityManager.remove(unPoi);
 	}
 
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
-		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getFechaDeBusqueda()));
+		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getUltimaFechaBusqueda()));
 	}
 
 	public static RepoPOIs getInstance() {
@@ -185,11 +200,16 @@ public class RepoPOIs implements WithGlobalEntityManager {
 				new BasicDBObject()
 						.append("nombre",
 								nombre)
-						.append("point", new BasicDBObject().append("latitud", unaGeo.getLatitud())
-								.append("longitud", unaGeo.getLongitud()).append("domicilio",
-										new BasicDBObject()
-												.append("callePrincipal", unaGeo.getDomicilio().getCallePrincipal())
-												.append("altura", unaGeo.getDomicilio().getAltura()))));
+						.append("point",
+								new BasicDBObject()
+										.append("latitud", unaGeo.getLatitud()).append(
+												"longitud", unaGeo
+														.getLongitud())
+										.append("domicilio",
+												new BasicDBObject()
+														.append("callePrincipal",
+																unaGeo.getDomicilio().getCallePrincipal())
+														.append("altura", unaGeo.getDomicilio().getAltura()))));
 
 		POI poiAModificar = obtenerDeHibernate(unPoi.getId());
 		poiAModificar.setNombre(nombre);

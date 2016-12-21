@@ -27,9 +27,6 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.HorarioYDia;
 
-
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "Pois")
@@ -57,10 +54,10 @@ public abstract class POI {
 	public String idMongo = ""; 
 
 	@OneToMany(cascade = CascadeType.ALL)
-	//@JoinColumn(name = "idPoi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
-	public LocalDateTime ultimaFechaBusqueda;
+	@Transient
+	public LocalDateTime ultimaFechaBusqueda = LocalDateTime.now();
 
 	public void setId(int unID) {
 		this.id = unID;
@@ -70,8 +67,8 @@ public abstract class POI {
 		return this.id;
 	}
 
-	public POI() {
-	};
+	protected POI() {
+	}
 	
 	public void setIdMongo(String clave) {
 		idMongo = clave;
@@ -85,11 +82,11 @@ public abstract class POI {
 		point = unaGeo;
 	}
 
-	public void setUltimaFechaDeBusqueda(LocalDateTime unaFecha) {
+	public void setUltimaFechaBusqueda(LocalDateTime unaFecha) {
 		ultimaFechaBusqueda = unaFecha;
 	}
 	
-	public LocalDateTime getFechaDeBusqueda() {
+	public LocalDateTime getUltimaFechaBusqueda() {
 		return ultimaFechaBusqueda;
 	}
 	
