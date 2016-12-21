@@ -16,10 +16,13 @@ public class HashMapeameEsta {
 	     
 	        public void put(DayOfWeek newKey, GestorIntervalos data){
 	      Entry newEntry = new Entry(newKey, data);
-	      if(listaDeElementos.stream().filter(entry->entry.key == newKey).count() ==0)  	  
+	      if(!hasKey(newKey))  	  
 	      listaDeElementos.add(newEntry);
+  
 	    }
-	        
+	        public boolean hasKey(DayOfWeek key){
+	        	return listaDeElementos.stream().filter(entry->entry.key == key).count()>0;
+	        }
 	    public GestorIntervalos get(DayOfWeek key){
 	     	
 			List<Entry> lista =  listaDeElementos.stream().filter(entry->entry.key == key).collect(Collectors.toList());
