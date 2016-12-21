@@ -3,13 +3,16 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.hibernate.cfg.Configuration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +22,7 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import DesignDreamTeamLocation.Localidad;
 import DesignDreamTeamTime.Feriado;
+import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.IntervaloHorario;
 import Repositorios.RepoPOIs;
 import TypePois.Banco;
@@ -38,7 +42,8 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	IntervaloHorario intervalo2;
 	Feriado feriado2;
 	ArrayList<Feriado> feriados;
-
+	ArrayList<IntervaloHorario> lista;
+	
 	@Before
 	public void setUp() {
 		repositorioPOI = new RepoPOIs();
@@ -128,7 +133,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 
 	public void persistoUnLocalYmeLoTraigoSanoYSalvo() {
-		Local lodemari = GlobalTestVariables.crearUnLocal(null);
+		Local lodemari = GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto());
 		repositorioPOI.persistirEnHibernate(lodemari);
 		assertEquals(repositorioPOI.obtenerDeHibernate(lodemari.getId()), lodemari);
 	}
@@ -157,6 +162,21 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Feriado unFeriado = entityManager.find(Feriado.class, feriado.getId());
 		Assert.assertTrue(unFeriado.getMes() == feriado.getMes());
 
+	}
+	
+	@Test
+	public void persistoUnDiaYHora() {
+	
+		LocalDateTime hora1 = LocalDateTime.now().withHour(10).withMinute(00);
+		LocalDateTime hora2 = LocalDateTime.now().withHour(15).withMinute(00);
+		IntervaloHorario intervalo = new IntervaloHorario(hora1, hora2);
+		lista = new ArrayList<IntervaloHorario>();
+		lista.add(intervalo);
+		GestorIntervalos gestor = new GestorIntervalos(lista);
+		Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
+		agenda.put(DayOfWeek.FRIDAY, gestor);
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		entityManager.persist(agenda);
 	}
 
 	@Test

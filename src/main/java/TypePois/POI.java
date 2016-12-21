@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -35,7 +36,6 @@ import DesignDreamTeamTime.HorarioYDia;
 public abstract class POI {
 
 	@Id
-	@Column(name = "idPoi")
 	@GeneratedValue
 	private int id;
 
@@ -56,8 +56,8 @@ public abstract class POI {
 	@Transient
 	public String idMongo = ""; 
 
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idPoi")
+	@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "idPoi")
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
 	public LocalDateTime ultimaFechaBusqueda;

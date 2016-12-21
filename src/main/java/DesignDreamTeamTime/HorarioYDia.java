@@ -6,26 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-@Entity
-
+@javax.persistence.Entity
 public class HorarioYDia {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idHorarioYDia")
 	private int id;
-	
-	@ElementCollection
-	 
-	//@JoinTable(name="AgendaHorario", joinColumns=@JoinColumn(name="id_horarioYDia"))
-	//@MapKeyColumn (name="dia")
-	//@Column(name="gestor_intervalo")
 	private Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
 
 	public HorarioYDia() {
