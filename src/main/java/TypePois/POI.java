@@ -50,7 +50,7 @@ public abstract class POI {
 	@CollectionTable(name = "palabrasClaves")
 	public List<String> palabrasClave = new ArrayList<String>();
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	protected HorarioYDia horario = new HorarioYDia();
 	
 	@Transient
@@ -145,7 +145,7 @@ public abstract class POI {
 	}
 
 	public boolean compararmeConHorarioDeUnFeriado(Feriado unFeriado, LocalDateTime horario) {
-		return (unFeriado.incluisHorario(horario.toLocalTime()));
+		return (unFeriado.incluisHorario(horario));
 	}
 
 	public Feriado getUnFeriado(LocalDate fecha) {

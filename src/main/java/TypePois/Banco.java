@@ -2,16 +2,18 @@ package TypePois;
 
 
 import java.time.DayOfWeek;
-
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
+
 @Entity
 public class Banco extends POI {
 		
@@ -25,7 +27,7 @@ public class Banco extends POI {
 	public Banco(Geolocalizacion point, String nombre, ArrayList<String> palabrasClave, List<Feriado> feriados) {
 		super(point, nombre, palabrasClave, horarioBancario, feriados);
 		palabrasClave.add("Banco");
-		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalTime.of(10, 00), LocalTime.of(15, 00));
+		IntervaloHorario intervaloUnico = new IntervaloHorario(LocalDateTime.now().withHour(10).withMinute(00), LocalDateTime.now().withHour(15).withMinute(00));
 		ArrayList<IntervaloHorario> intervaloBancario = new ArrayList<IntervaloHorario>();
 		intervaloBancario.add(intervaloUnico);
 		GestorIntervalos gestor = new GestorIntervalos(intervaloBancario);

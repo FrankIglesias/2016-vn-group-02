@@ -1,4 +1,12 @@
 package CGPExterno;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.GestorIntervalos;
@@ -7,13 +15,6 @@ import DesignDreamTeamTime.IntervaloHorario;
 import TypePois.CGP;
 import TypePois.POI;
 import TypePois.Servicio;
-
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
 
 
 public class RepositorioCGPExternoAdapter {
@@ -62,8 +63,8 @@ public class RepositorioCGPExternoAdapter {
 
 	public static void agregarAHorarioDeServicio(HorarioYDia unHorarioYDia, RangoServicioDTO unHorario) {
 		DayOfWeek dia = DayOfWeek.of(unHorario.getDiaSemana());
-		LocalTime horarioInicio = LocalTime.of(unHorario.getHoraDesde(), unHorario.getMinutoDesde());
-		LocalTime horarioFin = LocalTime.of(unHorario.getHoraHasta(), unHorario.getMinutoHasta());
+		LocalDateTime horarioInicio = LocalDateTime.now().withHour(unHorario.getHoraDesde()).withMinute(unHorario.getMinutoDesde());
+		LocalDateTime horarioFin = LocalDateTime.now().withHour(unHorario.getHoraHasta()).withMinute(unHorario.getMinutoHasta());
 		IntervaloHorario intervalo = new IntervaloHorario(horarioInicio, horarioFin);
 		ArrayList<IntervaloHorario> listaDeIntervalos = new ArrayList<IntervaloHorario>();
 		GestorIntervalos gestor = new GestorIntervalos(listaDeIntervalos);

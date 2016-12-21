@@ -21,10 +21,8 @@ public class Main {
 		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
 		  Spark.get("/editar_terminal", home::mostrarEditarTerminal, engine);
 		  Spark.get("/admin_acciones", home::mostrarAdminAcciones, engine);
-		  Spark.get("/admin_pois", home::mostrarPois, engine);
+		 // Spark.get("/admin_pois", home::mostrarPois, engine);
 		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
 		  Spark.get("/buscar_pois", home::filtrarNombreTipoPois, engine);
-		  Spark.post("/admin_pois",home::imprimiQueLlegueAca,engine);
-		  Spark.get("/usuarioBusqueda",home::imprimiQueLlegueAca,engine);
 	}
 }

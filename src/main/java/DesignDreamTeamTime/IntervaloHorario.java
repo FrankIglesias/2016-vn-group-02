@@ -1,11 +1,14 @@
 package DesignDreamTeamTime;
-import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
-
-import java.awt.List;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 @Entity
 
@@ -13,29 +16,27 @@ public class IntervaloHorario {
 
 	@Id
 	@GeneratedValue
-	@Column(name="idIntervalo")
-	private int id;
+	public int id;
 	
-	//@Convert(converter=LocalDateTimeConverter.class)
-	@Column(name="horaInicio")
-	LocalTime horaInicio;
-	//@Convert(converter=LocalDateTimeConverter.class)
-	@Column(name="horaFin")
-	LocalTime horaFin;
-	//@Convert(converter=LocalDateTimeConverter.class)
-	@Column(name="medianoche")
-	LocalTime mediaNoche = LocalTime.MIDNIGHT;
+	@Convert(converter = LocalDateTimeConverter.class)
+	public LocalDateTime horaInicio;
+
+	@Convert(converter = LocalDateTimeConverter.class)
+	public LocalDateTime horaFin;
+	
+	@Transient
+	LocalDateTime mediaNoche; //TODO armar una medianoche
 	
 	
-	public IntervaloHorario(LocalTime horaInicial, LocalTime horaFinal) {
+	public IntervaloHorario(LocalDateTime horaInicial, LocalDateTime horaFinal) {
 		super();
 		horaInicio = horaInicial;
 		horaFin = horaFinal;
 	
 	}
 	
-	public boolean incluyeHora(LocalTime hora) {
-		if (horaInicio == hora){
+	public boolean incluyeHora(LocalDateTime hora) {
+		if (horaInicio.toLocalTime() == hora.toLocalTime()){
 			return true;
 		} else if(horaFin == hora){
 			return false;
@@ -48,23 +49,26 @@ public class IntervaloHorario {
 	}
 
 	public LocalTime getHoraInicio() {
-		return horaInicio;
+		return horaInicio.toLocalTime();
 	}
 
-	private boolean between(LocalTime horaACheckear, LocalTime hora1, LocalTime hora2) {
-		return (horaACheckear.isAfter(hora1) && horaACheckear.isBefore(hora2));
+	private boolean between(LocalDateTime horaACheckear, LocalDateTime hora1, LocalDateTime hora2) {
+		return (horaACheckear.toLocalTime().isAfter(hora1.toLocalTime()) && horaACheckear.toLocalTime().isBefore(hora2.toLocalTime()));
 	}
 
-	public void setHoraInicio(LocalTime horaInicial) {
+	public void setHoraInicio(LocalDateTime horaInicial) {
 		horaInicio = horaInicial;
 	}
 
 	public LocalTime getHoraFin() {
-		return horaFin;
+		return horaFin.toLocalTime();
 	}
 
-	public void setHoraFin(LocalTime horaFinal) {
+	public void setHoraFin(LocalDateTime horaFinal) {
 		horaFin = horaFinal;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 }

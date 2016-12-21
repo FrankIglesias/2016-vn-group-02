@@ -67,7 +67,7 @@ public class Servicio {
 	}
 
 	public boolean compararmeConHorarioDeUnFeriado(Feriado unFeriado, LocalDateTime horario) {
-		return (unFeriado.incluisHorario(horario.toLocalTime()));
+		return (unFeriado.incluisHorario(horario));
 	}
 
 	public Feriado getUnFeriado(LocalDate fecha) {

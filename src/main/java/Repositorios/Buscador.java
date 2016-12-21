@@ -44,9 +44,8 @@ public class Buscador {
 		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 		return puntosSegunPalabra;
-
 	}
-
+	
 	public void setTiempoMaximoDeBusqueda(double tiempoMax) {
 		Buscador.tiempoMax = tiempoMax;
 	}

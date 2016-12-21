@@ -1,8 +1,13 @@
 package DesignDreamTeamTime;
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 
@@ -37,7 +42,7 @@ public class Feriado {
 		return (dia == unaFecha.getDayOfMonth() && mes == unaFecha.getMonthValue());
 	}
 
-	public boolean incluisHorario(LocalTime horario) {
+	public boolean incluisHorario(LocalDateTime horario) {
 		return (this.intervaloFeriado.incluyeHora(horario));
 	}
 
