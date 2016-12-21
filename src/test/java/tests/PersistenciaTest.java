@@ -109,8 +109,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 	@Test
 	public void alPedirleQueGuardeUnBancoPersiste() {
-		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
-		// repositorioPOI.persistirObjeto(unBanco);
+		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaccion = entityManager.getTransaction();
 
@@ -141,7 +140,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 	@Test
 	public void alObtenerUnPOICoincideConElPersistido() {
 
-		Banco unBanco = GlobalTestVariables.crearUnBanco(null);
+		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		RepoPOIs.getInstance().persistirEnHibernate(unBanco);
 		Banco otroBanco = entityManager.find(Banco.class, unBanco.getId());
@@ -162,21 +161,6 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		Feriado unFeriado = entityManager.find(Feriado.class, feriado.getId());
 		Assert.assertTrue(unFeriado.getMes() == feriado.getMes());
 
-	}
-	
-	@Test
-	public void persistoUnDiaYHora() {
-	
-		LocalDateTime hora1 = LocalDateTime.now().withHour(10).withMinute(00);
-		LocalDateTime hora2 = LocalDateTime.now().withHour(15).withMinute(00);
-		IntervaloHorario intervalo = new IntervaloHorario(hora1, hora2);
-		lista = new ArrayList<IntervaloHorario>();
-		lista.add(intervalo);
-		GestorIntervalos gestor = new GestorIntervalos(lista);
-		Map<DayOfWeek, GestorIntervalos> agenda = new HashMap<DayOfWeek, GestorIntervalos>();
-		agenda.put(DayOfWeek.FRIDAY, gestor);
-		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		entityManager.persist(agenda);
 	}
 
 	@Test
