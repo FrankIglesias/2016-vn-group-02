@@ -121,7 +121,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 		POI poiAGuardar = null;
 		try {
-			poiAGuardar = gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
+			poiAGuardar = (POI) gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
 		} catch (JsonSyntaxException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
