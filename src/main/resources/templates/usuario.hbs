@@ -35,11 +35,11 @@
 			</tr>
 			<tr>
 				<td><t>Localidad:</t></td>
-				<td><t>{{localidad}}</t></td>
+				<td><t></t></td>
 			</tr>
 			<tr>
 				<td><t>Coordenadas:</t></td>
-				<td><t>{{coordenadas}}</t></td>
+				<td><t>{{point.latitud}} {{point.longitud}}</t></td>
 		   </tr>
 		</table>	
 		<button type="button" class="btn_Detalles"  style=" margin-top: 15px; margin-bottom: 5px;"> Detalles </button></center></div>
@@ -54,21 +54,27 @@
 	</table>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
 			async defer></script>
-			<script>
-	 function initMap() {
-  var myLatLng = {lat: -25.363, lng: 131.044};
+<script>
+	function initMap() {
+        
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: myLatLng
-  });
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.6130556, lng: -58.377222222 },
+          scrollwheel: false,
+          zoom: 11
+        });
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
-}
+       
+        
+        {{#each latitudes}}
+        var marker = new google.maps.Marker({
+          map: map,
+          position: {{this}}
+        });
+        {{/each}}
+      }
+
 	</script>
 </body>
 </html>

@@ -27,6 +27,7 @@ public class Main {
 		  Spark.get("/admin_pois", home::mostrarPois, engine);
 		  Spark.get("/admin_consultas", home::mostrarConsultas, engine);
 		  Spark.get("/buscar_pois", home::filtrarNombreTipoPois, engine);
+		  Spark.get("/usuarioBusqueda", home::buscarPois, engine);
 		  Runtime rt = Runtime.getRuntime();
 		  try {
 			Process pr = rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"+puerto.toString());

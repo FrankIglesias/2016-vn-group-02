@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -30,34 +34,32 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		terminales = new ArrayList<Terminal>();
 		reporteBusquedasTotales = new HashMap<String, Integer>();
 	}
-	
-	public void persistirTerminal(Terminal terminal){
-	withTransaction(() -> {
-		persist(terminal);});
-	
-}
-	
-	public List<Terminal> obtenerTerminales(int comuna) {
-		
-		if(comuna != -1) {
-			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
-		}
-		else {
-			return entityManager().createQuery("from Terminal WHERE comuna = :comuna", Terminal.class).setParameter("comuna", comuna).getResultList();
-		}
-		
+
+	public void persistirTerminal(Terminal terminal) {
+		withTransaction(() -> {
+			persist(terminal);
+		});
+
+		System.out.println("fjadfiojadifo");
 	}
-	
+
+	public List<Terminal> obtenerTerminales(int comuna) {
+
+		if (comuna != -1) {
+			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
+		} else {
+			return entityManager().createQuery("from Terminal WHERE comuna = :comuna", Terminal.class)
+					.setParameter("comuna", comuna).getResultList();
+		}
+
+	}
+
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
 		entityManager().remove(unaTerminal);
 	}
-	
-	public void add(Terminal terminal) {
 
-		if (!terminales.contains(terminal)) {
-			persistirTerminal(terminal);
-			terminales.add(terminal);
-		}
+	public void add(Terminal terminal) {
+		persistirTerminal(terminal);
 	}
 
 	public void addReportesPorTerminal() {
@@ -71,16 +73,16 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		addReportesPorTerminal();
 		return reporteBusquedasTotales;
 	}
-	
-	public boolean todosTienenLaAccion(Accion unaAccion){
+
+	public boolean todosTienenLaAccion(Accion unaAccion) {
 		return terminales.stream().allMatch(unaTerminal -> unaTerminal.getListaDeAcciones().get(0).equals(unaAccion));
 	}
-	
-	public int size(){
+
+	public int size() {
 		return terminales.size();
 	}
-	
-	public ArrayList<Terminal> seleccionaUsuarios(AsignarAccionesUsuarios proceso){
+
+	public ArrayList<Terminal> seleccionaUsuarios(AsignarAccionesUsuarios proceso) {
 		return terminales.stream().filter(unaTerminal -> proceso.cumpleCriterio(unaTerminal))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}

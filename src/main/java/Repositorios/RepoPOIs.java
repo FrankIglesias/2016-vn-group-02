@@ -40,7 +40,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 
 	public void persistirEnHibernate(POI unPOI) {
 		EntityTransaction transaccion = entityManager.getTransaction();
-	//	transaccion.rollback();
+		// transaccion.rollback();
 		transaccion.begin();
 		entityManager.persist(unPOI);
 		transaccion.commit();
@@ -102,7 +102,8 @@ public class RepoPOIs implements WithGlobalEntityManager {
 		whereQuery.put("palabrasClave", palabra);
 		DBCursor cursor = collection.find(whereQuery);
 		while (cursor.hasNext()) {
-			System.out.println(cursor.next() + "\n");
+			POI unPoi = parsearFromGson(cursor);
+			pois.add(unPoi);
 		}
 		return pois;
 
@@ -111,29 +112,34 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	public void levantarTodoDeMongo() {
 		DBCollection collection = conexionAMongo();
 		DBCursor cursor = collection.find();
-		Gson gson = new Gson();
 		while (cursor.hasNext()) {
-			DBObject json = cursor.next();
-			String id = json.get("_id").toString();
-
-			POI poiAGuardar = null;
-			try {
-				poiAGuardar = gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
-			} catch (JsonSyntaxException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			poiAGuardar.ultimaFechaBusqueda = LocalDateTime.of(
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("year"),
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("monthValue"),
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("dayOfMonth"),
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("hour"),
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("minute"),
-					new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("second"));
-			poiAGuardar.setIdMongo(id);
+			POI poiAGuardar = parsearFromGson(cursor);
 			puntosDeIntereses.add(poiAGuardar);
 		}
 
+	}
+
+	private POI parsearFromGson(DBCursor cursor) {
+		Gson gson = new Gson();
+		DBObject json = cursor.next();
+		String id = json.get("_id").toString();
+
+		POI poiAGuardar = null;
+		try {
+			poiAGuardar = gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
+		} catch (JsonSyntaxException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		poiAGuardar.ultimaFechaBusqueda = LocalDateTime.of(
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("year"),
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("monthValue"),
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("dayOfMonth"),
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("hour"),
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("minute"),
+				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("second"));
+		poiAGuardar.setIdMongo(id);
+		return poiAGuardar;
 	}
 
 	public void sincronizarBDs() {

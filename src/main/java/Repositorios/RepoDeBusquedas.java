@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -20,7 +24,6 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 	List<Busqueda> busquedas;
 	Map<LocalDateTime, Integer> reportePorFecha;
 	RepoTerminales repoTerminales;
-	
 
 	public static RepoDeBusquedas getInstance() {
 		if (instancia == null) {
@@ -30,16 +33,22 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		return instancia;
 	}
 
+	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
 	public void persistirBusqueda(Busqueda unObjeto) {
-		withTransaction(() -> {
-			persist(unObjeto);
-		});
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.begin();
+		entityManager.persist(unObjeto);
+		transaccion.commit();
+
 	}
 
 	public void persistirAccion(Accion unObjeto) {
-		entityManager().persist(unObjeto);
-
+		EntityTransaction transaccion = entityManager.getTransaction();
+		// transaccion.rollback();
+		transaccion.begin();
+		entityManager.persist(unObjeto);
+		transaccion.commit();
 	}
 
 	public Accion obtenerObjetoAccion(Integer id) {
@@ -73,6 +82,7 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
 		repoTerminales.add(terminal);
+		
 		persistirBusqueda(busqueda);
 		return busqueda;
 	}

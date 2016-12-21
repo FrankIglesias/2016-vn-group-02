@@ -47,7 +47,7 @@ public class Terminal {
 
 	private String mailAdmin = "mailprueba@gmail.com";
 
-	protected Terminal() {
+	public Terminal() {
 	}
 
 	public Terminal(String nombre) {

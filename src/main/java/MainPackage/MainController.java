@@ -3,14 +3,17 @@ package MainPackage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
+import Repositorios.Buscador;
+import Repositorios.Terminal;
 import TypePois.POI;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 public class MainController {
+	private String nombreUsuario;
+
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
@@ -37,28 +40,9 @@ public class MainController {
 	}
 
 	public ModelAndView mostrarUser(Request request, Response response) {
-		System.out.println("Mostrar Usuario");
-		String filtro = request.queryParams("nombreFiltro");
-		
-		if(!(filtro.equals("") || filtro.isEmpty())){
-			
-			HashMap<String, Object> viewModel = new HashMap<>();
-			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(filtro, "");
-			List<String> nombres = new ArrayList<String>();
-			List<String> localidad = new ArrayList<String>();
-			List<String> coordenadas = new ArrayList<String>();
-			
-			pois.forEach(poi -> nombres.add(poi.getNombre()));
-			pois.forEach(poi -> localidad.add(poi.getPoint().getLocalidad().toString()));
-			pois.forEach(poi -> coordenadas.add("{lat:" + poi.getPoint().getLatitud() + ", lng:" + poi.getPoint().getLongitud() + "}"));
 
-			viewModel.put("listadoPOIs",pois);
-			viewModel.put("nombre",nombres);
-			viewModel.put("localidad",localidad);	
-			viewModel.put("coordenadas",coordenadas);
-			
-			return new ModelAndView(viewModel, "usuario.hbs");
-		}
+		nombreUsuario = request.queryParams("nombreFiltro");
+		System.out.println("Mostrar Usuario " + nombreUsuario);
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -75,8 +59,7 @@ public class MainController {
 	public ModelAndView mostrarPois(Request request, Response response) {
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-	
-	
+
 	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 
@@ -95,8 +78,25 @@ public class MainController {
 	}
 
 	public ModelAndView busquedaUsuario(Request request, Response response) {
-		System.out.println("busquedaUsuario");
+		nombreUsuario = request.queryParams("nombreFiltro");
+		System.out.println("busquedaUsuario" + nombreUsuario);
 		return new ModelAndView(null, "usuario.hbs");
+	}
+
+	public ModelAndView buscarPois(Request request, Response response) {
+		System.out.println("busquedaUsuario");
+
+		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombreFiltro = request.queryParams("nombreFiltro");
+		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, new Terminal(nombreUsuario));
+		viewModel.put("listadoPOIs", pois);
+		List<String> coordenadas = new ArrayList<String>();
+		
+		pois.forEach(unPoi -> coordenadas
+				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
+		viewModel.put("latitudes", coordenadas);
+
+		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
 }
