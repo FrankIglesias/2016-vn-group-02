@@ -38,6 +38,27 @@ public class MainController {
 
 	public ModelAndView mostrarUser(Request request, Response response) {
 		System.out.println("Mostrar Usuario");
+		String filtro = request.queryParams("nombreFiltro");
+		
+		if(!(filtro.equals("") || filtro.isEmpty())){
+			
+			HashMap<String, Object> viewModel = new HashMap<>();
+			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(filtro, "");
+			List<String> nombres = new ArrayList<String>();
+			List<String> localidad = new ArrayList<String>();
+			List<String> coordenadas = new ArrayList<String>();
+			
+			pois.forEach(poi -> nombres.add(poi.getNombre()));
+			pois.forEach(poi -> localidad.add(poi.getPoint().getLocalidad().toString()));
+			pois.forEach(poi -> coordenadas.add("{lat:" + poi.getPoint().getLatitud() + ", lng:" + poi.getPoint().getLongitud() + "}"));
+
+			viewModel.put("listadoPOIs",pois);
+			viewModel.put("nombre",nombres);
+			viewModel.put("localidad",localidad);	
+			viewModel.put("coordenadas",coordenadas);
+			
+			return new ModelAndView(viewModel, "usuario.hbs");
+		}
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -63,7 +84,6 @@ public class MainController {
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		String tipoFiltro = request.queryParams("tipoFiltro");
 
-		System.out.println("Alla");
 		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 		viewModel.put("listadoPOIs", pois);
 
