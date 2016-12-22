@@ -15,7 +15,7 @@
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<t class="login_text" style="color:#454545;"><strong>Agregar terminal</strong></t>
 		
-<p class="login_text" style="color:#454545;"><center><t><strong>Ingrese nombre de terminal</strong></t>
+<p class="login_text" style="color:#454545;"><center><t><strong>Ingrese nombre de terminal:</strong></t>
 <input type="text" style="border-radius:5px;
 	width:177px; height:20px; margin-right: 10px; margin-left:10px">
 <t><strong> Ingrese numero de comuna:  </strong></t>
@@ -30,16 +30,19 @@
       <td><p class="historial_tabla" style=" height:25px; width:150px;"> Comuna</p></td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> 1520</p></td>
-    <td><p class=" historial_tabla_textos"> 752</p></td>
-    <td><p class=" historial_tabla_textos"> 752</p></td>
+    {{#terminales}}
+    <td><p class=" historial_tabla_textos">{{id}}</p></td>
+    <td><p class=" historial_tabla_textos"> {{posicion}}</p></td>
+    <td><p class=" historial_tabla_textos"> {{comuna}}</p></td>
+    
     <td>
-		<a href="/editar_terminal">
+		<a href="/editar_terminal/{{id}}">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
 		</a>
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.55 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
 	
 </td>
+{{/terminales}}
     </tr>
   </tbody>
 </table>
