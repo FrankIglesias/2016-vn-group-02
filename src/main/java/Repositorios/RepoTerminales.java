@@ -49,6 +49,10 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		}
 
 	}
+	
+	public Terminal buscameUnaTerminal(String nombreTerminal) {
+		return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class).setParameter("nombreTerminal", nombreTerminal).getResultList().get(0);
+	}
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
 		entityManager().remove(unaTerminal);

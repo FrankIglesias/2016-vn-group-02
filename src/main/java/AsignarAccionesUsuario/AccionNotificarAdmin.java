@@ -2,8 +2,13 @@ package AsignarAccionesUsuario;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.OneToOne;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import Repositorios.Terminal;
 
@@ -16,6 +21,7 @@ public class AccionNotificarAdmin extends Accion {
 	String mensaje;
 	
 	String nombre = "Notificar Administrador";
+
 
 	public AccionNotificarAdmin(String mensaje) {
 		super();
@@ -37,6 +43,5 @@ public class AccionNotificarAdmin extends Accion {
 	public String getNombre() {
 		return nombre;
 	}
-
 
 }

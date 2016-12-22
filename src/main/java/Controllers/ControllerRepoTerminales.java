@@ -8,7 +8,7 @@ import Repositorios.Terminal;
 
 public class ControllerRepoTerminales {
 	
-	private static ControllerRepoTerminales instancia;
+	private static ControllerRepoTerminales instancia = null;
 	public RepoTerminales modeloTerminales = RepoTerminales.getInstance();
 	
 	public static ControllerRepoTerminales getInstance() {
@@ -43,6 +43,7 @@ public class ControllerRepoTerminales {
 		else 
 			unaTerminal = new Terminal(nombre, comuna);
 		
+		eliminarUnaTerminal(unaTerminal);
 		modeloTerminales.persistirTerminal(unaTerminal);
 	}
 	
@@ -50,12 +51,20 @@ public class ControllerRepoTerminales {
 		return unaTerminal.getNombreDeAcciones();
 	}
 	
-	public void setearAccionParaUnaTerminal(Terminal unaTerminal, Accion unaAccion) {
+	public void setearAccionParaUnaTerminal(String nombreTerminal, Accion unaAccion) {
+		Terminal unaTerminal = modeloTerminales.buscameUnaTerminal(nombreTerminal);
+		eliminarUnaTerminal(unaTerminal);
 		unaTerminal.addAccion(unaAccion);
+		modeloTerminales.persistirTerminal(unaTerminal);
+		
 	}
 	
-	public void removerAccionParaUnaTerminal(Terminal unaTerminal, Accion unaAccion) {
+	public void removerAccionParaUnaTerminal(String nombreTerminal, Accion unaAccion) {
+		Terminal unaTerminal = modeloTerminales.buscameUnaTerminal(nombreTerminal);
+		eliminarUnaTerminal(unaTerminal);
 		unaTerminal.quitar(unaAccion);
+		modeloTerminales.persistirTerminal(unaTerminal);
 	}
+	
 	
 }

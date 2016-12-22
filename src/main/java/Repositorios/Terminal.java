@@ -109,9 +109,7 @@ public class Terminal {
 	}
 
 	public void quitar(Accion accion) {
-		
 		listaDeAcciones.remove(accion);
-	
 	}
 
 	public List<Accion> getListaDeAcciones() {

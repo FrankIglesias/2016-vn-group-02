@@ -7,6 +7,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import AsignarAccionesUsuario.AccionNotificarAdmin;
+import AsignarAccionesUsuario.AsignarAccionesUsuarios;
+import AsignarAccionesUsuario.CriterioTodosUsuarios;
+import Controllers.ControllerRepoTerminales;
 import Repositorios.RepoPOIs;
 import TypePois.Banco;
 import TypePois.CGP;
@@ -17,9 +21,12 @@ public class CargaDePrueba {
 	
 	RepoPOIs repoPois;
 	List<POI> poisAPersistir;
+	ControllerRepoTerminales repoTerminales;
+	AsignarAccionesUsuarios lapoli;
 	@Before
 	public void init() {
 		repoPois = RepoPOIs.getInstance();
+		repoTerminales =  ControllerRepoTerminales.getInstance();
 		poisAPersistir = new ArrayList<POI>();
 		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 		unBanco.setUltimaFechaBusqueda(LocalDateTime.now().minusDays(10));
@@ -35,6 +42,10 @@ public class CargaDePrueba {
 		poisAPersistir.add(unCGP);
 		poisAPersistir.add(GlobalTestVariables.crearOtroCGP(GlobalTestVariables.crearFeriadoAbierto()));
 		poisAPersistir.add(GlobalTestVariables.crearUnLocal(GlobalTestVariables.crearFeriadoAbierto()));
+	
+		lapoli = AsignarAccionesUsuarios.getInstance();
+		CriterioTodosUsuarios todos = new CriterioTodosUsuarios();
+		lapoli.setCriterio(todos);
 	}
 	
 	@Test
@@ -42,11 +53,20 @@ public class CargaDePrueba {
 		repoPois.limpiarMongo();
 		poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnMongo(unPoi));
 		repoPois.sincronizarBDs();
+		cargarLaTerminal1();
+		cargarUnaAccionAUnaTerminal();
 	}
 	
-	@Test
-	public void llevarAMongoLoMasConsultado() {
-		
+	public void	cargarLaTerminal1() {
+		repoTerminales.agregarUnaTerminal("terminal1", 10);
 	}
+	
+	public void cargarUnaAccionAUnaTerminal() {
+		AccionNotificarAdmin unaAccion = new AccionNotificarAdmin("mensajito");
+		repoTerminales.setearAccionParaUnaTerminal("terminal1", unaAccion);
+	}
+	
+	
+	
 	
 }

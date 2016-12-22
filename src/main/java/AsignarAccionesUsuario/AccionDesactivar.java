@@ -1,8 +1,12 @@
 package AsignarAccionesUsuario;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import Repositorios.Terminal;
 
@@ -14,7 +18,7 @@ public class AccionDesactivar extends Accion {
 	Accion accionAquitar;
 	
 	String nombre = "Desactivar una accion";
-
+	
 	public AccionDesactivar(Accion accion) {
 		super();
 		this.accionAquitar = accion;
@@ -35,5 +39,4 @@ public class AccionDesactivar extends Accion {
 	public String getNombre() {
 		return nombre;
 	}
-
 }
