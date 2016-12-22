@@ -18,9 +18,8 @@ public class ControllerRepoTerminales {
 		return instancia;
 	}
 
-	public List<Terminal> listarTerminales(int comuna) {
-
-		return modeloTerminales.obtenerTerminales(comuna);
+	public List<Terminal> listarTerminales(String nombre, int comuna) {
+		return modeloTerminales.obtenerTerminales(nombre, comuna);
 	}
 	
 	public void eliminarUnaTerminal(Terminal unaTerminal) {

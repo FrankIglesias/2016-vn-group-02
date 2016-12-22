@@ -16,23 +16,13 @@ import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 
-@Entity
-@Table(name = "Acciones_manager")
-
-
 public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
-	@Id
-	private Long id;
-	@Transient
+
 	private RepoTerminales repoTerminales;
-	@OneToOne
 	private Accion accion;
-	@Transient
 	private Criterio criterio;
-	@Transient
 	private List<Terminal> terminalesAsignadas = new ArrayList<Terminal>();
 	
-	@Transient
 	public static AsignarAccionesUsuarios instancia;
 
 	public AsignarAccionesUsuarios(Criterio criterio, Accion accion) {

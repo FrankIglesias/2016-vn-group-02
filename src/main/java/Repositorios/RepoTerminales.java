@@ -39,13 +39,17 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		entityManager().persist(terminal);
 	}
 
-	public List<Terminal> obtenerTerminales(int comuna) {
+	public List<Terminal> obtenerTerminales(String nombre, int comuna) {
 
-		if (comuna != -1) {
+		if (comuna == -1 && nombre == "") {
 			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
-		} else {
+		} else if (nombre == "") {
 			return entityManager().createQuery("from Terminal WHERE comuna = :comuna", Terminal.class)
 					.setParameter("comuna", comuna).getResultList();
+		} else if (comuna == -1){
+			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class).setParameter("nombreTerminal", nombre).getResultList();
+		} else {
+			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal and comuna = :comuna", Terminal.class).setParameter("nombreTerminal", nombre).setParameter("comuna", comuna).getResultList();
 		}
 
 	}
