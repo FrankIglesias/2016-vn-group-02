@@ -3,6 +3,9 @@ package Controllers;
 import java.util.List;
 
 import AsignarAccionesUsuario.Accion;
+import DesignDreamTeamLocation.Domicilio;
+import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamLocation.Localidad;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 
@@ -31,19 +34,20 @@ public class ControllerRepoTerminales {
 		modeloTerminales.persistirTerminal(unaTerminal);
 	}
 	
-	public void editarUnaTerminal(Terminal terminalVieja, String nombre, int comuna) {
-		Terminal unaTerminal;
+	public void editarUnaTerminal(String nombre, int comuna, String callePrincipal, String entreCalles, String altura, String piso, String unidad,
+			String codigoPostal, String unaCiudad, String unaProvincia, String unPais, double latitud, double longitud) {
 		
-		if(nombre.isEmpty()) 
-			unaTerminal = new Terminal(terminalVieja.getNombre(), comuna);
-		
-		if(comuna == -1)
-			unaTerminal = new Terminal(nombre, terminalVieja.getComuna());
-		else 
-			unaTerminal = new Terminal(nombre, comuna);
-		
+		Terminal unaTerminal = modeloTerminales.buscameUnaTerminal(nombre);
 		eliminarUnaTerminal(unaTerminal);
-		modeloTerminales.persistirTerminal(unaTerminal);
+		
+		Domicilio unDomi = new Domicilio(callePrincipal, entreCalles, altura, piso, unidad, codigoPostal, comuna);
+		Localidad unaLoca = new Localidad(unaCiudad, unaProvincia, unPais);
+		Geolocalizacion unaGeo = new Geolocalizacion(latitud, longitud, unDomi, unaLoca);
+		
+		Terminal laNuevaTerminal = new Terminal(nombre, comuna);
+		laNuevaTerminal.setPoint(unaGeo);
+		
+		modeloTerminales.persistirTerminal(laNuevaTerminal);
 	}
 	
 	public List<String> listarAccionesTerminal(Terminal unaTerminal) {

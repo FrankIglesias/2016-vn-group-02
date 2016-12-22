@@ -54,6 +54,10 @@ public class Terminal {
 		this.nombre = nombre;
 	}
 	
+	public void setPoint(Geolocalizacion unaGeo) {
+		this.point = unaGeo;
+	}
+	
 	public Terminal(String nombre, int comuna) {
 		this.nombre = nombre;
 		this.point.getDomicilio().setComuna(comuna);

@@ -40,7 +40,6 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 	}
 
 	public List<Terminal> obtenerTerminales(String nombre, int comuna) {
-
 		if (comuna == -1 && nombre == "") {
 			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
 		} else if (nombre == "") {
@@ -51,7 +50,6 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		} else {
 			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal and comuna = :comuna", Terminal.class).setParameter("nombreTerminal", nombre).setParameter("comuna", comuna).getResultList();
 		}
-
 	}
 	
 	public Terminal buscameUnaTerminal(String nombreTerminal) {
