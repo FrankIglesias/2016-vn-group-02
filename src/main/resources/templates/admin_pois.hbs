@@ -46,7 +46,7 @@
 	   <td>
 	   <t class="login_text">Nombre:</t><br>
 	   </td>
-	   <td><t class="login_text" id="{{id}}">{{nombre}}</t></td>	    
+	   <td><t class="login_text">{{nombre}}</t></td>	    
 	   </tr>
 	   <tr>
 	   <td>
@@ -54,9 +54,9 @@
 		   <td><t class="login_text">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
 	   </table>	
-	   <a href="/masDetallePoi">
+	   <a href="/masDetallePoi?id={{id}}">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
-		<a href="/editar_poi">
+		<a href="/editar_poi?id={{id}}">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
 		</a>
 <script>	  

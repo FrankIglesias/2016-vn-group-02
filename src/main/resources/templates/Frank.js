@@ -10,8 +10,18 @@ function fucionValidarUsuario() {
 		}
 	}
 
-}
+};
+function initMap() {
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center : {
+			lat : -34.603722,
+			lng : -58.381592
+		},
+		scrollwheel : true,
+		zoom : 10
+	})
+};
 
 function goBack() {
 	window.history.back();
-}
+};

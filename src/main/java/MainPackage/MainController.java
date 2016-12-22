@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import Repositorios.Buscador;
+import Repositorios.RepoPOIs;
 import Repositorios.Terminal;
 import TypePois.POI;
 import spark.ModelAndView;
@@ -108,6 +109,19 @@ public class MainController {
 				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "usuario.hbs");
+	}
+
+	public ModelAndView editarPoi(Request request, Response response) {
+		System.out.println("busquedaUsuario");
+		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombreFiltro = request.queryParams("id");
+
+		POI pois = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
+		viewModel.put("poi", pois);
+		List<String> coordenadas = new ArrayList<String>();
+		coordenadas.add("{lat:" + pois.getPoint().getLatitud() + ", lng:" + pois.getPoint().getLongitud() + "}");
+		viewModel.put("latitudes", coordenadas);
+		return new ModelAndView(viewModel, "editar_poi.hbs");
 	}
 
 }
