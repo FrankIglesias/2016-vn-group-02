@@ -20,7 +20,6 @@ public class Main {
 		  Spark.get("/", home::mostrar, engine);
 		  Spark.get("/administrador",home::mostrarAdmin, engine);
 		  Spark.get("/usuario", home::mostrarUser, engine);
-		  //Spark.get("/editar_poi", home::mostrarEditarPoi, engine);
 		  Spark.get("/admin_terminales", home::mostrarTerminales, engine);
 		  Spark.get("/editar_terminal", home::mostrarEditarTerminal, engine);
 		  Spark.get("/admin_acciones", home::mostrarAdminAcciones, engine);
@@ -30,6 +29,7 @@ public class Main {
 		  Spark.get("/usuarioBusqueda", home::buscarPois, engine);
 		  Spark.get("/ver_mas", home::verMas,engine);
 		  Spark.get("/editar_poi", home::editarPoi,engine);
+		  Spark.delete("/borrar_poi/:id", home::borrarPoi,engine);
 		  Runtime rt = Runtime.getRuntime();
 		  try {
 			Process pr = rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"+puerto.toString());
