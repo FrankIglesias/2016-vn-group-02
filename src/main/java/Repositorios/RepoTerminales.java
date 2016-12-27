@@ -20,7 +20,7 @@ import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;
-	static RepoTerminales instancia;
+	static RepoTerminales instancia = null;
 
 	public static RepoTerminales getInstance() {
 		if (instancia == null) {
@@ -49,6 +49,7 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 		} else if (comuna == -1){
 			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class).setParameter("nombreTerminal", nombre).getResultList();
 		} else {
+			
 			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal and comuna = :comuna", Terminal.class).setParameter("nombreTerminal", nombre).setParameter("comuna", comuna).getResultList();
 		}
 

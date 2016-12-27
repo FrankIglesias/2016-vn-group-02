@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Controllers.ControllerRepoTerminales;
 import Repositorios.Buscador;
 import Repositorios.RepoPOIs;
 import Repositorios.Terminal;
@@ -19,12 +20,34 @@ public class MainController {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
 	}
+
 	public ModelAndView borrarPoi(Request request, Response response) {
 		System.out.println("Se quiso borrar un poi");
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
+
+	public ModelAndView buscarTerminal(Request request, Response response) {
+		System.out.println("Buscar Terminal");
+		String nombre = request.queryParams("nombre");
+		
+		String comuna = request.queryParams("comuna");
+		int comu;
+		if (comuna == "0") {
+			
+			comu = (int) -1;
+		} else {
+			comu = Integer.parseInt(comuna);
+		}
+
+		HashMap<String, Object> viewModel = new HashMap<>();
+		List<Terminal> terminales  = ControllerRepoTerminales.getInstance().listarTerminales(nombre, comu);
+		viewModel.put("terminales",terminales);
+		
+		return new ModelAndView(viewModel, "admin_terminales.hbs");
+	}
+
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
-		System.out.println("Editar Terminal");
+		System.out.println("Buscar Terminal");
 		return new ModelAndView(null, "editar_terminal.hbs");
 	}
 

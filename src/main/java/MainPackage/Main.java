@@ -29,6 +29,7 @@ public class Main {
 		  Spark.get("/usuarioBusqueda", home::buscarPois, engine);
 		  Spark.get("/ver_mas", home::verMas,engine);
 		  Spark.get("/editar_poi", home::editarPoi,engine);
+		  Spark.get("/buscar_terminales",home::buscarTerminal,engine);
 		  Spark.delete("/borrar_poi/:id", home::borrarPoi,engine);
 		  Runtime rt = Runtime.getRuntime();
 		  try {

@@ -14,14 +14,14 @@
 <a href="/editar_terminal">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<t class="login_text" style="color:#454545;"><strong>Agregar terminal</strong></t>
-		
+<form action="buscar_terminales">		
 <p class="login_text" style="color:#454545;"><center><t><strong>Ingrese nombre de terminal:</strong></t>
 <input type="text" style="border-radius:5px;
-	width:177px; height:20px; margin-right: 10px; margin-left:10px">
+	width:177px; height:20px; margin-right: 10px; margin-left:10px" name="nombre">
 <t><strong> Ingrese numero de comuna:  </strong></t>
-<input type="number" min ="1" style= "margin-right:10px "> 
+<input type="number" min ="1" style= "margin-right:10px " name="comuna" value ="0"> 
 <input type="submit" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px; font-family: 'Raleway', Arial, sans-serif; font-weight:bold; 	margin-top:10px; color: #454545; text-align:center;  height:25px; margin-bottom:50px; margin-right: 10px;" value="Buscar"></center></p>
-
+</form>
 <center><table width="700" border="0" style="">
   <tbody >
     <tr>
@@ -31,9 +31,9 @@
     </tr>
     <tr>
     {{#terminales}}
-    <td><p class=" historial_tabla_textos">{{id}}</p></td>
-    <td><p class=" historial_tabla_textos"> Lat: <br> Long:</p></td>
-    <td><p class=" historial_tabla_textos"> {{comuna}}</p></td>
+    <td><p class=" historial_tabla_textos">{{nombre}}</p></td>
+    <td><p class=" historial_tabla_textos"> Lat:{{point.latitud}} <br> Long:{{point.longitud}}</p></td>
+    <td><p class=" historial_tabla_textos"> {{point.domicilio.comuna}}</p></td>
     
     <td>
 		<a href="/editar_terminal?id={{id}}">
