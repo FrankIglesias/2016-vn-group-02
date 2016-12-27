@@ -19,7 +19,10 @@ public class MainController {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
 	}
-
+	public ModelAndView borrarPoi(Request request, Response response) {
+		System.out.println("Se quiso borrar un poi");
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
 		System.out.println("Editar Terminal");
 		return new ModelAndView(null, "editar_terminal.hbs");

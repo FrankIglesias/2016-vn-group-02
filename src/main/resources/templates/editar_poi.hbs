@@ -92,13 +92,17 @@
     </tr>
     	
     
-	{{/poi}}
-    
+	
     <tr>
+    <form>
     <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
-    <td><input type="text" value="{{point.longitud}}">
-    <input type="text" value="{{point.latitud}}">
-    <button type="button" href="/admin_pois" class="btn_Detalles" onclick="setNewCenter()"> Ver</button></td>
+    <td><input id="lng" type="number" value="{{point.longitud}}">
+    <input type="number" id="lat" value="{{point.latitud}}"><br>
+    <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
+    <input type="reset" class="btn_Detalles"></center></td>
+    </form>
+    {{/poi}}
+    
     <td>
 		<div id="map" style="height: 300px; width: 300px;"></div>
 	</td>
@@ -112,8 +116,7 @@
     <br>
     <center>
 	<form method="post">
-	
-    <input type="submit" href="/admin_pois" class="btn_Detalles"> Aceptar </input>
+    <input type="submit" href="/admin_pois" class="btn_Detalles" value= "Aceptar">
 	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button><form></center>
 	 
 <script>
