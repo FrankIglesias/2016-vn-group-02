@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,8 +23,8 @@ public class Busqueda {
 	@Id
 	@GeneratedValue
 	private Integer id;
-
-	@Transient
+	
+	@OneToMany
 	List<POI> puntosObtenidos;
 	@Convert(converter = LocalDateTimeConverter.class)
 	LocalDateTime fecha;
@@ -32,7 +33,6 @@ public class Busqueda {
 	String frase;
 	double tiempo;
 
-	@Transient
 	double tiempoMax;
 
 	protected Busqueda() {

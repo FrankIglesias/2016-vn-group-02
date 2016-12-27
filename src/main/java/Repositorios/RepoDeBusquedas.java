@@ -69,7 +69,6 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
 		repoTerminales.add(terminal);
-
 		persistirBusqueda(busqueda);
 		return busqueda;
 	}

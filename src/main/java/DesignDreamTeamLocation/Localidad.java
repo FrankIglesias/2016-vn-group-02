@@ -34,4 +34,13 @@ public class Localidad {
 		return this.ciudad;
 	}
 
+	public String getProvincia()
+	{
+		return this.provincia;
+	}
+	
+	public String getPais()
+	{
+		return this.pais;
+	}
 }
