@@ -7,6 +7,7 @@ import java.util.List;
 import Controllers.ControllerRepoTerminales;
 import Repositorios.Buscador;
 import Repositorios.RepoPOIs;
+import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 import TypePois.POI;
 import spark.ModelAndView;
@@ -114,7 +115,8 @@ public class MainController {
 		System.out.println("Ver mas");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
-		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, new Terminal(nombreUsuario));
+		RepoTerminales modeloTerminales = RepoTerminales.getInstance();
+		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, modeloTerminales.buscameUnaTerminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
 		List<String> coordenadas = new ArrayList<String>();
 		pois.forEach(unPoi -> coordenadas

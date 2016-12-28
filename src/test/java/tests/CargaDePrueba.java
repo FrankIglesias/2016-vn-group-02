@@ -53,17 +53,17 @@ public class CargaDePrueba {
 		repoPois.limpiarMongo();
 		poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnMongo(unPoi));
 		repoPois.sincronizarBDs();
-		cargarLaTerminal1();
+		cargarLaTerminalUsuario();
 		cargarUnaAccionAUnaTerminal();
 	}
 	
-	public void	cargarLaTerminal1() {
-		repoTerminales.agregarUnaTerminal("terminal1", 10);
+	public void	cargarLaTerminalUsuario() {
+		repoTerminales.agregarUnaTerminal("usuario", 10);
 	}
 	
 	public void cargarUnaAccionAUnaTerminal() {
 		AccionNotificarAdmin unaAccion = new AccionNotificarAdmin("mensajito");
-		repoTerminales.setearAccionParaUnaTerminal("terminal1", unaAccion);
+		repoTerminales.setearAccionParaUnaTerminal("usuario", unaAccion);
 	}
 	
 	

@@ -13,19 +13,19 @@
 
 <body style="height:100%;width: 100%; ">
 	<center>
-	<form method="get" action="/usuarioBusqueda" style= "margin-top: 50px;" >
-		
+	<form method="get" action="/usuarioBusqueda" id="myForm" style= "margin-top: 50px;" >
+
 		<input  id="Buscador" type="text" style="border-radius:5px; width: 80%; height: 25px;" name="nombreFiltro" placeholder="  Ingrese frase a buscar">
 		<input type="submit" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
 		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px; " value="Buscar">
 		</form>
 	</center>
 
-	<table style="">		
+	<table style="">
 
 		<td style="">
 		<div style="overflow-y: auto; max-height: 500px">
-		{{#listadoPOIs}}		
+		{{#listadoPOIs}}
 		<div style="background-color: #ffd300;margin-bottom: 5px;">
 		<center>
 		<table>
@@ -35,21 +35,23 @@
 			</tr>
 			<tr>
 				<td><t>Localidad:</t></td>
+        <td><t>{{point.localidad.ciudad}} {{point.localidad.provincia}} {{point.localidad.pais}}</t></td>
 				<td><t></t></td>
 			</tr>
 			<tr>
 				<td><t>Coordenadas:</t></td>
 				<td><t>{{point.latitud}} {{point.longitud}}</t></td>
 		   </tr>
-		</table>	
+		</table>
 		<button type="button" class="btn_Detalles"  style=" margin-top: 15px; margin-bottom: 5px;"> Detalles </button></center></div>
 		{{/listadoPOIs}}
 		</div>
-		<div><center><form action="'/ver_mas'document.getElementById('Buscador').value"><input class="login_text" type="submit"> Ver mas</center></div>
+    <button type="submit" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
+		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px;" formaction="/ver_mas" form="myForm">Ver mas</button>
 		</td>
-		
-	
-	<td style="width: 50% ">    
+
+
+	<td style="width: 50% ">
 	<div id="map" style="height: 500px; width: 500px;"></div>
 	</td>
 	</table>
@@ -57,21 +59,21 @@
 			async defer></script>
 <script>
 	function initMap() {
-        
+
 
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.6130556, lng: -58.377222222 },
-          scrollwheel: false,
           zoom: 11
         });
 
-       
-        
+
+
         {{#each latitudes}}
         var marker = new google.maps.Marker({
           map: map,
-          position: {{this}}
+          position: {{this}},
+          label: "Hola"
         });
         {{/each}}
       }

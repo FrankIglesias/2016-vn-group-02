@@ -14,9 +14,9 @@ public class Geolocalizacion {
 	private double longitud;
 	
 	@Embedded
-	private Domicilio domicilio;
+	private Domicilio domicilio = new Domicilio();
 	@OneToOne(cascade = CascadeType.PERSIST)
-	private Localidad localidad;
+	private Localidad localidad = new Localidad();
 	
 
 	public Geolocalizacion()
