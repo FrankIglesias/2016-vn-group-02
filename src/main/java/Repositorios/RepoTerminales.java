@@ -17,7 +17,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 
-public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
+public class RepoTerminales implements WithGlobalEntityManager {
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;
 	static RepoTerminales instancia = null;
@@ -36,7 +36,7 @@ public class RepoTerminales implements WithGlobalEntityManager, EntityManagerOps
 	}
 
 	public void persistirTerminal(Terminal terminal) {
-		entityManager().persist(terminal);
+		PerThreadEntityManagers.getEntityManager().persist(terminal);
 	}
 
 	public List<Terminal> obtenerTerminales(String nombre, int comuna) {

@@ -19,7 +19,7 @@
     <option value="vacio">-</option>
 		  <option value="banco">Mandar mail a admin</option>
   </select>
-<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: auto"/>
+<a href="/agregar_accion"><img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: auto"/></a>
 </center>
 <center>
   <table style="margin-top: 40px;">
@@ -28,9 +28,11 @@
      </tr>
      <tr>
      <td>
-     <li><p class=" historial_tabla_textos"> Enviar mail al usuario
+ {{#acciones}}
+     <li><p class=" historial_tabla_textos"> {{descripcion}}
 		  		<img src="img/WhatsApp Image 2016-12-20 at 00.11.55 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></p>
 		  </li>
+{{/acciones}}
 		 </td>
 		  </tr>
 		      
@@ -38,7 +40,7 @@
 
    <center>
     <button type="button" class="btn_Detalles" style="margin-top: 50px;"> Aceptar </button>
-    <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button></center>		
+    <button type="button" onclick="goBack()" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button></center>		
 
 </body>
 </html>

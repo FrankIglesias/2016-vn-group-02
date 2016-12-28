@@ -22,28 +22,22 @@ public class MainController {
 		return new ModelAndView(null, "home.hbs");
 	}
 
+	public ModelAndView agregarPoi(Request request, Response response) {
+		System.out.println("Nuevo Poi");
+		return new ModelAndView(null, "agregar_poi.hbs");
+	}
+
 	public ModelAndView borrarPoi(Request request, Response response) {
-		System.out.println("Se quiso borrar un poi");
+		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
+
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
-		String nombre = request.queryParams("nombre");
-		
-		String comuna = request.queryParams("comuna");
-		int comu;
-		if (comuna == "0") {
-			
-			comu = (int) -1;
-		} else {
-			comu = Integer.parseInt(comuna);
-		}
-
 		HashMap<String, Object> viewModel = new HashMap<>();
-		List<Terminal> terminales  = ControllerRepoTerminales.getInstance().listarTerminales(nombre, comu);
-		viewModel.put("terminales",terminales);
-		
+		List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales("", -1);
+		viewModel.put("terminales", terminales);
 		return new ModelAndView(viewModel, "admin_terminales.hbs");
 	}
 
@@ -71,6 +65,7 @@ public class MainController {
 
 		nombreUsuario = request.queryParams("nombreFiltro");
 		System.out.println("Mostrar Usuario " + nombreUsuario);
+		ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -116,26 +111,18 @@ public class MainController {
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		RepoTerminales modeloTerminales = RepoTerminales.getInstance();
-		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, modeloTerminales.buscameUnaTerminal(nombreUsuario));
+		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro,
+				modeloTerminales.buscameUnaTerminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
-		List<String> coordenadas = new ArrayList<String>();
-		pois.forEach(unPoi -> coordenadas
-				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
-		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
 	public ModelAndView buscarPois(Request request, Response response) {
 		System.out.println("busquedaUsuario");
-
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, new Terminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
-		List<String> coordenadas = new ArrayList<String>();
-		pois.forEach(unPoi -> coordenadas
-				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
-		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
@@ -143,12 +130,8 @@ public class MainController {
 		System.out.println("busquedaUsuario");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("id");
-
 		POI pois = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
 		viewModel.put("poi", pois);
-		List<String> coordenadas = new ArrayList<String>();
-		coordenadas.add("{lat:" + pois.getPoint().getLatitud() + ", lng:" + pois.getPoint().getLongitud() + "}");
-		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "editar_poi.hbs");
 	}
 

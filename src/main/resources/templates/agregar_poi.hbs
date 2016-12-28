@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+
+<link href= "frank.css" rel="stylesheet" type= "text/css">
+ <script type="text/javascript" src="Frank.js"></script>
+<meta charset="utf-8">
+
+<title>Nuevo POI</title>
+</head>
+<header class="header"><br><br>
+<p id="h1"> Agregar POI</p>
+</header>
+<body>
+<center><table style="margin-top: 70px;">
+  <tbody >
+
+    <tr>
+    <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
+    <td>
+    	<input type="text">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Nueva direcci&oacute;n:</p></td>
+    </tr>
+     <tr>
+    <td><p class=" historial_tabla_textos"> Calle Principal:</p></td>
+    <td>
+    	<input type="text">
+    </td>
+    </tr>
+   
+    <tr>
+    <td><p class=" historial_tabla_textos"> Entre calles:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+   
+    <tr>
+    <td><p class=" historial_tabla_textos"> Altura:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+   
+    <tr>
+    <td><p class=" historial_tabla_textos"> Piso:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Unidad:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Codigo postal:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
+    <td>
+    	<input type="number" min="1" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Ciudad:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Provincia:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Pais:</p></td>
+    <td>
+    	<input type="text" value="">
+    </td>
+    </tr>
+    <tr>
+    <form>
+    <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
+    <td><input id="lng" type="number" value="">
+    <input type="number" id="lat" value=""><br>
+    <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
+    <input type="reset" class="btn_Detalles"></center></td>
+    </form>
+    
+    <td>
+		<div id="map" style="height: 300px; width: 300px;"></div>
+	</td>
+    </tr> 
+    
+     </tbody>
+</table>
+	<form method="post">
+    <input type="submit" href="/admin_pois" class="btn_Detalles" value= "Aceptar">
+	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button></form></center>
+	 
+<script>
+function setNewCenter(lat,lng){
+   var center = new google.maps.LatLng(lat,lng);
+    map.panTo(center);
+}
+var map;
+	function initMap() {
+        // Create a map object and specify the DOM element for display.
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.6130556, lng: -58.377222222 },
+          scrollwheel: true,
+          zoom: 10
+        });
+      }
+    	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+			async defer></script>
+</body>
+</html>

@@ -25,25 +25,24 @@ import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
 @Entity
-@Table(name = "Terminal")
 public class Terminal {
 	@Id
 	@GeneratedValue
 	Integer id;
 	@Column(name = "name_terminal")
-	private String nombre; 
+	public String nombre; 
 
 	@OneToOne
-	Geolocalizacion point = new Geolocalizacion();
+	public Geolocalizacion point = new Geolocalizacion();
 	@OneToMany
-	List<Accion> listaDeAcciones = new ArrayList<Accion>();
+	public List<Accion> listaDeAcciones = new ArrayList<Accion>();
 	
 	@ElementCollection
 	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
-	private List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
+	public List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
 
 	@Transient
-	private GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
+	public  GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
 
 	private String mailAdmin = "mailprueba@gmail.com";
 

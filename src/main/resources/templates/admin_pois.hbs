@@ -14,11 +14,11 @@
 
 <body style="height:100%;width: 100%; ">
 
-<a href="/editar_terminal">
+<a href="/nuevo_poi">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<t class="login_text" style="color:#454545;"><strong>Agregar un POI</strong></t>
 	
-<form method="get" action="/buscar_pois" >
+<form method="get" action="/nuevo_poi" >
 		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
 		<input type="text" style="border-radius:5px;" name="nombreFiltro">
 		<strong>Ingrese el tipo de POI:</strong>
@@ -58,8 +58,7 @@
 	   <a href="/masDetallePoi?id={{id}}">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<a href="/editar_poi?id={{id}}">
-		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/>
-		</a>
+		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (2).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<a onClick="myFunction({{id}})"><img src="img/WhatsApp Image 2016-12-20 at 00.11.55 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		</center>
 		</div>
@@ -76,7 +75,7 @@
      if(confirm("Desea eliminar el poi")==true)
 		 {
 			 $.ajax({
-    url: '/borrar_poi/'+id,
+    url: '/borrar_poi?id='+id,
     type: 'DELETE',
     success: function(result) {
     }
