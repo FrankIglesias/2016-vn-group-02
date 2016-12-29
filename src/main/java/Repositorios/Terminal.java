@@ -28,23 +28,21 @@ import TypePois.POI;
 public class Terminal {
 	@Id
 	@GeneratedValue
-	Integer id;
+	public Integer id;
 	@Column(name = "name_terminal")
-	public String nombre; 
-
+	public String nombre;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	Geolocalizacion point = new Geolocalizacion();
+	Geolocalizacion point;
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Accion> listaDeAcciones = new ArrayList<Accion>();
 
-	
 	@ElementCollection
 	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
 	public List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
 
 	@Transient
-	public  GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
+	public GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
 
 	private String mailAdmin = "mailprueba@gmail.com";
 
@@ -54,20 +52,21 @@ public class Terminal {
 	public Terminal(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public void setPoint(Geolocalizacion unaGeo) {
 		this.point = unaGeo;
 	}
-	
+
 	public Terminal(String nombre, int comuna) {
 		this.nombre = nombre;
+		this.point = new Geolocalizacion();
 		this.point.getDomicilio().setComuna(comuna);
 	}
-	
+
 	public int getComuna() {
 		return this.point.getDomicilio().getComuna();
 	}
-	
+
 	public void setGestorDeMail(GestorMailInterface gestorDeMail) {
 		this.gestorDeMail = gestorDeMail;
 	}
@@ -82,6 +81,14 @@ public class Terminal {
 
 	public List<Integer> getReporteParcialPorTerminal() {
 		return reporteParcialPorTerminal;
+	}
+
+	public Geolocalizacion getPoint() {
+		return this.point;
+
+	}
+	public int getId() {
+		return this.id;
 	}
 
 	public int sumarResultados(List<Integer> enteros) {
@@ -107,10 +114,10 @@ public class Terminal {
 	public GestorMailInterface getGestor() {
 		return gestorDeMail;
 	}
-	
+
 	public void addAccion(Accion accion) {
-		if(!listaDeAcciones.contains(accion))
-		listaDeAcciones.add(accion);
+		if (!listaDeAcciones.contains(accion))
+			listaDeAcciones.add(accion);
 	}
 
 	public void quitar(Accion accion) {
@@ -133,7 +140,7 @@ public class Terminal {
 	public void ejecutaUnaAccion(Accion unaAccion) {
 		unaAccion.ejecutarAccion(this);
 	}
-	
+
 	public void ejecutarTodasLasAcciones() {
 		listaDeAcciones.forEach(unaAccion -> unaAccion.ejecutarAccion(this));
 	}
