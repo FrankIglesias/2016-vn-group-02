@@ -44,8 +44,11 @@ public class MainController {
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		String nombreFiltro = request.queryParams("nombre");
-		ControllerRepoTerminales.getInstance().listarTerminales(nombreFiltro, -1);
-		return new ModelAndView(null, "editar_terminal.hbs");
+		List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales(nombreFiltro, -1);
+		HashMap<String, Object> viewModel = new HashMap<>();
+		viewModel.put("terminales", terminales.get(0));
+		System.out.println(terminales.size());
+		return new ModelAndView(viewModel, "editar_terminal.hbs");
 	}
 
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
