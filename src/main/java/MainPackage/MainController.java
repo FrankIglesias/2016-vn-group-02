@@ -68,12 +68,15 @@ public class MainController {
 	}
 
 	public ModelAndView mostrarUser(Request request, Response response) {
-
 		nombreUsuario = request.queryParams("nombreFiltro");
-		int comuna = 1;
+		
 		System.out.println("Mostrar Usuario " + nombreUsuario);
-		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario).equals(null))
-		ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, comuna);
+		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario).equals(null)) {
+			String barrio = request.queryParams("rrioba");
+			HashMap<String, Integer> comunas = ControllerRepoPoi.getInstance().cargarComunas();
+			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, comunas.get(barrio));
+		}
+		
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
