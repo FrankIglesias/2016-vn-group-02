@@ -66,8 +66,10 @@ public class MainController {
 	public ModelAndView mostrarUser(Request request, Response response) {
 
 		nombreUsuario = request.queryParams("nombreFiltro");
+		int comuna = 1;
 		System.out.println("Mostrar Usuario " + nombreUsuario);
-		ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
+		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario).equals(null))
+		ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, comuna);
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -112,9 +114,8 @@ public class MainController {
 		System.out.println("Ver mas");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
-		RepoTerminales modeloTerminales = RepoTerminales.getInstance();
 		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro,
-				modeloTerminales.buscameUnaTerminal(nombreUsuario));
+				RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
@@ -123,7 +124,7 @@ public class MainController {
 		System.out.println("busquedaUsuario");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
-		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, new Terminal(nombreUsuario));
+		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
