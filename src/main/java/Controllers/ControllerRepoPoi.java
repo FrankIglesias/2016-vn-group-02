@@ -98,7 +98,7 @@ public class ControllerRepoPoi {
 		comunas.put("Recoleta", 2);
 		comunas.put("Retiro", 1);
 		comunas.put("Saavedra", 12);
-		comunas.put("San Cristóbal", 3);
+		comunas.put("San Cristobal", 3);
 		
 		comunas.put("San Nicolas", 1);
 		comunas.put("San Telmo", 1);
