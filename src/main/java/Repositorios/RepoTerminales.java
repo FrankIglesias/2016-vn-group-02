@@ -9,10 +9,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
@@ -20,7 +18,9 @@ import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 public class RepoTerminales implements WithGlobalEntityManager {
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;
+	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	static RepoTerminales instancia = null;
+
 
 	public static RepoTerminales getInstance() {
 		if (instancia == null) {
@@ -36,9 +36,13 @@ public class RepoTerminales implements WithGlobalEntityManager {
 	}
 
 	public void persistirTerminal(Terminal terminal) {
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.begin();
+		entityManager.persist(terminal);
+		transaccion.commit();
 		PerThreadEntityManagers.getEntityManager().persist(terminal);
 	}
-
+		
 	public List<Terminal> obtenerTerminales(String nombre, int comuna) {
 		if (comuna == -1 && nombre == "") {
 			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();

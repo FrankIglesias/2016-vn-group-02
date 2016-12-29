@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -14,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import AsignarAccionesUsuario.Accion;
@@ -32,10 +32,12 @@ public class Terminal {
 	@Column(name = "name_terminal")
 	public String nombre; 
 
-	@OneToOne
-	public Geolocalizacion point = new Geolocalizacion();
-	@OneToMany
-	public List<Accion> listaDeAcciones = new ArrayList<Accion>();
+
+	@OneToOne(cascade = CascadeType.ALL)
+	Geolocalizacion point = new Geolocalizacion();
+	@OneToMany(cascade = CascadeType.ALL)
+	List<Accion> listaDeAcciones = new ArrayList<Accion>();
+
 	
 	@ElementCollection
 	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
