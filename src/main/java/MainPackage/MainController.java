@@ -43,6 +43,8 @@ public class MainController {
 
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
+		String nombreFiltro = request.queryParams("nombre");
+		ControllerRepoTerminales.getInstance().listarTerminales(nombreFiltro, -1);
 		return new ModelAndView(null, "editar_terminal.hbs");
 	}
 

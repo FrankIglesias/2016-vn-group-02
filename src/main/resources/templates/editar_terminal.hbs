@@ -16,19 +16,19 @@
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
     <td>
-    	<input type="text">
+    	<input type="text" value="{{nombre}}">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
     <td>
-    	<input type="number" min="1">
+    	<input type="number" min="1" value="{{point.domicilio.comuna}}">
     </td>
 	  </tr>
 	</table>
    <br>
     <center>
-    <form action="/admin_acciones">
+    <form action="/admin_acciones?id={{id}}">
     <button type="button" class="btn_Detalles" > Aceptar </button>
     <input   type="submit" class="btn_Detalles" value="Administrar Acciones">
     <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button></form></center>		
