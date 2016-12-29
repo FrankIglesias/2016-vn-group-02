@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Controllers.ControllerRepoPoi;
 import Controllers.ControllerRepoTerminales;
 import Repositorios.Buscador;
 import Repositorios.RepoPOIs;
@@ -29,7 +30,7 @@ public class MainController {
 
 	public ModelAndView borrarPoi(Request request, Response response) {
 		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
-
+		ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 

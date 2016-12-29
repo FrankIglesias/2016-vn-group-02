@@ -55,10 +55,11 @@ public class ControllerRepoPoi {
 		
 	}
 	
-	public void borrarUnPOI(POI unPoi) 
+	public void borrarUnPOIporId(String id) 
 		{
-			modeloPOI.borrarDeMongo(unPoi);
-			modeloPOI.borrarDeHibernate(unPoi);	
+			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
+			modeloPOI.borrarDeMongo(poiABorrar);
+			modeloPOI.borrarDeHibernate(poiABorrar);	
 		}
 
 }

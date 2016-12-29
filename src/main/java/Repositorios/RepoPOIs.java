@@ -285,4 +285,5 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	public int size() {
 		return puntosDeIntereses.size();
 	}
+
 }
