@@ -66,7 +66,7 @@ public class ControllerRepoPoi {
 
 	public HashMap<String, Integer> cargarComunas() {
 		HashMap<String, Integer> comunas = new HashMap<String, Integer>();
-		comunas.put("Agronomía", 15);
+		comunas.put("AgronomÃ­a", 15);
 		comunas.put("Almagro", 5);
 		comunas.put("Balvanera", 3);
 		comunas.put("Barracas", 4);
@@ -77,7 +77,7 @@ public class ControllerRepoPoi {
 		comunas.put("Coghlan", 12);
 		comunas.put("Colegiales", 13);
 		
-		comunas.put("Constitución", 1);
+		comunas.put("ConstituciÃ³n", 1);
 		comunas.put("Flores", 7);
 		comunas.put("Floresta", 10);
 		comunas.put("La Boca", 4);
@@ -87,7 +87,7 @@ public class ControllerRepoPoi {
 		comunas.put("Monte Castro", 10);
 		comunas.put("Monserrat", 1);
 		comunas.put("Nueva Pompeya", 4);
-		comunas.put("Núñez", 13);
+		comunas.put("NÃºÃ±ez", 13);
 		
 		comunas.put("Palermo", 14);
 		comunas.put("Parque Avellaneda", 9);
@@ -98,11 +98,11 @@ public class ControllerRepoPoi {
 		comunas.put("Recoleta", 2);
 		comunas.put("Retiro", 1);
 		comunas.put("Saavedra", 12);
-		comunas.put("San Cristóbal", 3);
+		comunas.put("San CristÃ³bal", 3);
 		
-		comunas.put("San Nicolás", 1);
+		comunas.put("San Nicolas", 1);
 		comunas.put("San Telmo", 1);
-		comunas.put("Vélez Sársfield", 10);
+		comunas.put("VÃ©lez SÃ¡rsfield", 10);
 		comunas.put("Versalles", 10);
 		comunas.put("Villa Crespo", 15);
 		comunas.put("Villa del Parque", 11);
@@ -111,8 +111,8 @@ public class ControllerRepoPoi {
 		comunas.put("Villa Lugano", 8);
 		comunas.put("Villa Luro", 10);
 		
-		comunas.put("Villa Ortúzar", 15);
-		comunas.put("Villa Pueyrredón", 12);
+		comunas.put("Villa OrtÃºzar", 15);
+		comunas.put("Villa PueyrredÃ³n", 12);
 		comunas.put("Villa Real", 10);
 		comunas.put("Villa Riachuelo", 8);
 		comunas.put("Villa Santa Rita", 11);
