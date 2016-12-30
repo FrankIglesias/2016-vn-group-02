@@ -6,6 +6,24 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<meta charset="utf-8">
 	<title>Administrar POIs</title>
+	<script>
+	$(document).ready(function(){
+	
+		$("#verMas").hide();
+		});
+	</script>
+	<script>
+	function myFunctionA() {
+	
+	 $.ajax({
+    url: '/buscar_pois',
+    type: 'GET',
+    success: function(result) {
+    }
+});
+$("#verMas").show(1000);
+	}
+</script>
 </head>
 
 <header class="header"><br><br>
@@ -17,8 +35,8 @@
 <a href="/nuevo_poi">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<t class="login_text" style="color:#454545;"><strong>Agregar un POI</strong></t>
-	
-<form method="get" action="/buscar_pois" >
+
+<form>
 		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
 		<input type="text" style="border-radius:5px;" name="nombreFiltro">
 		<strong>Ingrese el tipo de POI:</strong>
@@ -30,7 +48,7 @@
 		  <option value="local">Local</option>
 		  </select>
 		  
-		<input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
+		<input type="button" onClick="myFunctionA()" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
 		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></center></p>
 		</form>
 	
@@ -70,6 +88,9 @@
 	<div id="map" style="height: 500px; width: 500px;"></div>
 	</td>
 	</table>
+	<input type="button" id="verMas" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px; font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; 
+	margin-left: 10px; height:25px; margin-bottom:50px"
+	value="Ver Mas"> <br>
 	<script>
 	function myFunction(id) {
      if(confirm("Desea eliminar el poi")==true)
