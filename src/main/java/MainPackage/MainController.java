@@ -17,7 +17,11 @@ import spark.Response;
 
 public class MainController {
 	private String nombreUsuario;
-
+	public ModelAndView borrarTerminal(Request request, Response response) {
+		System.out.println("Se quiso borrar terminal nombre: "+ request.queryParams("nombre"));
+		//ControllerRepoTerminales.getInstance().eliminarUnaTerminal(new Terminal(request.queryParams("nombre"),1));
+		return new ModelAndView(null, "admin_terminales.hbs");
+	}
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
@@ -43,17 +47,17 @@ public class MainController {
 	}
 
 	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
-		System.out.println("Buscar Terminal");
+		System.out.println("Editar Terminal");
 		String nombreFiltro = request.queryParams("nombre");
 		List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales(nombreFiltro, -1);
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("terminales", terminales.get(0));
-		System.out.println(terminales.size());
 		return new ModelAndView(viewModel, "editar_terminal.hbs");
 	}
 
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
+		String barrio = request.queryParams("nombre");
 		return new ModelAndView(null, "admin_acciones.hbs");
 	}
 
@@ -86,11 +90,12 @@ public class MainController {
 	}
 
 	public ModelAndView mostrarConsultas(Request request, Response response) {
-		System.out.println("mostrarConsultas");
+		System.out.println("Mostrar Consultas");
 		return new ModelAndView(null, "admin_consultas.hbs");
 	}
 
 	public ModelAndView mostrarPois(Request request, Response response) {
+		System.out.println("Ver pois sin listado");
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 

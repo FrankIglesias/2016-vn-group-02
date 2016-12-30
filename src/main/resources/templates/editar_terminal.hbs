@@ -3,6 +3,7 @@
 <head>
 <link href= "frank.css" rel="stylesheet" type= "text/css">
  <script src="Frank.js"></script>
+ <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <meta charset="utf-8">
 
 <title>Edicion de Terminal</title>
@@ -29,11 +30,12 @@
 	</table>
    <br>
     <center>
-    <form action="/admin_acciones?id={{id}}">
     <button type="button" class="btn_Detalles" > Aceptar </button>
-    <input   type="submit" class="btn_Detalles" value="Administrar Acciones">
-    <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button></form></center>		
-
+    <button  class="btn_Detalles" onclick="
+    window.location.href ='/admin_acciones?nombre={{nombre}}';
+">Administrar Acciones</button>   
+    <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button>
+    </center>		
 {{/terminales}}
 </body>
 </html>
