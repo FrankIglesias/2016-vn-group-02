@@ -33,6 +33,7 @@ public class Main {
 		Spark.get("/buscar_terminales", home::buscarTerminal, engine);
 		Spark.delete("/borrar_poi/:id", home::borrarPoi, engine);
 		Spark.get("/nuevo_poi", home::agregarPoi, engine);
+		Spark.delete("/borrar_terminal", home::borrarTerminal, engine);
 		Runtime rt = Runtime.getRuntime();
 		try {
 			rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"
