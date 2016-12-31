@@ -12,14 +12,29 @@
 		$("#verMas").hide();
 		});
 	function myFunctionA() {
-	
-	 $.ajax({
+	var nombre;
+	var tipo;
+	if (document.getElementById('nombreF').value == "" || document.getElementById('tipoF').value == "")
+	{
+		 $.ajax({
     url: '/buscar_pois',
     type: 'GET',
     success: function(result) {
     }
 });
 $("#verMas").show(1000);
+	}
+	else{
+	nombre = document.getElementById('nombreF').value;
+	tipo = document.getElementById('tipoF').value;
+	 $.ajax({
+    url: '/buscar_pois/'+nombre+'/'+tipo,
+    type: 'GET',
+    success: function(result) {
+    }
+});
+$("#verMas").show(1000);
+	}
 	}
 </script>
 </head>
@@ -36,9 +51,9 @@ $("#verMas").show(1000);
 
 <form>
 		<p class="login_text" style="color:#454545; margin-right:370px "><center><strong>Ingrese el nombre del POI:</strong>
-		<input type="text" style="border-radius:5px;" name="nombreFiltro">
+		<input type="text" style="border-radius:5px;" id="nombreF" name="nombreFiltro">
 		<strong>Ingrese el tipo de POI:</strong>
-		<select id="Seleccion" style="width:60px; height:20px;" name="tipoFiltro">
+		<select style="width:60px; height:20px;" id="tipoF" name="tipoFiltro">
 		  <option value="">-</option>
 		  <option value="banco">Banco</option>
 		  <option value="cgp">CGP</option>

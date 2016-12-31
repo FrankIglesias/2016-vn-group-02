@@ -94,12 +94,12 @@ public class MainController {
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
-	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
+	public ModelAndView filtrarNombreTipoPoisParam(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 
 		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = request.queryParams("nombreFiltro");
-		String tipoFiltro = request.queryParams("tipoFiltro");
+		String nombreFiltro = request.params(":nombre");
+		String tipoFiltro = request.params(":tipo");
 
 		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 		viewModel.put("listadoPOIs", pois);
@@ -110,7 +110,28 @@ public class MainController {
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "admin_pois.hbs");
 	}
+	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
+		System.out.println("FiltrarNombrePois");
 
+		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombreFiltro = "";
+		String tipoFiltro = "";
+
+		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+		viewModel.put("listadoPOIs", pois);
+
+		List<String> coordenadas = new ArrayList<String>();
+		pois.forEach(unPoi -> coordenadas
+				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
+		viewModel.put("latitudes", coordenadas);
+		return new ModelAndView(viewModel, "admin_pois.hbs");
+	}
+	public ModelAndView ylaconchatuya(Request request, Response response) {
+		String nombreFiltro = request.params(":nombre");
+		String tipoFiltro = request.params(":tipo");
+		System.out.println(nombreFiltro + tipoFiltro);
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
 	public ModelAndView busquedaUsuario(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");
 		System.out.println("busquedaUsuario" + nombreUsuario);
