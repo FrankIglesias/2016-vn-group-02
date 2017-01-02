@@ -40,7 +40,6 @@ public class RepoTerminales implements WithGlobalEntityManager {
 		transaccion.begin();
 		entityManager.persist(terminal);
 		transaccion.commit();
-		PerThreadEntityManagers.getEntityManager().persist(terminal);
 	}
 		
 	public List<Terminal> obtenerTerminales(String nombre, int comuna) {
@@ -62,7 +61,10 @@ public class RepoTerminales implements WithGlobalEntityManager {
 	}
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.begin();
 		entityManager().remove(unaTerminal);
+		transaccion.commit();
 	}
 
 	public void add(Terminal terminal) {

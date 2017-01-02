@@ -12,6 +12,8 @@ import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 import AsignarAccionesUsuario.CriterioTodosUsuarios;
 import Controllers.ControllerRepoTerminales;
 import Repositorios.RepoPOIs;
+import Repositorios.RepoTerminales;
+import Repositorios.Terminal;
 import TypePois.Banco;
 import TypePois.CGP;
 import TypePois.Colectivo;
@@ -23,10 +25,13 @@ public class CargaDePrueba {
 	List<POI> poisAPersistir;
 	ControllerRepoTerminales repoTerminales;
 	AsignarAccionesUsuarios lapoli;
+	RepoTerminales repoPosta;
+	
 	@Before
 	public void init() {
 		repoPois = RepoPOIs.getInstance();
 		repoTerminales =  ControllerRepoTerminales.getInstance();
+		repoPosta = RepoTerminales.getInstance();
 		poisAPersistir = new ArrayList<POI>();
 		Banco unBanco = GlobalTestVariables.crearUnBanco(GlobalTestVariables.crearFeriadoAbierto());
 		unBanco.setUltimaFechaBusqueda(LocalDateTime.now().minusDays(10));
@@ -57,8 +62,11 @@ public class CargaDePrueba {
 		cargarUnaAccionAUnaTerminal();
 	}
 	
+	
 	public void	cargarLaTerminalUsuario() {
-		repoTerminales.agregarUnaTerminal("usuario", 10);
+		repoTerminales.agregarUnaTerminal("fafita3", 10);
+		Terminal unaTermi = repoPosta.buscameUnaTerminal("fafita3");
+		repoTerminales.eliminarUnaTerminal(unaTermi);
 	}
 	
 	public void cargarUnaAccionAUnaTerminal() {
