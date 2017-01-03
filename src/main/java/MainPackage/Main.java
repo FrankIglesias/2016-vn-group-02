@@ -35,13 +35,13 @@ public class Main {
 		Spark.get("/nuevo_poi", home::agregarPoi, engine);
 		Spark.delete("/borrar_terminal", home::borrarTerminal);
 		Runtime rt = Runtime.getRuntime();
-		try {
+		/*try {
 			rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"
 					+ puerto.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
 
 	}
 }
