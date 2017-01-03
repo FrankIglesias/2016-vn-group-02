@@ -25,3 +25,10 @@ function initMap() {
 function goBack() {
 	window.history.back();
 };
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
