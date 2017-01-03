@@ -1,17 +1,4 @@
-<!doctype html>
-<html>
-<head>
-<link href= "frank.css" rel="stylesheet" type= "text/css">
- <script src="Frank.js"></script>
- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<meta charset="utf-8">
-
-<title>Administrador de terminales</title>
-</head>
-<header class="header"><br><br>
-<p id="h1"> Administrador de terminales</p>
-</header>
-<body>
+{{#partial "contenido"}}
 <a href="/editar_terminal">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<t class="login_text" style="color:#454545;"><strong>Agregar terminal</strong></t>
@@ -59,6 +46,6 @@
   </tbody>
 </table>
 	</center>
-
-</body>
-</html>
+  {{/partial}}
+{{#partial "titulo"}} Administrar Terminales{{/partial}}
+{{> layoutAdmin.hbs}}
