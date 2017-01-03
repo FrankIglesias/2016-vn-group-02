@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
+import Controllers.ControllerRepoBusquedas;
 import Controllers.ControllerRepoPoi;
 import Controllers.ControllerRepoTerminales;
 import Repositorios.Buscador;
+import Repositorios.Busqueda;
 import Repositorios.RepoPOIs;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
@@ -109,12 +109,20 @@ public class MainController implements WithGlobalEntityManager,TransactionalOps 
 		System.out.println("Mostrar Consultas");
 		return new ModelAndView(null, "admin_consultas.hbs");
 	}
+	
+	public ModelAndView buscarBusquedas(Request request, Response response) {
+		System.out.println("Buscando busquedas");
+		List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(request.queryParams("nombre"), request.queryParams("desde"), request.queryParams("hasta"), request.queryParams("cantidad"));
+		HashMap<String, Object> viewModel = new HashMap<>();
+		viewModel.put("consultas", busquedas);
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
 
 	public ModelAndView mostrarPois(Request request, Response response) {
 		System.out.println("Ver pois sin listado");
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-
+	
 	public ModelAndView filtrarNombreTipoPoisParam(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 

@@ -21,25 +21,28 @@
 		<t> <strong>Cantidad de POIs obtenidos</strong></t>
 		<input type="number" style="margin-left: 10px;margin-right: 10px;" min="0" step="1">
 		</div></center>
-<table width="90%" border="0" style="margin-left:70px; ">
-  <tbody >
-		<tr>
-		  <td><p class="historial_tabla" style=" height:25px; width:150px;"> B&uacutesqueda</p></td>
-		  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Terminal</p></td>
-		  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Fecha</p></td>
-		  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Cantidad de POIs</p></td>
-		</tr>
-		<tr>
-		{{#consultas}}
-		<td><p class=" historial_tabla_textos"> {{id}}</p></td>
-		<td><p class=" historial_tabla_textos"> {{terminal.id}}</p></td>
-		<td> <p class=" historial_tabla_textos">{{fecha}}</p></td>
-		<td><p class=" historial_tabla_textos">{{}}	</p></td>
-		<td><center><img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></center>
-	</td>
-	{{/consultas}}
-		</tr>
-	  </tbody>
-	</table>
+
+		<table width="90%" border="0" style="margin-left:70px; ">
+		  <tbody>
+				<tr>
+				  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Busqueda</p></td>
+				  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Terminal</p></td>
+				  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Fecha</p></td>
+				  <td><p class="historial_tabla" style=" height:25px; width:150px;"> Cantidad de POIs</p></td>
+				</tr>
+				<tr>
+				{{#consultas}}
+				<td><p class=" historial_tabla_textos"> {{id}}</p></td>
+				<td><p class=" historial_tabla_textos"> {{terminal.id}}</p></td>
+				<td> <p class=" historial_tabla_textos">{{fecha}}</p></td>
+				<td><p class=" historial_tabla_textos"> {{getCantidadDePoisObtenidos}}	</p></td>
+				<td><center><img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></center>
+			</td>
+			{{/consultas}}
+				</tr>
+			  </tbody>
+			</table>
+
+
 	</body>
 	</html>
