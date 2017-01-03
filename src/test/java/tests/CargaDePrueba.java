@@ -53,7 +53,7 @@ public class CargaDePrueba {
 		lapoli.setCriterio(todos);
 	}
 	
-	@Test
+	
 	public void cargarTodoEnMongo() {
 		repoPois.limpiarMongo();
 		poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnMongo(unPoi));
@@ -62,10 +62,11 @@ public class CargaDePrueba {
 		cargarUnaAccionAUnaTerminal();
 	}
 	
-	
+	@Test
 	public void	cargarLaTerminalUsuario() {
-		repoTerminales.agregarUnaTerminal("fafita3", 10);
+		//repoTerminales.agregarUnaTerminal("fafita3", 10);
 		Terminal unaTermi = repoPosta.buscameUnaTerminal("fafita3");
+	
 		repoTerminales.eliminarUnaTerminal(unaTermi);
 	}
 	

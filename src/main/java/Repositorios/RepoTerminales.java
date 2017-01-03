@@ -11,11 +11,12 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 
-public class RepoTerminales implements WithGlobalEntityManager {
+public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps{
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
@@ -61,10 +62,8 @@ public class RepoTerminales implements WithGlobalEntityManager {
 	}
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
-		EntityTransaction transaccion = entityManager.getTransaction();
-		transaccion.begin();
 		entityManager().remove(unaTerminal);
-		transaccion.commit();
+		entityManager().flush();
 	}
 
 	public void add(Terminal terminal) {
