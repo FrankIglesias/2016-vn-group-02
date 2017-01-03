@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import Controllers.ControllerRepoPoi;
 import Controllers.ControllerRepoTerminales;
 import Repositorios.Buscador;
@@ -15,13 +20,21 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MainController {
+public class MainController implements WithGlobalEntityManager,TransactionalOps {
 	private String nombreUsuario;
-	public ModelAndView borrarTerminal(Request request, Response response) {
-		System.out.println("Se quiso borrar terminal nombre: "+ request.queryParams("nombre"));
-		//ControllerRepoTerminales.getInstance().eliminarUnaTerminal(new Terminal(request.queryParams("nombre"),1));
-		return new ModelAndView(null, "admin_terminales.hbs");
+
+	public Void borrarTerminal(Request request, Response response) {
+		System.out.println("Se quiso borrar terminal nombre: " + request.queryParams("nombre"));
+		withTransaction(() ->{
+		Terminal terminalABorrar = RepoTerminales.getInstance().buscameUnaTerminal(request.queryParams("nombre"));
+		System.out.println("Terminal encontrada");
+		ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
+		});
+		System.out.println("La puta que te pario");
+		response.redirect("/admin_terminales");
+		return null;
 	}
+
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "home.hbs");
@@ -41,7 +54,11 @@ public class MainController {
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
+		
 		List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales("", -1);
+		if (!terminales.isEmpty()) {
+			System.out.println("*************************************************************************");
+		}
 		viewModel.put("terminales", terminales);
 		return new ModelAndView(viewModel, "admin_terminales.hbs");
 	}
@@ -57,7 +74,6 @@ public class MainController {
 
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
-		String barrio = request.queryParams("nombre");
 		return new ModelAndView(null, "admin_acciones.hbs");
 	}
 
@@ -73,14 +89,14 @@ public class MainController {
 
 	public ModelAndView mostrarUser(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");
-		
+
 		System.out.println("Mostrar Usuario " + nombreUsuario);
 		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario).equals(null)) {
 			String barrio = request.queryParams("rrioba");
 			HashMap<String, Integer> comunas = ControllerRepoPoi.getInstance().cargarComunas();
 			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, comunas.get(barrio));
 		}
-		
+
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -115,6 +131,7 @@ public class MainController {
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "admin_pois.hbs");
 	}
+
 	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 
@@ -131,12 +148,14 @@ public class MainController {
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "admin_pois.hbs");
 	}
+
 	public ModelAndView ylaconchatuya(Request request, Response response) {
 		String nombreFiltro = request.params(":nombre");
 		String tipoFiltro = request.params(":tipo");
 		System.out.println(nombreFiltro + tipoFiltro);
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
+
 	public ModelAndView busquedaUsuario(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");
 		System.out.println("busquedaUsuario" + nombreUsuario);
@@ -157,7 +176,8 @@ public class MainController {
 		System.out.println("busquedaUsuario");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
-		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario));
+		List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro,
+				RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario));
 		viewModel.put("listadoPOIs", pois);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
@@ -170,5 +190,4 @@ public class MainController {
 		viewModel.put("poi", pois);
 		return new ModelAndView(viewModel, "editar_poi.hbs");
 	}
-
 }
