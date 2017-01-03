@@ -75,7 +75,7 @@ public class Busqueda {
 		return (fecha.isAfter(antes) && fecha.isBefore(despues));
 	}
 
-	public int cantidadDePoisObtenidos() {
+	public int getCantidadDePoisObtenidos() {
 		return puntosObtenidos.size();
 	}
 	

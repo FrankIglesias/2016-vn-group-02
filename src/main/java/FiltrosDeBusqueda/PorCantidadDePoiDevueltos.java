@@ -15,7 +15,7 @@ public class PorCantidadDePoiDevueltos implements Filtro {
 	
 	@Override
 	public List<Busqueda> aplicarFiltro(List<Busqueda> listaDeBusquedas) {
-		return listaDeBusquedas.stream().filter(unaBusqueda -> unaBusqueda.cantidadDePoisObtenidos() >= cantidadParametro).collect(Collectors.toList());
+		return listaDeBusquedas.stream().filter(unaBusqueda -> unaBusqueda.getCantidadDePoisObtenidos() >= cantidadParametro).collect(Collectors.toList());
 	}
 
 }
