@@ -1,21 +1,31 @@
 {{#partial "contenido"}}
-<a href="/editar_terminal">
-		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
-		<t class="login_text" style="color:#454545;"><strong>Agregar terminal</strong></t>
-<form action="buscar_terminales">		
-<p class="login_text" style="color:#454545;"><center><t><strong>Ingrese nombre de terminal:</strong></t>
-<input type="text" style="border-radius:5px;
-	width:177px; height:20px; margin-right: 10px; margin-left:10px" name="nombre">
-<t><strong> Ingrese numero de comuna:  </strong></t>
-<input type="number" min ="1" style= "margin-right:10px " name="comuna" value ="0"> 
-<input type="submit" class="btn_Detalles" value="Buscar"></center></p>
-</form>
-<center><table width="700" border="0" style="">
+
+
+<center><table width="700" border="0" style="margin-top:200px">
   <tbody >
-    <tr>
-	      <td><p class="historial_tabla" style=" height:25px; width:150px;"> Terminal</p></td>
-      <td><p class="historial_tabla" style=" height:25px; width:150px;"> Posicion</p></td>
-      <td><p class="historial_tabla" style=" height:25px; width:150px;"> Comuna</p></td>
+  <form action="buscar_terminales">
+  <tr>
+<td style="text-align:right">
+<t class="login_text" style= "margin-bottom:30px;font-size:16px; margin-right:45px"><strong>Ingrese terminal:</strong></t></td>
+<td><input type="text" style="border-radius:5px;
+	width:177px; height:20px; margin-right: 10px; margin-left:10px" name="nombre"></td>
+	<td rowspan="2"><input type="submit" class="btn_Detalles"	 value="Buscar"></td>
+</tr>
+<tr>
+<td style="text-align:right; margin-top:50px"><t class="login_text" style="font-size:16px;margin-top:10px; margin-right:50px"><strong>Ingrese  comuna:</strong></t></td>
+<td><input type="number" min ="1" style= "border-radius:5px;height:20px;margin-left:10px;width:177px; " name="comuna" value ="0"></td>
+</tr>
+</form>
+  <tr>
+  <td></td>
+<td ><a href="/editar_terminal" style="text-decoration: none; margin-bottom:1000000px">
+		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px;"/><t class="login_text" style="color:#454545;"><strong>Agregar terminal</strong></t></a></td>
+		<td></td>  
+  </tr> 
+    <tr >
+	      <td style="padding-top: 40px;"><p class="historial_tabla" style=" height:40px; width:150px;"><t> Terminal</t></p></td>
+      <td style="padding-top: 40px;"><p class="historial_tabla" style=" height:40px; width:150px;"> Posicion</p></td>
+      <td style="padding-top: 40px;"><p class="historial_tabla" style=" height:40px; width:150px;"> Comuna</p></td>
     </tr>
     {{#terminales}}
     <tr>
