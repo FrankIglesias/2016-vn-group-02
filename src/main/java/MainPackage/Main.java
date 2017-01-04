@@ -2,12 +2,13 @@ package MainPackage;
 
 import java.io.IOException;
 
+import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static  void main(String[] args) {
 		Integer puerto = 10024;
 		Spark.port(puerto);
 
@@ -34,14 +35,18 @@ public class Main {
 		Spark.delete("/borrar_poi", home::borrarPoi);
 		Spark.get("/nuevo_poi", home::agregarPoi, engine);
 		Spark.delete("/borrar_terminal", home::borrarTerminal);
+		Spark.get("*", (request, response) -> {
+            System.out.println("404 not found!!");
+            return new ModelAndView(null,"notFound.hbs");
+            }, engine);
 		Runtime rt = Runtime.getRuntime();
-		/*try {
+	    
+		try {
 			rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"
 					+ puerto.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} */
-
+		} 
 	}
 }
