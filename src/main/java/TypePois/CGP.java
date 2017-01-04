@@ -15,7 +15,7 @@ public class CGP extends POI {
 	
 	
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="idPoi")
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 

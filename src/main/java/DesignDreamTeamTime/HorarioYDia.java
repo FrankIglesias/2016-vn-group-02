@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import HashMapeameEsta.HashMapeameEsta;
 
 @Entity
@@ -19,7 +22,8 @@ public class HorarioYDia {
 	@GeneratedValue
 	private int id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	 @OnDelete(action = OnDeleteAction.CASCADE)
 	private HashMapeameEsta agenda = new HashMapeameEsta();
 	public HorarioYDia() {
 		super();

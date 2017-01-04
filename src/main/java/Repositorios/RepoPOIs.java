@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.bson.types.ObjectId;
 import org.json.JSONObject;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +34,7 @@ import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
 
-public class RepoPOIs implements WithGlobalEntityManager {
+public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps  {
 
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
@@ -56,8 +59,7 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public POI obtenerDeHibernateSegunId(String idPoi) {
-		return entityManager().createQuery("from POI p WHERE idPoi = :id", POI.class).setParameter("id", idPoi)
-				.getResultList().get(0);
+		return entityManager().find(POI.class, Integer.parseInt(idPoi));
 	}
 
 	public String mappearUnPoi(POI unPoi) throws JsonProcessingException {
@@ -78,7 +80,6 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void persistirEnMongo(POI unPOI) {
-
 		DBCollection collection = conexionAMongo();
 		DBObject doc = new BasicDBObject();
 		try {
@@ -157,7 +158,15 @@ public class RepoPOIs implements WithGlobalEntityManager {
 	}
 
 	public void borrarDeHibernate(POI unPoi) {
-		entityManager.remove(unPoi);
+		
+		System.out.println("JUANI PUTO 1" );
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		  EntityTransaction transaccion = entityManager.getTransaction();
+		  transaccion.begin();
+		  entityManager.remove(unPoi);
+		  entityManager.clear();
+		  transaccion.commit();
+		System.out.println("JUANI PUTO 2" );
 	}
 
 	public boolean noSeConsultoEn7Dias(POI unPoi) {

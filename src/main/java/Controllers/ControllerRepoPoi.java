@@ -5,64 +5,67 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import Repositorios.RepoPOIs;
 import TypePois.POI;
 
-public class ControllerRepoPoi {
-	
-	
+public class ControllerRepoPoi implements WithGlobalEntityManager, TransactionalOps {
+
 	private static ControllerRepoPoi instancia;
 	RepoPOIs modeloPOI = RepoPOIs.getInstance();
-	
+
 	public static ControllerRepoPoi getInstance() {
 		if (instancia == null) {
-			instancia = new ControllerRepoPoi ();
+			instancia = new ControllerRepoPoi();
 		}
 		return instancia;
 	}
-	
 
 	public List<POI> listarPOIsParaAdmin(String nombre, String tipo) {
 
 		List<POI> listadoDePOIs = new ArrayList<POI>();
-		
-		if(!tipo.isEmpty()) {
+
+		if (!tipo.isEmpty()) {
 			listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(tipo));
 		}
-		if(!nombre.isEmpty()) {
+		if (!nombre.isEmpty()) {
 			String[] linea = nombre.split(" ");
 			ArrayList<String> palabras = new ArrayList<String>(Arrays.asList(linea));
-			palabras.forEach(palabrita -> listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(palabrita)));
+			palabras.forEach(
+					palabrita -> listadoDePOIs.addAll(modeloPOI.obtenerDeHibernateSegunPalabrasClave(palabrita)));
 		}
-		
-		if(nombre.isEmpty() && tipo.isEmpty()) {
+
+		if (nombre.isEmpty() && tipo.isEmpty()) {
 			listadoDePOIs.addAll(modeloPOI.levantarTodoDeHibernate());
 		}
-		
+
 		return listadoDePOIs;
 	}
-	
-	public void editarUnPOI(POI unPoi, String nombre, String callePrincipal, String entreCalles, String altura, String piso, String unidad,
-		String codigoPostal,int comuna, String unaCiudad, String unaProvincia, String unPais, double latitud, double longitud) 
-	{
-		
+
+	public void editarUnPOI(POI unPoi, String nombre, String callePrincipal, String entreCalles, String altura,
+			String piso, String unidad, String codigoPostal, int comuna, String unaCiudad, String unaProvincia,
+			String unPais, double latitud, double longitud) {
+
 		Domicilio unDomi = new Domicilio(callePrincipal, entreCalles, altura, piso, unidad, codigoPostal, comuna);
 		Localidad unaLoca = new Localidad(unaCiudad, unaProvincia, unPais);
 		Geolocalizacion unaGeo = new Geolocalizacion(latitud, longitud, unDomi, unaLoca);
 		modeloPOI.modificarUnPoi(unPoi, nombre, unaGeo);
-		
-	}
-	
-	public void borrarUnPOIporId(String id) 
-		{
-			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
-			modeloPOI.borrarDeMongo(poiABorrar);
-			modeloPOI.borrarDeHibernate(poiABorrar);	
-		}
 
+	}
+
+	public void borrarUnPOIporId(String id) {
+			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
+			System.out.println(poiABorrar.getId());
+			//modeloPOI.borrarDeMongo(poiABorrar);
+			System.out.println("JUANI PUTO 3" );
+			modeloPOI.borrarDeHibernate(poiABorrar);
+			System.out.println("JUANI PUTO" );
+	}
 
 	public HashMap<String, Integer> cargarComunas() {
 		HashMap<String, Integer> comunas = new HashMap<String, Integer>();
@@ -76,7 +79,7 @@ public class ControllerRepoPoi {
 		comunas.put("Chacarita", 15);
 		comunas.put("Coghlan", 12);
 		comunas.put("Colegiales", 13);
-		
+
 		comunas.put("Constitución", 1);
 		comunas.put("Flores", 7);
 		comunas.put("Floresta", 10);
@@ -88,7 +91,7 @@ public class ControllerRepoPoi {
 		comunas.put("Monserrat", 1);
 		comunas.put("Nueva Pompeya", 4);
 		comunas.put("Núñez", 13);
-		
+
 		comunas.put("Palermo", 14);
 		comunas.put("Parque Avellaneda", 9);
 		comunas.put("Parque Chacabuco", 7);
@@ -99,7 +102,7 @@ public class ControllerRepoPoi {
 		comunas.put("Retiro", 1);
 		comunas.put("Saavedra", 12);
 		comunas.put("San Cristobal", 3);
-		
+
 		comunas.put("San Nicolas", 1);
 		comunas.put("San Telmo", 1);
 		comunas.put("Vélez Sársfield", 10);
@@ -110,7 +113,7 @@ public class ControllerRepoPoi {
 		comunas.put("Villa General Mitre", 11);
 		comunas.put("Villa Lugano", 8);
 		comunas.put("Villa Luro", 10);
-		
+
 		comunas.put("Villa Ortúzar", 15);
 		comunas.put("Villa Pueyrredón", 12);
 		comunas.put("Villa Real", 10);
@@ -118,9 +121,9 @@ public class ControllerRepoPoi {
 		comunas.put("Villa Santa Rita", 11);
 		comunas.put("Villa Soldati", 8);
 		comunas.put("Villa Urquiza", 12);
-		
+
 		return comunas;
-		
+
 	}
 
 }

@@ -1,9 +1,16 @@
 package TypePois;
 
 import java.util.ArrayList;
-
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
@@ -14,7 +21,8 @@ import DesignDreamTeamTime.HorarioYDia;
 @Table(name = "Locales")
 public class Local extends POI {
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "idRubro")
 	private Rubro rubro;
 

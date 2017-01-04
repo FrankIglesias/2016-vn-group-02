@@ -27,13 +27,13 @@ public class Servicio {
 	private int id;
 	
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
 	private HorarioYDia horario;
 	
 	
 	private String nombreDelServicio;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="idServicio")
 	protected List<Feriado> feriados;
 

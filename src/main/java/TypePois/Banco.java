@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
@@ -17,7 +19,7 @@ import DesignDreamTeamTime.IntervaloHorario;
 @Entity
 public class Banco extends POI {
 		
-	//@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private static HorarioYDia horarioBancario = new HorarioYDia();
 
 	public Banco()

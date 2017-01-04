@@ -20,15 +20,15 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MainController implements WithGlobalEntityManager,TransactionalOps {
+public class MainController implements WithGlobalEntityManager, TransactionalOps {
 	private String nombreUsuario;
 
 	public Void borrarTerminal(Request request, Response response) {
 		System.out.println("Se quiso borrar terminal nombre: " + request.queryParams("nombre"));
-		withTransaction(() ->{
-		Terminal terminalABorrar = RepoTerminales.getInstance().buscameUnaTerminal(request.queryParams("nombre"));
-		System.out.println("Terminal encontrada");
-		ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
+		withTransaction(() -> {
+			Terminal terminalABorrar = RepoTerminales.getInstance().buscameUnaTerminal(request.queryParams("nombre"));
+			System.out.println("Terminal encontrada");
+			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
 		});
 		System.out.println("La puta que te pario");
 		response.redirect("/admin_terminales");
@@ -45,20 +45,18 @@ public class MainController implements WithGlobalEntityManager,TransactionalOps 
 		return new ModelAndView(null, "agregar_poi.hbs");
 	}
 
-	public ModelAndView borrarPoi(Request request, Response response) {
+	public Void borrarPoi(Request request, Response response) {
 		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
-		ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
-		return new ModelAndView(null, "admin_pois.hbs");
+			ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
+		
+		return null;
 	}
 
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
-		
+
 		List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales("", -1);
-		if (!terminales.isEmpty()) {
-			System.out.println("*************************************************************************");
-		}
 		viewModel.put("terminales", terminales);
 		return new ModelAndView(viewModel, "admin_terminales.hbs");
 	}
@@ -109,10 +107,11 @@ public class MainController implements WithGlobalEntityManager,TransactionalOps 
 		System.out.println("Mostrar Consultas");
 		return new ModelAndView(null, "admin_consultas.hbs");
 	}
-	
+
 	public ModelAndView buscarBusquedas(Request request, Response response) {
 		System.out.println("Buscando busquedas");
-		List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(request.queryParams("nombre"), request.queryParams("desde"), request.queryParams("hasta"), request.queryParams("cantidad"));
+		List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(request.queryParams("nombre"),
+				request.queryParams("desde"), request.queryParams("hasta"), request.queryParams("cantidad"));
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("consultas", busquedas);
 		return new ModelAndView(null, "admin_pois.hbs");
@@ -122,30 +121,13 @@ public class MainController implements WithGlobalEntityManager,TransactionalOps 
 		System.out.println("Ver pois sin listado");
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-	
-	public ModelAndView filtrarNombreTipoPoisParam(Request request, Response response) {
-		System.out.println("FiltrarNombrePois");
-
-		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = request.params(":nombre");
-		String tipoFiltro = request.params(":tipo");
-
-		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-		viewModel.put("listadoPOIs", pois);
-
-		List<String> coordenadas = new ArrayList<String>();
-		pois.forEach(unPoi -> coordenadas
-				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
-		viewModel.put("latitudes", coordenadas);
-		return new ModelAndView(viewModel, "admin_pois.hbs");
-	}
 
 	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
 
 		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = "";
-		String tipoFiltro = "";
+		String nombreFiltro = request.queryParams("nombreFiltro");
+		String tipoFiltro = request.queryParams("tipoFiltro");
 
 		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 		viewModel.put("listadoPOIs", pois);
@@ -155,13 +137,6 @@ public class MainController implements WithGlobalEntityManager,TransactionalOps 
 				.add("{lat:" + unPoi.getPoint().getLatitud() + ", lng:" + unPoi.getPoint().getLongitud() + "}"));
 		viewModel.put("latitudes", coordenadas);
 		return new ModelAndView(viewModel, "admin_pois.hbs");
-	}
-
-	public ModelAndView ylaconchatuya(Request request, Response response) {
-		String nombreFiltro = request.params(":nombre");
-		String tipoFiltro = request.params(":tipo");
-		System.out.println(nombreFiltro + tipoFiltro);
-		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
 	public ModelAndView busquedaUsuario(Request request, Response response) {

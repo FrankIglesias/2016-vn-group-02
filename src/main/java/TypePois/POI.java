@@ -11,7 +11,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamTime.Feriado;
@@ -36,7 +38,7 @@ public abstract class POI {
 	@GeneratedValue
 	private int id;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "geolocalizacion")
 	private Geolocalizacion point;
 
@@ -47,13 +49,13 @@ public abstract class POI {
 	@CollectionTable(name = "palabrasClaves")
 	public List<String> palabrasClave = new ArrayList<String>();
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	protected HorarioYDia horario = new HorarioYDia();
 	
 	@Transient
 	public String idMongo = ""; 
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Feriado> feriados = new ArrayList<Feriado>();
 	
 	@Transient

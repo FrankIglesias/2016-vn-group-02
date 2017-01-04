@@ -22,7 +22,7 @@ public class Feriado {
 	protected int mes;
 	protected int dia;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	protected IntervaloHorario intervaloFeriado;
 
 	public Feriado(int unMes, int unDia, IntervaloHorario unIntervalo) {

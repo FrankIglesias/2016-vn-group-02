@@ -10,11 +10,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import DesignDreamTeamTime.GestorIntervalos;
 
@@ -25,7 +27,7 @@ public class HashMapeameEsta {
 	@GeneratedValue
 	int id;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	List <Entry> listaDeElementos = new ArrayList<Entry>();
 	     
 	        public void put(DayOfWeek newKey, GestorIntervalos data){

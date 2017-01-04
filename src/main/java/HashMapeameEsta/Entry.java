@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import DesignDreamTeamTime.GestorIntervalos;
 
 @Entity
@@ -19,7 +22,7 @@ class Entry {
 	
 		//@Convert(converter=DayOfWeek.class)
 	         DayOfWeek aKey;
-	         @OneToOne(cascade = CascadeType.ALL)
+	         @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	         GestorIntervalos value;
 	         
 	         
