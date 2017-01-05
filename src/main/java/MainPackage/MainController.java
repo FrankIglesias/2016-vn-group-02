@@ -21,6 +21,7 @@ import spark.Response;
 
 public class MainController implements WithGlobalEntityManager, TransactionalOps {
 	private String nombreUsuario;
+	private Terminal terminal;
 
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
@@ -115,7 +116,8 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		nombreUsuario = request.queryParams("nombreFiltro");
 		String local = request.queryParams("localizacion");
 		System.out.println(local);
-		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario) == null) {
+		terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
+		if (terminal == null) {
 			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
 		}
 		return new ModelAndView(null, "usuario.hbs");
@@ -174,7 +176,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro,
-				RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario));
+				terminal);
 		viewModel.put("listadoPOIs", pois);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
@@ -184,7 +186,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		try {
-			List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, new Terminal(nombreUsuario, 1));
+			List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, terminal);
 			viewModel.put("listadoPOIs", pois);
 		} catch (Exception e) {
 			e.printStackTrace();
