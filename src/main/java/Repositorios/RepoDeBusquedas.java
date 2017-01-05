@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityTransaction;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -30,7 +32,12 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 	}
 
 	public void persistirBusqueda(Busqueda unObjeto) {
+		EntityTransaction transaccion = entityManager().getTransaction();
+	//	transaccion.rollback();
+		transaccion.begin();
 		entityManager().persist(unObjeto);
+		transaccion.commit();
+		
 
 	}
 

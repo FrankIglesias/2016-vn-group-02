@@ -34,7 +34,7 @@ import TypePois.CGP;
 import TypePois.Local;
 import TypePois.POI;
 
-public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps  {
+public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps {
 
 	List<POI> puntosDeIntereses;
 	static RepoPOIs instancia;
@@ -121,14 +121,15 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 		String id = json.get("_id").toString();
 
 		POI poiAGuardar = null;
-		
+
 		try {
-			poiAGuardar = (POI) gson.fromJson(json.toString(), Class.forName(json.get("Tipo").toString().split(" ")[1]));
+			poiAGuardar = (POI) gson.fromJson(json.toString(),
+					Class.forName(json.get("Tipo").toString().split(" ")[1]));
 		} catch (JsonSyntaxException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		poiAGuardar.ultimaFechaBusqueda = LocalDateTime.of(
 				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("year"),
 				new JSONObject(json.get("ultimaFechaBusqueda").toString()).getInt("monthValue"),
@@ -149,8 +150,15 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 	}
 
 	public void borrarDeMongo(POI unPoi) {
-		conexionAMongo().remove(new BasicDBObject("_id", new ObjectId(unPoi.idMongo)));
-		;
+
+		DBObject doc = new BasicDBObject();
+		try {
+			doc = (DBObject) JSON.parse(mappearUnPoi(unPoi));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		doc.put("Tipo", unPoi.getClass().toString());
+		conexionAMongo().remove(doc);
 	}
 
 	public void limpiarMongo() {
@@ -158,15 +166,9 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 	}
 
 	public void borrarDeHibernate(POI unPoi) {
-		
-		System.out.println("JUANI PUTO 1" );
-		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		  EntityTransaction transaccion = entityManager.getTransaction();
-		  transaccion.begin();
-		  entityManager.remove(unPoi);
-		  entityManager.clear();
-		  transaccion.commit();
-		System.out.println("JUANI PUTO 2" );
+		withTransaction(() -> {
+			entityManager.remove(unPoi);
+		});
 	}
 
 	public boolean noSeConsultoEn7Dias(POI unPoi) {

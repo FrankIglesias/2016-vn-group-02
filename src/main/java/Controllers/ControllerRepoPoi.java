@@ -60,11 +60,9 @@ public class ControllerRepoPoi implements WithGlobalEntityManager, Transactional
 
 	public void borrarUnPOIporId(String id) {
 			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
-			System.out.println(poiABorrar.getId());
-			//modeloPOI.borrarDeMongo(poiABorrar);
-			System.out.println("JUANI PUTO 3" );
+			modeloPOI.borrarDeMongo(poiABorrar);
 			modeloPOI.borrarDeHibernate(poiABorrar);
-			System.out.println("JUANI PUTO" );
+			
 	}
 
 	public HashMap<String, Integer> cargarComunas() {

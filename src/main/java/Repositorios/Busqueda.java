@@ -3,6 +3,7 @@ package Repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
@@ -23,12 +23,12 @@ public class Busqueda {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
-	@OneToMany
+
+	@OneToMany(cascade = CascadeType.ALL)
 	List<POI> puntosObtenidos;
 	@Convert(converter = LocalDateTimeConverter.class)
 	LocalDateTime fecha;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	Terminal terminal;
 	String frase;
 	double tiempo;
@@ -51,11 +51,11 @@ public class Busqueda {
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public LocalDateTime getFecha() {
 		return fecha;
 	}
-	
+
 	public Terminal getTerminal() {
 		return terminal;
 	}
@@ -66,17 +66,23 @@ public class Busqueda {
 
 	public void analizaElTiempoDeBusqueda() {
 		if (tiempo >= tiempoMax) {
-			terminal.enviarMailAlAdmin("El tiempo de busqueda se ha excedido en " + (tiempo - tiempoMax) , fecha, terminal.getNombre());
+			System.out.println(terminal.getNombre() + " " + tiempo + " " + tiempoMax + " " + fecha);
+			terminal.enviarMailAlAdmin("El tiempo de busqueda se ha excedido en " + (tiempo - tiempoMax), fecha,
+					terminal.getNombre());
 		}
 
 	}
-	
+
 	public boolean estaEntreDosFechas(LocalDateTime antes, LocalDateTime despues) {
 		return (fecha.isAfter(antes) && fecha.isBefore(despues));
+	}
+
+	public List<POI> getPuntosBuscados() {
+		return puntosObtenidos;
 	}
 
 	public int getCantidadDePoisObtenidos() {
 		return puntosObtenidos.size();
 	}
-	
+
 }

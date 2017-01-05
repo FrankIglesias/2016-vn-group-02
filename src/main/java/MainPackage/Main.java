@@ -26,8 +26,9 @@ public class Main {
 		Spark.get("/admin_acciones", home::mostrarAdminAcciones, engine);
 		Spark.get("/admin_pois", home::mostrarPois, engine);
 		Spark.get("/admin_consultas", home::mostrarConsultas, engine);
-		Spark.get("/buscar_consultas/:nombre/:desde/:hasta/:cantidad", home::buscarBusquedas, engine);
-		Spark.get("/buscar_pois", home::filtrarNombreTipoPois, engine);
+		Spark.get("/buscar_consultas", home::buscarBusquedas, engine);
+		Spark.get("/ver_pois_consultas", home::verPoisConsultas, engine);
+		Spark.get("/buscar_pois", home::buscarPoisAdmin, engine);
 		Spark.get("/usuarioBusqueda", home::buscarPois, engine);
 		Spark.get("/ver_mas", home::verMas, engine);
 		Spark.get("/editar_poi", home::editarPoi, engine);

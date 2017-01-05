@@ -61,11 +61,10 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 
 	public Terminal buscameUnaTerminal(String nombreTerminal) {
 		List<Terminal> terminales = entityManager()
-				.createQuery("from Terminal where name_terminal = :nombreTerminal", Terminal.class)
+				.createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class)
 				.setParameter("nombreTerminal", nombreTerminal).getResultList();
 		if (!terminales.isEmpty())
 			return terminales.get(0);
-
 		return null;
 	}
 

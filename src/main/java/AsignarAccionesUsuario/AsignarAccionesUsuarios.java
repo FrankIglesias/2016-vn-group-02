@@ -20,10 +20,10 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 
 	private RepoTerminales repoTerminales;
 	private Accion accion;
-	private Criterio criterio;
+	private Criterio criterio=null;
 	private List<Terminal> terminalesAsignadas = new ArrayList<Terminal>();
 	
-	public static AsignarAccionesUsuarios instancia;
+	public static AsignarAccionesUsuarios instancia =null;
 
 	public AsignarAccionesUsuarios(Criterio criterio, Accion accion) {
 		this.repoTerminales = RepoTerminales.getInstance();
@@ -69,7 +69,7 @@ public class AsignarAccionesUsuarios extends DesignDreamTeamProcess {
 	}
 	
 	public void analizarAccionesParaUnaTerminal(Terminal unTerminal) {
-		if(!criterio.equals(null)) {
+		if(!(criterio == null)) {
 		if(cumpleCriterio(unTerminal)) {
 			unTerminal.ejecutarTodasLasAcciones();
 		}
