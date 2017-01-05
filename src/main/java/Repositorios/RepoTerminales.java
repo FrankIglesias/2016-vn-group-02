@@ -16,12 +16,11 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
 
-public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps{
+public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps {
 	List<Terminal> terminales;
 	Map<String, Integer> reporteBusquedasTotales;
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	static RepoTerminales instancia = null;
-
 
 	public static RepoTerminales getInstance() {
 		if (instancia == null) {
@@ -42,23 +41,32 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 		entityManager.persist(terminal);
 		transaccion.commit();
 	}
-		
+
 	public List<Terminal> obtenerTerminales(String nombre, int comuna) {
 		if (comuna == -1 && nombre == "") {
 			return entityManager().createQuery("from Terminal", Terminal.class).getResultList();
 		} else if (nombre == "") {
 			return entityManager().createQuery("from Terminal WHERE comuna = :comuna", Terminal.class)
 					.setParameter("comuna", comuna).getResultList();
-		} else if (comuna == -1){
-			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class).setParameter("nombreTerminal", nombre).getResultList();
+		} else if (comuna == -1) {
+			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class)
+					.setParameter("nombreTerminal", nombre).getResultList();
 		} else {
-			
-			return entityManager().createQuery("from Terminal where nombre = :nombreTerminal and comuna = :comuna", Terminal.class).setParameter("nombreTerminal", nombre).setParameter("comuna", comuna).getResultList();
+
+			return entityManager()
+					.createQuery("from Terminal where nombre = :nombreTerminal and comuna = :comuna", Terminal.class)
+					.setParameter("nombreTerminal", nombre).setParameter("comuna", comuna).getResultList();
 		}
 	}
-	
+
 	public Terminal buscameUnaTerminal(String nombreTerminal) {
-		return entityManager().createQuery("from Terminal where nombre = :nombreTerminal", Terminal.class).setParameter("nombreTerminal", nombreTerminal).getResultList().get(0);
+		List<Terminal> terminales = entityManager()
+				.createQuery("from Terminal where name_terminal = :nombreTerminal", Terminal.class)
+				.setParameter("nombreTerminal", nombreTerminal).getResultList();
+		if (!terminales.isEmpty())
+			return terminales.get(0);
+
+		return null;
 	}
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {

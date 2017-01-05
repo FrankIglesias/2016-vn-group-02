@@ -3,6 +3,7 @@ package MainPackage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle.Control;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -47,8 +48,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public Void borrarPoi(Request request, Response response) {
 		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
-			ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
-		
+		ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
 		return null;
 	}
 
@@ -82,19 +82,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
+
 		return new ModelAndView(null, "Administrador.hbs");
 	}
 
 	public ModelAndView mostrarUser(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");
-
-		System.out.println("Mostrar Usuario " + nombreUsuario);
-		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario).equals(null)) {
-			String barrio = request.queryParams("rrioba");
-			HashMap<String, Integer> comunas = ControllerRepoPoi.getInstance().cargarComunas();
-			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, comunas.get(barrio));
+		if (RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario) == null) {
+			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
 		}
-
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
@@ -124,11 +120,9 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView filtrarNombreTipoPois(Request request, Response response) {
 		System.out.println("FiltrarNombrePois");
-
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		String tipoFiltro = request.queryParams("tipoFiltro");
-
 		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 		viewModel.put("listadoPOIs", pois);
 

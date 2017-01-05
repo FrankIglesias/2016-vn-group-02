@@ -3,7 +3,7 @@ function fucionValidarUsuario() {
 		alert("Ingrese una contrasena");
 	else {
 		if (document.getElementById('nombreDeUsuario').value == 'admin') {
-			window.location.href = "administrador.hbs";
+			window.location.href = "administrador";
 		} else {
 			window.location.href = "usuario?nombreFiltro="
 					+ document.getElementById('nombreDeUsuario').value;
