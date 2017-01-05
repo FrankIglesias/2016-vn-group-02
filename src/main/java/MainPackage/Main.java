@@ -8,7 +8,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main {
 
-	public static  void main(String[] args) {
+	public static void main(String[] args) {
 		Integer puerto = 10024;
 		Spark.port(puerto);
 

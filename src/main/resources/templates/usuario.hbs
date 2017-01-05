@@ -1,26 +1,18 @@
-<!doctype html>
-<html>
-<head>
-	<link href= "frank.css" rel="stylesheet" type= "text/css">
-	<script src="Frank.js"></script>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-	<meta charset="utf-8">
-	<title> Buscador de POIs</title>
-</head>
 
-<header class="header"><br><br>
-	<p id="h1"> Buscador De Pois</p>
-</header>
+{{#partial "contenido"}}
+<style>
+.hoovereable:hover {
+    background-color:#F5F5F5;
+}
+</style>
 
-<body style="height:100%;width: 100%; ">
-	
 <form method="get" action="/usuarioBusqueda" id="myForm">
 		<p class="login_text" style="color:#454545; margin-right:370px "><center>
 <input type="text" style="border-radius:5px; width: 80%" name="nombreFiltro">
 <input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
 		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></center></p>
 </form>
-	
+
 	<table>
 	 <td >
 	<div style="overflow-y: auto; max-height: 500px">
@@ -28,20 +20,20 @@
 	 <hr>
 	  <div style="margin-bottom: 5px;">
 	  <center>
-	  
+
 	  <table>
 	   <tr>
 	   <td>
 	   <t class="login_text">Nombre:</t><br>
 	   </td>
-	   <td><t class="login_text">{{nombre}}</t></td>	    
+	   <td><t class="login_text">{{nombre}}</t></td>
 	   </tr>
 	   <tr>
 	   <td>
 		<t class="login_text">Direccion:</t><br></td>
 		   <td><t class="login_text">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
-	   </table>	
+	   </table>
 	   <a href="/masDetallePoi?id={{id}}">
 		<img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 		<a href="/editar_poi?id={{id}}">
@@ -51,45 +43,54 @@
 		</div>
 		<hr>
 	{{/listadoPOIs}}
-	  </div>  
+	  </div>
 	   <button type="submit" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
  		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px;" formaction="/ver_mas" form="myForm">Ver mas</button>
 	   </td>
-	<td style="width: 50% ">    
+	<td style="width: 50% ">
 	<div id="map" style="height: 500px; width: 500px;"></div>
 	</td>
 	</table>
 	<script>
-	function myFunction(id) {
-     if(confirm("Desea eliminar el poi")==true)
-		 {
-			 $.ajax({
-    url: '/borrar_poi/'+id,
-    type: 'DELETE',
-    success: function(result) {
-    }
+
+function initMap() {
+
+
+			// Create a map object and specify the DOM element for display.
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: -34.6130556, lng: -58.377222222 },
+				scrollwheel: false,
+				zoom: 12
+			});
+			{{#listadoPOIs}}
+			var contentString{{id}} = '<div id="content">'+
+		'<div id="siteNotice">'+
+		'</div>'+
+		'<h1 id="firstHeading" class="firstHeading" style="font-size:15px">{{nombre}}</h1>'+
+		'</div>';
+
+			var marker{{id}} = new google.maps.Marker({
+				map: map,
+				position: {lat: {{point.latitud}} , lng: {{point.longitud}} }
+			});
+			var infowindow{{id}} = new google.maps.InfoWindow({
+	content: contentString{{id}}
 });
-			 }
-}	
-	function initMap() {
-        
-
-        // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.6130556, lng: -58.377222222 },
-          zoom: 11
-        });        
-        {{#listadoPOIs}}
-        var marker = new google.maps.Marker({
-          map: map,
-          position: {lat: {{point.latitud}} , lng: {{point.longitud}} },
-          tittle: '{{nombre}}'
-        });
-       	{{/listadoPOIs}}
-      }
-
-	</script>
+marker{{id}}.addListener('click', function() {
+	infowindow{{id}}.open(map, marker{{id}});
+});
+	marker{{id}}.addListener('click', function() {
+	infowindow{{id}}.open(map, marker{{id}});
+});
+$('#{{id}}').on('click',function() {
+	 infowindow{{id}}.open(map, marker{{id}});
+});
+			{{/listadoPOIs}}
+		}
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
-			async defer></script>
-</body>
-</html>
+		async defer></script>
+		{{/partial}}
+
+{{#partial "titulo"}}Buscador de POIs{{/partial}}
+{{> layoutUser.hbs }}
