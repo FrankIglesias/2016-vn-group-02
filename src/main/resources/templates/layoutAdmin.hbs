@@ -8,13 +8,13 @@
 $(document).ready(function(){
    $("#mySidenav a").on({
     mouseenter: function(){
-        $(this).css("background-color", "lightgray");
+        $(this).css("background-color", "#888");
     }, 
     mouseleave: function(){
         $(this).css("background-color", "#111");
     }, 
     click: function(){
-        $(this).css("background-color", "yellow");
+        $(this).css("background-color", "#ffd300");
     } 
 });
    $("#mySidenav").mouseleave(function(){
@@ -38,7 +38,6 @@ $(document).ready(function(){
 </header>
 <body>
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="/admin_terminales">Administrar Terminales</a>
   <a href="/admin_pois"">Administrar POIs</a>
   <a href="/admin_consultas">Ver Consultas</a>
