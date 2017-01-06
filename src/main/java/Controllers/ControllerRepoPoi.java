@@ -60,7 +60,7 @@ public class ControllerRepoPoi implements WithGlobalEntityManager, Transactional
 
 	public void borrarUnPOIporId(String id) {
 			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
-			modeloPOI.borrarDeMongo(poiABorrar);
+			//modeloPOI.borrarDeMongo(poiABorrar);
 			modeloPOI.borrarDeHibernate(poiABorrar);
 			
 	}

@@ -1,5 +1,6 @@
 package MainPackage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,8 +119,11 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		String idBusqueda = request.queryParams("id");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		try {
-			List<POI> poisDeLaBusqueda = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
+			List<Integer> idsPOIs = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
 					.getPuntosBuscados();
+			List<POI> poisDeLaBusqueda = new ArrayList<POI>();
+			
+			idsPOIs.forEach(unID -> poisDeLaBusqueda.add(RepoPOIs.getInstance().obtenerDeHibernateSegunId(unID.toString())));
 			viewModel.put("listadoPOIs", poisDeLaBusqueda);
 		} catch (Exception e) {
 			e.printStackTrace();

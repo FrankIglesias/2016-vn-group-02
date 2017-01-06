@@ -26,7 +26,12 @@ public class GestorIntervalos {
 	public List<IntervaloHorario> getIntervalosHorarios() {
 		return intervalosHorarios;
 	}
-
+	
+	public GestorIntervalos()
+	{
+		
+	}
+	
 	public void setIntervalosHorarios(List<IntervaloHorario> intervalosHorarios) {
 		this.intervalosHorarios = intervalosHorarios;
 	}
@@ -35,6 +40,14 @@ public class GestorIntervalos {
 	{
 		super();
 		this.intervalosHorarios = intervalos;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

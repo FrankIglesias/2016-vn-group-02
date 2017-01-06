@@ -15,7 +15,7 @@ public class PorTerminal implements Filtro {
 	
 	@Override
 	public List<Busqueda> aplicarFiltro(List<Busqueda> listaDeBusquedas) {
-		return listaDeBusquedas.stream().filter(unaBusqueda -> unaBusqueda.getTerminal().getNombre().equals(nombreTerminal)).collect(Collectors.toList());
+		return listaDeBusquedas.stream().filter(unaBusqueda -> unaBusqueda.getTerminal().equals(nombreTerminal)).collect(Collectors.toList());
 	}
 	
 	

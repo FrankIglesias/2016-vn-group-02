@@ -48,11 +48,11 @@ public class Main {
 		}, engine);
 		Runtime rt = Runtime.getRuntime();
 
-		try {
+		/*try {
 			rt.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" http:\\\\localhost:"
 					+ puerto.toString());
 		} catch (IOException e) {
-		}
+		}*/
 	}
 
 }

@@ -30,6 +30,10 @@ public class Feriado {
 		this.dia = unDia;
 		this.intervaloFeriado = unIntervalo;
 	}
+	
+	public Feriado() {
+		
+	}
 
 	public int getId()
 	{
@@ -46,5 +50,31 @@ public class Feriado {
 	public boolean incluisHorario(LocalDateTime horario) {
 		return (this.intervaloFeriado.incluyeHora(horario));
 	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public IntervaloHorario getIntervaloFeriado() {
+		return intervaloFeriado;
+	}
+
+	public void setIntervaloFeriado(IntervaloHorario intervaloFeriado) {
+		this.intervaloFeriado = intervaloFeriado;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+	
+	
 
 }

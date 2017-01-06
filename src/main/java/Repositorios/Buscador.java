@@ -25,7 +25,9 @@ public class Buscador {
 				.addAll(baseDeDatosDePois.obtenerDeMongoSegunPalabrasClave(palabrita)));
 		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
-		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
+		List<Integer> idsPOIs = new ArrayList<Integer>();
+		puntosSegunPalabra.stream().forEach(unPoi -> idsPOIs.add(unPoi.getId()));
+		baseDeDatos.addBusqueda(unTerminal.getNombre(), unaFrase, (fin - inicio), tiempoMax, idsPOIs);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 		AsignarAccionesUsuarios.getInstance().analizarAccionesParaUnaTerminal(unTerminal);
 		return puntosSegunPalabra;
@@ -41,7 +43,9 @@ public class Buscador {
 				.addAll(baseDeDatosDePois.obtenerDeHibernateSegunPalabrasClave(palabrita)));
 		puntosSegunPalabra.stream().forEach(unPunto -> unPunto.setUltimaFechaBusqueda(LocalDateTime.now()));
 		fin = System.currentTimeMillis();
-		baseDeDatos.addBusqueda(unTerminal, unaFrase, (fin - inicio), tiempoMax, puntosSegunPalabra);
+		List<Integer> idsPOIs = new ArrayList<Integer>();
+		puntosSegunPalabra.stream().forEach(unPoi -> idsPOIs.add(unPoi.getId()));
+		baseDeDatos.addBusqueda(unTerminal.getNombre(), unaFrase, (fin - inicio), tiempoMax, idsPOIs);
 		unTerminal.addResultadosParcialesAlReporte(puntosSegunPalabra);
 		return puntosSegunPalabra;
 	}

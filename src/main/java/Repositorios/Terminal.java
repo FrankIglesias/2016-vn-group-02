@@ -41,11 +41,6 @@ public class Terminal {
 	@CollectionTable(name = "reporteParcialPorTerminal", joinColumns = @JoinColumn(name = "nombre_terminal"))
 	public List<Integer> reporteParcialPorTerminal = new ArrayList<Integer>();
 
-	@Transient
-	public GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
-
-	private String mailAdmin = "mailprueba@gmail.com";
-
 	public Terminal() {
 	}
 
@@ -65,10 +60,6 @@ public class Terminal {
 
 	public int getComuna() {
 		return this.point.getDomicilio().getComuna();
-	}
-
-	public void setGestorDeMail(GestorMailInterface gestorDeMail) {
-		this.gestorDeMail = gestorDeMail;
 	}
 
 	public int cantidadDeResultadosPorBusqueda(List<POI> puntosSegunPalabra) {
@@ -104,16 +95,8 @@ public class Terminal {
 		return this.sumarResultados(reporteParcialPorTerminal);
 	}
 
-	public boolean enviarMailAlAdmin(String frase, LocalDateTime fecha, String terminal) {
-		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, frase, terminal);
-	}
-
 	public String getNombre() {
 		return nombre;
-	}
-
-	public GestorMailInterface getGestor() {
-		return gestorDeMail;
 	}
 
 	public void addAccion(Accion accion) {

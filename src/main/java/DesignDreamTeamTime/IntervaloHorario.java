@@ -32,7 +32,10 @@ public class IntervaloHorario {
 		super();
 		horaInicio = horaInicial;
 		horaFin = horaFinal;
+	}
 	
+	public IntervaloHorario() {
+		
 	}
 	
 	public boolean incluyeHora(LocalDateTime hora) {
@@ -70,5 +73,17 @@ public class IntervaloHorario {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public LocalDateTime getMediaNoche() {
+		return mediaNoche;
+	}
+
+	public void setMediaNoche(LocalDateTime mediaNoche) {
+		this.mediaNoche = mediaNoche;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

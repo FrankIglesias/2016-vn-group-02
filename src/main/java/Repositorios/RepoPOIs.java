@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import org.bson.types.ObjectId;
+import org.hibernate.Session;
 import org.json.JSONObject;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -150,7 +151,7 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi))
 				.collect(Collectors.toList());
 		aHibernate.forEach(unPoi -> persistirEnHibernate(unPoi));
-		aHibernate.stream().forEach(unPoint -> borrarDeMongo(unPoint));
+		aHibernate.stream().forEach(unPoi -> borrarDeMongo(unPoi));
 	}
 
 	public void borrarDeMongo(POI unPoi) {
@@ -171,7 +172,8 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 
 	public void borrarDeHibernate(POI unPoi) {
 		withTransaction(() -> {
-			entityManager.remove(unPoi);
+			entityManager().merge(unPoi);
+			entityManager().remove(unPoi);
 		});
 	}
 

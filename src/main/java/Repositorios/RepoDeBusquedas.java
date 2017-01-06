@@ -70,12 +70,11 @@ public class RepoDeBusquedas implements WithGlobalEntityManager, EntityManagerOp
 		repoTerminales = RepoTerminales.getInstance();
 	}
 
-	public Busqueda addBusqueda(Terminal terminal, String frase, double tiempo, double tiempoMax,
-			List<POI> puntosObtenidos) {
+	public Busqueda addBusqueda(String terminal, String frase, double tiempo, double tiempoMax,
+			List<Integer> puntosObtenidos) {
 		Busqueda busqueda = new Busqueda(terminal, frase, tiempo, tiempoMax, puntosObtenidos);
 		busquedas.add(busqueda);
 		addBusquedasPorFechaAlReporte(busqueda.getFecha());
-		repoTerminales.add(terminal);
 		persistirBusqueda(busqueda);
 		return busqueda;
 	}

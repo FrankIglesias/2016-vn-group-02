@@ -1,11 +1,13 @@
 package Repositorios;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.mail.Message;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -15,6 +17,8 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.AsignarAccionesUsuarios;
+import GestorDeMail.GestorDeMailTrucho;
+import GestorDeMail.GestorMailInterface;
 
 public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps {
 	List<Terminal> terminales;
@@ -22,6 +26,9 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	static RepoTerminales instancia = null;
 
+	private String mailAdmin = "mailprueba@gmail.com";
+	public GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
+	
 	public static RepoTerminales getInstance() {
 		if (instancia == null) {
 			instancia = new RepoTerminales();
@@ -101,5 +108,10 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 		return terminales.stream().filter(unaTerminal -> proceso.cumpleCriterio(unaTerminal))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
+	
+	public boolean enviarMailAlAdmin(String frase, LocalDateTime fecha, String terminal) {
+		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, frase, terminal);
+	}
+	
 
 }

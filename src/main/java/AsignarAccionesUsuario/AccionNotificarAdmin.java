@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
+import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
 
 @Entity
@@ -29,7 +30,7 @@ public class AccionNotificarAdmin extends Accion {
 	}
 
 	public void ejecutarAccion(Terminal terminal) {
-		terminal.enviarMailAlAdmin(mensaje, LocalDateTime.now(), terminal.getNombre());
+		RepoTerminales.getInstance().enviarMailAlAdmin(mensaje, LocalDateTime.now(), terminal.getNombre());
 		
 	}
 	

@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import GestorDeMail.GestorDeMailTrucho;
 import Repositorios.Buscador;
 import Repositorios.Terminal;
 
@@ -29,7 +30,7 @@ public class AnalizarTiempoDeBusquedaSobrepasadoTest {
 	
 	@Test
 	public void testTiempoDeBusquedaMaximoSobrepasado() {
-		Assert.assertEquals(terminal.getGestor().getContadorDeMails(), 1);
+		Assert.assertEquals(GestorDeMailTrucho.getInstance().getContadorDeMails(), 1);
 	}
 	
 }

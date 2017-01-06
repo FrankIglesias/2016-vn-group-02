@@ -25,11 +25,38 @@ class Entry {
 	         @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	         GestorIntervalos value;
 	         
+	         public Entry() {
+	        	 
+	         }
 	         
 	         public Entry(DayOfWeek key,
 	         GestorIntervalos value
 	         ) {
 				this.aKey = key;
+				this.value = value;
+			}
+
+			public int getId() {
+				return id;
+			}
+
+			public void setId(int id) {
+				this.id = id;
+			}
+
+			public DayOfWeek getaKey() {
+				return aKey;
+			}
+
+			public void setaKey(DayOfWeek aKey) {
+				this.aKey = aKey;
+			}
+
+			public GestorIntervalos getValue() {
+				return value;
+			}
+
+			public void setValue(GestorIntervalos value) {
 				this.value = value;
 			}
 	     }

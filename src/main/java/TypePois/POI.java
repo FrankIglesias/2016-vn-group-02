@@ -38,7 +38,7 @@ public abstract class POI {
 	@GeneratedValue
 	private int id;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "geolocalizacion")
 	private Geolocalizacion point;
 

@@ -3,18 +3,14 @@ package Repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
-
-import TypePois.POI;
 
 @Entity
 @Table(name = "Busqueda")
@@ -24,12 +20,11 @@ public class Busqueda {
 	@GeneratedValue
 	private Integer id;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	List<POI> puntosObtenidos;
+	@ElementCollection
+	List<Integer> idsPuntosObtenidos;
 	@Convert(converter = LocalDateTimeConverter.class)
 	LocalDateTime fecha;
-	@ManyToOne(cascade = CascadeType.MERGE)
-	Terminal terminal;
+	String nombreTerminal;
 	String frase;
 	double tiempo;
 
@@ -38,13 +33,13 @@ public class Busqueda {
 	protected Busqueda() {
 	}
 
-	public Busqueda(Terminal terminal, String frase, double tiempo, double tiempoMax, List<POI> puntosObtenidos) {
-		this.terminal = terminal;
+	public Busqueda(String terminal, String frase, double tiempo, double tiempoMax, List<Integer> puntosObtenidos) {
+		this.nombreTerminal = terminal;
 		this.fecha = LocalDateTime.now();
 		this.frase = frase;
 		this.tiempo = tiempo;
 		this.tiempoMax = tiempoMax;
-		this.puntosObtenidos = puntosObtenidos;
+		this.idsPuntosObtenidos = puntosObtenidos;
 		this.analizaElTiempoDeBusqueda();
 	}
 
@@ -56,8 +51,8 @@ public class Busqueda {
 		return fecha;
 	}
 
-	public Terminal getTerminal() {
-		return terminal;
+	public String getTerminal() {
+		return nombreTerminal;
 	}
 
 	public boolean esDeLaFecha(LocalDateTime fecha) {
@@ -66,9 +61,9 @@ public class Busqueda {
 
 	public void analizaElTiempoDeBusqueda() {
 		if (tiempo >= tiempoMax) {
-			System.out.println(terminal.getNombre() + " " + tiempo + " " + tiempoMax + " " + fecha);
-			terminal.enviarMailAlAdmin("El tiempo de busqueda se ha excedido en " + (tiempo - tiempoMax), fecha,
-					terminal.getNombre());
+			System.out.println(nombreTerminal + " " + tiempo + " " + tiempoMax + " " + fecha);
+			RepoTerminales.getInstance().enviarMailAlAdmin("El tiempo de busqueda se ha excedido en " + (tiempo - tiempoMax), fecha,
+					nombreTerminal);
 		}
 
 	}
@@ -77,12 +72,12 @@ public class Busqueda {
 		return (fecha.isAfter(antes) && fecha.isBefore(despues));
 	}
 
-	public List<POI> getPuntosBuscados() {
-		return puntosObtenidos;
+	public List<Integer> getPuntosBuscados() {
+		return idsPuntosObtenidos;
 	}
 
 	public int getCantidadDePoisObtenidos() {
-		return puntosObtenidos.size();
+		return idsPuntosObtenidos.size();
 	}
 
 }
