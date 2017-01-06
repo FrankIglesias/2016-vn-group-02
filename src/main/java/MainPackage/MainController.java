@@ -67,10 +67,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombre;
 		try {
-			String nombre = request.queryParams("nombre");
+			if (request.queryParams("nombre").equals("")) {
+				nombre = "";
+			} else {
+				nombre = request.queryParams("nombre");
+			}
 			int comuna;
-			if (request.queryParams("comuna").endsWith("0")) {
+			if (request.queryParams("comuna").equals("")) {
 				comuna = -1;
 			} else {
 				comuna = Integer.parseInt(request.queryParams("comuna"));
@@ -81,7 +86,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		}		
+		}
 		return new ModelAndView(viewModel, "admin_terminales.hbs");
 	}
 
