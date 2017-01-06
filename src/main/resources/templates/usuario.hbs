@@ -12,20 +12,18 @@
 <input type="submit" id="buscar" class="btn_Detalles" value="Buscar"></center></p>
 </form>
 
-	<table>
+	<table style ="padding-top:5px">
 	 <td >
 	<div style="overflow-y: auto; max-height: 500px">
 	{{#listadoPOIs}}
-	 <hr>
-	  <div style="margin-bottom: 5px;">
+	  <div id="{{id}}" class="hoovereable" style="height:150px">
 	  <center>
-
 	  <table>
 	   <tr>
-	   <td>
+	   <td style="padding-top:30px">
 	   <t class="login_text">Nombre:</t><br>
 	   </td>
-	   <td><t class="login_text">{{nombre}}</t></td>
+	   <td style="padding-top:30px"><t class="login_text">{{nombre}}</t></td>
 	   </tr>
 	   <tr>
 	   <td>
@@ -40,7 +38,6 @@
 		<a onClick="myFunction({{id}})"></a>
 		</center>
 		</div>
-		<hr>
 	{{/listadoPOIs}}
 		<center><button type="submit" id="ver_mas" class="btn_Detalles" formaction="/ver_mas" form="myForm">Ver mas</button></center>
 	  </div>
