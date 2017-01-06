@@ -68,12 +68,20 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		try {
-			List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales("", -1);
+			String nombre = request.queryParams("nombre");
+			int comuna;
+			if (request.queryParams("comuna").endsWith("0")) {
+				comuna = -1;
+			} else {
+				comuna = Integer.parseInt(request.queryParams("comuna"));
+			}
+			List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales(nombre, comuna);
 			viewModel.put("terminales", terminales);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		}
+		}		
 		return new ModelAndView(viewModel, "admin_terminales.hbs");
 	}
 
@@ -119,16 +127,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		nombreUsuario = request.queryParams("nombreFiltro");
 		String latitud = request.queryParams("latitud");
 		String longitud = request.queryParams("longitud");
-		System.out.println("Latitud: "+latitud+" Longitud: "+longitud);
+		System.out.println("Latitud: " + latitud + " Longitud: " + longitud);
 		terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
 		if (terminal == null) {
-			try{
-		terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1, latitud, longitud);
-			}catch(Exception e){
+			try {
+				terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1, latitud,
+						longitud);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
