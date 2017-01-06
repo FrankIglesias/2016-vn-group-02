@@ -9,8 +9,7 @@
 <form method="get" action="/usuarioBusqueda" id="myForm">
 		<p class="login_text" style="color:#454545; margin-right:370px "><center>
 <input type="text" style="border-radius:5px; width: 80%" name="nombreFiltro">
-<input type="submit" link="/admin_pois" name="_method" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
-		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px" value="Buscar"></center></p>
+<input type="submit" id="buscar" class="btn_Detalles" value="Buscar"></center></p>
 </form>
 
 	<table>
@@ -43,12 +42,11 @@
 		</div>
 		<hr>
 	{{/listadoPOIs}}
+		<center><button type="submit" id="ver_mas" class="btn_Detalles" formaction="/ver_mas" form="myForm">Ver mas</button></center>
 	  </div>
-	   <button type="submit" style="background: linear-gradient(to bottom,#FBAB00,#ffd300); background-repeat:no-repeat; border-radius:10px;
- 		font-family: 'Raleway', Arial, sans-serif; font-weight:bold; color: #454545; text-align:center; margin-left: 10px; height:25px; margin-bottom:50px;" formaction="/ver_mas" form="myForm">Ver mas</button>
 	   </td>
 	<td style="width: 50% ">
-	<div id="map" style="height: 500px; width: 500px;"></div>
+	<div id="map" style="height: 500px;  width: 1000px;"></div>
 	</td>
 	</table>
 	<script>

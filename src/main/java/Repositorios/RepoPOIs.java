@@ -41,7 +41,11 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 
 	public void persistirEnHibernate(POI unPOI) {
-		entityManager().persist(unPOI);
+		EntityTransaction transaccion = entityManager.getTransaction();
+		transaccion.begin();
+		entityManager.persist(unPOI);
+		transaccion.commit();
+
 	}
 
 	public POI obtenerDeHibernate(int id) {

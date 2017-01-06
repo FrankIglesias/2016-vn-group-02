@@ -87,6 +87,7 @@ public class Terminal {
 		return this.point;
 
 	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -127,7 +128,6 @@ public class Terminal {
 	public List<Accion> getListaDeAcciones() {
 		return listaDeAcciones;
 	}
-
 	public void ingresarALista(List<Criterio> listaDeCriterios, ArrayList<Terminal> filtro) {
 		if (listaDeCriterios.stream().allMatch(criterio -> criterio.esCumplidoPor(this)))
 			filtro.add(this);

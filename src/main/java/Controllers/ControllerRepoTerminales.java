@@ -29,8 +29,10 @@ public class ControllerRepoTerminales {
 		modeloTerminales.eliminarUnaTerminal(unaTerminal);
 	}
 
-	public void agregarUnaTerminal(String nombre, int comuna) {
-		modeloTerminales.persistirTerminal(new Terminal(nombre, comuna));
+	public Terminal agregarUnaTerminal(String nombre, int comuna) {
+		Terminal terminal = new Terminal(nombre, comuna);
+		modeloTerminales.persistirTerminal(terminal);
+		return terminal;
 	}
 
 	public void editarUnaTerminal(String nombre, int comuna, String callePrincipal, String entreCalles, String altura,

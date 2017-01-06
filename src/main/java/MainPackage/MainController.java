@@ -25,7 +25,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
-		return new ModelAndView(null, "home.hbs");
+		return new ModelAndView(null, "Frank.hbs");
 	}
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
@@ -103,11 +103,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView verPoisConsultas(Request request, Response response) {
 		System.out.println("Ver pois de una consulta");
 		String idBusqueda = request.queryParams("id");
-
-		List<POI> poisDeLaBusqueda = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
-				.getPuntosBuscados();
 		HashMap<String, Object> viewModel = new HashMap<>();
-		viewModel.put("listadoPOIs", poisDeLaBusqueda);
+		try {
+			List<POI> poisDeLaBusqueda = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
+					.getPuntosBuscados();
+			viewModel.put("listadoPOIs", poisDeLaBusqueda);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView(viewModel, "ver_pois_consultas.hbs");
 	}
 
@@ -118,7 +121,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println(local);
 		terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
 		if (terminal == null) {
-			ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
+		terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
 		}
 		return new ModelAndView(null, "usuario.hbs");
 	}
@@ -135,8 +138,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView buscarBusquedas(Request request, Response response) {
 		System.out.println("Buscando busquedas");
-		System.out.println(request.queryParams("nombre") + request.queryParams("desde") + request.queryParams("hasta")
-				+ request.queryParams("cantidad"));
 		HashMap<String, Object> viewModel = new HashMap<>();
 		try {
 			List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(
@@ -160,29 +161,37 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		String tipoFiltro = request.queryParams("tipoFiltro");
-		List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-		viewModel.put("listadoPOIs", pois);
+		try {
+			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+			viewModel.put("listadoPOIs", pois);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		return new ModelAndView(viewModel, "admin_pois.hbs");
 	}
 
 	public ModelAndView busquedaUsuario(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");
-		System.out.println("busquedaUsuario" + nombreUsuario);
+		System.out.println("Busqueda de " + nombreUsuario);
 		return new ModelAndView(null, "usuario.hbs");
 	}
 
 	public ModelAndView verMas(Request request, Response response) {
-		System.out.println("Ver mas");
+		System.out.println("Ver mas (Busqueda desde hibernate)");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
-		List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro,
-				terminal);
-		viewModel.put("listadoPOIs", pois);
+		try {
+			List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, terminal);
+			viewModel.put("listadoPOIs", pois);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
 	public ModelAndView buscarPois(Request request, Response response) {
-		System.out.println("busquedaUsuario");
+		System.out.println("Busqueda desde MONGO");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		try {
@@ -196,11 +205,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	}
 
 	public ModelAndView editarPoi(Request request, Response response) {
-		System.out.println("busquedaUsuario");
+		System.out.println("Editar POI " + request.queryParams("id"));
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("id");
-		POI pois = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
-		viewModel.put("poi", pois);
+		try {
+			POI pois = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
+			viewModel.put("poi", pois);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView(viewModel, "editar_poi.hbs");
 	}
 }

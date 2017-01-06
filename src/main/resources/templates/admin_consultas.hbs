@@ -1,8 +1,13 @@
 	
 {{#partial "contenido"}}
+<script>
+$('#datepick').focus(function(){
+    this.blur();
+});
+</script>
+
 <form action="/buscar_consultas">
 <center>
-
 <input type="text" name="nombre"  placeholder = "  Ingrese nombre de terminal"style="border-radius:100px; width:85%; height:25px; margin-left: 5px; margin-right: 10px; margin-top: 50px;">
 	<input type="submit" value= "Buscar" class="btn_Detalles"></center>
 	<center>	<div style="margin-bottom: 70px;">
@@ -17,18 +22,18 @@
 		<table width="90%" border="0" style="margin-left:70px; ">
 		  <tbody>
 				<tr>
-				  <td><p class="historial_tabla" style=" height:60px;  width:150px;"> Busqueda</p></td>
-				  <td><p class="historial_tabla" style=" height:60px;  width:150px;"> Terminal</p></td>
-				  <td><p class="historial_tabla" style=" height:60px;  width:150px;"> Fecha</p></td>
+				  <td><p class="historial_tabla" style=" padding-top:20px; 	height:60px;  width:150px;"> Busqueda</p></td>
+				  <td><p class="historial_tabla" style=" padding-top:20px; height:60px;  width:150px;"> Terminal</p></td>
+				  <td><p class="historial_tabla" style=" padding-top:20px; height:60px;  width:150px;"> Fecha</p></td>
 				  <td><p class="historial_tabla" style=" height:60px;  width:150px;"> Cantidad de POIs</p></td>
 				</tr>
 				<tr>
 				{{#consultas}}
-				<td><center><p class=" historial_tabla_textos"> {{id}}</p></center></td>
-				<td><center><p class=" historial_tabla_textos"> {{terminal.id}}</p></center></td>
-				<td><center> <p class=" historial_tabla_textos">{{fecha}}</p></center></td>
-				<td><center><p class=" historial_tabla_textos"> {{cantidadDePoisObtenidos}}	</p></center></td>
-				<td><center><a href="/ver_pois_consultas?id={{id}}"><img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a></center>
+				<td><p class=" historial_tabla_textos"> {{id}}</p></center></td>
+				<td><p class=" historial_tabla_textos"> {{terminal.id}}</p></center></td>
+				<td><input id="datepick"  style ="border: 0" type="datetime-local" value="{{fecha}}" readonly></td>
+				<td><p class=" historial_tabla_textos"> {{cantidadDePoisObtenidos}}	</p></td>
+				<td><a href="/ver_pois_consultas?id={{id}}"><img src="img/WhatsApp Image 2016-12-20 at 00.11.54 (1).jpeg" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
 			</td>
 			{{/consultas}}
 				</tr>
