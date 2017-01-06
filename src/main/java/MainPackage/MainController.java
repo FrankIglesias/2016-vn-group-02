@@ -117,12 +117,18 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView mostrarUser(Request request, Response response) {
 		System.out.println("Se loggeo el usuario " + request.queryParams("nombreFiltro"));
 		nombreUsuario = request.queryParams("nombreFiltro");
-		String local = request.queryParams("localizacion");
-		System.out.println(local);
+		String latitud = request.queryParams("latitud");
+		String longitud = request.queryParams("longitud");
+		System.out.println("Latitud: "+latitud+" Longitud: "+longitud);
 		terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
 		if (terminal == null) {
-		terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1);
+			try{
+		terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1, latitud, longitud);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
+		
 		return new ModelAndView(null, "usuario.hbs");
 	}
 

@@ -29,8 +29,10 @@ public class ControllerRepoTerminales {
 		modeloTerminales.eliminarUnaTerminal(unaTerminal);
 	}
 
-	public Terminal agregarUnaTerminal(String nombre, int comuna) {
+	public Terminal agregarUnaTerminal(String nombre, int comuna, String latitud, String longitud) {
 		Terminal terminal = new Terminal(nombre, comuna);
+		terminal.getPoint().setLatitud(Double.parseDouble(latitud));
+		terminal.getPoint().setLongitud(Double.parseDouble(longitud));
 		modeloTerminales.persistirTerminal(terminal);
 		return terminal;
 	}

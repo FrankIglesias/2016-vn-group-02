@@ -12,7 +12,7 @@ function fucionValidarUsuario() {
 			        lng: position.coords.longitude
 			      };
 					window.location.href = "usuario?nombreFiltro="
-						+ document.getElementById('nombreDeUsuario').value + "&localizacion="+pos;
+						+ document.getElementById('nombreDeUsuario').value + "&latitud="+pos.lat+"&longitud="+pos.lng;
 
 			      
 			    }, function() {

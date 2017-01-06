@@ -72,5 +72,13 @@ public class Geolocalizacion {
 	{
 		return this.localidad;
 	}
+	public void setLatitud(double latitud)
+	{
+		this.latitud = latitud;
+	}
+	public void setLongitud(double longitud)
+	{
+		this.longitud =longitud;
+	}
 
 }
