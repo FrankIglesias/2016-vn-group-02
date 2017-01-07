@@ -1,9 +1,11 @@
 package MainPackage;
 
-import java.io.IOException;
+import static spark.Spark.delete;
+import static spark.Spark.get;
+import static spark.Spark.port;
+import static spark.Spark.staticFileLocation;
 
 import spark.ModelAndView;
-import static spark.Spark.*;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Main {
@@ -43,7 +45,6 @@ public class Main {
 		get("/ver_pois_consultas", home::verPoisConsultas, engine);
 
 		get("*", (request, response) -> {
-			System.out.println("404 not found!!");
 			return new ModelAndView(null, "notFound.hbs");
 		}, engine);
 		Runtime rt = Runtime.getRuntime();

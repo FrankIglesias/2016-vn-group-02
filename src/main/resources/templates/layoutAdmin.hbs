@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 </head>
 <nav style="background: linear-gradient(to bottom,#ffd300,#FBAB00);
-	background-repeat:no-repeat; position: fixed; width:100%">
+	background-repeat:no-repeat; position: fixed; width:100%;z-index:1;">
   <span style="font-size:30px;cursor:pointer; margin-left:10px" onclick="openNav()">&#9776;</span>
   <img height="25px" style="float:right; margin-top:10px; margin-right:10px" src="img/DDT.png">
 </nav>
@@ -37,11 +37,11 @@ $(document).ready(function(){
 overflow:hidden;
 height:300px;
 width:100%;
-background-image: url('img/Planetario_Galileo_Galilei_(3022933477).jpg');
+background-image: url('{{#block "imagen"}}{{/block}}');
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
-   background-size: cover; text-align:left"><br><br><br><br><br><br><br><br><br><br><font  style="margin-left:10px;"class="login_text" size="20"><strong>{{#block "titulo"}}{{/block}}<strong></font></div>
+   background-size: cover; text-align:left"><br><br><br><br><br><br><br><br><br><br><font  style="margin-left:10px;"class="login_text" size="20"><strong>{{#block "titulo"}}{{/block}}</strong></font></div>
 </header>
 <body>
 <div id="mySidenav" class="sidenav">
