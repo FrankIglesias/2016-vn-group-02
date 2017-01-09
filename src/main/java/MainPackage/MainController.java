@@ -65,6 +65,16 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return null;
 	}
 
+	public ModelAndView masDetalle(Request request, Response response) {
+		System.out.println("Mostrar mas detalles");
+		String idpoi = request.queryParams("id");
+		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
+		HashMap<String, Object> viewModel = new HashMap<>();
+		viewModel.put("POI", unpoi);
+		return new ModelAndView(viewModel, "masDetallePoi.hbs");
+
+	}
+
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
@@ -122,8 +132,9 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 			List<Integer> idsPOIs = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
 					.getPuntosBuscados();
 			List<POI> poisDeLaBusqueda = new ArrayList<POI>();
-			
-			idsPOIs.forEach(unID -> poisDeLaBusqueda.add(RepoPOIs.getInstance().obtenerDeHibernateSegunId(unID.toString())));
+
+			idsPOIs.forEach(
+					unID -> poisDeLaBusqueda.add(RepoPOIs.getInstance().obtenerDeHibernateSegunId(unID.toString())));
 			viewModel.put("listadoPOIs", poisDeLaBusqueda);
 		} catch (Exception e) {
 			e.printStackTrace();

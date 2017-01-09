@@ -1,12 +1,9 @@
-
-
-
 {{#partial "contenido"}}
 <center>
  <table style="margin-top: 70px;">
   <tbody >
   
-    {{#poi}}
+    {{#POI}}
     <tr><td><p class=" historial_tabla_textos"> Nombre:</p></td><td><p class=" historial_tabla_textos"> {{nombre}}</p></td></tr>
     <tr><td><p class=" historial_tabla_textos"> Direcci&oacute;n:</p></td>
 		<td><p class=" historial_tabla_textos"> Calle Principal:{{callePrincipal}}</p>
@@ -45,18 +42,13 @@
 
     </td>
     </tr> 
-    {{/poi}}
+    {{/POI}}
      </tbody>
 </table>
 	</center>
     <br>
-    <center>
-	<form method="post">
-    <button type="submit" href="/admin_pois" class="btn_Detalles" > Aceptar </button>
-    <button type="button" class="btn_Detalles" style="margin-left: 130px"> Cancelar </button>
-	</form>
-    </center>		
+    <button type="submit" onclick="goBack()" class="btn_Detalles" style="width:150px;margin-left:80%;margin-top:80px" > Atras </button>		
 {{/partial}}
-{{#partial "titulo"}}Detalles del POI{{/partial}}
+{{#partial "titulo"}}Detalles del POI:  {{#POI}}{{nombre}}{{/POI}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}
 {{> layoutAdmin.hbs}}

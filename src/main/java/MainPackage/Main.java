@@ -30,13 +30,14 @@ public class Main {
 		get("/editar_terminal", home::mostrarEditarTerminal, engine);
 		get("/admin_acciones", home::mostrarAdminAcciones, engine);
 		delete("/borrar_terminal", home::borrarTerminal);
-
+		
 		get("/admin_pois", home::mostrarPois, engine);
 		get("/buscar_pois", home::buscarPoisAdmin, engine);
 		get("/editar_poi", home::editarPoi, engine);
 		delete("/borrar_poi", home::borrarPoi);
 		get("/nuevo_poi", home::agregarPoi, engine);
-
+		get("/masDetallePoi",home::masDetalle,engine);
+		
 		get("/usuarioBusqueda", home::buscarPois, engine);
 		get("/ver_mas", home::verMas, engine);
 
