@@ -31,7 +31,7 @@ public class Servicio {
 	private HorarioYDia horario;
 	
 	
-	private String nombreDelServicio;
+	public String nombreDelServicio;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="idServicio")

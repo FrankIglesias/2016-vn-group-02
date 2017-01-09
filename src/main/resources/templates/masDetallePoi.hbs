@@ -2,52 +2,29 @@
 <center>
  <table style="margin-top: 70px;">
   <tbody >
-  
-    {{#POI}}
-    <tr><td><p class=" historial_tabla_textos"> Nombre:</p></td><td><p class=" historial_tabla_textos"> {{nombre}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Direcci&oacute;n:</p></td>
-		<td><p class=" historial_tabla_textos"> Calle Principal:{{callePrincipal}}</p>
-			<p class=" historial_tabla_textos"> Entre calles:{{entreCalles}}</p>
-			<p class=" historial_tabla_textos"> Altura: {{altura}}</p>
-			<p class=" historial_tabla_textos"> Piso: {{piso}}</p>
-			<p class=" historial_tabla_textos"> Unidad: {{unidad}}</p>
-    <tr><td><p class=" historial_tabla_textos"> Codigo postal:</p></td><td><p class=" historial_tabla_textos"> {{codigoPostal}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Numero de comuna:</p></td><td><p class=" historial_tabla_textos">{{comuna}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Ciudad:</p></td><td><p class=" historial_tabla_textos">{{ciudad}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Provincia:</p></td><td><p class=" historial_tabla_textos">{{provincia}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> Pais:</p></td><td><p class=" historial_tabla_textos">{{pais}}</p></td></tr>
-    <tr>
-    <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
-    <td>
-		<div id="map" style="height: 300px; width: 300px;"></div>
-	</td>
-	<script>
-	function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
-          scrollwheel: false,
-          zoom: 3
-        });
-        var marker = new google.maps.Marker({
-          map: map,
-          position: myLatLng,
-          title: 'Hello World!'
-        });
-      }
-	
-	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
-			async defer></script>
 
-    </td>
-    </tr> 
+    {{#POI}}
+    <tr><td><p class=" historial_tabla_textos"> <strong> Nombre: </strong></p></td><td><p class=" historial_tabla_textos"> {{nombre}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Direcci&oacute;n: </strong> </p></td>
+		<td><p class=" historial_tabla_textos"> <strong> Calle Principal: </strong> {{point.domicilio.callePrincipal}}</p>
+			<p class=" historial_tabla_textos"> <strong> Entre calles: </strong> {{#if point.domicilio.entreCalles}} {{point.domicilio.entreCalles}} {{else}} - {{/if}}</p>
+			<p class=" historial_tabla_textos"> <strong> Altura: </strong> {{#if point.domicilio.altura}} {{point.domicilio.altura}} {{else}} - {{/if}}</p>
+			<p class=" historial_tabla_textos"> <strong> Piso: </strong> {{#if point.domicilio.piso}} {{point.domicilio.piso}} {{else}} - {{/if}}</p>
+			<p class=" historial_tabla_textos"> <strong> Unidad: </strong> {{#if point.domicilio.unidad}} {{point.domicilio.unidad}} {{else}} - {{/if}}</p>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Codigo postal: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.domicilio.codigoPostal}} {{point.domicilio.codigoPostal}} {{else}} - {{/if}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Numero de comuna: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Ciudad: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Provincia: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p></td></tr>
+    <tr><td><p class=" historial_tabla_textos"> <strong> Pais: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p></td></tr>
+     {{#if point.rubro.nombre}} <tr><td><p class=" historial_tabla_textos"> <strong> Rubro: </strong> </p></td><td><p class=" historial_tabla_textos"> {{point.rubro.nombre}} </p></td></tr> {{/if}}
+      {{#if servicios}} <tr><td><p class=" historial_tabla_textos"> <strong> Servicios: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#servicios}} {{nombreDelServicio}} {{/servicios}} </p></td></tr> {{/if}}
+  {{#if linea}} <tr><td><p class=" historial_tabla_textos"> <strong> Linea: </strong> </p></td><td><p class=" historial_tabla_textos"> {{linea}} </p></td></tr> {{/if}}
     {{/POI}}
      </tbody>
 </table>
 	</center>
     <br>
-    <button type="submit" onclick="goBack()" class="btn_Detalles" style="width:150px;margin-left:80%;margin-top:80px" > Atras </button>		
+    <button type="submit" onclick="goBack()" class="btn_Detalles" style="width:150px;margin-left:80%;margin-top:80px" > Atras </button>
 {{/partial}}
 {{#partial "titulo"}}Detalles del POI:  {{#POI}}{{nombre}}{{/POI}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}

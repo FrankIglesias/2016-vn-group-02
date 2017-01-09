@@ -6,15 +6,15 @@
   <tbody >
 <form action="/agregar_poi">
     <tr>
-    <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Nuevo nombre: </strong></p></td>
     <td>
-    	<input type="text" name="nombre">
+    	<input type="text" name="nombre" required>
     </td>
     </tr>
     <tr>
-    <td><p class="historial_tabla_textos"> Tipo:</p></td>
+    <td><p class="historial_tabla_textos"> <strong> Tipo: </strong></p></td>
     <td>
-		<select style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro">
+		<select style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
 		  <option value="">-</option>
 		  <option value="banco">Banco</option>
 		  <option value="cgp">CGP</option>
@@ -24,106 +24,123 @@
 	</td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"><strong>Direcci&oacute;n</strong></p></td>
+    <td><p class=" historial_tabla_textos"><strong>Direcci&oacute;n </strong></strong></p></td>
     </tr>
-     <tr>
-    <td><p class=" historial_tabla_textos"> Calle Principal:</p></td>
+    <tr>
+   <td><p class=" historial_tabla_textos"> <strong> Calle Principal: </strong></p></td>
+   <td>
+     <input type="text" name="calle_principal" id="calle_principal" required>
+   </td>
+   </tr>
+
+    <tr>
+    <td><p class=" historial_tabla_textos"> <strong> Entre calles: </strong></p></td>
     <td>
-    	<input type="text" name="calle_principal">
+    	<input type="text" name="entre_calles" id="entre_calles">
     </td>
     </tr>
-   
+
     <tr>
-    <td><p class=" historial_tabla_textos"> Entre calles:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Altura: </strong></p></td>
     <td>
-    	<input type="text" name="entre_calles">
+    	<input type="text" name="altura" id="altura" >
     </td>
     </tr>
-   
+
     <tr>
-    <td><p class=" historial_tabla_textos"> Altura:</p></td>
-    <td>
-    	<input type="text" name="altura" >
-    </td>
-    </tr>
-   
-    <tr>
-    <td><p class=" historial_tabla_textos"> Piso:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Piso: </strong></p></td>
     <td>
     	<input type="text" name="piso">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Unidad:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Unidad: </strong></p></td>
     <td>
     	<input type="text" name="unidad">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Codigo postal:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Codigo postal: </strong></p></td>
     <td>
     	<input type="text" name="codigo_postal">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Numero de comuna: </strong></p></td>
     <td>
-    	<input type="number" min="1" name="comuna">
+    	<input type="number" min="1" name="comuna" required>
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Ciudad:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Ciudad: </strong></p></td>
     <td>
-    	<input type="text" name="ciudad">
+    	<input type="text" name="ciudad" name="ciudad" required>
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Provincia:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Provincia: </strong></p></td>
     <td>
-    	<input type="text" name="provincia">
+    	<input type="text" id="provincia" name="provincia" required>
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Pais:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Pais: </strong></p></td>
     <td>
     	<input type="text" name="pais">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
-    <td><input id="lng" type="number" value="" name="longitud">
-    <input type="number" id="lat" value="" name="latitud"><br>
-    <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
+    <td><p class=" historial_tabla_textos"> <strong> Nuevas coordenadas: </strong></p></td>
+    <td><input id="lng" name="lng" type="text" value="" required>
+    <input  id="lat" name "lat" type="text" value="" required><br>
+
+    <center><button type="button" id="ver" class="btn_Detalles"> Ver</button>
     </td>
-    
+
     <td>
 		<div id="map" style="height: 300px; width: 300px;"></div>
 	</td>
-    </tr> 
-    
+    </tr>
      </tbody>
 </table>
-	
+
     <input type="submit" class="btn_Detalles" value= "Aceptar">
 	<button class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button>
 	 </form></center>
 <script>
-function setNewCenter(lat,lng){
-   var center = new google.maps.LatLng(lat,lng);
-    map.panTo(center);
+function initMap() {
+var map = new google.maps.Map(document.getElementById('map'), {
+zoom: 11,
+center: {lat: -34.6130556, lng: -58.377222222 }
+});
+var geocoder = new google.maps.Geocoder();
+document.getElementById("ver").addEventListener('click', function() {
+  geocodeAddress(geocoder, map);
+});
 }
-var map;
-	function initMap() {
-        // Create a map object and specify the DOM element for display.
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.6130556, lng: -58.377222222 },
-          scrollwheel: true,
-          zoom: 10
-        });
-      }
-    	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
-			async defer></script>
+
+function geocodeAddress(geocoder, resultsMap) {
+var calle = document.getElementById('calle_principal').value;
+var altura = document.getElementById('altura').value;
+var provincia =  document.getElementById('provincia').value;
+var address = altura + " " + calle + " " + provincia;
+geocoder.geocode({'address': address}, function(results, status) {
+if (status === google.maps.GeocoderStatus.OK) {
+  alert('Geocode was not successful for the following reason: ' + status);
+  document.getElementById('lat').value = results[0].geometry.location.lat();
+  document.getElementById('lng').value = results[0].geometry.location.lng();
+  var marker = new google.maps.Marker({
+    map: resultsMap,
+    position: results[0].geometry.location
+  });
+} else {
+  alert('Geocode was not successful for the following reason: ' + status);
+}
+});
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+    async defer></script>
 {{/partial}}
 {{#partial "titulo"}}Nuevo POI{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}

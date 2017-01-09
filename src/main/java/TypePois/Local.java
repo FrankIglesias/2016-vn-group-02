@@ -32,7 +32,7 @@ public class Local extends POI {
 		this.addPalabrasClaves("Local");
 	}
 
-	protected Local() {
+	public Local() {
 	}
 
 	public Geolocalizacion getDireccion() {

@@ -38,7 +38,7 @@ public class Main {
 		get("/nuevo_poi", home::agregarPoi, engine);
 		get("/masDetallePoi",home::masDetalle,engine);
 		// SI ES UNA MIERDA... PERO AL PARECER SPARK NO ACEPTA POST
-		delete("/agregar_poi",home::nuevoPoi,engine);
+		get("/agregar_poi",home::nuevoPoi,engine);
 		
 		get("/usuarioBusqueda", home::buscarPois, engine);
 		get("/ver_mas", home::verMas, engine);

@@ -10,11 +10,18 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import Controllers.ControllerRepoBusquedas;
 import Controllers.ControllerRepoPoi;
 import Controllers.ControllerRepoTerminales;
+import DesignDreamTeamLocation.Domicilio;
+import DesignDreamTeamLocation.Geolocalizacion;
+import DesignDreamTeamLocation.Localidad;
 import Repositorios.Buscador;
 import Repositorios.Busqueda;
 import Repositorios.RepoPOIs;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
+import TypePois.Banco;
+import TypePois.CGP;
+import TypePois.Colectivo;
+import TypePois.Local;
 import TypePois.POI;
 import spark.ModelAndView;
 import spark.Request;
@@ -28,7 +35,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "Frank.hbs");
 	}
-	
+
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
 		return new ModelAndView(null, "Administrador.hbs");
@@ -74,10 +81,37 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return new ModelAndView(viewModel, "masDetallePoi.hbs");
 
 	}
+
 	public ModelAndView nuevoPoi(Request request, Response response) {
-		System.out.println("Nuevo poi");
-		return new ModelAndView(null, "admin_pois.hbs");
+		System.out.println("Agregando poi " + request.queryParams("nombre"));
+		System.out.println(request.queryParams("lat") + request.queryParams("lng"));
+		POI poiAPersistir = new Local();
+		switch (request.queryParams("tipoFiltro")) {
+		case "local":
+			poiAPersistir = new Local();
+		case "banco":
+			poiAPersistir = new Banco();
+		case "cgp":
+			poiAPersistir = new CGP();
+		case "colectivo":
+			poiAPersistir = new Colectivo();
+		}
+
+		Domicilio unaDomi = new Domicilio(request.queryParams("calle_principal"), request.queryParams("entre_calles"),
+				request.queryParams("altura"), request.queryParams("piso"), request.queryParams("unidad"),
+				request.queryParams("codigo_postal"), Integer.parseInt(request.queryParams("comuna")));
+		Localidad unaLoca = new Localidad(request.queryParams("ciudad"), request.queryParams("provincia"),
+				request.queryParams("pais"));
+		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("lat")),
+				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
+		
+		poiAPersistir.setGeo(unaGeo);
+		poiAPersistir.setNombre(request.queryParams("nombre"));
+
+		RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
+		return new ModelAndView(null, "nuevo_poi.hbs");
 	}
+
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
