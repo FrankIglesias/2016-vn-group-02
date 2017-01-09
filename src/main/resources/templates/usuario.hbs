@@ -14,10 +14,10 @@
 <input type="text" style="border-radius:5px; width: 80% ;height:40px" name="nombreFiltro" placeholder="  &#191;Que POI quer&eacute;s buscar?">
 <input type="submit" id="buscar" class="btn_Detalles" style="height:40px" value="Buscar"></center></p>
 </form>
-{{#if listadoPOIs}}
 	<table style ="padding-top:5px">
 	 <td >
-	<div style="overflow-y: auto; max-height: 500px">
+	<div style="overflow-y: auto; max-height: 500px; min-height:500px">
+	{{#unless listadoPOIs}}<center><div id="loader" class="loader" style="display:none;margin-top:100"></div></center>{{/unless}}
 	{{#listadoPOIs}}
 	  <div id="{{id}}" class="hoovereable" style="height:100px">
 	  <table>
@@ -40,7 +40,6 @@
 	<div id="map" style="height: 500px;  width: 1000px;"></div>
 	</td>
 	</table>
-	{{/if}}
 	<script>
 
 function initMap() {
