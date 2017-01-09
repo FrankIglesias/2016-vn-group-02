@@ -4,40 +4,32 @@
 .hoovereable:hover {
     background-color:#F5F5F5;
 }
+#vermas:hover {
+    text-decoration:underline;
+}
 </style>
 
 <form method="get" action="/usuarioBusqueda" id="myForm">
 		<p class="login_text" style="color:#454545; margin-right:370px "><center>
-<input type="text" style="border-radius:5px; width: 80%" name="nombreFiltro" placeholder="  &#191;Que POI quer&eacute;s buscar?">
-<input type="submit" id="buscar" class="btn_Detalles" value="Buscar"></center></p>
+<input type="text" style="border-radius:5px; width: 80% ;height:40px" name="nombreFiltro" placeholder="  &#191;Que POI quer&eacute;s buscar?">
+<input type="submit" id="buscar" class="btn_Detalles" style="height:40px" value="Buscar"></center></p>
 </form>
-
+{{#if listadoPOIs}}
 	<table style ="padding-top:5px">
 	 <td >
 	<div style="overflow-y: auto; max-height: 500px">
 	{{#listadoPOIs}}
 	  <div id="{{id}}" class="hoovereable" style="height:130px">
-	  <center>
 	  <table>
 	   <tr>
-	   <td style="padding-top:30px">
-	   <t class="login_text">Nombre:</t><br>
-	   </td>
-	   <td style="padding-top:30px"><t class="login_text">{{nombre}}</t></td>
+	   <td style="padding-top:30px">  <a href="/masDetallePoi?id={{id}}" style="text-decoration:none">
+	   <t class="login_text" id="vermas" style="font-weight:400;font-size:25px">{{nombre}}</t></a></td>
 	   </tr>
 	   <tr>
-	   <td>
-		<t class="login_text">Direccion:</t><br></td>
-		   <td><t class="login_text">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
+	   <td><img src="img/localizacion.png" height="15px" style= "margin-left: 10px;"/></td>
+		   <td><t class="login_text" style="color:#888;margin-left:10px">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
-	   </table>
-	   <a href="/masDetallePoi?id={{id}}">
-		<img src="img/ver_mas.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
-		<a href="/editar_poi?id={{id}}">
-		</a>
-		<a onClick="myFunction({{id}})"></a>
-		</center>
-		
+	   </table>	
 		</div>
 	{{/listadoPOIs}}
 		{{#if listadoPOIs}}
@@ -49,6 +41,7 @@
 	<div id="map" style="height: 500px;  width: 1000px;"></div>
 	</td>
 	</table>
+	{{/if}}
 	<script>
 
 function initMap() {
@@ -87,5 +80,5 @@ $('#{{id}}').on('click',function() {
 		async defer></script>
 		{{/partial}}
 
-{{#partial "titulo"}}Buscador de POIs{{/partial}}
+{{#partial "titulo"}}Buscador de POIS{{/partial}}
 {{> layoutUser.hbs }}
