@@ -19,15 +19,14 @@
 	 <td >
 	<div style="overflow-y: auto; max-height: 500px">
 	{{#listadoPOIs}}
-	  <div id="{{id}}" class="hoovereable" style="height:130px">
+	  <div id="{{id}}" class="hoovereable" style="height:100px">
 	  <table>
 	   <tr>
-	   <td style="padding-top:30px">  <a href="/masDetallePoi?id={{id}}" style="text-decoration:none">
+	   <td style="padding-top:10px">  <a href="/masDetallePoi?id={{id}}" style="text-decoration:none">
 	   <t class="login_text" id="vermas" style="font-weight:400;font-size:25px">{{nombre}}</t></a></td>
 	   </tr>
 	   <tr>
-	   <td></td>
-		   <td><img src="img/localizacion.png" height="15px" style= "margin-bottom:-2px;margin-left: 10px;"/><t class="login_text" style="color:#888;margin-left:10px;">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
+		   <td><img src="img/localizacion.png" height="15px" style= "margin-left:10px;margin-bottom:-2px;"/><t class="login_text" style="color:#888;margin-left:10px;">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
 	   </table>	
 		</div>
