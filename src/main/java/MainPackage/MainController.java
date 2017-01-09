@@ -28,7 +28,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "Frank.hbs");
 	}
-
+	
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
 		return new ModelAndView(null, "Administrador.hbs");
@@ -74,7 +74,10 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return new ModelAndView(viewModel, "masDetallePoi.hbs");
 
 	}
-
+	public ModelAndView nuevoPoi(Request request, Response response) {
+		System.out.println("Nuevo poi");
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();

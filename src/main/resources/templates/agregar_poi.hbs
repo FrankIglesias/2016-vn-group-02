@@ -4,12 +4,24 @@
 
 <center><table style="margin-top: 70px;">
   <tbody >
-<form method="post" action="/agregar_poi">
+<form action="/agregar_poi">
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
     <td>
     	<input type="text" name="nombre">
     </td>
+    </tr>
+    <tr>
+    <td><p class="historial_tabla_textos"> Tipo:</p></td>
+    <td>
+		<select style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro">
+		  <option value="">-</option>
+		  <option value="banco">Banco</option>
+		  <option value="cgp">CGP</option>
+		  <option value="colectivo">Colectivo</option>
+		  <option value="local">Local</option>
+		  </select>
+	</td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"><strong>Direcci&oacute;n</strong></p></td>
@@ -93,7 +105,7 @@
 </table>
 	
     <input type="submit" class="btn_Detalles" value= "Aceptar">
-	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button>
+	<button class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button>
 	 </form></center>
 <script>
 function setNewCenter(lat,lng){
