@@ -45,7 +45,9 @@ public class CGP extends POI {
 		return elServicioBuscado;
 
 	}
-
+public boolean listaVacia(){
+	return servicios.isEmpty();
+}
 	public boolean estaDisponible(LocalDateTime horario) {
 
 		return servicios.stream().anyMatch(unServicio -> unServicio.estaDisponible(horario));

@@ -92,7 +92,7 @@
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Nuevas coordenadas: </strong></p></td>
     <td><input id="lng" name="lng" type="text" value="" required>
-    <input  id="lat" name "lat" type="text" value="" required><br>
+    <input  id="lat" name="latitud" type="text" value="" required><br>
 
     <center><button type="button" id="ver" class="btn_Detalles"> Ver</button>
     </td>
@@ -126,7 +126,6 @@ var provincia =  document.getElementById('provincia').value;
 var address = altura + " " + calle + " " + provincia;
 geocoder.geocode({'address': address}, function(results, status) {
 if (status === google.maps.GeocoderStatus.OK) {
-  alert('Geocode was not successful for the following reason: ' + status);
   document.getElementById('lat').value = results[0].geometry.location.lat();
   document.getElementById('lng').value = results[0].geometry.location.lng();
   var marker = new google.maps.Marker({

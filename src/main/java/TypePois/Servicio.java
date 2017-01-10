@@ -1,4 +1,5 @@
 package TypePois;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,24 +24,25 @@ public class Servicio {
 
 	@Id
 	@GeneratedValue
-	@Column(name="idServicio")
+	@Column(name = "idServicio")
 	private int id;
-	
-	
-	@OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private HorarioYDia horario;
-	
-	
+
 	public String nombreDelServicio;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="idServicio")
+	@JoinColumn(name = "idServicio")
 	protected List<Feriado> feriados;
 
 	public Servicio(String nombre, HorarioYDia agenda, List<Feriado> feriados) {
 		nombreDelServicio = nombre;
 		horario = agenda;
 		this.feriados = feriados;
+	}
+
+	public Servicio() {
 	}
 
 	public HorarioYDia getHorario() {

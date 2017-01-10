@@ -17,7 +17,9 @@
     <tr><td><p class=" historial_tabla_textos"> <strong> Provincia: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p></td></tr>
     <tr><td><p class=" historial_tabla_textos"> <strong> Pais: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p></td></tr>
      {{#if point.rubro.nombre}} <tr><td><p class=" historial_tabla_textos"> <strong> Rubro: </strong> </p></td><td><p class=" historial_tabla_textos"> {{point.rubro.nombre}} </p></td></tr> {{/if}}
-      {{#if servicios}} <tr><td><p class=" historial_tabla_textos"> <strong> Servicios: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#servicios}} {{nombreDelServicio}} {{/servicios}} </p></td></tr> {{/if}}
+       {{#if "servi"}}<tr><td><p class=" historial_tabla_textos"> <strong> Servicios: </strong> </p></td>
+     {{#each "servi"}}<td><p class="historial_tabla_textos">{{this.nombreDelSerivicio}}</p></td>{{/each}}
+      </tr>{{/if}}
   {{#if linea}} <tr><td><p class=" historial_tabla_textos"> <strong> Linea: </strong> </p></td><td><p class=" historial_tabla_textos"> {{linea}} </p></td></tr> {{/if}}
     {{/POI}}
      </tbody>

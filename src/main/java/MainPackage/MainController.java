@@ -77,6 +77,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		String idpoi = request.queryParams("id");
 		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
 		HashMap<String, Object> viewModel = new HashMap<>();
+		if(unpoi.getClass().toString().endsWith("TypePois.CGP")){
+			viewModel.put("servi",((TypePois.CGP) unpoi).getServicios());
+		}
+		try{
+		System.out.println(((TypePois.CGP) unpoi).getServicios().get(0).getNombreDelServicio());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		viewModel.put("POI", unpoi);
 		return new ModelAndView(viewModel, "masDetallePoi.hbs");
 
@@ -84,7 +92,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
 		System.out.println("Agregando poi " + request.queryParams("nombre"));
-		System.out.println(request.queryParams("lat") + request.queryParams("lng"));
+		System.out.println(request.queryParams("latitud") + request.queryParams("lng"));
 		POI poiAPersistir = new Local();
 		switch (request.queryParams("tipoFiltro")) {
 		case "local":
@@ -102,14 +110,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				request.queryParams("codigo_postal"), Integer.parseInt(request.queryParams("comuna")));
 		Localidad unaLoca = new Localidad(request.queryParams("ciudad"), request.queryParams("provincia"),
 				request.queryParams("pais"));
-		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("lat")),
+		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("latitud")),
 				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
 		
 		poiAPersistir.setGeo(unaGeo);
 		poiAPersistir.setNombre(request.queryParams("nombre"));
 
 		RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
-		return new ModelAndView(null, "nuevo_poi.hbs");
+		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
 	public ModelAndView buscarTerminal(Request request, Response response) {
