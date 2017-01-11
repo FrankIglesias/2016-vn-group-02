@@ -10,25 +10,27 @@
   </select>
 <a href="/agregar_accion" style="text-decoration: none;"><img src="img/nueva_accion.png" height="30px" style="margin-top: auto;"/>  Nueva acci&oacuten</a>
 </center>
+<form action="/borrar_accion">
+     {{#terminal}}
+     <input type="text"  name="id" value="{{nombre}}">
+     {{/terminal}}
+     
 <center>
   <table style="margin-top: 40px;">
      <tr>
 		  <td><p class="historial_tabla" style=" height:40px; width:600px;"> Lista de acciones</p></td>   
      </tr>
+     {{#acciones}}
      <tr>
      <td>
- {{#acciones}}
-     <div><p class=" historial_tabla_textos"> {{nombre}}
-		  		<a href="borrar_accion?id={{id}}&nombre={{nombre}}"><img src="img/borrar.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a></p>
-		  </div>
-{{/acciones}}
+ <center><input type="checkbox" name="name" value="{{nombre}}" style="margin-top:30px;">{{nombre}}<br></center> 		  		
 		 </td>
 		  </tr>
-		      
+{{/acciones}}		      
 </table></center>
-
-   <center>
-    <button type="button" onclick="goBack()" class="btn_Detalles" style="margin-left: 800px;margin-top:100px; width:150px"> Atras </button></center>		
+<center><input type="submit" class="btn_Detalles" value="Borrar Acciones">
+<button type="button" onclick="goBack()" class="btn_Detalles" style="margin-top:100px; width:150px"> Atras </button></center>
+</form>		
 {{/partial}}
 
 {{#partial "titulo"}}Administrador de Acciones{{/partial}}
