@@ -35,6 +35,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "Frank.hbs");
 	}
+	
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
@@ -119,7 +120,10 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-
+	public ModelAndView modificarTerminal(Request request, Response response) {
+		System.out.println("Modificar Terminal");
+		return new ModelAndView(null, "	.hbs");
+	}
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
@@ -161,7 +165,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
-		return new ModelAndView(null, "admin_acciones.hbs");
+		String nombre = request.queryParams("nombre");
+		 Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
+		 if(terminal!=null){
+			 HashMap<String, Object> viewModel = new HashMap<>();
+			 viewModel.put("acciones", terminal.getListaDeAcciones());
+			 return new ModelAndView(viewModel, "admin_acciones.hbs");
+		 }
+		 return new ModelAndView(null, "admin_terminales.hbs");
 	}
 
 	public ModelAndView mostrarEditarPoi(Request request, Response response) {

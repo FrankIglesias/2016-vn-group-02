@@ -3,7 +3,7 @@
 
 {{#partial "contenido"}}
 {{#terminales}}
-<form action="modificar_terminal">
+<form action="/modificar_terminal">
 <center><table style="margin-top: 70px;">
 
   <tbody>
@@ -21,11 +21,10 @@
 	  </tr>
 	</table>
    <br>
-    <center>
+    <center>	
     <input type="submit" class="btn_Detalles" value="Aceptar">
-    <button  class="btn_Detalles" onclick="
-    window.location.href ='/admin_acciones?nombre={{nombre}}';
-">Administrar Acciones</button>   
+    <a href="/admin_acciones?nombre={{nombre}}">
+    <button type="button" class="btn_Detalles">Administrar Acciones</button></a>   
     <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button>
     </center>
     </form>		
