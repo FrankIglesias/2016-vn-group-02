@@ -35,7 +35,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Mostrar Main");
 		return new ModelAndView(null, "Frank.hbs");
 	}
-	
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
@@ -78,12 +77,11 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		String idpoi = request.queryParams("id");
 		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
 		HashMap<String, Object> viewModel = new HashMap<>();
-		if(unpoi.getClass().toString().endsWith("TypePois.CGP")){
-			viewModel.put("servi",((TypePois.CGP) unpoi).getServicios());
+		if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
+			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
 		}
 		viewModel.put("POI", unpoi);
 		return new ModelAndView(viewModel, "masDetallePoi.hbs");
-
 	}
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
@@ -107,10 +105,10 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				request.queryParams("pais"));
 		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("latitud")),
 				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
-		
+
 		poiAPersistir.setGeo(unaGeo);
 		poiAPersistir.setNombre(request.queryParams("nombre"));
-		
+
 		poiAPersistir.addPalabrasClaves(request.queryParams("tipoFiltro"));
 		poiAPersistir.addPalabrasClaves(poiAPersistir.getNombre());
 		poiAPersistir.addPalabrasClaves(request.queryParams("calle_principal"));
@@ -120,10 +118,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-	public ModelAndView modificarTerminal(Request request, Response response) {
-		System.out.println("Modificar Terminal");
-		return new ModelAndView(null, "	.hbs");
-	}
+
 	public ModelAndView buscarTerminal(Request request, Response response) {
 		System.out.println("Buscar Terminal");
 		HashMap<String, Object> viewModel = new HashMap<>();
@@ -166,13 +161,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
 		String nombre = request.queryParams("nombre");
-		 Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
-		 if(terminal!=null){
-			 HashMap<String, Object> viewModel = new HashMap<>();
-			 viewModel.put("acciones", terminal.getListaDeAcciones());
-			 return new ModelAndView(viewModel, "admin_acciones.hbs");
-		 }
-		 return new ModelAndView(null, "admin_terminales.hbs");
+		HashMap<String, Object> viewModel = new HashMap<>();
+		try{
+		Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
+		viewModel.put("acciones", terminal.getListaDeAcciones());
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+		
+		return new ModelAndView(viewModel, "admin_acciones.hbs");
 	}
 
 	public ModelAndView mostrarEditarPoi(Request request, Response response) {
