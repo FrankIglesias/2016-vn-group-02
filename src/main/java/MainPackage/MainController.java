@@ -1,6 +1,12 @@
 package MainPackage;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +19,10 @@ import Controllers.ControllerRepoTerminales;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
+import DesignDreamTeamTime.GestorIntervalos;
+import DesignDreamTeamTime.HorarioYDia;
+import DesignDreamTeamTime.IntervaloHorario;
+import HashMapeameEsta.HashMapeameEsta;
 import Repositorios.Buscador;
 import Repositorios.Busqueda;
 import Repositorios.RepoPOIs;
@@ -30,6 +40,7 @@ import spark.Response;
 public class MainController implements WithGlobalEntityManager, TransactionalOps {
 	private String nombreUsuario;
 	private Terminal terminal;
+	HashMapeameEsta agenda = new HashMapeameEsta();
 
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
@@ -115,10 +126,52 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("ciudad"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("provincia"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
+
+		List<String> dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
 		
-		System.out.println(request.queryParams("dias"));
-		//RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
+		dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));
+		HorarioYDia horario = new HorarioYDia(agenda);
+		poiAPersistir.setHorario(horario);
+	
+		try {
+			RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		agenda = new HashMapeameEsta(); //limpio agenda global para proximos pois
 		return new ModelAndView(null, "admin_pois.hbs");
+	}
+	
+	DayOfWeek dayOfWeek(String unDia) {
+		switch(unDia) {
+		case "lunes" : return DayOfWeek.MONDAY;
+		case "martes" : return DayOfWeek.TUESDAY;
+		case "miercoles" : return DayOfWeek.WEDNESDAY;
+		case "jueves" : return DayOfWeek.THURSDAY;
+		case "viernes" : return DayOfWeek.FRIDAY;
+		case "sabado" : return DayOfWeek.SATURDAY;
+		case "domingo" : return DayOfWeek.SUNDAY;
+		}
+		
+		return null;
+	}
+
+	void guardarHorarioDelDia(String unDia, Request request) {
+		
+		GestorIntervalos gestor = new GestorIntervalos();
+		List<IntervaloHorario> intervalos = new ArrayList<IntervaloHorario>();
+		String desde = request.queryParams("desde_" + unDia);
+		String hasta = request.queryParams("hasta_" + unDia);
+
+		IntervaloHorario intervalo = new IntervaloHorario(
+				LocalDateTime.now().withHour(Integer.parseInt(desde.split(":")[0])).withMinute(Integer.parseInt(desde.split(":")[1])),
+				LocalDateTime.now().withHour(Integer.parseInt(hasta.split(":")[0])).withMinute(Integer.parseInt(hasta.split(":")[1])));
+		
+		intervalos.add(intervalo);
+		gestor.setIntervalosHorarios(intervalos);
+		agenda.put(dayOfWeek(unDia), gestor);
+
 	}
 
 	public ModelAndView buscarTerminal(Request request, Response response) {
@@ -164,13 +217,13 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Administrar acciones por terminal");
 		String nombre = request.queryParams("nombre");
 		HashMap<String, Object> viewModel = new HashMap<>();
-		try{
-		Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
-		viewModel.put("acciones", terminal.getListaDeAcciones());
-		}catch(Exception e ){
+		try {
+			Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
+			viewModel.put("acciones", terminal.getListaDeAcciones());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return new ModelAndView(viewModel, "admin_acciones.hbs");
 	}
 
