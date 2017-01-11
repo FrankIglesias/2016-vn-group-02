@@ -190,4 +190,20 @@ public abstract class POI {
 		this.palabrasClave = palabrasClave;
 	}
 
+	public HorarioYDia getHorario() {
+		return horario;
+	}
+
+	public void setHorario(HorarioYDia horario) {
+		this.horario = horario;
+	}
+
+	public List<Feriado> getFeriados() {
+		return feriados;
+	}
+
+	public void setFeriados(List<Feriado> feriados) {
+		this.feriados = feriados;
+	}
+
 }
