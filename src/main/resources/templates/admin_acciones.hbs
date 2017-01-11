@@ -3,7 +3,7 @@
 <center>
 <br>
 <br>
-<t class="login_text"> Seleccione el tipo de acci&oacute;n a agregar: </t>
+<t class="login_text" style="margin-top:30px"> Seleccione el tipo de acci&oacute;n a agregar: </t>
 <select id="Seleccion" style="margin-right: 30px; ;width:200px; height:20px;" name="tipoFiltro">
     <option value="vacio">-</option>
 		  <option value="banco">Mandar mail a admin</option>
@@ -29,10 +29,10 @@
 {{/acciones}}		      
 </table></center>
 <center><input type="submit" class="btn_Detalles" value="Borrar Acciones">
-<button type="button" onclick="goBack()" class="btn_Detalles" style="margin-top:100px; width:150px"> Atras </button></center>
+<button type="button" onclick="goBack()" class="btn_Detalles" style="margin-top:100px; width:150px"> Atr&aacute;s </button></center>
 </form>		
 {{/partial}}
 
-{{#partial "titulo"}}Administrador de Acciones{{/partial}}
+{{#partial "titulo"}}Administrador de Acciones de Terminal {{#terminal}}{{nombre}}{{/terminal}}{{/partial}}
 {{#partial "imagen"}}img/diagonal.jpg{{/partial}}
 {{> layoutAdmin.hbs}}

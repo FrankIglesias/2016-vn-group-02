@@ -1,0 +1,39 @@
+
+
+
+{{#partial "contenido"}}
+{{#terminales}}
+<form action="/modificar_terminal">
+<center><table style="margin-top: 70px;">
+
+  <tbody>
+    <tr>
+    <td><p class=" historial_tabla_textos"> Nombre:</p></td>
+    <td>
+    	<input type="text"  name="nombre">
+    </td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos">Comuna:</p></td>
+    <td>
+    	<input type="number" min="1" name="comuna">
+    </td>
+	  </tr>
+	  <tr>
+	  
+	  </tr>
+	</table>
+   <br>
+    <center>	
+    <input type="submit" class="btn_Detalles" value="Aceptar">
+    <a href="/admin_acciones?nombre={{nombre}}">
+    <button type="button" class="btn_Detalles">Administrar Acciones</button></a>   
+    <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button>
+    </center>
+    </form>		
+{{/terminales}}
+{{/partial}}
+
+{{#partial "titulo"}}Nueva Terminal{{/partial}}
+{{#partial "imagen"}}img/diagonal.jpg{{/partial}}
+{{> layoutAdmin.hbs}}
