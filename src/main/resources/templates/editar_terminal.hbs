@@ -3,29 +3,32 @@
 
 {{#partial "contenido"}}
 {{#terminales}}
+<form action="modificar_terminal">
 <center><table style="margin-top: 70px;">
-  <tbody >
+
+  <tbody>
     <tr>
     <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
     <td>
-    	<input type="text" value="{{nombre}}">
+    	<input type="text" value="{{nombre}}"  name="nombre">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
     <td>
-    	<input type="number" min="1" value="{{comuna}}">
+    	<input type="number" min="1" value="{{comuna}}" name="comuna">
     </td>
 	  </tr>
 	</table>
    <br>
     <center>
-    <button type="button" class="btn_Detalles" > Aceptar </button>
+    <input type="submit" class="btn_Detalles" value="Aceptar">
     <button  class="btn_Detalles" onclick="
     window.location.href ='/admin_acciones?nombre={{nombre}}';
 ">Administrar Acciones</button>   
     <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button>
-    </center>		
+    </center>
+    </form>		
 {{/terminales}}
 {{/partial}}
 

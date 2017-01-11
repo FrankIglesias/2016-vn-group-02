@@ -77,7 +77,6 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
 		entityManager().remove(unaTerminal);
-		entityManager().flush();
 	}
 
 	public void add(Terminal terminal) {
