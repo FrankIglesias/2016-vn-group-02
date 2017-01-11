@@ -115,7 +115,9 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("ciudad"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("provincia"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
-		RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
+		
+		System.out.println(request.queryParams("dias"));
+		//RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
