@@ -80,11 +80,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		if(unpoi.getClass().toString().endsWith("TypePois.CGP")){
 			viewModel.put("servi",((TypePois.CGP) unpoi).getServicios());
 		}
-		try{
-		System.out.println(((TypePois.CGP) unpoi).getServicios().get(0).getNombreDelServicio());
-		}catch (Exception e){
-			e.printStackTrace();
-		}
 		viewModel.put("POI", unpoi);
 		return new ModelAndView(viewModel, "masDetallePoi.hbs");
 
@@ -92,7 +87,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
 		System.out.println("Agregando poi " + request.queryParams("nombre"));
-		System.out.println(request.queryParams("latitud") + request.queryParams("lng"));
 		POI poiAPersistir = new Local();
 		switch (request.queryParams("tipoFiltro")) {
 		case "local":
