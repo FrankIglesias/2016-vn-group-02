@@ -18,9 +18,9 @@
      <tr>
      <td>
  {{#acciones}}
-     <li><p class=" historial_tabla_textos"> {{descripcion}}
-		  		<img src="img/borrar.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></p>
-		  </li>
+     <div><p class=" historial_tabla_textos"> {{nombre}}
+		  		<a href="borrar_accion?id={{id}}&nombre={{nombre}}"><img src="img/borrar.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a></p>
+		  </div>
 {{/acciones}}
 		 </td>
 		  </tr>
