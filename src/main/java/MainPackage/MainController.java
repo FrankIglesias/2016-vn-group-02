@@ -46,7 +46,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
-		return new ModelAndView(null, "Administrador.hbs");	
+		return new ModelAndView(null, "Administrador.hbs");
 	}
 
 	public Void borrarTerminal(Request request, Response response) {
@@ -84,17 +84,35 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		System.out.println("Mostrar mas detalles");
 		String idpoi = request.queryParams("id").trim();
 		HashMap<String, Object> viewModel = new HashMap<>();
-		try{
-		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
-		
-		if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
-			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
-		}		
-		viewModel.put("POI", unpoi);
-		}catch(Exception e ){
+		try {
+			POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
+
+			if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
+				viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
+			}
+			viewModel.put("POI", unpoi);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView(viewModel, "masDetalleUsuario.hbs");
+	}
+
+	public ModelAndView modificarTerminal(Request request, Response response) {
+		System.out.println("Guardar una terminal");
+		String nombre = request.queryParams("nombre");
+		String nombreViejo = request.queryParams("nombreViejo");
+		String comuna = request.queryParams("comuna");
+		try {
+			Terminal nuevaTerminal;
+			Terminal terminalAModificar = RepoTerminales.getInstance().buscameUnaTerminal(nombreViejo);
+			RepoTerminales.getInstance().eliminarUnaTerminal(terminalAModificar);
+			nuevaTerminal = new Terminal(nombre, Integer.parseInt(comuna));
+			terminalAModificar.getListaDeAcciones().forEach(a -> nuevaTerminal.addAccion(a));
+			RepoTerminales.getInstance().add(nuevaTerminal);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView(null, "admin_terminales.hbs");
 	}
 
 	public ModelAndView masDetalleAdministrador(Request request, Response response) {
@@ -236,15 +254,19 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		}
 		return new ModelAndView(viewModel, "editar_terminal.hbs");
 	}
+
 	public ModelAndView agregarTerminal(Request request, Response response) {
 		System.out.println("Se agrego terminal");
-		//ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombre, comuna, latitud, longitud)
+		ControllerRepoTerminales.getInstance().agregarUnaTerminal(request.queryParams("nombre"),
+				Integer.parseInt(request.queryParams("comuna")), "0", "0");
 		return new ModelAndView(null, "admin_terminales.hbs");
 	}
+
 	public ModelAndView nuevaTerminal(Request request, Response response) {
 		System.out.println("Nueva terminal");
 		return new ModelAndView(null, "nueva_terminal.hbs");
 	}
+
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
 		String nombre = request.queryParams("nombre");
@@ -328,12 +350,12 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	}
 
 	public ModelAndView buscarPoisAdmin(Request request, Response response) {
-		System.out.println("FiltrarNombrePois");
+		System.out.println("Busqueda de POIs por admin");
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("nombreFiltro");
 		String tipoFiltro = request.queryParams("tipoFiltro");
 		try {
-			List<POI> pois = new Controllers.ControllerRepoPoi().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+			List<POI> pois = ControllerRepoPoi.getInstance().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
 			viewModel.put("listadoPOIs", pois);
 		} catch (Exception e) {
 

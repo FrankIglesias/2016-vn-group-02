@@ -29,6 +29,7 @@ public class Main {
 		get("/admin_terminales", home::mostrarTerminales, engine);
 		get("/buscar_terminales", home::buscarTerminal, engine);
 		get("/editar_terminal", home::mostrarEditarTerminal, engine);
+		get("/modificar_terminal", home::modificarTerminal, engine);
 		get("/admin_acciones", home::mostrarAdminAcciones, engine);
 		get("/nueva_terminal", home::nuevaTerminal, engine);
 		get("/agregar_terminal", home::agregarTerminal, engine);
@@ -36,17 +37,20 @@ public class Main {
 		
 		get("/admin_pois", home::mostrarPois, engine);
 		get("/buscar_pois", home::buscarPoisAdmin, engine);
+		
 		get("/editar_poi", home::editarPoi, engine);
 		delete("/borrar_poi", home::borrarPoi);
-		get("/nuevo_poi", home::agregarPoi, engine);
-		get("/masDetallePoi",home::masDetalleAdministrador,engine);
-		get("/masDetallePoiUser",home::masDetalleUsuario,engine);
 		
+		get("/masDetallePoi",home::masDetalleAdministrador,engine);
+		
+		
+		get("/nuevo_poi", home::agregarPoi, engine);
 		get("/agregar_poi",home::nuevoPoi,engine);
 		
 		get("/usuarioBusqueda", home::buscarPois, engine);
+		get("/masDetallePoiUser",home::masDetalleUsuario,engine);
 		get("/ver_mas", home::verMas, engine);
-
+		
 		get("/admin_consultas", home::mostrarConsultas, engine);
 		get("/buscar_consultas", home::buscarBusquedas, engine);
 		get("/ver_pois_consultas", home::verPoisConsultas, engine);
