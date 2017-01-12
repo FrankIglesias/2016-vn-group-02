@@ -83,7 +83,24 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return null;
 	}
 
-	public ModelAndView masDetalle(Request request, Response response) {
+	public ModelAndView masDetalleUsuario(Request request, Response response) {
+		System.out.println("Mostrar mas detalles");
+		String idpoi = request.queryParams("id").trim();
+		HashMap<String, Object> viewModel = new HashMap<>();
+		try{
+		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
+		
+		if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
+			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
+		}		
+		viewModel.put("POI", unpoi);
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+		return new ModelAndView(viewModel, "masDetalleUsuario.hbs");
+	}
+
+	public ModelAndView masDetalleAdministrador(Request request, Response response) {
 		System.out.println("Mostrar mas detalles");
 		String idpoi = request.queryParams("id");
 		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
@@ -92,7 +109,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
 		}
 		viewModel.put("POI", unpoi);
-		return new ModelAndView(viewModel, "masDetallePoi.hbs");
+		return new ModelAndView(viewModel, "masDetalleAdministrador.hbs");
 	}
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
@@ -128,46 +145,56 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
 
 		List<String> dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
-		
+
 		dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));
 		HorarioYDia horario = new HorarioYDia(agenda);
 		poiAPersistir.setHorario(horario);
-	
+
 		try {
 			RepoPOIs.getInstance().persistirEnHibernate(poiAPersistir);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		agenda = new HashMapeameEsta(); //limpio agenda global para proximos pois
+
+		agenda = new HashMapeameEsta(); // limpio agenda global para proximos
+										// pois
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
-	
+
 	DayOfWeek dayOfWeek(String unDia) {
-		switch(unDia) {
-		case "lunes" : return DayOfWeek.MONDAY;
-		case "martes" : return DayOfWeek.TUESDAY;
-		case "miercoles" : return DayOfWeek.WEDNESDAY;
-		case "jueves" : return DayOfWeek.THURSDAY;
-		case "viernes" : return DayOfWeek.FRIDAY;
-		case "sabado" : return DayOfWeek.SATURDAY;
-		case "domingo" : return DayOfWeek.SUNDAY;
+		switch (unDia) {
+		case "lunes":
+			return DayOfWeek.MONDAY;
+		case "martes":
+			return DayOfWeek.TUESDAY;
+		case "miercoles":
+			return DayOfWeek.WEDNESDAY;
+		case "jueves":
+			return DayOfWeek.THURSDAY;
+		case "viernes":
+			return DayOfWeek.FRIDAY;
+		case "sabado":
+			return DayOfWeek.SATURDAY;
+		case "domingo":
+			return DayOfWeek.SUNDAY;
 		}
-		
+
 		return null;
 	}
 
 	void guardarHorarioDelDia(String unDia, Request request) {
-		
+
 		GestorIntervalos gestor = new GestorIntervalos();
 		List<IntervaloHorario> intervalos = new ArrayList<IntervaloHorario>();
 		String desde = request.queryParams("desde_" + unDia);
 		String hasta = request.queryParams("hasta_" + unDia);
 
 		IntervaloHorario intervalo = new IntervaloHorario(
-				LocalDateTime.now().withHour(Integer.parseInt(desde.split(":")[0])).withMinute(Integer.parseInt(desde.split(":")[1])),
-				LocalDateTime.now().withHour(Integer.parseInt(hasta.split(":")[0])).withMinute(Integer.parseInt(hasta.split(":")[1])));
-		
+				LocalDateTime.now().withHour(Integer.parseInt(desde.split(":")[0]))
+						.withMinute(Integer.parseInt(desde.split(":")[1])),
+				LocalDateTime.now().withHour(Integer.parseInt(hasta.split(":")[0]))
+						.withMinute(Integer.parseInt(hasta.split(":")[1])));
+
 		intervalos.add(intervalo);
 		gestor.setIntervalosHorarios(intervalos);
 		agenda.put(dayOfWeek(unDia), gestor);
@@ -253,17 +280,13 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView mostrarUser(Request request, Response response) {
 		System.out.println("Se loggeo el usuario " + request.queryParams("nombreFiltro"));
 		nombreUsuario = request.queryParams("nombreFiltro");
-		String latitud = request.queryParams("latitud");
-		String longitud = request.queryParams("longitud");
-		System.out.println("Latitud: " + latitud + " Longitud: " + longitud);
-		terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
-		if (terminal == null) {
-			try {
-				terminal = ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombreUsuario, 1, latitud,
-						longitud);
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
+			if (terminal == null) {
+				return new ModelAndView(null, "Frank.hbs");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return new ModelAndView(null, "usuario.hbs");

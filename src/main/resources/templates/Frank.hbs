@@ -3,7 +3,7 @@
 <link rel="shortcut icon" type="image/jpeg" href="img/favicon.jpeg"/>
 	<meta charset="utf-8">
 	<meta name="robots" content="Index , Follow">
-	<meta name="google" content="nositelinkssearchbox"> <!-- Google no muestra la barra de busqueda -->
+	<meta name="google" content="nositelinkssearchbox">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta name="description" content="Sistema de búsqueda de POIS">
 	<meta name="keywords" content="Sistema; Búsqueda; Pois">
@@ -18,10 +18,9 @@
   <div  class="login_text">Usuario</div>
    <input type="text" id="nombreDeUsuario" class="campos" >
   <div  class="login_text">Contraseña</div>
-  <input type="password" id="contraUsuario" onkeydown = "if (event.keyCode == 13)
+  <input type="password" id="contraUsuario" onkeydown="if(event.keyCode == 13)
 									 document.getElementById('btnEntrar').click()" class="campos" >
-
-  <button id= "btnEntrar" hidden="hidden" onClick="fucionValidarUsuario()" class="boton">Entrar</button>
+  <button id="btnEntrar" onClick="fucionValidarUsuario()" class="boton">Entrar</button>
 </div>
 <video width="1024" height="720" style=" position: fixed;
     top: 50%;
@@ -36,7 +35,7 @@
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     background: url(polina.jpg) no-repeat;
-    background-size: cover; " autoplay muted>
+    background-size: cover; " autoplay muted loop>
   <source src="img/movie.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>

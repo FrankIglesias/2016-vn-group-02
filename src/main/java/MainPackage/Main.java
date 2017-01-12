@@ -5,6 +5,8 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.staticFileLocation;
 
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
+
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -15,7 +17,6 @@ public class Main {
 		port(puerto);
 
 		System.out.println("Iniciando servidor");
-
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 		MainController home = new MainController();
 
@@ -36,8 +37,9 @@ public class Main {
 		get("/editar_poi", home::editarPoi, engine);
 		delete("/borrar_poi", home::borrarPoi);
 		get("/nuevo_poi", home::agregarPoi, engine);
-		get("/masDetallePoi",home::masDetalle,engine);
-		// SI ES UNA MIERDA... PERO AL PARECER SPARK NO ACEPTA POST
+		get("/masDetallePoi",home::masDetalleAdministrador,engine);
+		get("/masDetallePoiUser",home::masDetalleUsuario,engine);
+		
 		get("/agregar_poi",home::nuevoPoi,engine);
 		
 		get("/usuarioBusqueda", home::buscarPois, engine);
