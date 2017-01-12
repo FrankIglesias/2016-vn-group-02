@@ -30,6 +30,8 @@ public class Main {
 		get("/buscar_terminales", home::buscarTerminal, engine);
 		get("/editar_terminal", home::mostrarEditarTerminal, engine);
 		get("/admin_acciones", home::mostrarAdminAcciones, engine);
+		get("/nueva_terminal", home::nuevaTerminal, engine);
+		get("/agregar_terminal", home::agregarTerminal, engine);
 		delete("/borrar_terminal", home::borrarTerminal);
 		
 		get("/admin_pois", home::mostrarPois, engine);

@@ -1,10 +1,7 @@
 package MainPackage;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,7 +46,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
-		return new ModelAndView(null, "Administrador.hbs");
+		return new ModelAndView(null, "Administrador.hbs");	
 	}
 
 	public Void borrarTerminal(Request request, Response response) {
@@ -239,7 +236,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		}
 		return new ModelAndView(viewModel, "editar_terminal.hbs");
 	}
-
+	public ModelAndView agregarTerminal(Request request, Response response) {
+		System.out.println("Se agrego terminal");
+		//ControllerRepoTerminales.getInstance().agregarUnaTerminal(nombre, comuna, latitud, longitud)
+		return new ModelAndView(null, "admin_terminales.hbs");
+	}
+	public ModelAndView nuevaTerminal(Request request, Response response) {
+		System.out.println("Nueva terminal");
+		return new ModelAndView(null, "nueva_terminal.hbs");
+	}
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
 		System.out.println("Administrar acciones por terminal");
 		String nombre = request.queryParams("nombre");
