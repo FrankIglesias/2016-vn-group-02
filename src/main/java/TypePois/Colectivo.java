@@ -43,5 +43,8 @@ public class Colectivo extends POI {
 		
 		return "Colectivo";
 	}
+	public String getLinea(){
+		return this.linea;	
+	}
 
 }

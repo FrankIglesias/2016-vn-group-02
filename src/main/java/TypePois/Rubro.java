@@ -30,5 +30,8 @@ public class Rubro {
 	public boolean estasCercaDeUnPunto(Geolocalizacion point, Local miLocal) {
 		return miLocal.getDireccion().distanciaCon(point) < radioDeCercania;
 	}
-
+	public String getNombre(){
+		
+		return nombre;
+	}
 }
