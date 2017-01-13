@@ -255,9 +255,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView agregarTerminal(Request request, Response response) {
 		System.out.println("Se agrego terminal");
+		try{
 		ControllerRepoTerminales.getInstance().agregarUnaTerminal(request.queryParams("nombre"),
-				Integer.parseInt(request.queryParams("comuna")), "0", "0");
+				Integer.parseInt(request.queryParams("comuna").trim()),request.queryParams("latitud").trim(),request.queryParams("longitud").trim());
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
 		return new ModelAndView(null, "admin_terminales.hbs");
+		
 	}
 
 	public ModelAndView nuevaTerminal(Request request, Response response) {

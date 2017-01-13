@@ -20,7 +20,8 @@
    <td> <div id="floating-panel" style="z-index: 5; margin-top:10px; margin-bottom:30px; float:left">
       <center>
       <input id="address" type="textbox" placeholder=" Lugar de la terminal"><br>
-      
+      <input type="text"  id="latitud" name="latitud" hidden>
+      <input type="text"  id="longitud" name="longitud" hidden>
       <input id="submit" type="button" class="btn_Detalles"  style="margin-top:10px" value="Localizar">
       </center>
     </div>
@@ -31,12 +32,12 @@
 	  	  <tr>
     <td><t class="login_text" style="margin-top:30px"> Seleccione el tipo de acci&oacute;n a agregar: </t></td>
     <td>
-<select id="Seleccion" style="margin-right: 30px; ;width:200px; height:20px;" name="tipoFiltro">
+    <center>
+<select id="Seleccion" style="margin-right: 30px; ;width:300px; height:20px;" name="accion">
     <option value="vacio">-</option>
 		  <option value="banco">Mandar mail a admin</option>
-  </select>
-<a href="/agregar_accion" style="text-decoration: none;"><img src="img/nueva_accion.png" height="30px" style="margin-top: auto;"/>  Nueva acci&oacuten</a>
-	    	
+  </select>	
+	    	</center>
     </td>
 	  </tr>
 	</table>	
@@ -49,8 +50,9 @@
     <script>
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -34.397, lng: 150.644}
+    zoom: 10,
+    center: {lat: -34.6131500, lng:  -58.3772300},
+    scroll:true
   });
   var geocoder = new google.maps.Geocoder();
 
@@ -68,6 +70,8 @@ function geocodeAddress(geocoder, resultsMap) {
         map: resultsMap,
         position: results[0].geometry.location
       });
+      document.getElementById('latitud').value =results[0].geometry.location.lat();
+      document.getElementById('longitud').value =results[0].geometry.location.lng(); 
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
