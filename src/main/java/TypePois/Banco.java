@@ -40,4 +40,9 @@ public class Banco extends POI {
 		horarioBancario.agregarIntervalo(DayOfWeek.THURSDAY, gestor);
 		horarioBancario.agregarIntervalo(DayOfWeek.FRIDAY, gestor);
 	}
+	@Override
+	public String getTipo() {
+		
+		return "Banco";
+	}
 }

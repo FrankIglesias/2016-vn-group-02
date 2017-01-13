@@ -38,4 +38,10 @@ public class Colectivo extends POI {
 		return true;
 	}
 
+	@Override
+	public String getTipo() {
+		
+		return "Colectivo";
+	}
+
 }

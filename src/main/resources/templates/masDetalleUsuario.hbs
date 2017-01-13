@@ -1,29 +1,38 @@
 {{#partial "contenido"}}
-<center>
- <table style="margin-top: 70px;">
-  <tbody >
-
+<br>
+<br>
+<br>
+<t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t>
     {{#POI}}
-    <tr><td><p class=" historial_tabla_textos"> <strong> Nombre: </strong></p></td><td><p class=" historial_tabla_textos"> {{nombre}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Direcci&oacute;n: </strong> </p></td>
-		<td><p class=" historial_tabla_textos"> <strong> Calle Principal: </strong> {{point.domicilio.callePrincipal}}</p>
-			<p class=" historial_tabla_textos"> <strong> Entre calles: </strong> {{#if point.domicilio.entreCalles}} {{point.domicilio.entreCalles}} {{else}} - {{/if}}</p>
-			<p class=" historial_tabla_textos"> <strong> Altura: </strong> {{#if point.domicilio.altura}} {{point.domicilio.altura}} {{else}} - {{/if}}</p>
-			<p class=" historial_tabla_textos"> <strong> Piso: </strong> {{#if point.domicilio.piso}} {{point.domicilio.piso}} {{else}} - {{/if}}</p>
-			<p class=" historial_tabla_textos"> <strong> Unidad: </strong> {{#if point.domicilio.unidad}} {{point.domicilio.unidad}} {{else}} - {{/if}}</p>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Codigo postal: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.domicilio.codigoPostal}} {{point.domicilio.codigoPostal}} {{else}} - {{/if}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Numero de comuna: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Ciudad: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Provincia: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p></td></tr>
-    <tr><td><p class=" historial_tabla_textos"> <strong> Pais: </strong> </p></td><td><p class=" historial_tabla_textos"> {{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p></td></tr>
-     {{#if point.rubro.nombre}} <tr><td><p class=" historial_tabla_textos"> <strong> Rubro: </strong> </p></td><td><p class=" historial_tabla_textos"> {{point.rubro.nombre}} </p></td></tr> {{/if}}
-       {{#if "servi"}}<tr><td><p class=" historial_tabla_textos"> <strong> Servicios: </strong> </p></td>
+    <br>
+    <p style="margin-left:500px; font-size:20px"> <strong> Nombre: </strong> {{nombre}}</t>
+    
+    <p style="margin-left:500px; font-size:20px">  <strong> Numero de comuna: </strong> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p>    
+    <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800"><strong>Direcci&oacute;n:</strong></t>
+	
+	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Calle Principal: </strong> {{point.domicilio.callePrincipal}}</p>
+	
+	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Altura: </strong> {{#if point.domicilio.altura}} {{point.domicilio.altura}} {{else}} - {{/if}}</p>
+	
+	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Entre calles: </strong> {{#if point.domicilio.entreCalles}} {{point.domicilio.entreCalles}} {{else}} - {{/if}}</p>
+	
+	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Piso: </strong> {{#if point.domicilio.piso}} {{point.domicilio.piso}} {{else}} - {{/if}}</t>
+	
+	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Unidad: </strong> {{#if point.domicilio.unidad}} {{point.domicilio.unidad}} {{else}} - {{/if}}</p>
+    
+    <p style="margin-left:500px; font-size:20px; margin-bottom:20px">  <strong> Codigo postal: </strong>{{#if point.domicilio.codigoPostal}} {{point.domicilio.codigoPostal}} {{else}} - {{/if}}</p>
+    
+    <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Ciudad: </strong> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p>
+    <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Provincia: </strong> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p>
+    <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Pais: </strong>{{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p>
+     {{#if point.rubro.nombre}} <tr><td><p class=" historial_tabla_textos"> <strong> Rubro: </strong> </p><p class=" historial_tabla_textos"> {{point.rubro.nombre}} </p> {{/if}}
+       {{#if "servi"}}<tr><td><p class=" historial_tabla_textos"> <strong> Servicios: </strong> </p>
      {{#each "servi"}}<td><p class="historial_tabla_textos">{{this.nombreDelSerivicio}}</p></td>{{/each}}
-      </tr>{{/if}}
-  {{#if linea}} <tr><td><p class=" historial_tabla_textos"> <strong> Linea: </strong> </p></td><td><p class=" historial_tabla_textos"> {{linea}} </p></td></tr> {{/if}}
+      {{/if}}
+  {{#if linea}} <p class=" historial_tabla_textos"> <strong> Linea: </strong> {{linea}} </p>{{/if}}
+  </center>
     {{/POI}}
-     </tbody>
-</table>
 	</center>
     <br>
     <button type="submit" onclick="goBack()" class="btn_Detalles" style="width:150px;margin-left:80%;margin-top:80px" > Atras </button>

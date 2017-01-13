@@ -52,4 +52,8 @@ public boolean listaVacia(){
 
 		return servicios.stream().anyMatch(unServicio -> unServicio.estaDisponible(horario));
 	}
+	@Override
+	public String getTipo() {
+		return "CGP";
+	}
 }

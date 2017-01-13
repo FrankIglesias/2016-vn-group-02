@@ -46,4 +46,9 @@ public class Local extends POI {
 	public void setPalabrasClave(ArrayList<String> palabrasClave) {
 		super.setPalabrasClave(palabrasClave);
 	}
+
+	@Override
+	public String getTipo() {
+		return "Local";
+	}
 }

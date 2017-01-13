@@ -201,6 +201,7 @@ public abstract class POI {
 	public List<Feriado> getFeriados() {
 		return feriados;
 	}
+	public abstract String getTipo();
 
 	public void setFeriados(List<Feriado> feriados) {
 		this.feriados = feriados;
