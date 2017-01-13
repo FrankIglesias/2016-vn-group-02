@@ -1,19 +1,20 @@
 
 
 {{#partial "contenido"}}
+    <form action="/cambiar_poi">
 <center><table style="margin-top: 70px;">
   <tbody >
     {{#poi}}
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Nuevo nombre:</p></td>
     <td>
-    	<input type="text" value="{{nombre}}">
+    	<input type="text" value="{{nombre}}" name="nombre">
     </td>
     </tr>
     <tr>
     <td><p class="historial_tabla_textos"> <strong> Nuevo Tipo: </strong></p></td>
     <td>
-		<select style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
+		<select value="{{tipo}}" style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
 		  <option value="">-</option>
 		  <option value="banco">Banco</option>
 		  <option value="cgp">CGP</option>
@@ -45,64 +46,64 @@
      <tr>
     <td><p class=" historial_tabla_textos"> <strong> Calle Principal:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.callePrincipal}}">
+    	<input type="text" value="{{point.domicilio.callePrincipal}}" name="calle_principal">
     </td>
     </tr>
 
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Entre calles:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.entreCalles}}">
+    	<input type="text" value="{{point.domicilio.entreCalles}}" name="entre_calles">
     </td>
     </tr>
 
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Altura:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.altura}}">
+    	<input type="text" value="{{point.domicilio.altura}}" name="altura">
     </td>
     </tr>
 
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Piso:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.piso}}">
+    	<input type="text" value="{{point.domicilio.piso}}" name="piso">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Unidad:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.unidad}}">
+    	<input type="text" value="{{point.domicilio.unidad}}" name="unidad">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Codigo postal:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.codigoPostal}}">
+    	<input type="text" value="{{point.domicilio.codigoPostal}}" name="codigo_postal">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Numero de comuna:</strong></p></td>
     <td>
-    	<input type="number" min="1" value="{{point.domicilio.comuna}}">
+    	<input type="number" min="1" value="{{point.domicilio.comuna}}" name="comuna">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Ciudad:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.localidad.ciudad}}">
+    	<input type="text" value="{{point.localidad.ciudad}}" name="ciudad">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Provincia:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.localidad.provincia}}">
+    	<input type="text" value="{{point.localidad.provincia}}" name="provincia">
     </td>
     </tr>
     <tr>
     <td><p class=" historial_tabla_textos"> <strong> Pais:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.localidad.pais}}">
+    	<input type="text" value="{{point.localidad.pais}}" name="pais">
     </td>
     </tr>
 
@@ -111,8 +112,8 @@
     <tr>
     <form>
     <td><p class=" historial_tabla_textos"> <strong> Nuevas coordenadas:</strong></p></td>
-    <td><input id="lng" type="number" value="{{point.longitud}}">
-    <input type="number" id="lat" value="{{point.latitud}}"><br>
+    <td><input id="lng" type="number" value="{{point.longitud}}" name="latitud">
+    <input type="number" id="lat" value="{{point.latitud}}" name="lng"><br>
     <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
     <input type="reset" class="btn_Detalles"></center></td>
     </form>
@@ -130,9 +131,8 @@
 	</center>
     <br>
     <center>
-	<form action="/cambiar_poi" method="get">
     <input type="submit" class="btn_Detalles" value= "Aceptar">
-	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button><form></center>
+	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button></form></center>
 
 <script>
 function setNewCenter(lat,lng){

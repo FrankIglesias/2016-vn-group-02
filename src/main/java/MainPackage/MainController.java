@@ -421,10 +421,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView cambiarPoi(Request request, Response response) {
 		System.out.println("Actualizando poi...");
 		nuevoPoi(request, response);
-		RepoPOIs.getInstance().borrarDeHibernate(poiACambiar);
-		RepoPOIs.getInstance().borrarDeMongo(poiACambiar);
 		
-		return new ModelAndView(null, "cambiar_poi.hbs");
+		try {
+			RepoPOIs.getInstance().borrarDeHibernate(poiACambiar);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		//RepoPOIs.getInstance().borrarDeMongo(poiACambiar);
+		
+		return new ModelAndView(null, "admin_pois.hbs");
 		
 	}
 }
