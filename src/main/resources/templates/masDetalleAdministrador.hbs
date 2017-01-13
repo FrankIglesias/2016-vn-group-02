@@ -19,8 +19,7 @@
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Ciudad: </strong> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Provincia: </strong> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Pais: </strong>{{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p>
-     {{#if point.rubro.nombre}} <tr><td><p class=" historial_tabla_textos"> <strong> Rubro: </strong> </p><p class=" historial_tabla_textos"> {{point.rubro.nombre}} </p> {{/if}}
-  {{#if linea}} <p class=" historial_tabla_textos"> <strong> Linea: </strong> {{linea}} </p>{{/if}}
+ 	{{#each horario.agenda.listaDeElementos }} <t> </t>{{/each}}
   </center>
     {{/POI}}
 	</center>
