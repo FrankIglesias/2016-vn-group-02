@@ -39,6 +39,7 @@ public class Main {
 		get("/buscar_pois", home::buscarPoisAdmin, engine);
 		
 		get("/editar_poi", home::editarPoi, engine);
+		get("/cambiar_poi", home::cambiarPoi, engine);
 		delete("/borrar_poi", home::borrarPoi);
 		
 		get("/masDetallePoi",home::masDetalleAdministrador,engine);
