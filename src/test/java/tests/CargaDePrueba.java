@@ -55,11 +55,9 @@ public class CargaDePrueba {
 
 	//@Test
 	public void cargarTodoEnMongo() {
-		// repoPois.limpiarMongo();
 		try {
 			poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnHibernate(unPoi));
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 

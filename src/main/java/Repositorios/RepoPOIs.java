@@ -150,7 +150,6 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 		levantarTodoDeMongo();
 		List<POI> aHibernate = puntosDeIntereses.stream().filter(unPoi -> noSeConsultoEn7Dias(unPoi))
 				.collect(Collectors.toList());
-		aHibernate.forEach(unPoi -> persistirEnHibernate(unPoi));
 		aHibernate.stream().forEach(unPoi -> borrarDeMongo(unPoi));
 	}
 
