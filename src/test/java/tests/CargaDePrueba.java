@@ -53,7 +53,7 @@ public class CargaDePrueba {
 		lapoli.setCriterio(todos);
 	}
 
-	//@Test
+	@Test
 	public void cargarTodoEnMongo() {
 		try {
 			poisAPersistir.stream().forEach(unPoi -> repoPois.persistirEnHibernate(unPoi));
@@ -66,7 +66,7 @@ public class CargaDePrueba {
 		cargarLaTerminalUsuario();
 		cargarUnaAccionAUnaTerminal();
 	}
-	@Test
+	//@Test
 	public void cargarLaTerminalUsuario() {
 		Terminal unaTermi = new Terminal("Usuario");
 		unaTermi.addAccion(new AccionNotificarAdmin("Esta terdando mucho la busqueda viejo"));

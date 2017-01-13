@@ -36,7 +36,18 @@ public Domicilio()
 	public String getCallePrincipal() {
 		return this.callePrincipal;
 	}
-	
+	public String getEntreCalles() {
+		return this.entreCalles;
+	}
+	public String getPiso() {
+		return piso;
+	}
+	public String getUnidad() {
+		return unidad;
+	}
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
 	public String getAltura() {
 		return this.altura;
 	}
