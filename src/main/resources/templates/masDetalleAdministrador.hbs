@@ -2,9 +2,9 @@
 <br>
 <br>
 <br>
-<t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t>
+<t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t><br>
     {{#POI}}
-    <br>
+    
     <p style="margin-left:500px; font-size:20px"> <strong> Nombre: </strong> {{nombre}}</t>
     <p style="margin-left:500px; font-size:20px"> <strong> Tipo: </strong> {{tipo}}</t>
     <p style="margin-left:500px; font-size:20px">  <strong> Numero de comuna: </strong> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p>    
@@ -76,6 +76,12 @@
 	{{/if}}
  	</table>
   </center>
+  <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Feriados:</strong></t><br>
+  {{#each feriados in POI}}
+  
+ <center> <ul><t>{{dia}} de  {{mesString}}</t></ul></center>
+  {{/each}}
+  
     {{/POI}}
 	</center>
     <br>
