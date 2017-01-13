@@ -5,97 +5,119 @@
   <tbody >
     {{#poi}}
     <tr>
-    <td><p class=" historial_tabla_textos"> Nuevo nombre:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Nuevo nombre:</p></td>
     <td>
     	<input type="text" value="{{nombre}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Nueva direcci&oacute;n:</p></td>
+    <td><p class="historial_tabla_textos"> <strong> Nuevo Tipo: </strong></p></td>
+    <td>
+		<select style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
+		  <option value="">-</option>
+		  <option value="banco">Banco</option>
+		  <option value="cgp">CGP</option>
+		  <option value="colectivo">Colectivo</option>
+		  <option value="local">Local</option>
+		  </select>
+	</td>
+    </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"><strong>Nuevo Horario: </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
+    </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnLunes}} <input type="checkbox" name="dias" value="lunes" checked>Lunes<br> {{else}} <input type="checkbox" name="dias" value="lunes">Lunes<br> {{/if}} <td><input type="time" name="desde_lunes"> </td> <td><input type="time" name="hasta_lunes"></td> </td></td>  </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnMartes}} <input type="checkbox" name="dias" value="martes" checked> Martes<br> {{else}} <input type="checkbox" name="dias" value="martes"> Martes<br> {{/if}}  <td><input type="time" name="desde_martes"></td> <td><input type="time" name="hasta_martes"></td> </td></td> </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnMiercoles}} <input type="checkbox" name="dias" value="miercoles" checked> Miercoles<br> {{else}} <input type="checkbox" name="dias" value="miercoles">Miercoles <br> {{/if}} <td><input type="time" name="desde_miercoles"></td> <td><input type="time" name="hasta_miercoles"></td> </td></td> </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnJueves}} <input type="checkbox" name="dias" value="jueves" checked> Jueves<br> {{else}}  <input type="checkbox" name="dias" value="jueves"> Jueves<br> {{/if}} <td><input type="time" name="desde_jueves"></td> <td><input type="time" name="hasta_jueves"></td> </td></td> </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnViernes}} <input type="checkbox" name="dias" value="viernes" checked> Viernes<br> {{else}} <input type="checkbox" name="dias" value="viernes"> Viernes<br> {{/if}} <td><input type="time" name="desde_viernes"></td> <td><input type="time" name="hasta_viernes"></td> </td></td> </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnSabado}} <input type="checkbox" name="dias" value="sabado" checked> Sabado<br> {{else}} <input type="checkbox" name="dias" value="sabado"> Sabado<br> {{/if}} <td><input type="time" name="desde_sabado"></td> <td><input type="time" name="hasta_sabado"></td> </td></td> </tr>
+    <tr> <td> <td> {{#if horario.agenda.tengoUnDomingo}} <input type="checkbox" name="dias" value="domingo" checked> Domingo<br> {{else}}  <input type="checkbox" name="dias" value="domingo" > Domingo<br> {{/if}} <td><input type="time" name="desde_domingo"></td> <td><input type="time" name="hasta_domingo"></td> </td></td> </tr>
+    <tr>
+    <td><p class=" historial_tabla_textos"> <strong> Nueva direcci&oacute;n:</strong></p></td>
     </tr>
      <tr>
-    <td><p class=" historial_tabla_textos"> Calle Principal:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Calle Principal:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.callePrincipal}}">
     </td>
     </tr>
-   
+
     <tr>
-    <td><p class=" historial_tabla_textos"> Entre calles:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Entre calles:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.entreCalles}}">
     </td>
     </tr>
-   
+
     <tr>
-    <td><p class=" historial_tabla_textos"> Altura:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Altura:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.altura}}">
     </td>
     </tr>
-   
+
     <tr>
-    <td><p class=" historial_tabla_textos"> Piso:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Piso:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.piso}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Unidad:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Unidad:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.unidad}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Codigo postal:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Codigo postal:</strong></p></td>
     <td>
     	<input type="text" value="{{point.domicilio.codigoPostal}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Numero de comuna:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Numero de comuna:</strong></p></td>
     <td>
     	<input type="number" min="1" value="{{point.domicilio.comuna}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Ciudad:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Ciudad:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.ciudad}}">
+    	<input type="text" value="{{point.localidad.ciudad}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Provincia:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Provincia:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.provincia}}">
+    	<input type="text" value="{{point.localidad.provincia}}">
     </td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> Pais:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Pais:</strong></p></td>
     <td>
-    	<input type="text" value="{{point.domicilio.pais}}">
+    	<input type="text" value="{{point.localidad.pais}}">
     </td>
     </tr>
-    	
-    
-	
+
+
+
     <tr>
     <form>
-    <td><p class=" historial_tabla_textos"> Nuevas coordenadas:</p></td>
+    <td><p class=" historial_tabla_textos"> <strong> Nuevas coordenadas:</strong></p></td>
     <td><input id="lng" type="number" value="{{point.longitud}}">
     <input type="number" id="lat" value="{{point.latitud}}"><br>
     <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
     <input type="reset" class="btn_Detalles"></center></td>
     </form>
     {{/poi}}
-    
+
     <td>
 		<div id="map" style="height: 300px; width: 300px;"></div>
 	</td>
-	
+
     </td>
-    </tr> 
-    
+    </tr>
+
      </tbody>
 </table>
 	</center>
@@ -104,7 +126,7 @@
 	<form method="post">
     <input type="submit" href="/admin_pois" class="btn_Detalles" value= "Aceptar">
 	<button type="button" class="btn_Detalles" style="margin-left: 130px" onclick="goBack()"> Cancelar </button><form></center>
-	 
+
 <script>
 function setNewCenter(lat,lng){
    var center = new google.maps.LatLng(lat,lng);
@@ -112,7 +134,7 @@ function setNewCenter(lat,lng){
 }
 var map;
 	function initMap() {
-        
+
 
         // Create a map object and specify the DOM element for display.
         map = new google.maps.Map(document.getElementById('map'), {

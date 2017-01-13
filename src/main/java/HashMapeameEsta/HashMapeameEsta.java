@@ -29,7 +29,35 @@ public class HashMapeameEsta {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	List <Entry> listaDeElementos = new ArrayList<Entry>();
-	     
+	
+	public boolean getTengoUnLunes() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnLunes());
+	}
+	
+	public boolean getTengoUnMartes() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnMartes());
+	}
+	
+	public boolean getTengoUnMiercoles() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnMiercoles());
+	}
+	
+	public boolean getTengoUnJueves() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnJueves());
+	}
+	
+	public boolean getTengoUnViernes() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnViernes());
+	}
+	
+	public boolean getTengoUnSabado() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnSabado());
+	}
+	
+	public boolean getTengoUnDomingo() {
+		return listaDeElementos.stream().anyMatch(unaEntry -> unaEntry.tenesUnDomingo());
+	}
+	
 	        public void put(DayOfWeek newKey, GestorIntervalos data){
 	      Entry newEntry = new Entry(newKey, data);
 	      if(!hasKey(newKey))  	  
@@ -56,5 +84,11 @@ public class HashMapeameEsta {
 
 		public Set<DayOfWeek> keySet() {
 			return listaDeElementos.stream().map(entry-> entry.aKey).collect(Collectors.toSet());
+		}
+		public List<Entry> getListaDeElementos() {
+			return listaDeElementos;
+		}
+		public void setListaDeElementos(List<Entry> listaDeElementos) {
+			this.listaDeElementos = listaDeElementos;
 		}
 }

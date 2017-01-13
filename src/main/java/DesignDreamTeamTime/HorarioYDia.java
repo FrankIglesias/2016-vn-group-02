@@ -68,4 +68,8 @@ public class HorarioYDia {
 		}
 	}
 
+	public HashMapeameEsta getAgenda() {
+		return agenda;
+	}
+
 }

@@ -59,5 +59,36 @@ class Entry {
 			public void setValue(GestorIntervalos value) {
 				this.value = value;
 			}
+
+			public boolean tenesUnLunes() {
+				return aKey.equals(DayOfWeek.MONDAY);
+			}
+
+			public boolean  tenesUnMartes() {
+				return aKey.equals(DayOfWeek.TUESDAY);
+			}
+
+			public boolean tenesUnMiercoles() {
+				return aKey.equals(DayOfWeek.WEDNESDAY);
+			}
+
+			public boolean tenesUnJueves() {
+				return aKey.equals(DayOfWeek.THURSDAY);
+			}
+
+			public boolean tenesUnViernes() {
+				return aKey.equals(DayOfWeek.FRIDAY);
+			}
+
+			public boolean  tenesUnSabado() {
+				return aKey.equals(DayOfWeek.SATURDAY);
+			}
+
+			public boolean  tenesUnDomingo() {
+				return aKey.equals(DayOfWeek.SUNDAY);
+			}
+			
+			
+			
 	     }
 	
