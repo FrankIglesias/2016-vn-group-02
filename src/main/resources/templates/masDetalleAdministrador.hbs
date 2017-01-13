@@ -19,6 +19,8 @@
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Ciudad: </strong> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Provincia: </strong> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Pais: </strong>{{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p>
+    <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Horario:</strong></t><br>
  	<center>
  	<table>
  	<tr>
@@ -76,6 +78,7 @@
 	{{/if}}
  	</table>
   </center>
+  <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
   <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Feriados:</strong></t><br>
   {{#each feriados in POI}}
   
