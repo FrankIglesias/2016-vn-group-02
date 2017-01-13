@@ -13,14 +13,14 @@
 <script src="Frank.js"></script>
 </head>
 <body class="body1">
-<div class="login" style="margin-left:550px">
+<div class="login" style="margin-left:500px">
   <div  class="login_text"  style="padding-top: 30px;"> <h2>Inicie Sesion</h2></div>
   <div  class="login_text">Usuario</div>
    <input type="text" id="nombreDeUsuario" class="campos" >
   <div  class="login_text">Contraseña</div>
   <input type="password" id="contraUsuario" onkeydown="if(event.keyCode == 13)
 									 document.getElementById('btnEntrar').click()" class="campos" >
-  <button id="btnEntrar" onClick="fucionValidarUsuario()" class="boton">Entrar</button>
+  <button hidden="hidden" id="btnEntrar"  onClick="fucionValidarUsuario()" class="boton">Entrar</button>
 </div>
 <video width="1024" height="720" style=" position: fixed;
     top: 50%;
