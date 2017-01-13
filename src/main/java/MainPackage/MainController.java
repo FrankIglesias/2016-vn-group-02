@@ -38,6 +38,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	private String nombreUsuario;
 	private Terminal terminal;
 	HashMapeameEsta agenda = new HashMapeameEsta();
+	POI poiACambiar;
 
 	public ModelAndView mostrar(Request request, Response response) {
 		System.out.println("Mostrar Main");
@@ -127,6 +128,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
 		System.out.println("Agregando poi " + request.queryParams("nombre"));
+		HashMap<String, Object> viewModel = new HashMap<>();
 		POI poiAPersistir = new Local();
 		switch (request.queryParams("tipoFiltro")) {
 		case "local":
@@ -171,6 +173,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 		agenda = new HashMapeameEsta(); // limpio agenda global para proximos
 										// pois
+		
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
@@ -405,11 +408,23 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		HashMap<String, Object> viewModel = new HashMap<>();
 		String nombreFiltro = request.queryParams("id");
 		try {
-			POI pois = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
-			viewModel.put("poi", pois);
+			poiACambiar = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
+			
+			viewModel.put("poi", poiACambiar);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView(viewModel, "editar_poi.hbs");
+	}
+	
+	public ModelAndView cambiarPoi(Request request, Response response) {
+		System.out.println("Actualizando poi...");
+		nuevoPoi(request, response);
+		RepoPOIs.getInstance().borrarDeHibernate(poiACambiar);
+		RepoPOIs.getInstance().borrarDeMongo(poiACambiar);
+		
+		return new ModelAndView(null, "cambiar_poi.hbs");
+		
 	}
 }
