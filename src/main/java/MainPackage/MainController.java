@@ -52,19 +52,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public Void borrarTerminal(Request request, Response response) {
 		System.out.println("Se quiso borrar terminal nombre: " + request.queryParams("nombre"));
 		try {
-			withTransaction(() -> {
+		
 				Terminal terminalABorrar = RepoTerminales.getInstance()
 						.buscameUnaTerminal(request.queryParams("nombre"));
-				System.out.println("Terminal encontrada");
 				ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
-			});
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.redirect("/admin_terminales");
+		response.redirect("admin_terminales");
 		return null;
 	}
-
 	public ModelAndView agregarPoi(Request request, Response response) {
 		System.out.println("Nuevo Poi");
 		return new ModelAndView(null, "agregar_poi.hbs");

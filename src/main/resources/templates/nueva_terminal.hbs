@@ -4,30 +4,39 @@
 {{#partial "contenido"}}
 <form action="/agregar_terminal">
 <center>
-<table style="margin-top: 70px;">
-  <tbody>
-    <tr>
+
+
+<table style="padding-top:30px">
+<tbody>
+<tr>
     <td><t class="login_text" style="margin-top:30px">Nombre:</t></td>
-    <td><input type="text"  name="nombre"></td>
+    <td><input type="text"  name="nombre" placeholder="Nombre de la terminal" style="width:300px"></td>
     </tr>
     <tr>
     <td><t class="login_text" style="margin-top:30px">Comuna:</t></td>
-    <td><input type="number" min="1" name="comuna"></td>
-	</tr>
-	<tr>
-    <td>
-    	mapa
+    <td><input type="number" min="1"  max="30" name="comuna"  style="width:300px" placeholder="Numero de comuna"></td>
+    </tr>
+    <tr style ="padding-top:10px">	    
+   <td> <div id="floating-panel" style="z-index: 5; margin-top:10px; margin-bottom:30px; float:left">
+      <center>
+      <input id="address" type="textbox" placeholder=" Lugar de la terminal"><br>
+      
+      <input id="submit" type="button" class="btn_Detalles"  style="margin-top:10px" value="Localizar">
+      </center>
+    </div>
     </td>
+    <td><div id="map" style="height:300px;width:300px;margin-bottom:30px;"></div></td>
+        </td>
 	  </tr>
 	  	  <tr>
-    <td><t class="login_text" style="margin-top:30px"> Seleccione el tipo de acci&oacute;n a agregar: </t>
+    <td><t class="login_text" style="margin-top:30px"> Seleccione el tipo de acci&oacute;n a agregar: </t></td>
+    <td>
 <select id="Seleccion" style="margin-right: 30px; ;width:200px; height:20px;" name="tipoFiltro">
     <option value="vacio">-</option>
 		  <option value="banco">Mandar mail a admin</option>
   </select>
 <a href="/agregar_accion" style="text-decoration: none;"><img src="img/nueva_accion.png" height="30px" style="margin-top: auto;"/>  Nueva acci&oacuten</a>
-</center>
-		    	
+	    	
     </td>
 	  </tr>
 	</table>	
@@ -37,7 +46,39 @@
     <button type="button" onclick="goBack()" class="btn_Detalles"> Cancelar </button>
     </center>
     </form>		
+    <script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: -34.397, lng: 150.644}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}   </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+			async defer></script>
+			
 {{/partial}}
 {{#partial "titulo"}}Nueva Terminal{{/partial}}
 {{#partial "imagen"}}img/diagonal.jpg{{/partial}}
+
 {{> layoutAdmin.hbs}}

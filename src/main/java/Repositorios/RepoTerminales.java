@@ -28,7 +28,7 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 
 	private String mailAdmin = "mailprueba@gmail.com";
 	public GestorMailInterface gestorDeMail = GestorDeMailTrucho.getInstance();
-	
+
 	public static RepoTerminales getInstance() {
 		if (instancia == null) {
 			instancia = new RepoTerminales();
@@ -76,7 +76,10 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 	}
 
 	public void eliminarUnaTerminal(Terminal unaTerminal) {
-		entityManager().remove(unaTerminal);
+		withTransaction(() -> {
+			entityManager().remove(unaTerminal);
+			entityManager().flush();
+		});
 	}
 
 	public void add(Terminal terminal) {
@@ -107,10 +110,9 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 		return terminales.stream().filter(unaTerminal -> proceso.cumpleCriterio(unaTerminal))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
-	
+
 	public boolean enviarMailAlAdmin(String frase, LocalDateTime fecha, String terminal) {
 		return gestorDeMail.enviarMail(Message.RecipientType.TO, mailAdmin, frase, terminal);
 	}
-	
 
 }

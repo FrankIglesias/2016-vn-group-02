@@ -22,8 +22,10 @@ public class AccionNotificarAdmin extends Accion {
 	String mensaje;
 	
 	String nombre = "Notificar Administrador";
-
-
+ 
+	public AccionNotificarAdmin() {
+		// TODO Auto-generated constructor stub
+	}
 	public AccionNotificarAdmin(String mensaje) {
 		super();
 		this.mensaje = mensaje;
