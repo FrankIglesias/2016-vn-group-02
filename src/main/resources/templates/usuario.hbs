@@ -28,12 +28,12 @@
 	   <tr>
 		   <td><img src="img/localizacion.png" height="15px" style= "margin-left:10px;margin-bottom:-2px;"/><t class="login_text" style="color:#888;margin-left:10px;">{{point.domicilio.callePrincipal}} {{point.domicilio.altura}}</t></td>
 		   </tr>
-	   </table>	
+	   </table>
 		</div>
 	{{/listadoPOIs}}
-		
+
 		<center><button type="submit" id="ver_mas" class="btn_Detalles" formaction="/ver_mas" form="myForm">Ver mas</button></center>
-	
+
 	  </div>
 	   </td>
 	<td style="width: 50% ">
@@ -78,5 +78,6 @@ $('#{{id}}').on('click',function() {
 		async defer></script>
 		{{/partial}}
 
+{{#partial "usuario"}}{{nombreUsuario}}{{/partial}}
 {{#partial "titulo"}}Buscador de POIS{{/partial}}
 {{> layoutUser.hbs }}

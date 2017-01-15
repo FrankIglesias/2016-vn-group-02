@@ -190,6 +190,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
         async defer></script>
 {{/partial}}
+{{#partial "usuario"}}{{nombreUsuario}}{{/partial}}
 {{#partial "titulo"}}Detalles del POI:  {{#POI}}{{nombre}}{{/POI}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}
 {{> layoutUser.hbs}}

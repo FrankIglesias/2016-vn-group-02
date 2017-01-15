@@ -90,6 +90,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
 			}
 			viewModel.put("POI", unpoi);
+			viewModel.put("nombreUsuario", nombreUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -312,17 +313,19 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView mostrarUser(Request request, Response response) {
 		System.out.println("Se loggeo el usuario " + request.queryParams("nombreFiltro"));
+		HashMap<String, Object> viewModel = new HashMap<>();
 		nombreUsuario = request.queryParams("nombreFiltro");
 		try {
 			terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombreUsuario);
 			if (terminal == null) {
-				return new ModelAndView(null, "Frank.hbs");
+				viewModel.put("mensaje", "Usuario y/o contraseña incorrectos");
+				return new ModelAndView(viewModel, "Frank.hbs");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		return new ModelAndView(null, "usuario.hbs");
+		}	
+		viewModel.put("nombreUsuario", nombreUsuario);
+		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
 	public ModelAndView mostrarTerminales(Request request, Response response) {
@@ -383,6 +386,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		try {
 			List<POI> pois = new Buscador().buscarPoisHibernate(nombreFiltro, terminal);
 			viewModel.put("listadoPOIs", pois);
+			viewModel.put("nombreUsuario", nombreUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -396,6 +400,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		try {
 			List<POI> pois = new Buscador().buscarPoisMongo(nombreFiltro, terminal);
 			viewModel.put("listadoPOIs", pois);
+			viewModel.put("nombreUsuario", nombreUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
