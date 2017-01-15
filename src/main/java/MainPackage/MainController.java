@@ -148,7 +148,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 			break;
 		case "colectivo":
 			poiAPersistir = new Colectivo();
-				poiAPersistir.setLinea(request.queryParams("linea"));
+			poiAPersistir.setLinea(request.queryParams("linea"));
 			break;
 		}
 
@@ -159,17 +159,16 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				request.queryParams("pais"));
 		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("latitud")),
 				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
-		
+
 		List<Feriado> feriadosAPersistir = new ArrayList<Feriado>();
-		
+
 		List<String> feriados;
-		if(request.queryParamsValues("feriados") != null)
-		{
-		feriados = new ArrayList<String>(Arrays.asList(request.queryParamsValues("feriados")));
-		feriados.forEach(feri -> feriadosAPersistir.add(new Feriado(Integer.valueOf(feri.split("/")[1]), Integer.valueOf(feri.split("/")[0]), null)));
+		if (request.queryParamsValues("feriados") != null) {
+			feriados = new ArrayList<String>(Arrays.asList(request.queryParamsValues("feriados")));
+			feriados.forEach(feri -> feriadosAPersistir
+					.add(new Feriado(Integer.valueOf(feri.split("/")[1]), Integer.valueOf(feri.split("/")[0]), null)));
 		}
-		
-		
+
 		poiAPersistir.setGeo(unaGeo);
 		poiAPersistir.setNombre(request.queryParams("nombre"));
 
@@ -179,15 +178,15 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("ciudad"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("provincia"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
-		
+
 		poiAPersistir.setFeriados(feriadosAPersistir);
-		
+
 		List<String> dias;
-		if(request.queryParamsValues("dias") != null) {
+		if (request.queryParamsValues("dias") != null) {
 			dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
 			dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));
 		}
-		
+
 		HorarioYDia horario = new HorarioYDia(agenda);
 		poiAPersistir.setHorario(horario);
 
@@ -306,13 +305,20 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		String accion = request.queryParams("accion");
 
 		Terminal terminalVieja = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
-		Terminal terminalNueva = terminalVieja;
+		Terminal terminalNueva = new Terminal(terminalVieja.getNombre(), terminalVieja.getComuna());
+		terminalNueva.setPoint(terminalVieja.getPoint());
+
 		if (accion.trim() == new AccionDesactivar(null).getNombre())
 			terminalNueva.addAccion(new AccionDesactivar(null));
 		// if (accion.trim() == new AccionNotificarAdmin().getNombre())
 		terminalNueva.addAccion(new AccionNotificarAdmin());
+		try {
+			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalVieja);
 
-		ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalVieja);
+			RepoTerminales.getInstance().persistirTerminal(terminalNueva);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView(null, "admin_acciones.hbs");
 	}
 

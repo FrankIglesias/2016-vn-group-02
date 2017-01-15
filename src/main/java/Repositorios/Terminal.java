@@ -32,7 +32,7 @@ public class Terminal {
 	@Column(name = "name_terminal")
 	public String nombre;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	Geolocalizacion point;
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Accion> listaDeAcciones = new ArrayList<Accion>();
