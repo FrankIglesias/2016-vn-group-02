@@ -175,6 +175,12 @@ public class RepoPOIs extends AbstractPersistenceTest implements WithGlobalEntit
 			entityManager().remove(unPoi);
 		});
 	}
+	
+	public void borrarDeHibernateSegunId(Integer idPoi) {
+		withTransaction(() -> {
+			entityManager().remove(entityManager().find(POI.class, idPoi));
+		});
+	}
 
 	public boolean noSeConsultoEn7Dias(POI unPoi) {
 		return !(LocalDateTime.now().minusWeeks(1).isBefore(unPoi.getUltimaFechaBusqueda()));

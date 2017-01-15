@@ -43,7 +43,7 @@ public class Main {
 		delete("/borrar_poi", home::borrarPoi);
 		
 		get("/masDetallePoi",home::masDetalleAdministrador,engine);
-		
+
 		
 		get("/nuevo_poi", home::agregarPoi, engine);
 		get("/agregar_poi",home::nuevoPoi,engine);

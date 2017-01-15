@@ -345,7 +345,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 			List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(
 					request.queryParams("nombre"), request.queryParams("desde"), request.queryParams("hasta"),
 					request.queryParams("cantidad"));
-
 			viewModel.put("consultas", busquedas);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -428,7 +427,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		nuevoPoi(request, response);
 		
 		try {
-			RepoPOIs.getInstance().borrarDeHibernate(poiACambiar);
+			RepoPOIs.getInstance().borrarDeHibernateSegunId(poiACambiar.getId());
 		}
 		catch(Exception e)
 		{

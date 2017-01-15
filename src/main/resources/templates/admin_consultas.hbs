@@ -31,7 +31,7 @@ $('#datepick').focus(function(){
 				{{#consultas}}
 				<tr>
 				<td><p class=" historial_tabla_textos"> {{id}}</p></center></td>
-				<td><p class=" historial_tabla_textos"> {{terminal.nombreTerminal}}</p></center></td>
+				<td><p class=" historial_tabla_textos"> {{nombreTerminal}}</p></center></td>
 				<td><input id="datepick"  style ="border: 0" type="datetime-local" value="{{fecha}}" readonly></td>
 				<td><p class=" historial_tabla_textos"> {{cantidadDePoisObtenidos}}	</p></td>
 				<td><a href="/ver_pois_consultas?id={{id}}"><img src="img/ver_mas.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>
