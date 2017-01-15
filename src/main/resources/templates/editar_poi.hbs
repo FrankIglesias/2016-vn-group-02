@@ -53,8 +53,11 @@
   
    </tr>
 {{/feriados}}
-
-
+<tr>
+<td></td>
+<td><input type="date" name="feriado_nuevo"></td>
+</tr>
+	
     {{#unless servicios}}
     <tr>
     <td><p class=" historial_tabla_textos"><strong>Nuevo Horario: </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
@@ -270,6 +273,6 @@ var map;
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
 			async defer></script>
 			{{/partial}}
-{{#partial "titulo"}}Edicion de POI{{/partial}}
+{{#partial "titulo"}}Edici&oacute;n de POI: {{#poi}}{{nombre}}{{/poi}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}
 {{> layoutAdmin.hbs }}
