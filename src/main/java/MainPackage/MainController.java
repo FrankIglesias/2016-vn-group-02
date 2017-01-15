@@ -139,13 +139,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		case "local":
 			poiAPersistir = new Local();
 			poiAPersistir.setRubro(new Rubro(request.queryParams("rubro"), 0));
+			break;
 		case "banco":
 			poiAPersistir = new Banco();
+			break;
 		case "cgp":
 			poiAPersistir = new CGP();
+			break;
 		case "colectivo":
 			poiAPersistir = new Colectivo();
-			poiAPersistir.setLinea(request.queryParams("linea"));
+				poiAPersistir.setLinea(request.queryParams("linea"));
+			break;
 		}
 
 		Domicilio unaDomi = new Domicilio(request.queryParams("calle_principal"), request.queryParams("entre_calles"),
@@ -157,9 +161,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
 		
 		List<Feriado> feriadosAPersistir = new ArrayList<Feriado>();
-		List<String> feriados = new ArrayList<String>(Arrays.asList(request.queryParamsValues("feriados")));
-
+		
+		List<String> feriados;
+		if(request.queryParamsValues("feriados") != null)
+		{
+		feriados = new ArrayList<String>(Arrays.asList(request.queryParamsValues("feriados")));
 		feriados.forEach(feri -> feriadosAPersistir.add(new Feriado(Integer.valueOf(feri.split("/")[1]), Integer.valueOf(feri.split("/")[0]), null)));
+		}
+		
 		
 		poiAPersistir.setGeo(unaGeo);
 		poiAPersistir.setNombre(request.queryParams("nombre"));
@@ -172,9 +181,13 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
 		
 		poiAPersistir.setFeriados(feriadosAPersistir);
-		List<String> dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
-
-		dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));
+		
+		List<String> dias;
+		if(request.queryParamsValues("dias") != null) {
+			dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
+			dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));
+		}
+		
 		HorarioYDia horario = new HorarioYDia(agenda);
 		poiAPersistir.setHorario(horario);
 
