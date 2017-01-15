@@ -8,7 +8,14 @@
     <option value="vacio">-</option>
 		  <option value="banco">Mandar mail a admin</option>
   </select>
-<a href="/agregar_accion" style="text-decoration: none;"><img src="img/nueva_accion.png" height="30px" style="margin-top: auto;"/>  Nueva acci&oacuten</a>
+<a onclick="
+
+var e = document.getElementById('Seleccion');
+if(e.options[e.selectedIndex].value != 'vacio')
+window.location.href='/agregar_accion?accion='+e.options[e.selectedIndex].value+'&nombre=Frank';
+else 
+alert('Por favor seleccione una opcion');
+" style="text-decoration: none;"><img src="img/nueva_accion.png" height="30px" style="margin-top: auto;"/>  Nueva acci&oacuten</a>
 </center>
 <form action="/borrar_accion">
      {{#terminal}}
@@ -23,7 +30,7 @@
      {{#acciones}}
      <tr>
      <td>
- <center><input type="checkbox" name="name" value="{{nombre}}" style="margin-top:30px;">{{nombre}}<br></center> 		  		
+ <center><input type="checkbox" name="name" value="{{this}}" style="margin-top:30px;">{{this}}<br></center> 		  		
 		 </td>
 		  </tr>
 {{/acciones}}		      
@@ -33,6 +40,6 @@
 </form>		
 {{/partial}}
 
-{{#partial "titulo"}}Administrador de Acciones de Terminal {{#terminal}}{{nombre}}{{/terminal}}{{/partial}}
+{{#partial "titulo"}}Acciones de Terminal: {{#terminal}}{{nombre}}{{/terminal}}{{/partial}}
 {{#partial "imagen"}}img/diagonal.jpg{{/partial}}
 {{> layoutAdmin.hbs}}

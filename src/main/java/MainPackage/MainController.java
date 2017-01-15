@@ -10,6 +10,8 @@ import java.util.List;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
+import AsignarAccionesUsuario.AccionDesactivar;
+import AsignarAccionesUsuario.AccionNotificarAdmin;
 import Controllers.ControllerRepoBusquedas;
 import Controllers.ControllerRepoPoi;
 import Controllers.ControllerRepoTerminales;
@@ -53,17 +55,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public Void borrarTerminal(Request request, Response response) {
 		System.out.println("Se quiso borrar terminal nombre: " + request.queryParams("nombre"));
 		try {
-		
-				Terminal terminalABorrar = RepoTerminales.getInstance()
-						.buscameUnaTerminal(request.queryParams("nombre"));
-				ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
-			
+
+			Terminal terminalABorrar = RepoTerminales.getInstance().buscameUnaTerminal(request.queryParams("nombre"));
+			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		response.redirect("admin_terminales");
 		return null;
 	}
+
 	public ModelAndView agregarPoi(Request request, Response response) {
 		System.out.println("Nuevo Poi");
 		return new ModelAndView(null, "agregar_poi.hbs");
@@ -174,7 +176,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 		agenda = new HashMapeameEsta(); // limpio agenda global para proximos
 										// pois
-		
+
 		return new ModelAndView(null, "admin_pois.hbs");
 	}
 
@@ -259,19 +261,36 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	public ModelAndView agregarTerminal(Request request, Response response) {
 		System.out.println("Se agrego terminal");
-		try{
-		ControllerRepoTerminales.getInstance().agregarUnaTerminal(request.queryParams("nombre"),
-				Integer.parseInt(request.queryParams("comuna").trim()),request.queryParams("latitud").trim(),request.queryParams("longitud").trim());
-		}catch(Exception e ){
+		try {
+			ControllerRepoTerminales.getInstance().agregarUnaTerminal(request.queryParams("nombre"),
+					Integer.parseInt(request.queryParams("comuna").trim()), request.queryParams("latitud").trim(),
+					request.queryParams("longitud").trim());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView(null, "admin_terminales.hbs");
-		
+
 	}
 
 	public ModelAndView nuevaTerminal(Request request, Response response) {
 		System.out.println("Nueva terminal");
 		return new ModelAndView(null, "nueva_terminal.hbs");
+	}
+
+	public ModelAndView nuevaAccion(Request request, Response response) {
+		System.out.println("Nueva Accion");
+		String nombre = request.queryParams("nombre");
+		String accion = request.queryParams("accion");
+
+		Terminal terminalVieja = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
+		Terminal terminalNueva = terminalVieja;
+		if (accion.trim() == new AccionDesactivar(null).getNombre())
+			terminalNueva.addAccion(new AccionDesactivar(null));
+		// if (accion.trim() == new AccionNotificarAdmin().getNombre())
+		terminalNueva.addAccion(new AccionNotificarAdmin());
+
+		ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalVieja);
+		return new ModelAndView(null, "admin_acciones.hbs");
 	}
 
 	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
@@ -284,7 +303,10 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		List<String> accionesDisponnibles = new ArrayList<String>();
+		accionesDisponnibles.add(new AccionNotificarAdmin().getNombre());
+		accionesDisponnibles.add(new AccionDesactivar(null).getNombre());
+		viewModel.put("acciones", accionesDisponnibles);
 		return new ModelAndView(viewModel, "admin_acciones.hbs");
 	}
 
@@ -323,7 +345,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 		viewModel.put("nombreUsuario", nombreUsuario);
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
@@ -413,29 +435,27 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		String nombreFiltro = request.queryParams("id");
 		try {
 			poiACambiar = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(nombreFiltro));
-			
+
 			viewModel.put("poi", poiACambiar);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView(viewModel, "editar_poi.hbs");
 	}
-	
+
 	public ModelAndView cambiarPoi(Request request, Response response) {
 		System.out.println("Actualizando poi...");
 		nuevoPoi(request, response);
-		
+
 		try {
 			RepoPOIs.getInstance().borrarDeHibernateSegunId(poiACambiar.getId());
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//RepoPOIs.getInstance().borrarDeMongo(poiACambiar);
-		
+		// RepoPOIs.getInstance().borrarDeMongo(poiACambiar);
+
 		return new ModelAndView(null, "admin_pois.hbs");
-		
+
 	}
 }
