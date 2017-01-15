@@ -24,7 +24,7 @@ public class Busqueda {
 	List<Integer> idsPuntosObtenidos;
 	@Convert(converter = LocalDateTimeConverter.class)
 	LocalDateTime fecha;
-	String nombreTerminal;
+	public String nombreTerminal;
 	String frase;
 	double tiempo;
 
@@ -51,7 +51,7 @@ public class Busqueda {
 		return fecha;
 	}
 
-	public String getTerminal() {
+	public String getNombreTerminal() {
 		return nombreTerminal;
 	}
 
@@ -78,6 +78,50 @@ public class Busqueda {
 
 	public int getCantidadDePoisObtenidos() {
 		return idsPuntosObtenidos.size();
+	}
+
+	public List<Integer> getIdsPuntosObtenidos() {
+		return idsPuntosObtenidos;
+	}
+
+	public void setIdsPuntosObtenidos(List<Integer> idsPuntosObtenidos) {
+		this.idsPuntosObtenidos = idsPuntosObtenidos;
+	}
+
+	public String getFrase() {
+		return frase;
+	}
+
+	public void setFrase(String frase) {
+		this.frase = frase;
+	}
+
+	public double getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(double tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public double getTiempoMax() {
+		return tiempoMax;
+	}
+
+	public void setTiempoMax(double tiempoMax) {
+		this.tiempoMax = tiempoMax;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setNombreTerminal(String nombreTerminal) {
+		this.nombreTerminal = nombreTerminal;
 	}
 
 }

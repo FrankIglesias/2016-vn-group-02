@@ -1,4 +1,4 @@
-	
+
 {{#partial "contenido"}}
 <script>
 $('#datepick').focus(function(){
@@ -27,11 +27,11 @@ $('#datepick').focus(function(){
 				  <td><p class="historial_tabla" style=" padding-top:20px; height:60px;  width:150px;"> Fecha</p></td>
 				  <td><p class="historial_tabla" style=" height:60px;  width:150px;"> Cantidad de POIs</p></td>
 				</tr>
-				
+
 				{{#consultas}}
 				<tr>
 				<td><p class=" historial_tabla_textos"> {{id}}</p></center></td>
-				<td><p class=" historial_tabla_textos"> {{terminal.id}}</p></center></td>
+				<td><p class=" historial_tabla_textos"> {{terminal.nombreTerminal}}</p></center></td>
 				<td><input id="datepick"  style ="border: 0" type="datetime-local" value="{{fecha}}" readonly></td>
 				<td><p class=" historial_tabla_textos"> {{cantidadDePoisObtenidos}}	</p></td>
 				<td><a href="/ver_pois_consultas?id={{id}}"><img src="img/ver_mas.png" height="30px" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"/></a>

@@ -4,10 +4,10 @@
 <br>
 <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t><br>
     {{#POI}}
-    
+
     <p style="margin-left:500px; font-size:20px"> <strong> Nombre: </strong> {{nombre}}</t>
     <p style="margin-left:500px; font-size:20px"> <strong> Tipo: </strong> {{tipo}}</t>
-    <p style="margin-left:500px; font-size:20px">  <strong> Numero de comuna: </strong> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p>    
+    <p style="margin-left:500px; font-size:20px">  <strong> Numero de comuna: </strong> {{#if point.domicilio.comuna}} {{point.domicilio.comuna}} {{else}} - {{/if}}</p>
     <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
     <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800"><strong>Direcci&oacute;n:</strong></t>
 	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Calle Principal: </strong> {{point.domicilio.callePrincipal}}</p>
@@ -15,13 +15,13 @@
 	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Entre calles: </strong> {{#if point.domicilio.entreCalles}} {{point.domicilio.entreCalles}} {{else}} - {{/if}}</p>
 	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"><strong> Piso: </strong> {{#if point.domicilio.piso}} {{point.domicilio.piso}} {{else}} - {{/if}}</p>
 	<p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Unidad: </strong> {{#if point.domicilio.unidad}} {{point.domicilio.unidad}} {{else}} - {{/if}}</p>
-    <p style="margin-left:500px; font-size:20px; margin-bottom:20px">  <strong> Codigo postal: </strong>{{#if point.domicilio.codigoPostal}} {{point.domicilio.codigoPostal}} {{else}} - {{/if}}</p>  
+    <p style="margin-left:500px; font-size:20px; margin-bottom:20px">  <strong> Codigo postal: </strong>{{#if point.domicilio.codigoPostal}} {{point.domicilio.codigoPostal}} {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Ciudad: </strong> {{#if point.localidad.ciudad}} {{point.localidad.ciudad}}  {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Provincia: </strong> {{#if point.localidad.provincia}} {{point.localidad.provincia}} {{else}} - {{/if}}</p>
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Pais: </strong>{{#if point.localidad.pais}} {{point.localidad.pais}}  {{else}} - {{/if}}</p>
     <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
     <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos espec&iacute;ficos:</strong></t><br>
-    {{#if linea}}<p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Linea:</strong> {{linea}} </p>{{/if}} 
+    {{#if linea}}<p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Linea:</strong> {{linea}} </p>{{/if}}
     {{#if rubro}}<p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Rubro:</strong> {{rubro}} </p>{{/if}}
     {{#each servicios in POI}}
     <p style="margin-left:500px; font-size:20px; margin-bottom:20px"> <strong> Servicio: </strong>{{nombreDelServicio}}</p>
@@ -30,61 +30,61 @@
  	<tr>
     <td><t class=" historial_tabla_textos" style="margin-right:100px"><strong>Dia</strong</t></td> <td>Desde</td> <td>Hasta</td>
     </tr>
-    
+
     {{#if horario.agenda.tengoUnLunes}}
-    <tr> 
+    <tr>
     	<td>Lunes</td>
-     	<td><input disabled  style="border: 0; background-color:#FDFCFC"  type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}" ></td> 
+     	<td><input disabled  style="border: 0; background-color:#FDFCFC"  type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}" ></td>
      	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td>
      </tr>
      {{/if}}
      {{#if horario.agenda.tengoUnMartes}}
-    <tr> 
-    	
+    <tr>
+
     	<td>Martes</td>
-    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td> 
-    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td> 
+    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td>
+    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnMiercoles}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnMiercoles}}
+    <tr>
     <td> Miercoles</td>
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td> 
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td> 
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td>
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td>
 	</tr>
 	{{/if}}
 	{{#if horario.agenda.tengoUnJueves}}
-    <tr> 
+    <tr>
     <td> Jueves</td>
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td> 
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td> 
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td>
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnViernes}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnViernes}}
+    <tr>
     <td>Viernes</td>
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td> 
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td> 
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td>
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td>
 	</tr>
 	{{/if}}
 	{{#if horario.agenda.tengoUnSabado}}
     <tr>
      <td>Sabado</td>
-      <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td> 
-      <td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td> 
+      <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td>
+      <td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnDomingo}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnDomingo}}
+    <tr>
     <td>Domingo</td>
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td> 
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td> 
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
 	</tr>
 	{{/if}}
  	</table>
   </center>
     {{/each}}
-  
+
     {{#unless servicios}}
     <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
     <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Horario:</strong></t><br>
@@ -93,72 +93,104 @@
  	<tr>
     <td><t class=" historial_tabla_textos" style="margin-right:100px"><strong>Dia</strong</t></td> <td>Desde</td> <td>Hasta</td>
     </tr>
-    
+
     {{#if horario.agenda.tengoUnLunes}}
-    <tr> 
+    <tr>
     	<td>Lunes</td>
-     	<td><input disabled  style="border: 0; background-color:#FDFCFC"  type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}" ></td> 
+     	<td><input disabled  style="border: 0; background-color:#FDFCFC"  type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}" ></td>
      	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td>
      </tr>
      {{/if}}
      {{#if horario.agenda.tengoUnMartes}}
-    <tr> 
-    	
+    <tr>
+
     	<td>Martes</td>
-    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td> 
-    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td> 
+    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td>
+    	<td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnMiercoles}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnMiercoles}}
+    <tr>
     <td> Miercoles</td>
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td> 
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td> 
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC"  name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td>
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td>
 	</tr>
 	{{/if}}
 	{{#if horario.agenda.tengoUnJueves}}
-    <tr> 
+    <tr>
     <td> Jueves</td>
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td> 
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td> 
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td>
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnViernes}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnViernes}}
+    <tr>
     <td>Viernes</td>
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td> 
-     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td> 
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td>
+     <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td>
 	</tr>
 	{{/if}}
 	{{#if horario.agenda.tengoUnSabado}}
     <tr>
      <td>Sabado</td>
-      <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td> 
-      <td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td> 
+      <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td>
+      <td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td>
 	</tr>
 	{{/if}}
-	{{#if horario.agenda.tengoUnDomingo}} 
-    <tr>  
+	{{#if horario.agenda.tengoUnDomingo}}
+    <tr>
     <td>Domingo</td>
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td> 
-    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td> 
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
+    <td><input type="time" disabled  style="border: 0; background-color:#FDFCFC" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
 	</tr>
 	{{/if}}
  	</table>
   </center>
   {{/unless}}
-  
+
   <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
   <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Feriados:</strong></t><br>
   {{#each feriados in POI}}
  <center> <ul><t>{{dia}} de  {{mesString}}</t></ul></center>
   {{/each}}
-  
-    {{/POI}}
+  <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+  <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Ubicaci&oacute;n:</strong></t><br>
+  <input type="text" value="{{point.latitud}}" id="pointlat" hidden>
+  <input type="text" value="{{point.longitud}}" id="pointlong" hidden>
+  {{/POI}}
+
+  <center><div id="map" style=" margin-left: 100px; height: 300px;  width: 550px; float:left;"></div>
+    <div id="sv" style="height: 300px;  width: 500px; float:left; "></div> </center>
 	</center>
     <br>
     <button type="submit" onclick="goBack()" class="btn_Detalles" style="width:150px;margin-left:80%;margin-top:80px" > Atras </button>
+
+    <script>
+    function initMap() {
+    var lati = document.getElementById('pointlat').value;
+    var longi = document.getElementById('pointlong').value;
+    var punto = new google.maps.LatLng(lati, longi);
+    var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: punto
+    });
+    var panorama = new google.maps.StreetViewPanorama(
+      document.getElementById('sv'), {
+        position: punto,
+        pov: {
+          heading: 34,
+          pitch: 10
+        }
+      });
+  map.setStreetView(panorama);
+    }
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
+        async defer></script>
 {{/partial}}
+{{#partial "usuario"}}{{nombreUsuario}}{{/partial}}
 {{#partial "titulo"}}Detalles del POI:  {{#POI}}{{nombre}}{{/POI}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}
 {{> layoutUser.hbs}}
