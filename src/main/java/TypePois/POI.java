@@ -207,4 +207,11 @@ public abstract class POI {
 		this.feriados = feriados;
 	}
 
+	public void setRubro(Rubro rubro) {
+	}
+
+	public void setLinea(String queryParams) {
+		// TODO Auto-generated method stub
+		
+	}
 }

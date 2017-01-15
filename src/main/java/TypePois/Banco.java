@@ -43,6 +43,6 @@ public class Banco extends POI {
 	@Override
 	public String getTipo() {
 		
-		return "Banco";
+		return "banco";
 	}
 }

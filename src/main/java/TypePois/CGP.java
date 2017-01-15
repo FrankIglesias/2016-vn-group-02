@@ -54,6 +54,6 @@ public boolean listaVacia(){
 	}
 	@Override
 	public String getTipo() {
-		return "CGP";
+		return "cgp";
 	}
 }

@@ -16,6 +16,7 @@ import Controllers.ControllerRepoTerminales;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
+import DesignDreamTeamTime.Feriado;
 import DesignDreamTeamTime.GestorIntervalos;
 import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
@@ -30,6 +31,7 @@ import TypePois.CGP;
 import TypePois.Colectivo;
 import TypePois.Local;
 import TypePois.POI;
+import TypePois.Rubro;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -134,12 +136,14 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		switch (request.queryParams("tipoFiltro")) {
 		case "local":
 			poiAPersistir = new Local();
+			poiAPersistir.setRubro(new Rubro(request.queryParams("rubro"), 0));
 		case "banco":
 			poiAPersistir = new Banco();
 		case "cgp":
 			poiAPersistir = new CGP();
 		case "colectivo":
 			poiAPersistir = new Colectivo();
+			poiAPersistir.setLinea(request.queryParams("linea"));
 		}
 
 		Domicilio unaDomi = new Domicilio(request.queryParams("calle_principal"), request.queryParams("entre_calles"),
@@ -149,7 +153,12 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 				request.queryParams("pais"));
 		Geolocalizacion unaGeo = new Geolocalizacion(Double.parseDouble(request.queryParams("latitud")),
 				Double.parseDouble(request.queryParams("lng")), unaDomi, unaLoca);
+		
+		List<Feriado> feriadosAPersistir = new ArrayList<Feriado>();
+		List<String> feriados = new ArrayList<String>(Arrays.asList(request.queryParamsValues("feriados")));
 
+		feriados.forEach(feri -> feriadosAPersistir.add(new Feriado(Integer.valueOf(feri.split("/")[1]), Integer.valueOf(feri.split("/")[0]), null)));
+		
 		poiAPersistir.setGeo(unaGeo);
 		poiAPersistir.setNombre(request.queryParams("nombre"));
 
@@ -159,7 +168,8 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		poiAPersistir.addPalabrasClaves(request.queryParams("ciudad"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("provincia"));
 		poiAPersistir.addPalabrasClaves(request.queryParams("pais"));
-
+		
+		poiAPersistir.setFeriados(feriadosAPersistir);
 		List<String> dias = new ArrayList<String>(Arrays.asList(request.queryParamsValues("dias")));
 
 		dias.stream().forEach(unDia -> guardarHorarioDelDia(unDia, request));

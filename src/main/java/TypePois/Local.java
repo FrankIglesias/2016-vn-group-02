@@ -49,8 +49,13 @@ public class Local extends POI {
 	public String getRubro(){
 	return rubro.getNombre();
 	}
+	
+	public void setRubro(Rubro rubro){
+		this.rubro = rubro;
+	}
+
 	@Override
 	public String getTipo() {
-		return "Local";
+		return "local";
 	}
 }

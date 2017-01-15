@@ -41,10 +41,14 @@ public class Colectivo extends POI {
 	@Override
 	public String getTipo() {
 		
-		return "Colectivo";
+		return "colectivo";
 	}
 	public String getLinea(){
 		return this.linea;	
+	}
+	
+	public void setLinea(String linea) {
+		this.linea = linea;
 	}
 
 }

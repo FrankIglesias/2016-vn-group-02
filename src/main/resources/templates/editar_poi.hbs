@@ -23,98 +23,130 @@
 		  </select>
 	</td>
     </tr>
+
+    {{#if linea}}
+  <tr>
+    <td>
+      <p class=" historial_tabla_textos"><strong>Nueva linea: </strong></p>
+      <td><input type="text" value="{{linea}}" name="linea"></td>
+    </td>
+  </tr>
+    {{/if}}
+
+  {{#if rubro}}
+  <tr>
+    <td>
+      <p class=" historial_tabla_textos"><strong>Nueva rubro: </strong></p>
+      <td><input type="text" value="{{rubro}}" name="rubro"></td>
+    </td>
+  </tr>
+  {{/if}}
+
+  <tr>
+   <td><p class="historial_tabla_textos"> <strong> Lista de Feriados: </p> </strong></td>
+  </tr>
+  {{#feriados}}
+  <tr>
+  <td>
+    <td><input type="checkbox" name="feriados" value="{{dia}}/{{mes}}" style="margin-top:30px;" checked> {{dia}}/{{mes}}<br></td>
+  </td>
+  
+   </tr>
+{{/feriados}}
+
+
     {{#unless servicios}}
     <tr>
     <td><p class=" historial_tabla_textos"><strong>Nuevo Horario: </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
     </tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td> 
-    	<td><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td> 
-    	<td><input type="time" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td>
+    	<td><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td>
+    	<td><input type="time" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="martes" {{#if horario.agenda.tengoUnMartes}}checked{{/if}}> Martes</td>
-    	<td><input type="time" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td> 
-    	<td><input type="time" name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td> 
+    	<td><input type="time" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td>
+    	<td><input type="time" name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="miercoles" {{#if horario.agenda.tengoUnMiercoles}} checked{{/if}}> Miercoles</td> 
-      	<td><input type="time" name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td> 
-      	<td><input type="time" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="miercoles" {{#if horario.agenda.tengoUnMiercoles}} checked{{/if}}> Miercoles</td>
+      	<td><input type="time" name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td>
+      	<td><input type="time" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="jueves" {{#if horario.agenda.tengoUnJueves}} checked{{/if}}> Jueves</td>
-    	<td><input type="time" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td> 
-    	<td><input type="time" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td> 
+    	<td><input type="time" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td>
+    	<td><input type="time" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td>
     </tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="viernes" {{#if horario.agenda.tengoUnViernes}} checked{{/if}}> Viernes </td> 
-    	<td><input type="time" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td> 
-    	<td><input type="time" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="viernes" {{#if horario.agenda.tengoUnViernes}} checked{{/if}}> Viernes </td>
+    	<td><input type="time" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td>
+    	<td><input type="time" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td>
 	</tr>
-    <tr> 
-    	<td></td> 
+    <tr>
+    	<td></td>
     	<td><input type="checkbox" name="dias" value="sabado" {{#if horario.agenda.tengoUnSabado}} checked{{/if}}> Sabado</td>
-      	<td><input type="time" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td> 
-      	<td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td> 
+      	<td><input type="time" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td>
+      	<td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="domingo" {{#if horario.agenda.tengoUnDomingo}} checked{{/if}}> Domingo</td>
-    	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td> 
+    	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
     	<td><input type="time" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
       </tr>
       {{/unless}}
       {{#each servicios in poi}}
       <tr> </tr>
      <tr>
-    <td><p class=" historial_tabla_textos"><strong>Nuevo Horario: </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
+    <td><p class=" historial_tabla_textos"><strong>Nuevo Horario para el servicio: {{nombre}} </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
     </tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td> 
-    	<td><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td> 
-    	<td><input type="time" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td>
+    	<td><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td>
+    	<td><input type="time" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="martes" {{#if horario.agenda.tengoUnMartes}}checked{{/if}}> Martes</td>
-    	<td><input type="time" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td> 
-    	<td><input type="time" name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td> 
+    	<td><input type="time" name="desde_martes" value="{{horario.agenda.desdeMartes}}"></td>
+    	<td><input type="time" name="hasta_martes" value="{{horario.agenda.hastaMartes}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="miercoles" {{#if horario.agenda.tengoUnMiercoles}} checked{{/if}}> Miercoles</td> 
-      	<td><input type="time" name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td> 
-      	<td><input type="time" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="miercoles" {{#if horario.agenda.tengoUnMiercoles}} checked{{/if}}> Miercoles</td>
+      	<td><input type="time" name="desde_miercoles" value="{{horario.agenda.desdeMiercoles}}"></td>
+      	<td><input type="time" name="hasta_miercoles" value="{{horario.agenda.hastaMiercoles}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="jueves" {{#if horario.agenda.tengoUnJueves}} checked{{/if}}> Jueves</td>
-    	<td><input type="time" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td> 
-    	<td><input type="time" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td> 
+    	<td><input type="time" name="desde_jueves" value="{{horario.agenda.desdeJueves}}"></td>
+    	<td><input type="time" name="hasta_jueves" value="{{horario.agenda.hastaJueves}}"></td>
     </tr>
-    <tr> 
-    	<td> </td> 
-    	<td><input type="checkbox" name="dias" value="viernes" {{#if horario.agenda.tengoUnViernes}} checked{{/if}}> Viernes </td> 
-    	<td><input type="time" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td> 
-    	<td><input type="time" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td> 
+    <tr>
+    	<td> </td>
+    	<td><input type="checkbox" name="dias" value="viernes" {{#if horario.agenda.tengoUnViernes}} checked{{/if}}> Viernes </td>
+    	<td><input type="time" name="desde_viernes" value="{{horario.agenda.desdeViernes}}"></td>
+    	<td><input type="time" name="hasta_viernes" value="{{horario.agenda.hastaViernes}}"></td>
 	</tr>
-    <tr> 
-    	<td></td> 
+    <tr>
+    	<td></td>
     	<td><input type="checkbox" name="dias" value="sabado" {{#if horario.agenda.tengoUnSabado}} checked{{/if}}> Sabado</td>
-      	<td><input type="time" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td> 
-      	<td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td> 
+      	<td><input type="time" name="desde_sabado" value="{{horario.agenda.desdeSabado}}"></td>
+      	<td><input type="time" name="hasta_sabado" value="{{horario.agenda.hastaSabado}}"></td>
 	</tr>
-    <tr> 
-    	<td> </td> 
+    <tr>
+    	<td> </td>
     	<td><input type="checkbox" name="dias" value="domingo" {{#if horario.agenda.tengoUnDomingo}} checked{{/if}}> Domingo</td>
-    	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td> 
+    	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
     	<td><input type="time" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
       </tr>
           {{/each}}
