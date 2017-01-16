@@ -1,5 +1,3 @@
-
-
 {{#partial "contenido"}}
     <form action="/cambiar_poi">
 <center><table style="margin-top: 70px;">
@@ -54,8 +52,8 @@
    </tr>
 {{/feriados}}
 <tr>
-<td></td>
-<td><input type="date" name="feriado_nuevo"></td>
+<td><p class="historial_tabla_textos"><strong> Nuevo Feriado:</strong></p></td>
+<td> <input type="number" min="1" max="31" placeholder="Dia" name="dia_feriado_nuevo" style="width:50px"> / <input type="number"   min="1" max="12" placeholder="Mes" name="mes_feriado_nuevo" style="width:50px"></td>
 </tr>
 	
     {{#unless servicios}}
