@@ -306,15 +306,17 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 		Terminal terminalVieja = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
 		Terminal terminalNueva = new Terminal(terminalVieja.getNombre(), terminalVieja.getComuna());
-		terminalNueva.setPoint(terminalVieja.getPoint());
+		Domicilio unaDomi = new Domicilio(terminalVieja.getPoint().getDomicilio().getCallePrincipal(), terminalVieja.getPoint().getDomicilio().getEntreCalles(), terminalVieja.getPoint().getDomicilio().getAltura(), "0", "0", terminalVieja.getPoint().getDomicilio().getCodigoPostal(), terminalVieja.getPoint().getDomicilio().getComuna());
+		Localidad unaLoca = new Localidad(terminalVieja.getPoint().getLocalidad().getCiudad(), terminalVieja.getPoint().getLocalidad().getProvincia(), terminalVieja.getPoint().getLocalidad().getPais());
+		Geolocalizacion unaGeo = new Geolocalizacion(terminalVieja.getPoint().getLatitud(), terminalVieja.getPoint().getLongitud(), unaDomi, unaLoca);
+		terminalNueva.setPoint(unaGeo);
 
-		if (accion.trim() == new AccionDesactivar(null).getNombre())
-			terminalNueva.addAccion(new AccionDesactivar(null));
-		// if (accion.trim() == new AccionNotificarAdmin().getNombre())
-		terminalNueva.addAccion(new AccionNotificarAdmin());
+		switch(accion.trim()) {
+			case "mail_admin": terminalNueva.addAccion(new AccionNotificarAdmin());
+		}
+		
 		try {
 			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalVieja);
-
 			RepoTerminales.getInstance().persistirTerminal(terminalNueva);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -336,6 +338,7 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		accionesDisponnibles.add(new AccionNotificarAdmin().getNombre());
 		accionesDisponnibles.add(new AccionDesactivar(null).getNombre());
 		viewModel.put("acciones", accionesDisponnibles);
+		viewModel.put("nombre", request.queryParams("nombre"));
 		return new ModelAndView(viewModel, "admin_acciones.hbs");
 	}
 

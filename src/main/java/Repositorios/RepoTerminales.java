@@ -46,8 +46,8 @@ public class RepoTerminales implements WithGlobalEntityManager, TransactionalOps
 		EntityTransaction transaccion = entityManager.getTransaction();
 
 		transaccion.begin();
-		entityManager.merge(terminal);
-		entityManager.persist(terminal);
+		entityManager().merge(terminal);
+		entityManager().persist(terminal);
 		transaccion.commit();
 	}
 
