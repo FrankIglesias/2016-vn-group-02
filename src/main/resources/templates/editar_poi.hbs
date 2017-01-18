@@ -1,69 +1,96 @@
 {{#partial "contenido"}}
+
+<br>
+<br>
+<t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t><br>
     <form action="/cambiar_poi">
-<center><table style="margin-top: 70px;">
-  <tbody >
     {{#poi}}
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Nuevo nombre:</p></td>
-    <td>
-    	<input type="text" value="{{nombre}}" name="nombre">
-    </td>
-    </tr>
-    <tr>
-    <td><p class="historial_tabla_textos"> <strong> Nuevo Tipo: </strong></p></td>
-    <td>
-		<select value="{{tipo}}" style="width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
+    <p style="margin-left:500px; font-size:20px"> <strong> Nuevo Nombre: </strong> <input type="text" value="{{nombre}}" name="nombre"></p>
+   
+  <p style="margin-left:500px; font-size:20px"> <strong> Nuevo Tipo: </strong> 
+		<select value="{{tipo}}" style="margin-left:110px;width:205px;margin-right:30px" id="tipoF" name="tipoFiltro" required>
 		  <option value="">-</option>
 		  <option value="banco">Banco</option>
 		  <option value="cgp">CGP</option>
 		  <option value="colectivo">Colectivo</option>
 		  <option value="local">Local</option>
 		  </select>
-	</td>
-    </tr>
-
+	</p>   	
+ 
     {{#if linea}}
-  <tr>
-    <td>
-      <p class=" historial_tabla_textos"><strong>Nueva linea: </strong></p>
-      <td><input type="text" value="{{linea}}" name="linea"></td>
-    </td>
-  </tr>
+         <p style="margin-left:500px; font-size:20px"> <strong> Nuevo Linea: </strong><input type="text" value="{{linea}}" name="linea"></p>
     {{/if}}
-
+    
   {{#if rubro}}
-  <tr>
-    <td>
-      <p class=" historial_tabla_textos"><strong>Nueva rubro: </strong></p>
-      <td><input type="text" value="{{rubro}}" name="rubro"></td>
-    </td>
-  </tr>
-  {{/if}}
-
-  <tr>
-   <td><p class="historial_tabla_textos"> <strong> Lista de Feriados: </p> </strong></td>
-  </tr>
-  {{#feriados}}
-  <tr>
-  <td>
-    <td><input type="checkbox" name="feriados" value="{{dia}}/{{mes}}" style="margin-top:30px;" checked> {{dia}}/{{mes}}<br></td>
-  </td>
-  
-   </tr>
-{{/feriados}}
-<tr>
-<td><p class="historial_tabla_textos"><strong> Nuevo Feriado:</strong></p></td>
-<td> <input type="number" min="1" max="31" placeholder="Dia" name="dia_feriado_nuevo" style="width:50px"> / <input type="number"   min="1" max="12" placeholder="Mes" name="mes_feriado_nuevo" style="width:50px"></td>
-</tr>
+  <p style="margin-left:500px; font-size:20px"> <strong> Nuevo Rubro: </strong><input type="text" value="{{rubro}}" name="rubro"></p>
+	{{/if}}
 	
-    {{#unless servicios}}
-    <tr>
-    <td><p class=" historial_tabla_textos"><strong>Nuevo Horario: </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
-    </tr>
+  <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Lista de feriados:</strong></t><br>
+	<p style="margin-left:500px; font-size:20px"> <strong> Nuevo Feriado: </strong>
+	<input type="number" min="1" max="31" placeholder="Dia" name="dia_feriado_nuevo" style="width:60px"> / 
+	<input type="number"   min="1" max="12" placeholder="Mes" name="mes_feriado_nuevo" style="width:60px">
+	<button  type="button" class="btn_Detalles" id="btn_feriados" onclick="agregar()">Agregar feriado</button></p>
+  <script> 
+function mesString(mes){
+switch (mes){
+case "1": 
+	return "Enero";
+	break;
+	case "2": 
+	return "Febrero";
+	break;
+	case "3": 
+	return "Marzo";
+	break;
+	case "4": 
+	return "Abril";
+	break;
+	case "5": 
+	return "Mayo";
+	break;
+	case "6": 
+	return "Junio";
+	break;
+	case "7": 
+	return "Julio";
+	break;
+	case "8": 
+	return "Agosto";
+	break;
+	case "9": 
+	return "Septiembre";
+	break;
+	case "10": 
+	return "Octubre";
+	break;
+	case "11": 
+	return "Noviembre";
+	break;
+	case "12": 
+	return "Diciembre";
+	break;
+
+}
+};
+function agregar(){
+        $("#feriados").append("<p style=\"margin-left:500px; font-size:20px\"><input type=\"checkbox\" name=\"feriados\" value=\""+ document.getElementsByName('dia_feriado_nuevo')[0].value +" / "+document.getElementsByName('mes_feriado_nuevo')[0].value +"\" style=\"margin-top:30px; border-radius:5px\" checked> "+ document.getElementsByName('dia_feriado_nuevo')[0].value+ "  de "+  mesString(document.getElementsByName('mes_feriado_nuevo')[0].value)+"</p>");
+    };
+</script>
+<div id="feriados">
+  {{#feriados}}  
+	<p style="margin-left:500px; font-size:20px"><input type="checkbox" name="feriados" value="{{dia}}/{{mes}}" style="margin-top:30px; border-radius:5px" checked> {{dia}} de {{mesString}} </p>
+  {{/feriados}}
+</div>
+  {{#unless servicios}}
+  <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Horarios:</strong></t><br>
+  
+    <table style="width:600px;margin-left:500px">
     <tr>
     	<td> </td>
-    	<td><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td>
-    	<td><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td>
+    	<td style="width:190px"><input type="checkbox" name="dias" value="lunes" {{#if horario.agenda.tengoUnLunes}}checked{{/if}}>Lunes</td>
+    	<td style="width:100px"><input type="time" name="desde_lunes" value="{{horario.agenda.desdeLunes}}"></td>
     	<td><input type="time" name="hasta_lunes" value="{{horario.agenda.hastaLunes}}"></td>
 	</tr>
     <tr>
@@ -102,9 +129,11 @@
     	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
     	<td><input type="time" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
       </tr>
+      </table>
       {{/unless}}
+      
       {{#each servicios in poi}}
-      <tr> </tr>
+      <table>
      <tr>
     <td><p class=" historial_tabla_textos"><strong>Nuevo Horario para el servicio: {{nombre}} </strong></strong></p></td> <td> </td> <td>Horario Desde:</td> <td>Horario Hasta:</td>
     </tr>
@@ -150,96 +179,88 @@
     	<td><input type="time" name="desde_domingo" value="{{horario.agenda.desdeDomingo}}"></td>
     	<td><input type="time" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
       </tr>
+      </table>
+      
           {{/each}}
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Nueva direcci&oacute;n:</strong></p></td>
-    </tr>
-     <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Calle Principal:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.callePrincipal}}" name="calle_principal">
-    </td>
-    </tr>
+    </center>
+    
+    <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Direcci&oacuten:</strong></t><br>
 
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Entre calles:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.entreCalles}}" name="entre_calles">
+ <table style="width:600px;text-align:right; margin-left:300px">
+ <tr>
+ <td>
+ <t style="font-size:20px"> <strong> Calle Principal:</strong></t>
+ </td>
+ <td>  
+ <input type="text"  value="{{point.domicilio.callePrincipal}}" name="calle_principal"></td>
+ </tr>
+ <tr>
+    <td><p style="font-size:20px"> <strong> Entre calles:</strong></p>  
     </td>
+    <td><input type="text" value="{{point.domicilio.entreCalles}}" name="entre_calles" ></td>
     </tr>
-
+    
     <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Altura:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.altura}}" name="altura">
-    </td>
+    <td><p style="font-size:20px"> <strong> Altura:</strong>  </p> </td>
+    <td><input type="text" value="{{point.domicilio.altura}}" name="altura"></td>
     </tr>
-
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Piso:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.piso}}" name="piso">
-    </td>
-    </tr>
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Unidad:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.unidad}}" name="unidad">
-    </td>
-    </tr>
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Codigo postal:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.domicilio.codigoPostal}}" name="codigo_postal">
-    </td>
-    </tr>
-    <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Numero de comuna:</strong></p></td>
-    <td>
-    	<input type="number" min="1" value="{{point.domicilio.comuna}}" name="comuna">
-    </td>
+   	<tr>
+   	<td><p style="font-size:20px"> <strong> Piso:</strong> </p></td>
+   	<td><input type="text" value="{{point.domicilio.piso}}" name="piso"></td>
+ 	</tr>
+ 	<tr>
+ 	<td><p style="font-size:20px"> <strong> Unidad:</strong></td>
+ 	<td><input type="text" value="{{point.domicilio.unidad}}" name="unidad"></td>
+ 	</tr>
+ 	<tr>
+ 	<td><p style="font-size:20px"> <strong> Codigo postal:</strong></p></td>
+ 	<td><input type="text" value="{{point.domicilio.codigoPostal}}" name="codigo_postal"></td>
+ 	</tr>
+ 	<tr>
+    <td><p style="font-size:20px"> <strong> Numero de comuna:</strong></p></td>
+    <td><input type="number" min="1" value="{{point.domicilio.comuna}}" name="comuna"></td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Ciudad:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.localidad.ciudad}}" name="ciudad">
-    </td>
+    <td><p style="font-size:20px"> <strong> Ciudad:</strong></p></td>
+    <td><input type="text" value="{{point.localidad.ciudad}}" name="ciudad"></p></td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Provincia:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.localidad.provincia}}" name="provincia">
-    </td>
+    <td><p style="font-size:20px"> <strong> Provincia:</strong></p></td>
+    <td><input type="text" value="{{point.localidad.provincia}}" name="provincia"></p></td>
     </tr>
     <tr>
-    <td><p class=" historial_tabla_textos"> <strong> Pais:</strong></p></td>
-    <td>
-    	<input type="text" value="{{point.localidad.pais}}" name="pais">
-    </td>
+    <td><p style=" font-size:20px"> <strong> Pais:</strong></p>
+    <td>  <input type="text" value="{{point.localidad.pais}}" name="pais"></td>
     </tr>
-
-
-
-    <tr>
-    <form>
-    <td><p class=" historial_tabla_textos"> <strong> Nuevas coordenadas:</strong></p></td>
-    <td><input id="lng" type="number" value="{{point.longitud}}" name="latitud">
+       </table>
+	
+	
+ <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
+    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Geolocalizaci&oacute;n:</strong></t><br>
+	
+	 
+	 <center>
+	 <table>
+	 <tr>
+	 <td>
+	 <form>
+ <center><p style=" font-size:20px"> <strong> Nuevas coordenadas:</strong></p></center>
+    <input id="lng" type="number" value="{{point.longitud}}" name="latitud">
     <input type="number" id="lat" value="{{point.latitud}}" name="lng"><br>
     <center><button type="button" class="btn_Detalles" onclick="setNewCenter(document.getElementById('lat').value,document.getElementById('lng').value)"> Ver</button>
-    <input type="reset" class="btn_Detalles"></center></td>
+    <input type="reset" class="btn_Detalles"></center>
     </form>
-    {{/poi}}
-
-    <td>
-		<div id="map" style="height: 300px; width: 300px;"></div>
-	</td>
-
     </td>
+    <td>
+    <div id="map" style="height: 300px; width: 300px;"></div></td>
     </tr>
+    </table>
+    </center>
+       {{/poi}}
 
-     </tbody>
-</table>
-	</center>
+
+		
     <br>
     <center>
     <input type="submit" class="btn_Detalles" value= "Aceptar">
@@ -269,8 +290,9 @@ var map;
       }
     	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5iusfA7K8t19MxnxGXSrrETDEb-u9BxE&callback=initMap"
-			async defer></script>
-			{{/partial}}
+			async defer>
+			</script>
+{{/partial}}
 {{#partial "titulo"}}Edici&oacute;n de POI: {{#poi}}{{nombre}}{{/poi}}{{/partial}}
 {{#partial "imagen"}}img/Planetario_Galileo_Galilei_(3022933477).jpg{{/partial}}
 {{> layoutAdmin.hbs }}
