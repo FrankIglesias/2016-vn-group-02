@@ -2,7 +2,7 @@
 
 <br>
 <br>
-<t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Datos Principales:</strong></t><br>
+<t class="titulo_secundario" ><strong>Datos Principales:</strong></t><br>
     <form action="/cambiar_poi">
     {{#poi}}
     <p style="margin-left:500px; font-size:20px"> <strong> Nuevo Nombre: </strong> <input type="text" value="{{nombre}}" name="nombre"></p>
@@ -26,7 +26,7 @@
 	{{/if}}
 	
   <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
-    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Lista de feriados:</strong></t><br>
+    <t class="titulo_secundario"><strong>Lista de feriados:</strong></t><br>
 	<p style="margin-left:500px; font-size:20px"> <strong> Nuevo Feriado: </strong>
 	<input type="number" min="1" max="31" placeholder="Dia" name="dia_feriado_nuevo" style="width:60px"> / 
 	<input type="number"   min="1" max="12" placeholder="Mes" name="mes_feriado_nuevo" style="width:60px">
@@ -74,18 +74,19 @@ case "1":
 }
 };
 function agregar(){
-        $("#feriados").append("<p style=\"margin-left:500px; font-size:20px\"><input type=\"checkbox\" name=\"feriados\" value=\""+ document.getElementsByName('dia_feriado_nuevo')[0].value +" / "+document.getElementsByName('mes_feriado_nuevo')[0].value +"\" style=\"margin-top:30px; border-radius:5px\" checked> "+ document.getElementsByName('dia_feriado_nuevo')[0].value+ "  de "+  mesString(document.getElementsByName('mes_feriado_nuevo')[0].value)+"</p>");
+        $("#feriados").append("<p style=\"margin-left:500px; font-size:20px\"><output name=\"feriados\" value=\""+ document.getElementsByName('dia_feriado_nuevo')[0].value +" / "+document.getElementsByName('mes_feriado_nuevo')[0].value +"\" style=\"margin-top:30px; border-radius:5px\"> "+ document.getElementsByName('dia_feriado_nuevo')[0].value+ "  de "+  mesString(document.getElementsByName('mes_feriado_nuevo')[0].value)+"</p>");
     };
 </script>
+
 <div id="feriados">
   {{#feriados}}  
-	<p style="margin-left:500px; font-size:20px"><input type="checkbox" name="feriados" value="{{dia}}/{{mes}}" style="margin-top:30px; border-radius:5px" checked> {{dia}} de {{mesString}} </p>
+	<p style="margin-left:500px; font-size:20px"> <output name="feriados" value="{{dia}}/{{mes}}" style="margin-top:30px; border-radius:5px"> {{dia}} de {{mesString}} </p>
   {{/feriados}}
 </div>
+
   {{#unless servicios}}
   <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
-    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Horarios:</strong></t><br>
-  
+    <t class="titulo_secundario"><strong>Horarios:</strong></t><br>
     <table style="width:600px;margin-left:500px">
     <tr>
     	<td> </td>
@@ -180,12 +181,11 @@ function agregar(){
     	<td><input type="time" name="hasta_domingo" value="{{horario.agenda.hastaDomingo}}"></td>
       </tr>
       </table>
-      
-          {{/each}}
+     {{/each}}
     </center>
     
     <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
-    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Direcci&oacuten:</strong></t><br>
+    <t class="titulo_secundario"><strong>Direcci&oacuten:</strong></t><br>
 
  <table style="width:600px;text-align:right; margin-left:300px">
  <tr>
@@ -237,7 +237,7 @@ function agregar(){
 	
 	
  <center><hr style="width:90%; height:2px; background-color:#e5e5e5; "></center>
-    <t class="login_text" style="font-size:40px;margin-left:30px;font-weight:800 "><strong>Geolocalizaci&oacute;n:</strong></t><br>
+    <t class="titulo_secundario"><strong>Geolocalizaci&oacute;n:</strong></t><br>
 	
 	 
 	 <center>
@@ -259,8 +259,6 @@ function agregar(){
     </center>
        {{/poi}}
 
-
-		
     <br>
     <center>
     <input type="submit" class="btn_Detalles" value= "Aceptar">
@@ -273,10 +271,7 @@ function setNewCenter(lat,lng){
 }
 var map;
 	function initMap() {
-
-
-        // Create a map object and specify the DOM element for display.
-        map = new google.maps.Map(document.getElementById('map'), {
+	 map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.6130556, lng: -58.377222222 },
           scrollwheel: true,
           zoom: 10
