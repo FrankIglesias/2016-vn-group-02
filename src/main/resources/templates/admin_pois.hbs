@@ -26,13 +26,6 @@
 	<table style ="padding-top:5px">
 	 <td>
 	<div style="overflow-y: auto; max-height: 500px; min-height: 500px;">
-	<script>
-	function funcioncita() {
-    var x = document.getElementById('loader');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-}}
-</script>
 	{{#unless listadoPOIs}}<center><div id="loader" class="loader" style="display:none;margin-top:100"></div></center>{{/unless}}
 	{{#listadoPOIs}}
 	  <div id="{{id}}" class="hoovereable" style="height:150px">

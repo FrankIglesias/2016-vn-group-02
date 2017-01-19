@@ -12,7 +12,7 @@
 <form method="get" action="/usuarioBusqueda" id="myForm">
 		<p class="login_text" style="color:#454545; margin-right:370px "><center>
 <input type="text" style="border-radius:5px; width: 80% ;height:40px" name="nombreFiltro" placeholder="  &#191;Que POI quer&eacute;s buscar?">
-<input type="submit" id="buscar" class="btn_Detalles" style="height:40px" value="Buscar"></center></p>
+<input type="submit" id="buscar" class="btn_Detalles" style="height:40px" value="Buscar" onclick="funcioncita()"></center></p>
 </form>
 	<table style ="padding-top:5px">
 	 <td >
@@ -32,7 +32,7 @@
 		</div>
 	{{/listadoPOIs}}
 
-		<center><button type="submit" id="ver_mas" class="btn_Detalles" formaction="/ver_mas" form="myForm">Ver mas</button></center>
+	<center><button type="submit" id="ver_mas" class="btn_Detalles" formaction="/ver_mas" form="myForm">Ver mas</button></center>
 
 	  </div>
 	   </td>

@@ -25,8 +25,13 @@ function goBack() {
 };
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
-}
+};
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-}
+};
+function funcioncita() {
+    var x = document.getElementById('loader');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';}
+    };
