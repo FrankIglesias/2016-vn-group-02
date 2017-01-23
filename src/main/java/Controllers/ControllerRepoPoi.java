@@ -13,6 +13,9 @@ import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
 import Repositorios.RepoPOIs;
 import TypePois.POI;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 
 public class ControllerRepoPoi implements WithGlobalEntityManager, TransactionalOps {
 
@@ -59,10 +62,10 @@ public class ControllerRepoPoi implements WithGlobalEntityManager, Transactional
 	}
 
 	public void borrarUnPOIporId(String id) {
-			POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
-			modeloPOI.borrarDeMongo(poiABorrar);
-			modeloPOI.borrarDeHibernateSegunId(Integer.valueOf(id));
-			
+		POI poiABorrar = modeloPOI.obtenerDeHibernateSegunId(id);
+		modeloPOI.borrarDeMongo(poiABorrar);
+		modeloPOI.borrarDeHibernateSegunId(Integer.valueOf(id));
+
 	}
 
 	public HashMap<String, Integer> cargarComunas() {
@@ -121,7 +124,53 @@ public class ControllerRepoPoi implements WithGlobalEntityManager, Transactional
 		comunas.put("Villa Urquiza", 12);
 
 		return comunas;
-
 	}
 
+	public ModelAndView mostrarPois(Request request, Response response) {
+		System.out.println("Ver pois sin listado");
+		return new ModelAndView(null, "admin_pois.hbs");
+	}
+
+	public ModelAndView buscarPoisAdmin(Request request, Response response) {
+		System.out.println("Busqueda de POIs por admin");
+		HashMap<String, Object> viewModel = new HashMap<>();
+		String nombreFiltro = request.queryParams("nombreFiltro");
+		String tipoFiltro = request.queryParams("tipoFiltro");
+		try {
+			List<POI> pois = ControllerRepoPoi.getInstance().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
+			viewModel.put("listadoPOIs", pois);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return new ModelAndView(viewModel, "admin_pois.hbs");
+	}
+
+	public ModelAndView agregarPoi(Request request, Response response) {
+		System.out.println("Nuevo Poi");
+		return new ModelAndView(null, "agregar_poi.hbs");
+	}
+
+	public Void borrarPoi(Request request, Response response) {
+		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
+		try {
+			ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ModelAndView masDetalleAdministrador(Request request, Response response) {
+		System.out.println("Mostrar mas detalles");
+		String idpoi = request.queryParams("id");
+		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
+		HashMap<String, Object> viewModel = new HashMap<>();
+		if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
+			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
+		}
+		viewModel.put("POI", unpoi);
+		return new ModelAndView(viewModel, "masDetalleAdministrador.hbs");
+	}
+	
 }

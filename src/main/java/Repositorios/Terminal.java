@@ -1,10 +1,8 @@
 package Repositorios;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.Message;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -15,13 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import AsignarAccionesUsuario.Accion;
 import AsignarAccionesUsuario.Criterio;
 import DesignDreamTeamLocation.Geolocalizacion;
-import GestorDeMail.GestorDeMailTrucho;
-import GestorDeMail.GestorMailInterface;
 import TypePois.POI;
 
 @Entity

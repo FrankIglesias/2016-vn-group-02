@@ -10,11 +10,6 @@ import java.util.List;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-import AsignarAccionesUsuario.AccionDesactivar;
-import AsignarAccionesUsuario.AccionNotificarAdmin;
-import Controllers.ControllerRepoBusquedas;
-import Controllers.ControllerRepoPoi;
-import Controllers.ControllerRepoTerminales;
 import DesignDreamTeamLocation.Domicilio;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamLocation.Localidad;
@@ -24,7 +19,6 @@ import DesignDreamTeamTime.HorarioYDia;
 import DesignDreamTeamTime.IntervaloHorario;
 import HashMapeameEsta.HashMapeameEsta;
 import Repositorios.Buscador;
-import Repositorios.Busqueda;
 import Repositorios.RepoPOIs;
 import Repositorios.RepoTerminales;
 import Repositorios.Terminal;
@@ -41,6 +35,7 @@ import spark.Response;
 public class MainController implements WithGlobalEntityManager, TransactionalOps {
 	private String nombreUsuario;
 	private Terminal terminal;
+
 	HashMapeameEsta agenda = new HashMapeameEsta();
 	POI poiACambiar;
 
@@ -52,35 +47,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 	public ModelAndView mostrarAdmin(Request request, Response response) {
 		System.out.println("Mostrar Panel Admin");
 		return new ModelAndView(null, "Administrador.hbs");
-	}
-
-	public Void borrarTerminal(Request request, Response response) {
-		System.out.println("Se quiso borrar terminal nombre: " + request.queryParams("nombre"));
-		try {
-
-			Terminal terminalABorrar = RepoTerminales.getInstance().buscameUnaTerminal(request.queryParams("nombre"));
-			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalABorrar);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		response.redirect("admin_terminales");
-		return null;
-	}
-
-	public ModelAndView agregarPoi(Request request, Response response) {
-		System.out.println("Nuevo Poi");
-		return new ModelAndView(null, "agregar_poi.hbs");
-	}
-
-	public Void borrarPoi(Request request, Response response) {
-		System.out.println("Se quiso borrar un poi" + request.queryParams("id"));
-		try {
-			ControllerRepoPoi.getInstance().borrarUnPOIporId(request.queryParams("id"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	public ModelAndView masDetalleUsuario(Request request, Response response) {
@@ -101,39 +67,10 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return new ModelAndView(viewModel, "masDetalleUsuario.hbs");
 	}
 
-	public ModelAndView modificarTerminal(Request request, Response response) {
-		System.out.println("Guardar una terminal");
-		String nombre = request.queryParams("nombre");
-		String nombreViejo = request.queryParams("nombreViejo");
-		String comuna = request.queryParams("comuna");
-		try {
-			Terminal nuevaTerminal;
-			Terminal terminalAModificar = RepoTerminales.getInstance().buscameUnaTerminal(nombreViejo);
-			RepoTerminales.getInstance().eliminarUnaTerminal(terminalAModificar);
-			nuevaTerminal = new Terminal(nombre, Integer.parseInt(comuna));
-			terminalAModificar.getListaDeAcciones().forEach(a -> nuevaTerminal.addAccion(a));
-			RepoTerminales.getInstance().add(nuevaTerminal);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(null, "admin_terminales.hbs");
-	}
 
-	public ModelAndView masDetalleAdministrador(Request request, Response response) {
-		System.out.println("Mostrar mas detalles");
-		String idpoi = request.queryParams("id");
-		POI unpoi = RepoPOIs.getInstance().obtenerDeHibernate(Integer.parseInt(idpoi));
-		HashMap<String, Object> viewModel = new HashMap<>();
-		if (unpoi.getClass().toString().endsWith("TypePois.CGP")) {
-			viewModel.put("servi", ((TypePois.CGP) unpoi).getServicios());
-		}
-		viewModel.put("POI", unpoi);
-		return new ModelAndView(viewModel, "masDetalleAdministrador.hbs");
-	}
 
 	public ModelAndView nuevoPoi(Request request, Response response) {
 		System.out.println("Agregando poi " + request.queryParams("nombre"));
-		HashMap<String, Object> viewModel = new HashMap<>();
 		POI poiAPersistir = new Local();
 		switch (request.queryParams("tipoFiltro")) {
 		case "local":
@@ -242,129 +179,8 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 
 	}
 
-	public ModelAndView buscarTerminal(Request request, Response response) {
-		System.out.println("Buscar Terminal");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombre;
-		try {
-			if (request.queryParams("nombre").equals("")) {
-				nombre = "";
-			} else {
-				nombre = request.queryParams("nombre");
-			}
-			int comuna;
-			if (request.queryParams("comuna").equals("")) {
-				comuna = -1;
-			} else {
-				comuna = Integer.parseInt(request.queryParams("comuna"));
-			}
-			List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales(nombre, comuna);
-			viewModel.put("terminales", terminales);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return new ModelAndView(viewModel, "admin_terminales.hbs");
-	}
-
-	public ModelAndView mostrarEditarTerminal(Request request, Response response) {
-		System.out.println("Editar Terminal");
-		String nombreFiltro = request.queryParams("nombre");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		try {
-			List<Terminal> terminales = ControllerRepoTerminales.getInstance().listarTerminales(nombreFiltro, -1);
-			viewModel.put("terminales", terminales.get(0));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(viewModel, "editar_terminal.hbs");
-	}
-
-	public ModelAndView agregarTerminal(Request request, Response response) {
-		System.out.println("Se agrego terminal");
-		try {
-			ControllerRepoTerminales.getInstance().agregarUnaTerminal(request.queryParams("nombre"),
-					Integer.parseInt(request.queryParams("comuna").trim()), request.queryParams("latitud").trim(),
-					request.queryParams("longitud").trim());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(null, "admin_terminales.hbs");
-
-	}
-
-	public ModelAndView nuevaTerminal(Request request, Response response) {
-		System.out.println("Nueva terminal");
-		return new ModelAndView(null, "nueva_terminal.hbs");
-	}
-
-	public ModelAndView nuevaAccion(Request request, Response response) {
-		System.out.println("Nueva Accion");
-		String nombre = request.queryParams("nombre");
-		String accion = request.queryParams("accion");
-
-		Terminal terminalVieja = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
-		Terminal terminalNueva = new Terminal(terminalVieja.getNombre(), terminalVieja.getComuna());
-		Domicilio unaDomi = new Domicilio(terminalVieja.getPoint().getDomicilio().getCallePrincipal(), terminalVieja.getPoint().getDomicilio().getEntreCalles(), terminalVieja.getPoint().getDomicilio().getAltura(), "0", "0", terminalVieja.getPoint().getDomicilio().getCodigoPostal(), terminalVieja.getPoint().getDomicilio().getComuna());
-		Localidad unaLoca = new Localidad(terminalVieja.getPoint().getLocalidad().getCiudad(), terminalVieja.getPoint().getLocalidad().getProvincia(), terminalVieja.getPoint().getLocalidad().getPais());
-		Geolocalizacion unaGeo = new Geolocalizacion(terminalVieja.getPoint().getLatitud(), terminalVieja.getPoint().getLongitud(), unaDomi, unaLoca);
-		terminalNueva.setPoint(unaGeo);
-
-		switch(accion.trim()) {
-			case "mail_admin": terminalNueva.addAccion(new AccionNotificarAdmin());
-		}
-		
-		try {
-			ControllerRepoTerminales.getInstance().eliminarUnaTerminal(terminalVieja);
-			RepoTerminales.getInstance().persistirTerminal(terminalNueva);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(null, "admin_acciones.hbs");
-	}
-
-	public ModelAndView mostrarAdminAcciones(Request request, Response response) {
-		System.out.println("Administrar acciones por terminal");
-		String nombre = request.queryParams("nombre");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		try {
-			Terminal terminal = RepoTerminales.getInstance().buscameUnaTerminal(nombre);
-			viewModel.put("acciones", terminal.getListaDeAcciones());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		List<String> accionesDisponnibles = new ArrayList<String>();
-		accionesDisponnibles.add(new AccionNotificarAdmin().getNombre());
-		accionesDisponnibles.add(new AccionDesactivar(null).getNombre());
-		viewModel.put("acciones", accionesDisponnibles);
-		viewModel.put("nombre", request.queryParams("nombre"));
-		return new ModelAndView(viewModel, "admin_acciones.hbs");
-	}
-
-	public ModelAndView mostrarEditarPoi(Request request, Response response) {
-		System.out.println("Editar POI");
-		return new ModelAndView(null, "editar_poi.hbs");
-	}
-
-	public ModelAndView verPoisConsultas(Request request, Response response) {
-		System.out.println("Ver pois de una consulta");
-		String idBusqueda = request.queryParams("id");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		try {
-			List<Integer> idsPOIs = ControllerRepoBusquedas.getInstance().buscarUnaBusquedaPorId(idBusqueda)
-					.getPuntosBuscados();
-			List<POI> poisDeLaBusqueda = new ArrayList<POI>();
-
-			idsPOIs.forEach(
-					unID -> poisDeLaBusqueda.add(RepoPOIs.getInstance().obtenerDeHibernateSegunId(unID.toString())));
-			viewModel.put("listadoPOIs", poisDeLaBusqueda);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(viewModel, "ver_pois_consultas.hbs");
-	}
-
+	
 	public ModelAndView mostrarUser(Request request, Response response) {
 		System.out.println("Se loggeo el usuario " + request.queryParams("nombreFiltro"));
 		HashMap<String, Object> viewModel = new HashMap<>();
@@ -382,49 +198,6 @@ public class MainController implements WithGlobalEntityManager, TransactionalOps
 		return new ModelAndView(viewModel, "usuario.hbs");
 	}
 
-	public ModelAndView mostrarTerminales(Request request, Response response) {
-		System.out.println("Mostrar Admin Terminales");
-		return new ModelAndView(null, "admin_terminales.hbs");
-	}
-
-	public ModelAndView mostrarConsultas(Request request, Response response) {
-		System.out.println("Mostrar Consultas");
-		return new ModelAndView(null, "admin_consultas.hbs");
-	}
-
-	public ModelAndView buscarBusquedas(Request request, Response response) {
-		System.out.println("Buscando busquedas");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		try {
-			List<Busqueda> busquedas = ControllerRepoBusquedas.getInstance().listarBusquedas(
-					request.queryParams("nombre"), request.queryParams("desde"), request.queryParams("hasta"),
-					request.queryParams("cantidad"));
-			viewModel.put("consultas", busquedas);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ModelAndView(viewModel, "admin_consultas.hbs");
-	}
-
-	public ModelAndView mostrarPois(Request request, Response response) {
-		System.out.println("Ver pois sin listado");
-		return new ModelAndView(null, "admin_pois.hbs");
-	}
-
-	public ModelAndView buscarPoisAdmin(Request request, Response response) {
-		System.out.println("Busqueda de POIs por admin");
-		HashMap<String, Object> viewModel = new HashMap<>();
-		String nombreFiltro = request.queryParams("nombreFiltro");
-		String tipoFiltro = request.queryParams("tipoFiltro");
-		try {
-			List<POI> pois = ControllerRepoPoi.getInstance().listarPOIsParaAdmin(nombreFiltro, tipoFiltro);
-			viewModel.put("listadoPOIs", pois);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return new ModelAndView(viewModel, "admin_pois.hbs");
-	}
 
 	public ModelAndView busquedaUsuario(Request request, Response response) {
 		nombreUsuario = request.queryParams("nombreFiltro");

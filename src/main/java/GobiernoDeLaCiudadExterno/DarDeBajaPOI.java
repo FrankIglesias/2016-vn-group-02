@@ -1,6 +1,5 @@
 package GobiernoDeLaCiudadExterno;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -14,7 +13,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import DesignDreamTeamErrorHandlers.DDTErrorHandler;
 import DesignDreamTeamLocation.Geolocalizacion;
 import DesignDreamTeamProcesses.DesignDreamTeamProcess;
 import Repositorios.RepoPOIs;
